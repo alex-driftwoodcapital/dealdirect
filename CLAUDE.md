@@ -29,6 +29,8 @@ The handoff assumes staging is a copy of the Bricks site. It is not. So:
 - `handoff/`: the design handoff as received (do not edit except the override note in its README).
 - `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging; `ops/acss/apply.sh`: applies the DealDirect ACSS settings built by `ops/acss/build-settings.py`; all dry run by default).
 - `wp-content/plugins/dealdirect-core/`: the site plugin (offering CPT + SCF fields, Platform stats options page, HubSpot proxy `dealdirect/v1`). Tests: `php tests/run.php` (+ `tests/README.md`).
+- `site/`: page sources. `site/pages/<page>.py` (structure; copy looked up from the design file, never retyped), `site/styles/<page>.css` (one rule per class = one Etch style record), `site/lib/` (block generator, copy lookup). `python3 -I site/build.py <page>` runs the copy gate and writes `build/<page>/` (gitignored); `python3 -I site/preview.py <page>` renders a local approximation for 375/768/1440 checks.
+- `ops/page/deploy.py <page>`: writes a built page to staging (media import, style records, draft page via `edit-run.sh`); dry run by default, stops if the page was edited since the last deploy.
 - `inventory/<date>/`: read-only exports of staging and the live site (copy, SEO meta, media list); committed so cloud sessions can read them.
 - `.claude/skills/`: the Etch/ACSS skills.
 

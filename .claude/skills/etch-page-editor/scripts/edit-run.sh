@@ -25,7 +25,7 @@ else
   ID=$(eval "$SSH_CMD" "'cd $WP_PATH && wp post create --post_type=page --post_status=draft --post_title=\"$NEWTITLE\" --post_name=$SLUG --porcelain -'" < "$FILE"); echo "created draft page $ID"
 fi
 remote "$PURGE_CMD" >/dev/null 2>&1 || true
-echo "== diff vs snapshot (expected: only your change)"; [ -f "$SNAP/post-$ID.html" ] && "$HERE/diff.sh" "$SNAP" | grep -E "^(CHANGED post|same    post|[<>])" | head -20
+echo "== diff vs snapshot (expected: only your change)"; [ -f "$SNAP/post-$ID.html" ] && { "$HERE/diff.sh" "$SNAP" | grep -E "^(CHANGED post|same    post|[<>])" | head -20 || true; }  # diff.sh exits 1 when something changed, which is the point here
 if [ ${#VERIFY[@]} -gt 0 ]; then node "$HERE/verify/verify.mjs" "${SNAP}/verify" "${VERIFY[@]}" || { echo "verify FAILED" >&2; echo "post id: $ID   rollback: RESTORE_YES=1 $HERE/restore.sh $SNAP post $ID"; exit 6; }; fi
 echo "post id: $ID   rollback: RESTORE_YES=1 $HERE/restore.sh $SNAP post $ID"
 exit 0
