@@ -277,4 +277,4 @@ MEDIA = {  # slug -> source (file in handoff/design/assets/eb5/ or a live-site u
     'StaybridgeSuites_Wilmington_EXT': 'https://driftwooddealdirect.com/wp-content/uploads/StaybridgeSuites_Wilmington_EXT.jpg',
 }
 
-META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments'}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)
+META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments', 'status': 'publish'}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)
