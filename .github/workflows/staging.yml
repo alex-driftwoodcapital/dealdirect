@@ -1,0 +1,58 @@
+# Staging deploys without the Mac: dry run on every PR, real deploy when main changes, or on demand
+# (Actions tab > "Staging" > Run workflow, from the GitHub app too). Writes go to STAGING only.
+# Secrets (Settings > Secrets and variables > Actions): STAGING_SSH_KEY, STAGING_KNOWN_HOSTS, optional DD_HUBSPOT_TOKEN.
+name: Staging
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dry-run or deploy'
+        type: choice
+        options: [dry-run, deploy]
+        default: dry-run
+
+concurrency:
+  group: staging
+  cancel-in-progress: false   # never cut a deploy off half-way
+
+permissions:
+  contents: read
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      RUN_YES: ${{ (github.event_name == 'push' || inputs.mode == 'deploy') && '1' || '' }}
+      ETCH_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+      ETCH_SSH_KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
+      DD_HUBSPOT_TOKEN: ${{ secrets.DD_HUBSPOT_TOKEN }}
+      SNAP_DIR: ${{ github.workspace }}/snapshots
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tests (plugin, copy gates)
+        run: |
+          php wp-content/plugins/dealdirect-core/tests/run.php
+          for f in site/pages/*.py; do python3 -I site/check_copy.py "$(basename "$f" .py)"; done
+      - name: Check secrets
+        run: |
+          [ -n "$ETCH_SSH_KEY" ] && [ -n "$ETCH_SSH_KNOWN_HOSTS" ] || { echo "::error::Add STAGING_SSH_KEY and STAGING_KNOWN_HOSTS in Settings > Secrets and variables > Actions"; exit 1; }
+      - name: ${{ env.RUN_YES == '1' && 'Deploy to staging' || 'Dry run against staging' }}
+        run: bash ops/deploy-all.sh 2>&1 | tee deploy.log
+      - name: Summary
+        if: always()
+        run: |
+          { echo '```'; tail -n 120 deploy.log 2>/dev/null || echo 'no log'; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep page snapshots (rollback sources)
+        if: always() && env.RUN_YES == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots-${{ github.run_number }}
+          path: snapshots/
+          retention-days: 90
+          if-no-files-found: ignore

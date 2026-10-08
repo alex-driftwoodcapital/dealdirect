@@ -15,8 +15,9 @@ The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/
 - GTM: `GTM-NX8DQZGQ`
 
 ## Where work runs
-- **Writes to staging** happen only from the Remote Control session on Alex's Mac (SSH works there). Cloud sessions cannot reach SSH, staging or the live site: they write specs, markup, CSS and code into this repo for the Mac session to apply.
-- Every write: snapshot first, re-read before editing, purge, verify at 375 / 768 / 1440 (`etch-page-editor`).
+- **Staging deploys run in GitHub Actions** (`.github/workflows/staging.yml` → `ops/deploy-all.sh`): every PR gets a dry run against staging (the plan shows in the PR's checks), every merge to `main` deploys, and "Run workflow" (Actions tab, also from the GitHub app) deploys on demand. Secrets: `STAGING_SSH_KEY`, `STAGING_KNOWN_HOSTS`, optional `DD_HUBSPOT_TOKEN`.
+- Cloud sessions cannot reach SSH, staging or the live site: they write specs, markup, CSS and code into this repo and open PRs. Alex merges (or says "merge"); the workflow deploys. The Mac Remote Control session is only needed for things Actions can't do (e.g. a builder check).
+- Every write: snapshot first, re-read before editing, purge (`ops/deploy-all.sh` and the scripts it calls do this). Verify at 375 / 768 / 1440.
 
 ## Fresh install (differs from the handoff)
 The handoff assumes staging is a copy of the Bricks site. It is not. So:
@@ -27,7 +28,7 @@ The handoff assumes staging is a copy of the Bricks site. It is not. So:
 
 ## Repo layout
 - `handoff/`: the design handoff as received (do not edit except the override note in its README).
-- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging; `ops/acss/apply.sh`: applies the DealDirect ACSS settings built by `ops/acss/build-settings.py`; all dry run by default).
+- `ops/`: deploy scripts, run by the Staging workflow or by hand (`ops/deploy-all.sh`: everything in order; `ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging; `ops/acss/apply.sh`: applies the DealDirect ACSS settings built by `ops/acss/build-settings.py`; all dry run by default).
 - `wp-content/plugins/dealdirect-core/`: the site plugin (offering CPT + SCF fields, Platform stats options page, HubSpot proxy `dealdirect/v1`). Tests: `php tests/run.php` (+ `tests/README.md`).
 - `site/`: page sources. `site/pages/<page>.py` (structure; copy looked up from the design file, never retyped), `site/styles/<page>.css` (one rule per class = one Etch style record), `site/lib/` (block generator, copy lookup). `python3 -I site/build.py <page>` runs the copy gate and writes `build/<page>/` (gitignored); `python3 -I site/preview.py <page>` renders a local approximation for 375/768/1440 checks.
 - `ops/page/deploy.py <page>`: writes a built page to staging (media import, style records, draft page via `edit-run.sh`); dry run by default, stops if the page was edited since the last deploy.

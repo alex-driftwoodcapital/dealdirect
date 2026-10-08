@@ -27,10 +27,14 @@ if [ -n "${ETCH_SSH_KEY:-}" ] && [ ! -s "$SSH_KEY_FILE" ]; then
   chmod 600 "$SSH_KEY_FILE"
 fi
 [ -s "$SSH_KEY_FILE" ] || { echo "ssh-setup: no key at $SSH_KEY_FILE (set the ETCH_SSH_KEY secret)" >&2; exit 1; }
+grep -q "PRIVATE KEY" "$SSH_KEY_FILE" || { echo "ssh-setup: $SSH_KEY_FILE is not a private key (the secret must hold the OUTPUT of the copy command, not the command)" >&2; rm -f "$SSH_KEY_FILE"; exit 1; }
 if [ -n "${ETCH_SSH_KNOWN_HOSTS:-}" ]; then
   touch "$HOME/.ssh/known_hosts"; chmod 600 "$HOME/.ssh/known_hosts"
   printf '%s\n' "$ETCH_SSH_KNOWN_HOSTS" | sed 's/\\n/\n/g' | while IFS= read -r l; do
-    [ -n "$l" ] && ! grep -qxF "$l" "$HOME/.ssh/known_hosts" && printf '%s\n' "$l" >> "$HOME/.ssh/known_hosts"; done
+    # if/fi, not a && chain: an already-present line must not end the loop with status 1 under set -e
+    if [ -n "$l" ] && ! grep -qxF "$l" "$HOME/.ssh/known_hosts"; then printf '%s\n' "$l" >> "$HOME/.ssh/known_hosts"; fi
+  done
+  grep -q "^\(\[\?${SSH_HOST}\)" "$HOME/.ssh/known_hosts" || { echo "ssh-setup: ETCH_SSH_KNOWN_HOSTS has no line for $SSH_HOST (paste the OUTPUT of ssh-keyscan, not the command)" >&2; exit 1; }
 fi
 for v in SSH_HOST SSH_USER WP_PATH; do [ "${!v}" != TBD ] || { echo "ssh-setup: $v is TBD in $PROFILE (or set ETCH_$v)" >&2; exit 1; }; done
 echo "ssh-setup: ready for $SSH_USER@$SSH_HOST:$SSH_PORT ($SITE_NAME)" >&2
