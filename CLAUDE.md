@@ -20,14 +20,15 @@ The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/
 
 ## Fresh install (differs from the handoff)
 The handoff assumes staging is a copy of the Bricks site. It is not. So:
-- The `offering` CPT (rewrite slug `offering`), its fields (`handoff/docs/cpt-schema.md`) and the platform-stats options page are **created**, not exported. Field plugin: decide in Phase 1 from what is installed.
+- The `offering` CPT (rewrite slug `offering`), its fields (`handoff/docs/cpt-schema.md`) and the platform-stats options page are **created**, not exported. Field plugin: Secure Custom Fields (installed on staging). The CPT, field groups and options page are registered in code by `dealdirect-core`, not in the SCF admin UI.
 - Pages are created with the **same slugs** as live (`handoff/docs/permalinks.md`); "same post ID" does not apply.
 - Media is imported from the live site's uploads (same filenames), not reused by attachment ID.
 - Copy, SEO title/description/OG and anchor IDs are lifted from the live pages verbatim.
 
 ## Repo layout
 - `handoff/`: the design handoff as received (do not edit except the override note in its README).
-- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only).
+- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging, dry run by default).
+- `wp-content/plugins/dealdirect-core/`: the site plugin (offering CPT + SCF fields, Platform stats options page, HubSpot proxy `dealdirect/v1`). Tests: `php tests/run.php` (+ `tests/README.md`).
 - `inventory/<date>/`: read-only exports of staging and the live site (copy, SEO meta, media list); committed so cloud sessions can read them.
 - `.claude/skills/`: the Etch/ACSS skills.
 
