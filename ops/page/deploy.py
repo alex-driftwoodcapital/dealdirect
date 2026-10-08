@@ -66,7 +66,7 @@ try:
             if WRITE:
                 upload(open(os.path.join(ROOT, src), 'rb').read(), path)
             src = path
-        sources[slug] = {'src': src, 'collection': m['collection']}
+        sources[slug] = {'src': src, 'collection': m['collection'], **({'name': m['name']} if m.get('name') else {})}
     got = helper('media', sources, mode) if sources else {}
     got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
@@ -90,8 +90,8 @@ try:
     print(f'  {counts}; written: {st["written"]}')
 
     KIND = meta.get('kind', 'page')
-    PTYPE = {'page': 'page', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
-    want = meta.get('status', 'draft' if KIND == 'page' else 'publish')
+    PTYPE = {'page': 'page', 'offering': 'offering', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
+    want = meta.get('status', 'draft' if KIND in ('page', 'offering') else 'publish')
     step(KIND)
     pg = helper('page', {'slug': meta['slug'], 'post_type': PTYPE}, 'dry')
     template = open(f'{B}/content.tpl.html').read()
@@ -119,7 +119,7 @@ try:
     if missing_refs:
         sys.exit(f'STOP: components not on staging yet: {missing_refs} (deploy them first; ops/deploy-all.sh orders them)')
     sel2id = {sel: r['id'] for sel, r in st['records'].items()}
-    content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs)
+    content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs, {s: r.get('url') for s, r in got.items()})
     final = f'{B}/content.html'
     open(final, 'w').write(content)
     run_env = {**os.environ, 'RUN_YES': '1', 'ETCH_PROFILE': PROFILE}
@@ -129,7 +129,7 @@ try:
         return [l.split('\t')[3].strip() for l in open(f'{snap}/manifest.tsv') if l.startswith(f'post\t{pid}\t')][0]
 
     if not pg['id'] and KIND != 'page':
-        # components and templates are created empty, then filled through the same guarded update path
+        # offerings, components and templates are created empty, then filled through the same guarded update path
         pg = {'id': helper('create', {'post_type': PTYPE, 'slug': meta['slug'], 'title': meta['title']}, 'write')['id'], 'deployed_sha': ''}
         print(f'  created {PTYPE} #{pg["id"]} {meta["slug"]}')
     if pg['id']:

@@ -18,7 +18,7 @@ if ( $action === 'media' ) {
 	if ( ! taxonomy_exists( $tax ) ) { WP_CLI::error( "taxonomy $tax not registered: is Etch active?" ); }
 	foreach ( $in as $slug => $m ) {
 		[ $src, $coll ] = [ $m['src'], $m['collection'] ];
-		$name = basename( parse_url( $src, PHP_URL_PATH ) );
+		$name = $m['name'] ?? basename( parse_url( $src, PHP_URL_PATH ) );  // name: for sources whose URL has no filename
 		// Same filename already in the library (a previous run): reuse it, never re-upload.
 		$id = (int) $wpdb->get_var( $wpdb->prepare(
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND (meta_value = %s OR meta_value LIKE %s) ORDER BY post_id LIMIT 1",
@@ -39,7 +39,7 @@ if ( $action === 'media' ) {
 			}
 			wp_set_object_terms( $id, $coll, $tax, true );
 		}
-		$out[ $slug ] = [ 'id' => $id, 'status' => $status, 'collection' => $has ? "in $coll" : ( $write ? "added to $coll" : "would add to $coll" ) ];
+		$out[ $slug ] = [ 'id' => $id, 'url' => wp_get_attachment_url( $id ), 'status' => $status, 'collection' => $has ? "in $coll" : ( $write ? "added to $coll" : "would add to $coll" ) ];
 	}
 } elseif ( $action === 'styles' ) {
 	// $in: {id: record}. Upsert by selector: an existing record keeps its id and gets our css; a new one gets our id.
@@ -74,11 +74,12 @@ if ( $action === 'media' ) {
 	$p = get_posts( $q );
 	$out = $p ? [ 'id' => $p[0]->ID, 'status' => $p[0]->post_status, 'deployed_sha' => (string) get_post_meta( $p[0]->ID, '_dd_deployed_sha', true ) ] : [ 'id' => null ];
 } elseif ( $action === 'create' ) {
-	// $in: {post_type, slug, title}. Empty published wp_block / wp_template (with the active theme term) that the
-	// normal update path (edit-run.sh) then fills. Pages are created by edit-run.sh --new instead.
-	if ( ! in_array( $in['post_type'], [ 'wp_block', 'wp_template' ], true ) ) { WP_CLI::error( 'create: wp_block or wp_template only' ); }
+	// $in: {post_type, slug, title}. Empty wp_block / wp_template (published, with the active theme term) or offering
+	// (draft until the status step) that the normal update path (edit-run.sh) then fills. Pages: edit-run.sh --new.
+	if ( ! in_array( $in['post_type'], [ 'wp_block', 'wp_template', 'offering' ], true ) ) { WP_CLI::error( 'create: wp_block, wp_template or offering only' ); }
 	if ( ! $write ) { $out = [ 'id' => null ]; } else {
-		$id = wp_insert_post( [ 'post_type' => $in['post_type'], 'post_name' => $in['slug'], 'post_title' => $in['title'], 'post_status' => 'publish', 'post_content' => '' ], true );
+		$status = $in['post_type'] === 'offering' ? 'draft' : 'publish';
+		$id = wp_insert_post( [ 'post_type' => $in['post_type'], 'post_name' => $in['slug'], 'post_title' => $in['title'], 'post_status' => $status, 'post_content' => '' ], true );
 		if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
 		if ( $in['post_type'] === 'wp_template' ) { wp_set_object_terms( $id, get_stylesheet(), 'wp_theme' ); }
 		$out = [ 'id' => $id ];
