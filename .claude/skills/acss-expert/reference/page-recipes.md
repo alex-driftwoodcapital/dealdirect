@@ -9,7 +9,7 @@ Each recipe is a **style spec** (see thread 5 `formats/style-spec.md`): role, AC
 ```
 
 ## Section head (eyebrow + h2 + lede)
-- Classes: wrapper `.section-head`; eyebrow `.eyebrow`; lede `p`. Existing TwoEleven rules apply (eyebrow 13px, uppercase, `--primary`, `--tertiary` on dark).
+- Classes: wrapper `.section-head`; eyebrow `.eyebrow`; lede `p`. Site rules from `index/site-profile.md` apply (the TwoEleven build used eyebrow 13px, uppercase, `--primary`, `--tertiary` on dark).
 ```
 .section-head { display: grid; gap: var(--space-s); max-inline-size: 47.5rem; }
 .section-head > p:not(.eyebrow) { color: var(--text-dark-muted); max-inline-size: 62ch; font-size: var(--text-l); }

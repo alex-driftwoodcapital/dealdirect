@@ -54,7 +54,7 @@ Status: **proven** = round-tripped from generated markup (`confirmed-on-staging.
 - **Props:** text, boolean, select (`label : value`), media, loop, object, class, group, repeater, condition (D `/components/props/*`). Map with `{props.key}`.
 - **Variations:** one component, props drive it: boolean + `{#if}`, select + data attribute, inline tokens `style="--card-bg: {props.cardBg}"`. Never duplicate a component per variant (D `/components/creating-component-variations`).
 - **Scope:** a component sees only `this`, `site`, `url` and its props; pass loop or template data in as prop values (`{item.title}`, `{item.image.id}`, `{item.permalink.relative}`) (D `/components/using-a-component-dynamic`).
-- **Reuse first:** existing refs on staging: 143 callout band (tones ink, butter, blue), 176 page hero, 457 newsletter band, header 22, footer 28 (`fixtures/README.md`).
+- **Reuse first:** existing component refs on DealDirect staging: TBD (list them after the first snapshot). The TwoEleven refs in `fixtures/README.md` (143, 176, 457, 22, 28) do not exist on DealDirect.
 
 ## Slots
 - Define `{@slot name}` in the component; fill `{#slot name}...{/slot}` on the instance. Stored as `etch/slot-placeholder` (definition) and `etch/slot-content` (instance). `slots.name.empty` is true when the slot has no content: use it for fallbacks and to drop empty wrappers (D `/components/slots`).

@@ -1,4 +1,4 @@
-// Read-only semantic audit: node audit-semantic.js <url...>. Run where the site is reachable (Mac); cloud hits the SiteGround captcha.
+// Read-only semantic audit: node audit-semantic.js <url...>. Run where the site is reachable.
 // Needs playwright (npm i -g playwright).
 const {chromium}=require('playwright');
 (async()=>{const b=await chromium.launch({args:['--no-sandbox']});

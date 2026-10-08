@@ -28,4 +28,4 @@ Extends `guardrails.md` section 2 and 3 (one h1, no skipped levels, anchor vs bu
 - Dialogs: `<dialog>` with labelled heading and real close button (guardrails section 2).
 
 ## Audit recipe (read-only)
-Run `scripts/audit-semantic.js <urls>` (needs a browser that passes the SiteGround captcha, i.e. the Mac; cloud is blocked). It lists: h1 count, heading sequence, landmarks (`header/nav/main/footer`, labels), `img` without alt, empty links/buttons, `div role=button`, duplicate ids, unlabelled sections (lists made of divs: check by eye). Mark unreadable pages `[VERIFY via Mac browser]`. Each finding gets an owner (builder / copy / Alex).
+Run `scripts/audit-semantic.js <urls>` (needs network access to the site from where it runs). It lists: h1 count, heading sequence, landmarks (`header/nav/main/footer`, labels), `img` without alt, empty links/buttons, `div role=button`, duplicate ids, unlabelled sections (lists made of divs: check by eye). Mark unreadable pages `[VERIFY via Mac browser]`. Each finding gets an owner (builder / copy / Alex).

@@ -14,7 +14,7 @@ Required unless marked optional. Full working example: `scripts/spec-check-tests
 ```yaml
 spec_version: 1
 page: {title: "Services", slug: services, status: draft, template: default}   # status is always draft
-site_profile: twoeleven-staging          # host, IDs, brand rules
+site_profile: dealdirect-staging         # host, IDs, brand rules
 site_styles: path/to/etch_styles.json    # optional: existing site classes count as known
 site_classes: [callout-band]             # optional: more known site classes
 scope: [services-intro]                  # optional: edit flow, only these sections change

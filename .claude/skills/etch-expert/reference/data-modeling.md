@@ -8,7 +8,7 @@ Etch pinned: 1.6.8 (staging, 2026-10-07). Staging-tested facts: `confirmed-on-st
 - Create: "+ New Collection" in the sidebar. Rename: double-click or right-click. Move: right-click > "Move into..." / "Move to top level"; drag to reorder. Deleting a collection never deletes assets.
 - Assign: drag assets onto a collection or use the collection popover. Uploads go into the currently selected collection (1.6.1); bulk uploads keep their collection (1.6.4).
 - Compression presets (1.6.2): save, reuse. Accepts JPG, PNG, WebP, AVIF, SVG, MP4, MOV, PDF, CSV, XLS.
-- TwoEleven convention (our choice, not Etch's): collections `Brand` (logos, portraits), `Clients` (client logos by name), `Work` (project shots, one sub-collection per client), `Insights` (post images), `Video`, `Docs`. Name files `client-what-size` before upload. Compress with a preset before upload, not after.
+- Convention from the TwoEleven build (our choice, not Etch's; confirm for DealDirect): collections `Brand` (logos, portraits), `Clients` (client logos by name), `Work` (project shots, one sub-collection per client), `Insights` (post images), `Video`, `Docs`. Name files `client-what-size` before upload. Compress with a preset before upload, not after.
 - **Unconfirmed:** nesting depth. Docs page says one level; changelog 1.6.2 says two. Assume one, test on staging. Whether collections show in the WP admin Media Library: not documented.
 
 ## 2. Etch custom fields vs SCF
@@ -32,7 +32,7 @@ Ask in order; first yes wins.
 ## 4. Every CPT gets a real menu icon
 - `register_post_type( ..., 'menu_icon' => ... )` (or the icon field in SCF's post type UI). Default is the Posts pin: never ship it.
 - Accepted: a Dashicons class (`dashicons-portfolio`), a base64 SVG data URI (`data:image/svg+xml;base64,...`, SVG must use `fill="black"` so WP recolors it), an image URL, or `'none'` (CSS-styled). Also set `menu_position` (5 below Posts, 20 below Pages, 25 below Comments, 60 first separator).
-- TwoEleven picks: service `dashicons-hammer`, project `dashicons-portfolio`, faq `dashicons-editor-help`, problem `dashicons-warning`, testimonial `dashicons-format-quote`, resource `dashicons-book`. Confirm each name exists in the Dashicons list before use. For a brand-specific icon, use a 20x20 `//` mark SVG in the base64 form.
+- TwoEleven picks (example; choose DealDirect's own): service `dashicons-hammer`, project `dashicons-portfolio`, faq `dashicons-editor-help`, problem `dashicons-warning`, testimonial `dashicons-format-quote`, resource `dashicons-book`. Confirm each name exists in the Dashicons list before use. For a brand-specific icon, use a 20x20 `//` mark SVG in the base64 form.
 - Etch 1.5.3: CPTs default to Featured Image + hierarchical parent support. Whether Etch's own CPT creator exposes an icon field: **unconfirmed**.
 
 ## Could not confirm

@@ -32,7 +32,7 @@ Always check and cite docs.etchwp.com for the installed version (Etch pinned 1.6
 - Settled by staging tests: see `reference/confirmed-on-staging.md`.
 
 ## Standing site rules
-Saving the same page in the builder overwrites direct edits. Staging first (alexg281.sg-host.com). Interactive pieces untouched beyond approved copy fixes.
+Saving the same page in the builder overwrites direct edits. Staging first (wordpress-1077248-6717515.cloudwaysapps.com). Interactive pieces untouched beyond approved copy fixes.
 
 ## Output
 The exact structure or snippet, the reference file that confirms it, and anything that needs a staging test.

@@ -1,6 +1,6 @@
 # Etch fixtures (known-good markup)
 
-Real `post_content` exported read-only from TwoEleven **staging** (`alexg281.sg-host.com`) on 2026-10-07. Everything here already renders and round-trips in the builder on that site, so copy from it instead of hand-writing block markup.
+Real `post_content` exported read-only from TwoEleven **staging** (`alexg281.sg-host.com`) on 2026-10-07. Everything here renders and round-trips in the builder on that site, so copy its STRUCTURE instead of hand-writing block markup. **This is not DealDirect content:** component refs, style IDs, copy and brand values are TwoEleven's. Swap in DealDirect's own IDs (from a snapshot of DealDirect staging) before writing anything.
 
 ## Versions (pin these in the site profile)
 

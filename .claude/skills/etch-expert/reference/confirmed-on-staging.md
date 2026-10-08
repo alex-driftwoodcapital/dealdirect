@@ -1,4 +1,5 @@
-# Confirmed on staging (TwoEleven, alexg281.sg-host.com)
+# Confirmed on staging (previous build: TwoEleven, not DealDirect)
+Etch behaviour findings carry over; IDs, refs and brand values below do not. Re-confirm on DealDirect staging before relying on a version-sensitive finding.
 Things tested for real, not copied from docs. Newest first. Etch 1.6.8 / ACSS 4.0.1 unless noted. Add a line whenever a test settles a doc gap; remove a gap from `SKILL.md` when it lands here.
 
 | Date | Confirmed | Evidence |

@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -z \"${ETCH_SSH_KEY:-}\" ] || \"$CLAUDE_PROJECT_DIR/.claude/skills/etch-page-editor/scripts/ssh-setup.sh\" || true"
+          }
+        ]
+      }
+    ]
+  }
+}

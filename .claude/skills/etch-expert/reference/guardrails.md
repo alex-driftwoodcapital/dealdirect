@@ -1,7 +1,7 @@
 # Etch guardrails (load first)
 
 Every Etch run (`etch-expert`, `etch-builder`, `etch-page-editor`) reads this file before anything else. One line per rule: DO / DO NOT, then the source.
-Pinned: Etch 1.6.8, ACSS 4.0.1, WP 7.1.3 (staging alexg281.sg-host.com). Docs re-read 2026-10-07; every docs path below was checked against the docs.etchwp.com sitemap that day.
+Pinned: Etch 1.6.8, ACSS 4.0.1, WP 7.1.3 (verified on a previous build's staging, TwoEleven; re-check DealDirect's versions with `etch-page-editor/scripts/ssh-setup.sh --check`). Docs re-read 2026-10-07; every docs path below was checked against the docs.etchwp.com sitemap that day.
 
 Sources: **D** = official docs, `https://docs.etchwp.com` + the path shown. **S** = staging finding (`confirmed-on-staging.md`, `fixtures/PILOT.md`, `etch-build/parity-audit.md`). **P** = project rule (project memory, skills).
 When docs and staging disagree, staging wins for this site and the mismatch goes in `confirmed-on-staging.md`. Lint column: **L** = `etch-page-editor/scripts/lint.py` checks it, **C** = `etch-builder/scripts/spec-check.py` checks it at the design-spec stage, blank = judgement or a staging test.

@@ -1,0 +1,4 @@
+{"goal":"3-piece dry run","done":"all three pieces written, diffs clean",
+ "pieces":[{"name":"new-A","new":{"title":"ZZ brief A (delete me)","slug":"zz-brief-a"},"content":"Piece_two.html"},
+           {"name":"edit-X","post":481,"content":"Piece_three__edited.html"},
+           {"name":"new-B","new":{"title":"ZZ brief B (delete me)","slug":"zz-brief-b"},"content":"Piece_one.html"}]}

@@ -24,7 +24,7 @@ Rules
 Example
 ```
 STYLE SPEC v1
-site: index/site-profile.md (TwoEleven)  acss: 4.0.1  verified: 2026-10-07  verify: python3 -I scripts/verify.py spec.css -> 0 error(s)
+site: index/site-profile.md (example from TwoEleven)  acss: 4.0.1  verified: 2026-10-07  verify: python3 -I scripts/verify.py spec.css -> 0 error(s)
 items:
 - role: Primary CTA button
   target: existing class .btn--secondary (no new class)

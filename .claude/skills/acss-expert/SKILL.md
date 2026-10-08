@@ -7,7 +7,7 @@ description: "Expert on Automatic.css (ACSS) 4.x for every site build: styles th
 One job: decide how something is styled with ACSS using only names that exist in the installed build, and hand a **style spec** to the Etch skills (`etch-builder`, `etch-page-editor`; they own structure and writing). This skill writes nothing to the site and never creates a stylesheet, global CSS or SCSS file: CSS lives at element level (class, nested block, attribute).
 
 ## Always first
-1. Load the site profile: `index/site-profile.md` (TwoEleven staging) or fill `index/site-profile.template.md` for a new site (checklist: `reference/new-site-setup.md`). Brand and measured values live there; project memory wins over it.
+1. Load the site profile: `index/site-profile.md` (DealDirect; values TBD until the first export) or fill `index/site-profile.template.md` for a new site (checklist: `reference/new-site-setup.md`). Brand and measured values live there; project memory wins over it.
 2. The live build is the truth: `index/automatic.css`, `index/acss-settings.json`, `index/acss-index.json` (ACSS 4.0.1, rebuild with `scripts/build-index.py`). Docs pages are partly 3.x; `reference/staging-4.0.1-facts.md` lists what is absent and what to use instead.
 3. Never use a name from memory. ACSS 4 is breakpoint-free and variable-first: no `.grid--N`, `.gap--`, `.pad--`, `.link--`, `.text--{color}` etc.
 
