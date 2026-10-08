@@ -2,7 +2,8 @@
 """Deploy a built page to STAGING over SSH + WP-CLI. Run from the repo root on the Mac.
   python3 ops/page/deploy.py eb5             dry run: what would be imported, added, updated, written
   RUN_YES=1 python3 ops/page/deploy.py eb5   do it
-Steps: build (copy gate) -> media: reuse by filename or import (local files uploaded, live URLs fetched by the host)
+Steps: build (copy gate) -> media: reuse (by source filename) or import (local files uploaded, live URLs fetched by the
+host; images compressed with the Etch Asset Manager preset first, as the builder does on upload)
 -> style records upserted by selector (backup of etch_styles first) -> placeholders resolved -> page written by
 etch-page-editor/scripts/edit-run.sh (snapshot, lint, write, purge, diff; a new page is created as a draft)
 -> sha recorded in post meta -> status set from the page's META (staging pages publish; live is never written). An existing page that changed since our last deploy (builder save, manual edit) STOPS."""
@@ -16,9 +17,9 @@ PAGE = sys.argv[1] if len(sys.argv) > 1 else sys.exit(__doc__)
 WRITE = os.environ.get('RUN_YES') == '1'
 EDITOR = os.path.join(ROOT, '.claude', 'skills', 'etch-page-editor', 'scripts')
 PROFILE = os.environ.get('ETCH_PROFILE', os.path.join(ROOT, '.claude', 'skills', 'etch-page-editor', 'profiles', 'dealdirect-staging.env'))
-env_dump = subprocess.run(['bash', '-c', f'set -a; . {shlex.quote(PROFILE)}; echo "$SITE_NAME"; echo "$SSH_CMD"; echo "$WP_PATH"; echo "$PURGE_CMD"'],
+env_dump = subprocess.run(['bash', '-c', f'set -a; . {shlex.quote(PROFILE)}; echo "$SITE_NAME"; echo "$SSH_CMD"; echo "$WP_PATH"; echo "$PURGE_CMD"; echo "$COMPRESS_PRESET"'],
                           capture_output=True, text=True, check=True).stdout.splitlines()
-SITE, SSH, WP, PURGE = env_dump[:4]
+SITE, SSH, WP, PURGE, PRESET = (env_dump + [''] * 5)[:5]
 if 'STAGING' not in SITE:
     sys.exit(f'REFUSED: staging profile only ({SITE})')
 
@@ -66,13 +67,16 @@ try:
             if WRITE:
                 upload(open(os.path.join(ROOT, src), 'rb').read(), path)
             src = path
-        sources[slug] = {'src': src, 'collection': m['collection']}
-    got = helper('media', sources, mode) if sources else {}
+        sources[slug] = {'src': src, 'collection': m['collection'], **({'name': m['name']} if m.get('name') else {})}
+    # Images are compressed on the host with the Etch Asset Manager preset (COMPRESS_PRESET, or the only one saved).
+    default_preset = json.load(open(os.path.join(ROOT, 'ops', 'page', 'compression-preset.json')))
+    got = helper('media', {'preset': os.environ.get('COMPRESS_PRESET') or PRESET or None, 'default_preset': default_preset,
+                           'items': sources}, mode) if sources else {}
     got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
-        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + f'  -> {r.get("collection", "")}')
-    errors = [s for s, r in got.items() if str(r['status']).startswith('ERROR')]
-    if errors:
+        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + (f'  -> {r["collection"]}' if r.get('collection') else ''))
+    errors = [s for s, r in got.items() if str(r['status']).startswith(('ERROR', 'BLOCKED'))]
+    if errors:  # also in a dry run: the PR check shows what would block the deploy
         sys.exit(f'STOP: media failed: {errors}')
 
     step('style records')
@@ -90,8 +94,8 @@ try:
     print(f'  {counts}; written: {st["written"]}')
 
     KIND = meta.get('kind', 'page')
-    PTYPE = {'page': 'page', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
-    want = meta.get('status', 'draft' if KIND == 'page' else 'publish')
+    PTYPE = {'page': 'page', 'offering': 'offering', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
+    want = meta.get('status', 'draft' if KIND in ('page', 'offering') else 'publish')
     step(KIND)
     pg = helper('page', {'slug': meta['slug'], 'post_type': PTYPE}, 'dry')
     template = open(f'{B}/content.tpl.html').read()
@@ -102,6 +106,7 @@ try:
             inv = helper('inventory', {}, 'dry')
             print(f'  staging now (theme {inv["active_theme"]}): ' + ('; '.join(inv['posts']) or 'no templates, parts or components yet'))
             print('  asset storage (Etch Asset Manager): ' + json.dumps(inv.get('asset_storage', {})))
+            print('  Etch compressor: ' + json.dumps(inv.get('etch_compressor', {})))
         what = f'{PTYPE} "{meta["title"]}" ({meta["slug"]})'
         if pg['id']:
             print(f'  would update {what} #{pg["id"]} ({pg["status"]})' + (f', then set status {want}' if pg['status'] != want else ''))
@@ -119,7 +124,7 @@ try:
     if missing_refs:
         sys.exit(f'STOP: components not on staging yet: {missing_refs} (deploy them first; ops/deploy-all.sh orders them)')
     sel2id = {sel: r['id'] for sel, r in st['records'].items()}
-    content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs)
+    content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs, {s: r.get('url') for s, r in got.items()})
     final = f'{B}/content.html'
     open(final, 'w').write(content)
     run_env = {**os.environ, 'RUN_YES': '1', 'ETCH_PROFILE': PROFILE}
@@ -129,7 +134,7 @@ try:
         return [l.split('\t')[3].strip() for l in open(f'{snap}/manifest.tsv') if l.startswith(f'post\t{pid}\t')][0]
 
     if not pg['id'] and KIND != 'page':
-        # components and templates are created empty, then filled through the same guarded update path
+        # offerings, components and templates are created empty, then filled through the same guarded update path
         pg = {'id': helper('create', {'post_type': PTYPE, 'slug': meta['slug'], 'title': meta['title']}, 'write')['id'], 'deployed_sha': ''}
         print(f'  created {PTYPE} #{pg["id"]} {meta["slug"]}')
     if pg['id']:

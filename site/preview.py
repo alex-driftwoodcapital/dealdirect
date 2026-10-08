@@ -45,7 +45,7 @@ for slug, m in media.items():
 body = open(os.path.join(B, 'content.tpl.html')).read()
 if tpl_markup:
     body = tpl_markup.replace('<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->', body)
-markup = etch.resolve(svg.expand(body, fetch_or_standin), sel2id, {k: k for k in media})
+markup = etch.resolve(svg.expand(body, fetch_or_standin), sel2id, {k: k for k in media}, None, src_of)
 STATS = {'{options.acf.years_experience}': '30+', '{options.acf.properties}': '78', '{options.acf.aum}': '~$3.5B',
          '{options.acf.employees.numberFormat()}': '6,000', '{options.acf.as_of}': 'September 1, 2026'}
 
@@ -91,10 +91,9 @@ for rec in {**builtin, **records}.values():
 acss = open(os.path.join(ROOT, '.claude', 'skills', 'acss-expert', 'index', 'automatic.css')).read()
 brand = """:root{--primary:#0B2B48;--primary-ultra-dark:#061A2E;--primary-semi-dark:#14385B;--secondary:#2468A8;--secondary-dark:#1B5388;
 --accent:#6FB0E0;--base:#F5F6F8;--base-light:#E9ECF0;--base-semi-light:#D3D8E0;--base-dark:#2E3744;--white:#fff;
---text-dark:#48535F;--content-width:1334px;--gutter:32px}
+--text-dark:#48535F;--content-width:1334px;--gutter:32px;--primary-semi-light:#22527F}
 body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#48535F;background:#fff}
 h1,h2,h3,h4{font-weight:300;color:var(--primary-ultra-dark)}
-[data-etch-element=container]{padding-inline:var(--gutter);box-sizing:border-box}
 @media (width < 768px){:root{--gutter:16px}}"""
 doc = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{page} preview</title><style>{acss}</style><style>{brand}</style><style>{chr(10).join(css)}</style></head>
