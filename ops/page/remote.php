@@ -79,7 +79,18 @@ if ( $action === 'media' ) {
 		$theme = wp_get_object_terms( $p->ID, 'wp_theme', [ 'fields' => 'names' ] );
 		$out[] = sprintf( '%s #%d %s (%s)%s', $p->post_type, $p->ID, $p->post_name, $p->post_status, $theme && ! is_wp_error( $theme ) ? ' theme=' . implode( ',', $theme ) : '' );
 	}
-	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out ];
+	// Etch Asset Manager storage is undocumented: report what could hold collections (attachment taxonomies and
+	// their terms, Etch options/post types whose names mention assets or collections) so it can be read, not guessed.
+	$tax = [];
+	foreach ( get_object_taxonomies( 'attachment', 'objects' ) as $t ) {
+		$terms = get_terms( [ 'taxonomy' => $t->name, 'hide_empty' => false, 'number' => 50 ] );
+		$tax[ $t->name ] = is_wp_error( $terms ) ? [] : array_map( fn( $x ) => $x->name . ( $x->parent ? ' (child of #' . $x->parent . ')' : '' ) . ' [' . $x->count . ']', $terms );
+	}
+	global $wpdb;
+	$opts  = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%etch%' AND (option_name LIKE '%asset%' OR option_name LIKE '%collection%' OR option_name LIKE '%media%')" );
+	$types = array_values( array_filter( get_post_types(), fn( $n ) => preg_match( '/etch|asset|collection/i', $n ) ) );
+	$meta  = $wpdb->get_col( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE meta_key LIKE '%etch%' AND (meta_key LIKE '%asset%' OR meta_key LIKE '%collection%') LIMIT 20" );
+	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ] ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
 	$cur = get_post_status( (int) $in['id'] );

@@ -101,6 +101,7 @@ try:
         if KIND == 'template':
             inv = helper('inventory', {}, 'dry')
             print(f'  staging now (theme {inv["active_theme"]}): ' + ('; '.join(inv['posts']) or 'no templates, parts or components yet'))
+            print('  asset storage (Etch Asset Manager): ' + json.dumps(inv.get('asset_storage', {})))
         what = f'{PTYPE} "{meta["title"]}" ({meta["slug"]})'
         if pg['id']:
             print(f'  would update {what} #{pg["id"]} ({pg["status"]})' + (f', then set status {want}' if pg['status'] != want else ''))
