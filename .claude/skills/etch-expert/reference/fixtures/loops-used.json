@@ -1,0 +1,50 @@
+{
+ "prjfeat": {
+  "key": "featuredProjects",
+  "name": "Featured projects",
+  "global": true,
+  "config": {
+   "type": "wp-query",
+   "args": {
+    "post_type": "project",
+    "posts_per_page": -1,
+    "orderby": "menu_order",
+    "order": "ASC",
+    "post_status": "publish",
+    "meta_query": [
+     {
+      "key": "featured",
+      "value": "1"
+     }
+    ]
+   }
+  }
+ },
+ "prjmore": {
+  "key": "moreProjects",
+  "name": "More projects",
+  "global": true,
+  "config": {
+   "type": "wp-query",
+   "args": {
+    "post_type": "project",
+    "posts_per_page": -1,
+    "orderby": "menu_order",
+    "order": "ASC",
+    "post_status": "publish",
+    "meta_query": {
+     "relation": "OR",
+     "0": {
+      "key": "featured",
+      "value": "1",
+      "compare": "!="
+     },
+     "1": {
+      "key": "featured",
+      "compare": "NOT EXISTS"
+     }
+    }
+   }
+  }
+ }
+}

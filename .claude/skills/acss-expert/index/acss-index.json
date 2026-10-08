@@ -1,0 +1,5760 @@
+{
+ "meta": {
+  "acss_version": "4.0.1",
+  "source": "automatic.css",
+  "built": "2026-10-07",
+  "counts": {
+   "variable": 405,
+   "class": 117,
+   "recipe": 64,
+   "absent": 47
+  },
+  "note": "Names ending in \"-\" or containing N/{...} in absent entries are patterns. Do not deploy; read-only reference."
+ },
+ "entries": [
+  {
+   "name": "--accent",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--accent-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--admin-bar-height",
+   "kind": "variable",
+   "group": "Header Height Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/header-height",
+   "replacement": null
+  },
+  {
+   "name": "--auto-grid-aggressiveness",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--base",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-heading-lh",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-text-lh",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--base-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark-button",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark-focus",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark-heading",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark-icon",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-dark-text",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-light",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-light-button",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-light-heading",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-light-icon",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-light-text",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark-button",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark-focus",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark-heading",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark-icon",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-dark-text",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-light",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-light-button",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-light-heading",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-light-icon",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--bg-ultra-light-text",
+   "kind": "variable",
+   "group": "Contextual Relationship Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": "--black",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-background",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-border-color",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-border-radius",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-border-style",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-border-width",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-box-shadow",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-color",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-font-family",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-font-size",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-font-style",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-font-weight",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-line-height",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-cite-text-transform",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-color",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-font-family",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-font-size",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-font-style",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-font-weight",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-line-height",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-margin-block",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-padding",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-footer-text-transform",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-gap",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-padding",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-color",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-font-family",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-font-size",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-font-style",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-font-weight",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-line-height",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-text-align",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--blockquote-text-text-transform",
+   "kind": "variable",
+   "group": "Blockquote Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": "--body-bg-color",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/sticky",
+   "replacement": null
+  },
+  {
+   "name": "--border",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-color-dark",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-color-light",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-dark",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-light",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-size",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-style",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--border-width",
+   "kind": "variable",
+   "group": "Border Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--box-shadow-1",
+   "kind": "variable",
+   "group": "Box Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/box-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--box-shadow-2",
+   "kind": "variable",
+   "group": "Box Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/box-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--box-shadow-3",
+   "kind": "variable",
+   "group": "Box Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/box-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--btn-align-items",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-background",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-background-hover",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-border-color",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-border-color-hover",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-border-radius",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-border-style",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-border-width",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-font-family",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-font-size",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-font-style",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-font-weight",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-justify-content",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-letter-spacing",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-line-height",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-min-width",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-padding-block",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-padding-inline",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-radius",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-align",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-color",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-color-hover",
+   "kind": "variable",
+   "group": "Blockquote Styling",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-decoration",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-decoration-hover",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-text-transform",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--btn-width",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--col-rule-width-l",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--col-rule-width-m",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--col-rule-width-s",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--col-width-l",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--col-width-m",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--col-width-s",
+   "kind": "variable",
+   "group": "Column Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/columns/css-columns",
+   "replacement": null
+  },
+  {
+   "name": "--container-gap",
+   "kind": "variable",
+   "group": "Contextual Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/contextual-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--content-gap",
+   "kind": "variable",
+   "group": "Contextual Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/contextual-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--content-width",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/content-width",
+   "replacement": null
+  },
+  {
+   "name": "--content-width-safe",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/content-width",
+   "replacement": null
+  },
+  {
+   "name": "--divider",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-color-dark",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-color-light",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-dark",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-gap",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-inline-size",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-light",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-size",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--divider-style",
+   "kind": "variable",
+   "group": "Divider Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-divider-system",
+   "replacement": null
+  },
+  {
+   "name": "--drop-shadow-1",
+   "kind": "variable",
+   "group": "Drop Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/drop-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--drop-shadow-2",
+   "kind": "variable",
+   "group": "Drop Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/drop-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--drop-shadow-3",
+   "kind": "variable",
+   "group": "Drop Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/shadow-filters/drop-shadows",
+   "replacement": null
+  },
+  {
+   "name": "--ease-bouncy",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/easing-presets",
+   "replacement": null
+  },
+  {
+   "name": "--ease-elastic",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/easing-presets",
+   "replacement": null
+  },
+  {
+   "name": "--ease-gentle",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/easing-presets",
+   "replacement": null
+  },
+  {
+   "name": "--ease-smooth",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/easing-presets",
+   "replacement": null
+  },
+  {
+   "name": "--ease-snappy",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/easing-presets",
+   "replacement": null
+  },
+  {
+   "name": "--figcaption-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--figure-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--flow-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--focus-color",
+   "kind": "variable",
+   "group": "Focus Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/accessibility/focus-styling",
+   "replacement": null
+  },
+  {
+   "name": "--focus-offset",
+   "kind": "variable",
+   "group": "Focus Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/accessibility/focus-styling",
+   "replacement": null
+  },
+  {
+   "name": "--focus-width",
+   "kind": "variable",
+   "group": "Focus Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/accessibility/focus-styling",
+   "replacement": null
+  },
+  {
+   "name": "--full",
+   "kind": "variable",
+   "group": "Content Grid",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": "--grid-1",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-1-2",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-1-3",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-10",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-11",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-12",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-2",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-2-1",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-2-3",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-3",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-3-1",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-3-2",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-4",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-5",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-6",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-7",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-8",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-9",
+   "kind": "variable",
+   "group": "Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-10",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-11",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-12",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-2",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-3",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-4",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-5",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-6",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-7",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-8",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-auto-9",
+   "kind": "variable",
+   "group": "Auto Grid Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/auto-grids",
+   "replacement": null
+  },
+  {
+   "name": "--grid-gap",
+   "kind": "variable",
+   "group": "Contextual Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/grid-variables",
+   "replacement": null
+  },
+  {
+   "name": "--gutter",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--h1",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-line-height",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-max-width",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-to-h2",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-to-h3",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-to-h4",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-to-h5",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h1-to-h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2-line-height",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2-to-h3",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2-to-h4",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2-to-h5",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h2-to-h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h3",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h3-to-h4",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h3-to-h5",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h3-to-h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h4",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h4-line-height",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h4-to-h5",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h4-to-h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h5",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h5-to-h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--h6",
+   "kind": "variable",
+   "group": "Heading Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": "--header-height",
+   "kind": "variable",
+   "group": "Header Height Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/header-height",
+   "replacement": null
+  },
+  {
+   "name": "--heading-color",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-font-family",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-font-weight",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-letter-spacing",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-line-height",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--heading-text-wrap",
+   "kind": "variable",
+   "group": "Heading Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/typography-variables",
+   "replacement": null
+  },
+  {
+   "name": "--icon-background",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-background-hover",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-border-color",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-border-color-hover",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-border-style",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-border-width",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-color",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-color-hover",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-list-gap",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-list-icon-size",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding-l",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding-m",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding-s",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding-xl",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-padding-xs",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-radius",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-scheme",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size-l",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size-m",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size-s",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size-xl",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--icon-size-xs",
+   "kind": "variable",
+   "group": "Icon Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": "--link-color",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-color-hover",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-decoration",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-decoration-hover",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-transition",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-underline-offset",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--link-weight",
+   "kind": "variable",
+   "group": "Link Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/links/link-styling",
+   "replacement": null
+  },
+  {
+   "name": "--list-indent-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--list-item-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--list-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--nested-list-indent-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--neutral",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--neutral-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--offset",
+   "kind": "variable",
+   "group": "Header Height Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/header-height",
+   "replacement": null
+  },
+  {
+   "name": "--option-base-btn-outline",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--option-primary-btn-outline",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--option-secondary-btn-outline",
+   "kind": "variable",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-variables",
+   "replacement": null
+  },
+  {
+   "name": "--overlay-z-index",
+   "kind": "variable",
+   "group": "Overlays",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/overlays/overlay-classes",
+   "replacement": null
+  },
+  {
+   "name": "--paragraph-spacing",
+   "kind": "variable",
+   "group": "Smart Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--primary",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--primary-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--radius",
+   "kind": "variable",
+   "group": "Radius Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--radius-50",
+   "kind": "variable",
+   "group": "Radius Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--radius-circle",
+   "kind": "variable",
+   "group": "Radius Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--radius-m",
+   "kind": "variable",
+   "group": "Radius Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--radius-none",
+   "kind": "variable",
+   "group": "Radius Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/borders-dividers/global-border-system",
+   "replacement": null
+  },
+  {
+   "name": "--relative-heading-color",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--relative-text-color",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--root-font-size",
+   "kind": "variable",
+   "group": "Text, Headings, & Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--scroll-margin",
+   "kind": "variable",
+   "group": "Header Height Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/header-height",
+   "replacement": null
+  },
+  {
+   "name": "--secondary",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--secondary-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--section-padding-block",
+   "kind": "variable",
+   "group": "Default Section Styles",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-l",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-l-to-m",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-l-to-s",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-l-to-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-m",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-m-to-s",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-m-to-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-s",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-s-to-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xl",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xl-to-l",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xl-to-m",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xl-to-s",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xl-to-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl-to-l",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl-to-m",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl-to-s",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl-to-xl",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--section-space-xxl-to-xs",
+   "kind": "variable",
+   "group": "Section Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-spacing",
+   "replacement": null
+  },
+  {
+   "name": "--space-l",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-l-to-m",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-l-to-s",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-l-to-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-m",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-m-to-s",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-m-to-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-s",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-s-to-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xl",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xl-to-l",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xl-to-m",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xl-to-s",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xl-to-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl-to-l",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl-to-m",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl-to-s",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl-to-xl",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--space-xxl-to-xs",
+   "kind": "variable",
+   "group": "Space Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/spacing-variables",
+   "replacement": null
+  },
+  {
+   "name": "--sticky-offset",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/sticky",
+   "replacement": null
+  },
+  {
+   "name": "--sticky-offset-custom",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/sticky",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-hover",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-semi-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-semi-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-ultra-dark",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--tertiary-ultra-light",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--text-color",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-dark",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-dark-muted",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-font-family",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-l",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-l-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-l-to-m",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-l-to-s",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-l-to-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-light",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-light-muted",
+   "kind": "variable",
+   "group": "Sticky Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-line-height",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-m",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-m-line-height",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-m-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-m-to-s",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-m-to-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-s",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-s-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-s-to-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-shadow-1",
+   "kind": "variable",
+   "group": "Text Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-shadow-2",
+   "kind": "variable",
+   "group": "Text Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-shadow-3",
+   "kind": "variable",
+   "group": "Text Shadow Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-text-wrap",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl-to-l",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl-to-m",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl-to-s",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xl-to-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xs-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-max-width",
+   "kind": "variable",
+   "group": "Text Defaults",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-to-l",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-to-m",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-to-s",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-to-xl",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--text-xxl-to-xs",
+   "kind": "variable",
+   "group": "Text Size Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": "--transition",
+   "kind": "variable",
+   "group": "Transition Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/transition",
+   "replacement": null
+  },
+  {
+   "name": "--transition-delay",
+   "kind": "variable",
+   "group": "Transition Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/transition",
+   "replacement": null
+  },
+  {
+   "name": "--transition-duration",
+   "kind": "variable",
+   "group": "Transition Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/transition",
+   "replacement": null
+  },
+  {
+   "name": "--transition-timing",
+   "kind": "variable",
+   "group": "Transition Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/transition",
+   "replacement": null
+  },
+  {
+   "name": "--visible-blur-amount",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-delay",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-duration",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-float-distance",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-opacity-start",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-scale-shrink",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-scale-start",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-sink-distance",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-slide-distance",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-stagger-interval",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-threshold",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--visible-timing",
+   "kind": "variable",
+   "group": "Auto Grid Gap",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": "--white",
+   "kind": "variable",
+   "group": "Palette",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/colors/palette-intro",
+   "replacement": null
+  },
+  {
+   "name": "--width-10",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-20",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-30",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-40",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-50",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-60",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-70",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-80",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-90",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": "--width-full",
+   "kind": "variable",
+   "group": "Width Variables",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".acss-visible",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": null
+  },
+  {
+   "name": ".bg--dark",
+   "kind": "class",
+   "group": "Color Assignments",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": ".bg--light",
+   "kind": "class",
+   "group": "Color Assignments",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": ".bg--ultra-dark",
+   "kind": "class",
+   "group": "Color Assignments",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": ".bg--ultra-light",
+   "kind": "class",
+   "group": "Color Assignments",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-assignments/background-text-assignments",
+   "replacement": null
+  },
+  {
+   "name": ".blockquote",
+   "kind": "class",
+   "group": "Elements",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/elements/blockquotes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--base",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--base-light",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--l",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--m",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--none",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--outline",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--primary",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--primary-dark",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--primary-light",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--s",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--secondary",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--secondary-dark",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--secondary-light",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--xl",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--xs",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".btn--xxl",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-classes",
+   "replacement": null
+  },
+  {
+   "name": ".content--feature",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content--feature-max",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content--full",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content--full-safe",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content-grid",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content-grid--off",
+   "kind": "class",
+   "group": "Grids",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/grids/content-grid",
+   "replacement": null
+  },
+  {
+   "name": ".content-width",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/content-width",
+   "replacement": null
+  },
+  {
+   "name": ".content-width--safe",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/content-width",
+   "replacement": null
+  },
+  {
+   "name": ".h1",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".h2",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".h3",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".h4",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".h5",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".h6",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-headings",
+   "replacement": null
+  },
+  {
+   "name": ".header--l",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".header--m",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".header--s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".header--xl",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".header--xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".header--xxl",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/header-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".hidden-accessible",
+   "kind": "class",
+   "group": "Accessibility",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/accessibility/hidden-accessible-class",
+   "replacement": null
+  },
+  {
+   "name": ".icon--2xl",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--boxed",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--l",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--m",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--plain",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--s",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--xl",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon--xs",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".icon-list",
+   "kind": "class",
+   "group": "Icons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/icons/icon-framework",
+   "replacement": null
+  },
+  {
+   "name": ".is-bg",
+   "kind": "class",
+   "group": "Backgrounds",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/backgrounds/is-background-is-bg",
+   "replacement": null
+  },
+  {
+   "name": ".on-enter--stagger",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-exit--stagger",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-visible--fade",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-visible--float",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-visible--stagger",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-visible-all--fade",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".on-visible-all--float",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/visible-effects",
+   "replacement": null
+  },
+  {
+   "name": ".overlay",
+   "kind": "class",
+   "group": "Overlays",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/overlays/overlay-classes",
+   "replacement": null
+  },
+  {
+   "name": ".scheme--dark",
+   "kind": "class",
+   "group": "Color Scheme",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-scheme/implementing-color-scheme",
+   "replacement": null
+  },
+  {
+   "name": ".scheme--light",
+   "kind": "class",
+   "group": "Color Scheme",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/color-scheme/implementing-color-scheme",
+   "replacement": null
+  },
+  {
+   "name": ".section--l",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--l-to-m",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--l-to-s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--l-to-xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--m",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--m-to-s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--m-to-xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--none",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--s-to-xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xl",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xl-to-l",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xl-to-m",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xl-to-s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xl-to-xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl-to-l",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl-to-m",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl-to-s",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl-to-xl",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".section--xxl-to-xs",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/section-padding-classes",
+   "replacement": null
+  },
+  {
+   "name": ".skip-link",
+   "kind": "class",
+   "group": "Accessibility",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/accessibility/hidden-accessible-class",
+   "replacement": null
+  },
+  {
+   "name": ".smart-spacing",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": ".smart-spacing--off",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": ".smart-spacing-normalize",
+   "kind": "class",
+   "group": "Spacing",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/spacing/smart-spacing",
+   "replacement": null
+  },
+  {
+   "name": ".sticky",
+   "kind": "class",
+   "group": "Effects",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/effects/sticky",
+   "replacement": null
+  },
+  {
+   "name": ".text--dark",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--dark-muted",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--l",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--light",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--light-muted",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--m",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--s",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--xl",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--xs",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".text--xxl",
+   "kind": "class",
+   "group": "Typography",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/typography/fluid-text",
+   "replacement": null
+  },
+  {
+   "name": ".unrelate",
+   "kind": "class",
+   "group": "Buttons",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/buttons/button-styling",
+   "replacement": null
+  },
+  {
+   "name": ".width--10",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--20",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--30",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--40",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--50",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--60",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--70",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--80",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--90",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--auto",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--fit-content",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--full",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--max-content",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".width--min-content",
+   "kind": "class",
+   "group": "Dimension",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/dimension/width-utilities",
+   "replacement": null
+  },
+  {
+   "name": ".wp-block-button",
+   "kind": "class",
+   "group": "Elements",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": null
+  },
+  {
+   "name": ".wp-block-button__link",
+   "kind": "class",
+   "group": "Elements",
+   "status": "present",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": null
+  },
+  {
+   "name": "?auto-grid",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-l",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-m",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-s",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-l",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-m",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-s",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-xl",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-xs",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-up-xxl",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-xl",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-xs",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?breakpoint-xxl",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?btn",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?card-container",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?center-all",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?center-bottom",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?center-left",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?center-right",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?center-top",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?clickable-parent",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?columns",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?concentric-radius",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?content-grid",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?divider-all",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?divider-bottom",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?divider-top",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-block",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-bottom",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-inline",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-left",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-right",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?fade-top",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?flex-column",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?flex-grid",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?flex-row",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?focus-parent",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-1",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-1-2",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-1-3",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-10",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-11",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-12",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-2",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-2-1",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-2-3",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-3",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-3-1",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-3-2",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-4",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-5",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-6",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-7",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-8",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?grid-9",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?ipsum-short",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?line-clamp",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?list-none",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?overlap",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?overlap-alt",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?property",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?query-children",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?script",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": "?variable-grid",
+   "kind": "recipe",
+   "group": "Recipes",
+   "status": "documented",
+   "since": "4.x",
+   "doc": "https://docs.automaticcss.com/recipes",
+   "replacement": null
+  },
+  {
+   "name": ".grid--*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.grid\\-\\-[\\w-]*$"
+  },
+  {
+   "name": ".grid--N",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.grid\\-\\-\\d+$"
+  },
+  {
+   "name": ".grid--l-2",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.grid\\-\\-l\\-2$"
+  },
+  {
+   "name": ".grid--1-2",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.grid\\-\\-1\\-2$"
+  },
+  {
+   "name": ".col-span--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.col\\-span\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".order--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.order\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".align-*--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.align\\-[\\w-]*\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".justify-*--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.justify\\-[\\w-]*\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".stretch",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`grid-template-columns: var(--grid-N)` or recipe `?grid-N`; `var(--grid-gap)`",
+   "pattern": "^\\.stretch$"
+  },
+  {
+   "name": ".grid--auto-N",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-auto-N)`, recipes `?auto-grid`, `?variable-grid`",
+   "pattern": "^\\.grid\\-\\-auto\\-\\d+$"
+  },
+  {
+   "name": ".variable-grid",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-auto-N)`, recipes `?auto-grid`, `?variable-grid`",
+   "pattern": "^\\.variable\\-grid$"
+  },
+  {
+   "name": ".grid-alternate--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-auto-N)`, recipes `?auto-grid`, `?variable-grid`",
+   "pattern": "^\\.grid\\-alternate\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".grid--stack-*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-auto-N)`, recipes `?auto-grid`, `?variable-grid`",
+   "pattern": "^\\.grid\\-\\-stack\\-[\\w-]*$"
+  },
+  {
+   "name": ".masonry--N",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?columns` recipe",
+   "pattern": "^\\.masonry\\-\\-\\d+$"
+  },
+  {
+   "name": ".col-count--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?columns` recipe",
+   "pattern": "^\\.col\\-count\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".col-width--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?columns` recipe",
+   "pattern": "^\\.col\\-width\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".col-rule--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?columns` recipe",
+   "pattern": "^\\.col\\-rule\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".flex--row",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?flex-row`, `?flex-column`, `?flex-grid`, `?center-*`",
+   "pattern": "^\\.flex\\-\\-row$"
+  },
+  {
+   "name": ".flex-grid--N",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`?flex-row`, `?flex-column`, `?flex-grid`, `?center-*`",
+   "pattern": "^\\.flex\\-grid\\-\\-\\d+$"
+  },
+  {
+   "name": ".gap--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--space-*)`, `.section--*`, `.header--*`",
+   "pattern": "^\\.gap\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".margin--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--space-*)`, `.section--*`, `.header--*`",
+   "pattern": "^\\.margin\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".pad--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--space-*)`, `.section--*`, `.header--*`",
+   "pattern": "^\\.pad\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".pad-section--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--space-*)`, `.section--*`, `.header--*`",
+   "pattern": "^\\.pad\\-section\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".pad-header--",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--space-*)`, `.section--*`, `.header--*`",
+   "pattern": "^\\.pad\\-header\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".grid-gap",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-gap)`, `var(--container-gap)`, `var(--content-gap)`",
+   "pattern": "^\\.grid\\-gap$"
+  },
+  {
+   "name": ".container-gap",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-gap)`, `var(--container-gap)`, `var(--content-gap)`",
+   "pattern": "^\\.container\\-gap$"
+  },
+  {
+   "name": ".content-gap",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--grid-gap)`, `var(--container-gap)`, `var(--content-gap)`",
+   "pattern": "^\\.content\\-gap$"
+  },
+  {
+   "name": ".breakout--*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`.content-grid` zones (`.content--feature`, `.content--full`)",
+   "pattern": "^\\.breakout\\-\\-[\\w-]*$"
+  },
+  {
+   "name": ".link--*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`--link-color`, custom class",
+   "pattern": "^\\.link\\-\\-[\\w-]*$"
+  },
+  {
+   "name": ".text--{color}",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`color: var(--primary)`, own properties",
+   "pattern": "^\\.text\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".text--{weight}",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`color: var(--primary)`, own properties",
+   "pattern": "^\\.text\\-\\-[\\w-]+$"
+  },
+  {
+   "name": ".text--underline",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`color: var(--primary)`, own properties",
+   "pattern": "^\\.text\\-\\-underline$"
+  },
+  {
+   "name": ".text--center",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`color: var(--primary)`, own properties",
+   "pattern": "^\\.text\\-\\-center$"
+  },
+  {
+   "name": ".marker--*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`::marker { color: var(--primary) }` on the element",
+   "pattern": "^\\.marker\\-\\-[\\w-]*$"
+  },
+  {
+   "name": ".border",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.border$"
+  },
+  {
+   "name": ".border-dark",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.border\\-dark$"
+  },
+  {
+   "name": ".box-shadow--m",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.box\\-shadow\\-\\-m$"
+  },
+  {
+   "name": ".divider-*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.divider\\-[\\w-]*$"
+  },
+  {
+   "name": ".z--10",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.z\\-\\-10$"
+  },
+  {
+   "name": ".relative",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.relative$"
+  },
+  {
+   "name": ".transition",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.transition$"
+  },
+  {
+   "name": ".focus--*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.focus\\-\\-[\\w-]*$"
+  },
+  {
+   "name": ".focus-parent*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.focus\\-parent[\\w-]*$"
+  },
+  {
+   "name": ".clickable-parent",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--border)`, `var(--box-shadow-1)`, `?divider-*`, `?focus-parent`, `?clickable-parent`",
+   "pattern": "^\\.clickable\\-parent$"
+  },
+  {
+   "name": "?primary-clr",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`var(--primary)`, `color-mix(in oklch, var(--primary) 20%, transparent)`, `oklch(from var(--primary) l c h / .5)`",
+   "pattern": "^\\?primary\\-clr$"
+  },
+  {
+   "name": "--body-color",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`--text-color`; page bg is `--body-bg-color`",
+   "pattern": "^\\-\\-body\\-color$"
+  },
+  {
+   "name": "--*-trans-*",
+   "kind": "absent",
+   "group": "Not in 4.0.1 build",
+   "status": "absent",
+   "since": "3.x",
+   "doc": "https://docs.automaticcss.com/setup/whats-new-in-4",
+   "replacement": "`color-mix()`",
+   "pattern": "^\\-\\-[\\w-]*\\-trans\\-[\\w-]*$"
+  }
+ ]
+}

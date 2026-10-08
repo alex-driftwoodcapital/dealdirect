@@ -1,0 +1,242 @@
+# Design spec skeleton: TwoEleven homepage (capstone L9 of plugins/etch-builder/LAYOUT-PLAN.md).
+# Filled only from repo data on 2026-10-07; the TODO lines are the gaps art-director must fill before any build,
+# so spec-check.py fails this file on purpose until they are filled (see README.md next to it).
+# Sources: copy, classes, media IDs and order = current staging homepage (page 48, etch-expert/reference/fixtures/pages/home.html);
+# look = mockup v117 (etch-build/mockup-v117.zip, index.html); known gaps = etch-build/parity-audit.md (home rows).
+# Run from the repo root:  python3 -I skills/etch-builder/scripts/spec-check.py skills/etch-builder/examples/home-v117/home.yaml --root .
+spec_version: 1
+page: {title: "Home", slug: home-rebuild-test, status: draft, template: default}
+site_profile: twoeleven-staging          # etch-page-editor/site-profile.md + acss-expert/index/site-profile.md
+site_styles: ../../../etch-expert/reference/fixtures/styles-used.json   # existing site classes (etch_styles subset)
+
+references:
+  source: etch-build/mockup-v117.zip#mockup-v117/index.html
+  shots:
+    375: "TODO: full-page shot of mockup-v117/index.html at 375 (Mac session, reduced motion on)"
+    1440: "TODO: full-page shot of mockup-v117/index.html at 1440"
+
+tokens:
+  surfaces: {paper: bg--ultra-light, light: bg--light, ink: bg--dark, butter: --secondary, blue: --primary}
+  type: {h1: --h1, h2: --h2, h3: --h3, body: --text-m, eyebrow: --text-xs}
+  space: {section: --section-space-m, gap: --space-l, small-gap: --space-s}
+  brand: {ink: --base, blue: --primary, butter: --secondary, periwinkle: --tertiary}
+
+notes:
+  - "Copy follows the current homepage where it differs from v117 (h1 now ends 'a partner who shows up.', v117 said 'a team to match.')."
+  - "v117 sections not on the current homepage (better, why, bookband, offer, faq) stay out until Alex asks for them."
+  - "Parity audit fixes carried as fields here: hero highlight is butter text not a box (row 1), solution cards keep their preview graphic (row 6), dialogs centred with a round icon close and a title line (rows 7, 8, 12), Send your brief is blue (row 14)."
+  - "Phone header and menu (rows 16-19) belong to the header template part, not this page spec."
+
+sections:
+  - id: hero
+    role: hero
+    landmark: section
+    heading: {level: 1, text: "Big missions deserve a partner who shows up.", highlight: "shows up."}
+    content:
+      - {type: kicker, text: "Hi, I’m Alex, founder of TwoEleven. A Miami digital partner for nonprofits."}
+      - {type: p, text: "One partner for how you reach, mobilize and fund. I design the materials, build the website and keep it working, so your team stays on the mission."}
+      - {type: link, text: "Book a free review", href: "https://meetings-na2.hubspot.com/alex-gomez", style: btn--secondary}
+      - {type: button, text: "Are we a fit? →", action: "open quiz dialog (site-wide quiz, header part)", style: btn--secondary btn--outline}
+      - {type: button, text: "Rather watch than scroll? Take the 3-minute tour", action: "play tour video in the site video player", style: video-link}
+    layout:
+      pattern: hero
+      wide: "single column, left aligned, text measure 44ch, decorative radial glow top right outside the text"
+      narrow: "same single column; actions wrap to stacked full-width buttons"
+      measure: 44ch
+    surface: ink
+    responsive: ["intrinsic only: fluid type, actions flex-wrap"]
+    states: ["highlight 'shows up.' is butter-coloured text, never a filled box"]
+    motion: {ref: "art-director/reference/site-motion.md (hero letter roll-in, v117 .dl letters roll in white then hop to butter)", reduced_motion: "static headline, highlight already butter"}
+    shots: {1440: etch-build/parity-shots/home/home-1-mock.jpg}
+    must_match: [order, copy, surface, heading sizes, button roles, motion]
+    may_differ: [exact line breaks]
+
+  - id: trust-bar
+    role: logos
+    landmark: div            # current page uses <section> with no heading; docs:/elements/section says that is a div
+    content:
+      - {type: label, text: "Organizations I’ve worked with"}
+    layout:
+      pattern: new
+      wide: "label above one row of logos, wrapping, centred, logos max 220px wide"
+      narrow: "label above logos wrapping into rows, logos max 150px wide"
+    surface: light
+    media:
+      - {media_id: 92, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 93, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 94, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 95, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 96, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 97, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+      - {media_id: 98, alt: library, ratio: intrinsic, fit: contain, loading: lazy}
+    responsive: ["logo max width grows from 150px to 220px when the viewport is at least 48em (viewport concern: top-level band)"]
+    must_match: [order, copy, media]
+
+  - id: reach
+    role: story
+    landmark: section
+    heading: {level: 2, text: "Your website is your front door", highlight: "front door"}
+    content:
+      - {type: kicker, text: "Who you can reach"}
+      - {type: p, text: "Three very different people come through it. Each one needs a clear next step."}
+      - {type: embed, source: "page 48 Home > Who you can reach > Front door (tabs, search, browser frame; leave as is beyond approved copy fixes)"}
+      - {type: p, text: "None of them should leave empty-handed."}
+      - {type: p, text: "Making sure they don’t is my job."}
+    layout:
+      pattern: new
+      wide: "intro block, then the front-door demo (3 person tabs over a browser frame), then the payoff line"
+      narrow: "same order stacked; tabs stay 3 across"
+    surface: paper
+    responsive: ["intro measure widens when the section container is at least 760px (container query on .home-reach)"]
+    motion: {ref: "art-director/reference/site-motion.md (native scroll only, no pin)", reduced_motion: "final state shown"}
+    must_match: [order, copy, surface]
+
+  - id: seams
+    role: game
+    landmark: section
+    heading: {level: 2, text: "Can you find the five leaks?"}
+    content:
+      - {type: kicker, text: "Where do people slip away?"}
+      - {type: p, text: "If your website, ads, email and donations each have a different vendor, things get dropped between them. Tap where you think it happens."}
+      - {type: embed, source: "page 48 Home > Section (seams) > Leaks board mount + Leaks list (game; leave as is beyond approved copy fixes)"}
+      - {type: link, text: "Check your site against the top 10 →", href: "/top-10/#check", style: btn--base}
+    layout:
+      pattern: new
+      wide: "section head, then the board: 5 handoffs in a row (auto-fit, min 12.5rem)"
+      narrow: "one column list of handoffs"
+    surface: light
+    responsive: ["board switches to one column when the section container is under 836px (container sec)"]
+    must_match: [order, copy, surface, columns]
+
+  - id: quiz-band
+    role: cta
+    landmark: section
+    heading: {level: 2, text: "Is your week going to the wrong jobs?", highlight: "wrong jobs?"}
+    component:
+      use: existing
+      ref: 143
+      props: {tone: butter, kicker: "A quick self-check", heading: "Is your week going to the", highlight: "wrong jobs?", sub: "A few quick questions, just about you. Nothing is tracked.", buttonLabel: "Find out →", buttonUrl: "#quiz", headingId: qband-heading}
+    layout: {pattern: callout-band, wide: "one row: copy left, button right", narrow: "stacked"}
+    surface: butter
+    responsive: ["intrinsic only (flex-wrap)"]
+    must_match: [copy, surface, button roles]
+
+  - id: solutions
+    role: features
+    landmark: section
+    heading: {level: 2, text: "Two things I build that you can try."}
+    content:
+      - {type: kicker, text: "What could I build for you?"}
+      - {type: p, text: "Two tools I build for movements, in your brand, in English and Spanish. Open one and try it."}
+      - {type: label, text: "Mobilize"}
+      - {type: h3, text: "Voting hub"}
+      - {type: p, text: "Voters see their county’s early voting dates and sites, then make a plan to vote."}
+      - {type: button, text: "Open the voting hub →", action: "open dialog solution-vote", style: nested}
+      - {type: label, text: "Reach"}
+      - {type: h3, text: "Resources hub"}
+      - {type: p, text: "Help pages and text alerts in English and Spanish, written with your team."}
+      - {type: button, text: "Open the resources hub →", action: "open dialog solution-resources", style: nested}
+    layout:
+      pattern: new
+      wide: "section head, then 2 cards side by side (auto-fit, min 22rem); each card: app-preview graphic on top, pillar tag, h3, text, open button"
+      narrow: "cards stacked"
+    surface: light
+    responsive: ["intrinsic only (auto-fit grid)"]
+    states: ["the whole card opens its dialog", "card hover lifts with border to ink"]
+    shots: {1440: etch-build/parity-shots/home/home-3-mock.jpg}
+    must_match: [order, copy, surface, columns, button roles, media]
+
+  - id: solution-vote
+    role: dialog
+    landmark: dialog
+    heading: {level: 2, text: "Voting hub"}
+    content:
+      - {type: kicker, text: "Mobilize"}
+      - {type: embed, source: "page 48 Home > Voting hub dialog (mounted by the page script)"}
+      - {type: button, text: "Close", action: close, style: nested}
+    layout: {pattern: new, wide: "centred modal card with scrim on both sides", narrow: "full width with side gutters"}
+    surface: paper
+    states: ["header shows the pillar eyebrow and the title line", "close is a round icon-only button, top right", "'See it in action' is a solid white pill"]
+    responsive: ["intrinsic only"]
+    shots: {1440: etch-build/parity-shots/home/home-8-mock.jpg}
+    must_match: [copy, states]
+
+  - id: solution-resources
+    role: dialog
+    landmark: dialog
+    heading: {level: 2, text: "Resources hub"}
+    content:
+      - {type: kicker, text: "Reach"}
+      - {type: embed, source: "page 48 Home > Resources hub dialog (mounted by the page script)"}
+      - {type: button, text: "Close", action: close, style: nested}
+    layout: {pattern: new, wide: "centred modal card with scrim on both sides", narrow: "full width with side gutters"}
+    surface: paper
+    states: ["same header and close control as solution-vote"]
+    responsive: ["intrinsic only"]
+    must_match: [copy, states]
+
+  - id: ffa-quote
+    role: quote
+    landmark: figure         # no heading: a figure with blockquote + figcaption (current page uses an unlabelled-by-heading <section>)
+    content:
+      - {type: quote, text: "Alex is the digital partner every nonprofit needs. Our work at Florida For All moves fast and changes constantly, and Alex is there every step of the way, working seamlessly with our team to get the job done."}
+      - {type: cite, text: "Nadeska Concha, Communications Director, Florida For All"}
+    layout: {pattern: new, wide: "single column quote, measure 60ch, attribution below", narrow: "same"}
+    surface: blue
+    responsive: ["intrinsic only"]
+    must_match: [copy, surface]
+
+  - id: guide
+    role: split
+    landmark: section
+    heading: {level: 2, text: "Your digital partner. Small on purpose."}
+    content:
+      - {type: kicker, text: "Who’s behind this?"}
+      - {type: p, text: "You lead the mission. I run the online work behind it, as part of your team."}
+      - {type: p, text: "I’ve been building for 501(c)(3) and (c)(4) nonprofits since 2019."}
+      - {type: list, items: ["You talk to me directly", "I reply to you myself", "I keep it personal", "I keep ad tracking off your help and intake pages", "I move when the news does"]}
+      - {type: button, text: "Who I am, in 41 seconds. Watch the intro", action: "play intro video in the site video player", style: video-tile}
+      - {type: link, text: "Meet Alex →", href: "/about/#care", style: text}
+    layout:
+      pattern: split
+      wide: "2 columns from 56em: photo column max 18rem, copy column fills the rest"
+      narrow: "one column, photo centred above the copy"
+    surface: ink
+    media:
+      - {media_id: 324, alt: library, ratio: "1/1", fit: cover, loading: lazy}
+      - {media_id: 91, decorative: true, alt: "", ratio: "16/9", fit: cover, loading: lazy}
+    responsive: ["photo and copy go side by side when the viewport is at least 56em (top-level layout)"]
+    must_match: [order, copy, surface, columns, media]
+
+  - id: top10-band
+    role: cta
+    landmark: section
+    heading: {level: 2, text: "See the 10 problems I find most often.", highlight: "most often."}
+    component:
+      use: existing
+      ref: 143
+      props: {tone: blue, kicker: "Not sure where to start?", heading: "See the 10 problems I find", highlight: "most often.", sub: "Check which ones apply to your site. Each one comes with the fix.", buttonLabel: "See the top 10 →", buttonUrl: "/top-10/#check", headingId: tband-heading}
+    layout: {pattern: callout-band, wide: "one row: copy left, button right", narrow: "stacked"}
+    surface: blue
+    responsive: ["intrinsic only (flex-wrap)"]
+    must_match: [copy, surface, button roles]
+
+  - id: contact
+    role: form
+    landmark: section
+    heading: {level: 2, text: "Tell me what has to move, and when."}
+    content:
+      - {type: kicker, text: "What happens next?"}
+      - {type: p, text: "Three quick choices, and I’ll come to your free 30-minute review already prepared."}
+      - {type: p, text: "Bring your questions. I’ll bring ideas."}
+      - {type: link, text: "Book a free review", href: "https://meetings-na2.hubspot.com/alex-gomez", style: btn--secondary}
+      - {type: embed, source: "page 48 Home > Section (contact) > Brief form (posts to /wp-json/twoeleven/v1/brief; chips, live preview, status)"}
+    layout:
+      pattern: new
+      wide: "section head, then form and live brief preview side by side (auto-fit, min 22rem)"
+      narrow: "form, then preview, stacked"
+    surface: ink
+    responsive: ["intrinsic only (auto-fit grid)"]
+    states: ["'Send your brief' is the blue button (btn--primary), not butter"]
+    shots: {1440: etch-build/parity-shots/home/home-9-mock.jpg}
+    must_match: [order, copy, surface, columns, button roles]
