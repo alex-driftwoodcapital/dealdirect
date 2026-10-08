@@ -54,6 +54,11 @@ if ( $action === 'media' ) {
 	// explicit statuses: 'any' skips drafts when WP-CLI runs logged out
 	$p = get_posts( [ 'post_type' => 'page', 'name' => $in['slug'], 'post_status' => [ 'draft', 'pending', 'private', 'future', 'publish' ], 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ] );
 	$out = $p ? [ 'id' => $p[0]->ID, 'status' => $p[0]->post_status, 'deployed_sha' => (string) get_post_meta( $p[0]->ID, '_dd_deployed_sha', true ) ] : [ 'id' => null ];
+} elseif ( $action === 'status' ) {
+	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
+	$cur = get_post_status( (int) $in['id'] );
+	if ( $write && $cur !== $in['status'] ) { wp_update_post( [ 'ID' => (int) $in['id'], 'post_status' => $in['status'] ] ); }
+	$out = [ 'from' => $cur, 'to' => $in['status'], 'changed' => $write && $cur !== $in['status'] ];
 } elseif ( $action === 'mark' ) {
 	// $in: {id, sha}. Record what we wrote, so the next deploy can tell a builder save from our own content.
 	if ( $write ) { update_post_meta( (int) $in['id'], '_dd_deployed_sha', $in['sha'] ); }

@@ -11,6 +11,7 @@ The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/
 - TARGET_AUDIENCE: US accredited investors; EB-5 pages: foreign investors (EN/ES/PT)
 - PRIMARY_CTA: "Start Investing" (registration) · offering pages "Request Investor Details" · EB-5 "Connect with an EB-5 Specialist"
 - AUTHORIZED_SITE: staging only until Alex signs off in his own typed words.
+- Staging pages are **published** on deploy (Alex, 2026-10-08: "publish the pages, not drafts"; staging sits behind Cloudways password protection). Each page's `META['status']` drives it. The live site still needs Alex's typed OK.
 - HUBSPOT_PORTAL_ID: 2951523. Private app token: `DD_HUBSPOT_TOKEN` in staging `wp-config.php` only, never in the repo, Etch, JS or chat.
 - GTM: `GTM-NX8DQZGQ`
 

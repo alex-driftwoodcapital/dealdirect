@@ -26,5 +26,5 @@ r "$PURGE_CMD" >/dev/null 2>&1 || true
 echo "-- read-back"
 r "wp plugin list --name=dealdirect-core --fields=name,status,version --format=csv; wp post-type get offering --field=name; wp option get options_aum"
 code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL/wp-json/dealdirect/v1/token" || true)
-echo "GET /wp-json/dealdirect/v1/token -> $code (expect 200)"
+case "$code" in 200) echo "GET /wp-json/dealdirect/v1/token -> 200 OK";; 401) echo "GET /wp-json/dealdirect/v1/token -> 401: staging is password-protected (expected; browsers past the password reach it)";; *) echo "GET /wp-json/dealdirect/v1/token -> $code (expected 200, or 401 behind the staging password)";; esac
 echo "rollback: ssh in, then: cd $WP_PATH/wp-content/plugins && rm -rf dealdirect-core && tar xzf ~/backups/dealdirect-core-$STAMP.tgz (or wp plugin deactivate dealdirect-core if this was the first deploy)"

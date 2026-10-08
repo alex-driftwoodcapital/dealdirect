@@ -4,8 +4,8 @@
   RUN_YES=1 python3 ops/page/deploy.py eb5   do it
 Steps: build (copy gate) -> media: reuse by filename or import (local files uploaded, live URLs fetched by the host)
 -> style records upserted by selector (backup of etch_styles first) -> placeholders resolved -> page written by
-etch-page-editor/scripts/edit-run.sh (snapshot, lint, write, purge, diff; a new page is created as a DRAFT)
--> sha recorded in post meta. An existing page that changed since our last deploy (builder save, manual edit) STOPS."""
+etch-page-editor/scripts/edit-run.sh (snapshot, lint, write, purge, diff; a new page is created as a draft)
+-> sha recorded in post meta -> status set from the page's META (staging pages publish; live is never written). An existing page that changed since our last deploy (builder save, manual edit) STOPS."""
 import json, os, re, shlex, subprocess, sys, time
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -90,10 +90,11 @@ try:
     step('page')
     pg = helper('page', {'slug': meta['slug']}, 'dry')
     if not WRITE:
+        want = meta.get('status', 'draft')
         if pg['id']:
-            print(f'  would update page #{pg["id"]} ({pg["status"]}) /{meta["slug"]}/')
+            print(f'  would update page #{pg["id"]} ({pg["status"]}) /{meta["slug"]}/' + (f', then set status {want}' if pg['status'] != want else ''))
         else:
-            print(f'  would create DRAFT page "{meta["title"]}" /{meta["slug"]}/')
+            print(f'  would create page "{meta["title"]}" /{meta["slug"]}/ as {want}')
         missing_media = [s for s, r in got.items() if not r['id']]
         print(f'  placeholders resolve after media import ({len(missing_media)} pending) and style upsert')
         print('dry run OK (set RUN_YES=1 to write)')
@@ -123,6 +124,7 @@ try:
         sys.exit(f'STOP: edit-run.sh exited {r.returncode}')
     pid = int(re.findall(r'post id: (\d+)', r.stdout)[-1])
     helper('mark', {'id': pid, 'sha': live_sha(pid)}, 'write')
-    print(f'done: page #{pid} /{meta["slug"]}/ (draft until published on Alex\'s word)')
+    st_ = helper('status', {'id': pid, 'status': meta.get('status', 'draft')}, 'write')
+    print(f'done: page #{pid} /{meta["slug"]}/ status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else ''))
 finally:
     remote(f'rm -rf {TMP}', check=False)
