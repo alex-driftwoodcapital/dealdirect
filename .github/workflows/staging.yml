@@ -23,6 +23,10 @@ concurrency:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash   # bash -eo pipefail: a failing step piped through tee must still fail the job
+
 jobs:
   staging:
     runs-on: ubuntu-latest
