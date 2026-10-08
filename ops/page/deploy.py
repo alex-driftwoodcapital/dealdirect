@@ -69,10 +69,12 @@ try:
             src = path
         sources[slug] = {'src': src, 'collection': m['collection'], **({'name': m['name']} if m.get('name') else {})}
     # Images are compressed on the host with the Etch Asset Manager preset (COMPRESS_PRESET, or the only one saved).
-    got = helper('media', {'preset': os.environ.get('COMPRESS_PRESET') or PRESET or None, 'items': sources}, mode) if sources else {}
+    default_preset = json.load(open(os.path.join(ROOT, 'ops', 'page', 'compression-preset.json')))
+    got = helper('media', {'preset': os.environ.get('COMPRESS_PRESET') or PRESET or None, 'default_preset': default_preset,
+                           'items': sources}, mode) if sources else {}
     got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
-        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + f'  -> {r.get("collection", "")}')
+        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + (f'  -> {r["collection"]}' if r.get('collection') else ''))
     errors = [s for s, r in got.items() if str(r['status']).startswith(('ERROR', 'BLOCKED'))]
     if errors:  # also in a dry run: the PR check shows what would block the deploy
         sys.exit(f'STOP: media failed: {errors}')

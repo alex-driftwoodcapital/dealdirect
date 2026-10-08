@@ -88,7 +88,27 @@ if ( $action === 'media' ) {
 		$status = $id ? 'exists' : 'imported';
 		if ( ! $id ) {
 			$is_image = (bool) preg_match( '/\.(jpe?g|png|webp|avif)$/i', $name );
-			if ( $is_image && $preset === null ) { $preset = dd_preset( $in['preset'] ?? null ); }
+			if ( $is_image && $preset === null ) {
+				$preset = dd_preset( $in['preset'] ?? null );
+				// None saved yet and no name asked for: create the repo's starting preset (ops/page/compression-preset.json)
+				// through Etch's own route, so Etch validates it and it shows (and stays editable) in the Asset Manager.
+				if ( is_wp_error( $preset ) && empty( $in['preset'] ) && ! empty( $in['default_preset'] ) && ! get_option( 'etch_compression_presets' ) ) {
+					if ( ! $write ) {
+						$preset = $in['default_preset'];
+						$out['_preset'] = [ 'id' => null, 'status' => 'would create Etch compression preset ' . dd_preset_label( $preset ) ];
+					} else {
+						$admins = get_users( [ 'role' => 'administrator', 'number' => 1, 'fields' => 'ID' ] );
+						wp_set_current_user( $admins ? (int) $admins[0] : 0 );
+						$req = new WP_REST_Request( 'POST', '/etch-api/compression-presets' );
+						$req->set_header( 'content-type', 'application/json' );
+						$req->set_body( wp_json_encode( $in['default_preset'] ) );
+						$res = rest_do_request( $req );
+						wp_set_current_user( 0 );
+						$preset = $res->get_status() < 300 ? dd_preset( null ) : new WP_Error( 'preset', 'creating the starting preset failed: ' . wp_json_encode( $res->get_data() ) );
+						$out['_preset'] = [ 'id' => null, 'status' => is_wp_error( $preset ) ? 'ERROR ' . $preset->get_error_message() : 'created Etch compression preset ' . dd_preset_label( $preset ) ];
+					}
+				}
+			}
 			if ( $is_image && is_wp_error( $preset ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'BLOCKED ' . $preset->get_error_message() ]; continue; }
 			$how = $is_image ? 'compress with ' . dd_preset_label( $preset ) : 'as is';
 			if ( ! $write ) { $out[ $slug ] = [ 'id' => null, 'status' => "would import $name ($how)", 'collection' => "would add to $coll" ]; continue; }

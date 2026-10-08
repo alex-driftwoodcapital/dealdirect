@@ -1,0 +1,7 @@
+{
+  "name": "DealDirect site images",
+  "compression": 25,
+  "outputFormat": "webp",
+  "overwrite": true,
+  "resize": { "type": "side", "side": "long", "pixels": 2560, "downscaleOnly": true }
+}
