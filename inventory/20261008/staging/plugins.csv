@@ -1,0 +1,15 @@
+name,status,version,update
+akismet,inactive,5.7.2,none
+all-in-one-wp-migration,active,7.112,none
+all-in-one-wp-migration-unlimited-extension,active,2.88,none
+automatic-css,active,4.0.1,none
+breeze,inactive,2.6.1,none
+dealdirect-core,active,0.1.0,none
+etch,active,1.6.8,available
+object-cache-pro,inactive,1.25.5,none
+secure-custom-fields,active,6.9.5,none
+sg-security,inactive,1.6.8,none
+sg-cachepress,inactive,7.8.4,none
+wpcodebox2,active,1.4.1,none
+advanced-cache.php,dropin,,
+object-cache.php,dropin,,
