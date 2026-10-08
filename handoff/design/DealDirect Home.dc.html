@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Home - Driftwood Capital | DealDirect</title>
+<link rel="stylesheet" href="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/colors_and_type.css">
+<link rel="stylesheet" href="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/styles.css">
+<script src="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink-900);-webkit-font-smoothing:antialiased}
+a{color:var(--gold-500);text-decoration:none}
+a:hover{color:var(--gold-700)}
+:focus-visible{outline:2px solid var(--gold-500);outline-offset:3px;border-radius:4px}
+image-slot:not(:defined){display:block;background:var(--ink-800)}
+@media (max-width:760px){.dd-header__links{display:none !important}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+@media (max-width:900px){.dd-tax__grid{grid-template-columns:1fr !important;grid-template-rows:none !important}.dd-tax__route{grid-row:auto !important;display:flex !important;flex-direction:column}}
+</style>
+</helmet>
+
+<header class="dd-header" style="position:fixed;top:0;left:0;right:0;z-index:50;background:{{ headerBg }};backdrop-filter:{{ headerBlur }};-webkit-backdrop-filter:{{ headerBlur }};border-bottom:1px solid {{ headerRule }};transition:background 360ms cubic-bezier(.2,.7,.2,1),border-color 360ms">
+  <div class="dd-header__rail" style="display:flex;align-items:center;gap:24px;max-width:1334px;margin:0 auto;height:{{ headerH }};padding:0 32px;transition:height 360ms cubic-bezier(.2,.7,.2,1)">
+    <a class="dd-header__logo" href="#top" aria-label="Driftwood Capital | DealDirect home" style="display:flex;align-items:center;min-height:44px">
+      <img src="https://driftwooddealdirect.com/wp-content/uploads/dealdirect-logo.svg" alt="Driftwood Capital | DealDirect logo" style="height:40px;width:auto;display:block;filter:{{ logoFilter }};transition:filter 320ms"></a>
+      </div>
+</header>
+
+<main id="top">
+
+<section class="dd-hero" data-screen-label="01 Hero" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:min(94vh,920px);overflow:hidden;background:var(--ink-900)">
+  <div class="dd-hero__media" style="position:absolute;inset:0">
+    <video class="dd-hero__video" ref="{{ videoRef }}" src="{{ heroVideoUrl }}" poster="https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_View-from-River.jpg" autoplay muted loop playsinline aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+  </div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,rgba(6,26,46,0.88) 0%,rgba(6,26,46,0.62) 48%,rgba(6,26,46,0.3) 100%)"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,18,31,0.55) 0%,rgba(4,18,31,0) 22%,rgba(4,18,31,0) 56%,rgba(4,18,31,0.82) 100%)"></div>
+
+  <div class="dd-hero__inner" style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;max-width:1334px;margin:0 auto;padding:clamp(140px,18vh,200px) 32px clamp(40px,5vw,64px)">
+        <h1 class="dd-hero__title" style="margin:0;max-width:13ch;font-size:clamp(42px,6vw,88px);font-weight:300;line-height:1.03;letter-spacing:-0.036em;color:#fff;text-wrap:balance">Invest today with DealDirect</h1>
+    <p class="dd-hero__lede" style="margin:26px 0 0;max-width:60ch;font-size:clamp(16px,1.45vw,20px);font-weight:300;line-height:1.6;color:rgba(255,255,255,0.92);text-wrap:pretty">We find the deals, complete the due diligence, create the business plan, secure the financing, and close the deal. Then, we offer you the opportunity to invest directly, enabling you to create a diverse portfolio that meets your investment needs.</p>
+    <div class="dd-hero__ctas" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:36px">
+      <button type="button" onClick="{{ openSignup }}" style="height:52px;padding:0 28px;border-radius:12px;border:0;background:#fff;color:var(--ink-900);font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;box-shadow:0 18px 40px -18px rgba(0,0,0,0.6);transition:transform 200ms" style-active="transform:scale(0.972)">Start Investing</button>
+          </div>
+  </div>
+
+  </section>
+
+<section class="dd-live" id="offerings" data-screen-label="02 Live offerings" style="background:linear-gradient(180deg,#FFFFFF 0%,#F7FAFD 70%,#EDF4FA 100%);border-top:1px solid var(--slate-200)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <div class="dd-live__grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px">
+      <sc-for list="{{ live }}" as="item" hint-placeholder-count="4">
+        <article class="dd-card" id="{{ item.key }}" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:440px;border-radius:24px;overflow:hidden;border:1.5px solid transparent;background:linear-gradient(165deg,#0F3457 0%,#081F36 100%) padding-box,linear-gradient(140deg,#ffffff 0%,rgba(127,184,224,0.34) 30%,rgba(11,43,72,0.1) 78%) border-box;box-shadow:0 2px 6px rgba(11,43,72,0.05),0 20px 44px -20px rgba(11,43,72,0.26),0 52px 96px -44px rgba(11,43,72,0.32);transition:transform 320ms cubic-bezier(.2,.7,.2,1),box-shadow 320ms" style-hover="transform:translateY(-4px)">
+          <div class="dd-card__photo" style="position:absolute;inset:0">
+            <image-slot style="position:absolute;inset:0;width:100%;height:100%;display:block" id="{{ item.slotId }}" src="{{ item.img }}" shape="rect" placeholder="Drop offering photo"></image-slot>
+            <sc-if value="{{ item.rendering }}" hint-placeholder-val="{{ false }}"><span class="rendering-chip" style="position:absolute;top:16px;right:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span></sc-if>
+          </div>
+          <div class="dd-card__veil" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:1">
+            <i style="position:absolute;left:0;right:0;bottom:0;height:72%;display:{{ blurDisplay }};backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 60%);mask-image:linear-gradient(to bottom,transparent 0,#000 60%)"></i>
+            <i style="position:absolute;left:0;right:0;bottom:0;height:62%;display:{{ blurDisplay }};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 58%);mask-image:linear-gradient(to bottom,transparent 0,#000 58%)"></i>
+            <i style="position:absolute;left:0;right:0;bottom:0;height:46%;background:rgba(6,26,46,0.94)"></i>
+            <i style="position:absolute;left:0;right:0;bottom:46%;height:28%;background:linear-gradient(to top,rgba(6,26,46,0.94) 0%,rgba(6,26,46,0.68) 40%,rgba(6,26,46,0.24) 76%,transparent 100%)"></i>
+          </div>
+          <div class="dd-card__chip" style="position:absolute;top:16px;left:16px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase">{{ item.status }}</div>
+          <div class="dd-card__body" style="position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;padding:24px 24px 22px">
+            <div class="dd-card__eyebrow" style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal-soft)">{{ item.tag }}</div>
+            <h3 class="dd-card__title" style="margin:0;font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-0.02em;color:#fff;text-wrap:balance">{{ item.title }}</h3>
+            <p class="dd-card__summary" style="margin:0;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.8);text-wrap:pretty">{{ item.summary }}</p>
+            <sc-if value="{{ item.hasLink }}" hint-placeholder-val="{{ true }}">
+              <a class="dd-card__cta" href="{{ item.href }}" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:2px;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#fff;transition:gap 280ms" style-hover="gap:16px;color:#fff">{{ item.cta }}<span aria-hidden="true">&#8594;</span></a>
+            </sc-if>
+            <sc-if value="{{ item.soon }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ notifyClosed }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ openNotify }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:2px;padding:0;border:0;background:none;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#fff;cursor:pointer">Get notified<span aria-hidden="true">&#8594;</span></button>
+              </sc-if>
+              <sc-if value="{{ notifyDone }}" hint-placeholder-val="{{ false }}">
+                <p role="status" style="margin:2px 0 0;font-size:13px;line-height:1.6;color:#fff">Thank you. We'll email you when this offering opens.</p>
+              </sc-if>
+                          </sc-if>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="dd-tax" id="tax-advantaged" data-screen-label="03 Tax-advantaged" style="background:linear-gradient(180deg,#F7FAFD 0%,#EDF4FA 100%);border-top:1px solid var(--slate-200)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <div style="margin-bottom:clamp(28px,3vw,40px)">
+      <div style="margin-bottom:14px;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-500)">Driftwood Strategies &#183; Tax-Advantaged</div>
+      <h2 style="margin:0;font-size:clamp(26px,3vw,40px);font-weight:300;line-height:1.14;letter-spacing:-0.03em;color:var(--ink-900);text-wrap:balance">Tax-advantaged access to the Driftwood platform</h2>
+      <p style="margin:18px 0 0;max-width:62ch;font-size:clamp(15.5px,1.4vw,17.5px);line-height:1.74;color:#48535F;text-wrap:pretty">Three vehicles that pair the firm&#8217;s hospitality underwriting with distinct tax treatments, each addressed to a different investor position.</p>
+    </div>
+    <div class="dd-tax__grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto auto auto auto 1fr auto auto;gap:18px">
+      <article class="dd-tax__route" style="grid-row:span 8;display:grid;grid-template-rows:subgrid;row-gap:0;position:relative;padding:28px 26px 26px;border:1px solid rgba(219,229,240,0.7);border-radius:24px;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);box-shadow:0 1px 2px rgba(11,43,72,0.025),0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13);transition:transform 300ms cubic-bezier(.2,.7,.2,1),box-shadow 300ms cubic-bezier(.2,.7,.2,1),border-color 300ms" style-hover="transform:translateY(-3px);border-color:rgba(36,104,168,0.28);box-shadow:0 1px 2px rgba(11,43,72,0.03),0 16px 36px -18px rgba(11,43,72,0.16),0 44px 76px -40px rgba(11,43,72,0.2)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:var(--gold-500)">01</div>
+        <div style="margin-top:14px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">You have</div>
+        <p style="margin:8px 0 0;font-size:clamp(19px,1.8vw,23px);font-weight:400;line-height:1.26;letter-spacing:-0.02em;color:var(--ink-900);text-wrap:pretty">Realized capital gains</p>
+        <span aria-hidden="true" style="display:block;width:100%;height:1px;margin:18px 0 0;background:linear-gradient(90deg,rgba(36,104,168,0.34) 0%,rgba(36,104,168,0.05) 100%)"></span>
+        <h3 style="margin:16px 0 0;font-size:14px;font-weight:700;line-height:1.35;letter-spacing:0.01em;color:var(--gold-700);text-wrap:pretty">Qualified Opportunity Zone Funds</h3>
+        <p style="margin:10px 0 20px;font-size:14px;line-height:1.72;color:#48535F;text-wrap:pretty">Directs capital gains into hospitality development within designated Opportunity Zones. Investors may defer tax on the reinvested gain, and gains on the fund investment itself may be excluded from tax when the position is held for the full statutory period. Driftwood sources and develops the underlying assets on its own platform.<sup style="font-size:9.5px;font-weight:700;color:var(--gold-700);vertical-align:super;margin-left:1px">1</sup></p>
+        <div style="margin:0 0 18px;padding:15px 0 0;border-top:1px solid var(--slate-200)"><span style="display:block;margin-bottom:5px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">Invest via</span><a href="Riverside Wharf QOZ.dc.html" style="position:relative;z-index:2;display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:600;line-height:1.45;color:var(--ink-900);text-decoration:underline;text-decoration-color:rgba(36,104,168,0.32);text-underline-offset:3px" style-hover="color:var(--gold-700);text-decoration-color:var(--gold-500)">Riverside Wharf Miami QOF</a></div>
+        <a href="https://driftwoodcapital.com/opportunity-zones/" style="display:inline-flex;align-items:center;align-self:end;justify-self:start;gap:8px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold-700)" style-hover="gap:12px">Learn how it works<span aria-hidden="true">&#8594;</span></a>
+      </article>
+      <article class="dd-tax__route" style="grid-row:span 8;display:grid;grid-template-rows:subgrid;row-gap:0;position:relative;padding:28px 26px 26px;border:1px solid rgba(219,229,240,0.7);border-radius:24px;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);box-shadow:0 1px 2px rgba(11,43,72,0.025),0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13);transition:transform 300ms cubic-bezier(.2,.7,.2,1),box-shadow 300ms cubic-bezier(.2,.7,.2,1),border-color 300ms" style-hover="transform:translateY(-3px);border-color:rgba(36,104,168,0.28);box-shadow:0 1px 2px rgba(11,43,72,0.03),0 16px 36px -18px rgba(11,43,72,0.16),0 44px 76px -40px rgba(11,43,72,0.2)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:var(--gold-500)">02</div>
+        <div style="margin-top:14px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">You are</div>
+        <p style="margin:8px 0 0;font-size:clamp(19px,1.8vw,23px);font-weight:400;line-height:1.26;letter-spacing:-0.02em;color:var(--ink-900);text-wrap:pretty">A 1031 exchange buyer</p>
+        <span aria-hidden="true" style="display:block;width:100%;height:1px;margin:18px 0 0;background:linear-gradient(90deg,rgba(36,104,168,0.34) 0%,rgba(36,104,168,0.05) 100%)"></span>
+        <h3 style="margin:16px 0 0;font-size:14px;font-weight:700;line-height:1.35;letter-spacing:0.01em;color:var(--gold-700);text-wrap:pretty">Delaware Statutory Trusts</h3>
+        <p style="margin:10px 0 20px;font-size:14px;line-height:1.72;color:#48535F;text-wrap:pretty">Offers fractional interests in institutional-grade hotel assets structured to qualify as like-kind replacement property under Section 1031 of the Internal Revenue Code. Exchange buyers may seek to redeploy sale proceeds on a passive basis without taking on direct management, while Driftwood Hospitality Management operates the property.<sup style="font-size:9.5px;font-weight:700;color:var(--gold-700);vertical-align:super;margin-left:1px">2</sup></p>
+        <div style="margin:0 0 18px;padding:15px 0 0;border-top:1px solid var(--slate-200)"><span style="display:block;margin-bottom:5px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">Invest via</span><a href="#courtyard-dst" style="position:relative;z-index:2;display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:600;line-height:1.45;color:var(--ink-900);text-decoration:underline;text-decoration-color:rgba(36,104,168,0.32);text-underline-offset:3px" style-hover="color:var(--gold-700);text-decoration-color:var(--gold-500)">Driftwood Hotel Income I, DST</a></div>
+        <a href="https://driftwoodcapital.com/1031-exchanges-and-dsts/" style="display:inline-flex;align-items:center;align-self:end;justify-self:start;gap:8px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold-700)" style-hover="gap:12px">Learn how it works<span aria-hidden="true">&#8594;</span></a>
+      </article>
+      <article class="dd-tax__route" style="grid-row:span 8;display:grid;grid-template-rows:subgrid;row-gap:0;position:relative;padding:28px 26px 26px;border:1px solid rgba(219,229,240,0.7);border-radius:24px;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);box-shadow:0 1px 2px rgba(11,43,72,0.025),0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13);transition:transform 300ms cubic-bezier(.2,.7,.2,1),box-shadow 300ms cubic-bezier(.2,.7,.2,1),border-color 300ms" style-hover="transform:translateY(-3px);border-color:rgba(36,104,168,0.28);box-shadow:0 1px 2px rgba(11,43,72,0.03),0 16px 36px -18px rgba(11,43,72,0.16),0 44px 76px -40px rgba(11,43,72,0.2)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;color:var(--gold-500)">03</div>
+        <div style="margin-top:14px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">You are seeking</div>
+        <p style="margin:8px 0 0;font-size:clamp(19px,1.8vw,23px);font-weight:400;line-height:1.26;letter-spacing:-0.02em;color:var(--ink-900);text-wrap:pretty">To offset passive income</p>
+        <span aria-hidden="true" style="display:block;width:100%;height:1px;margin:18px 0 0;background:linear-gradient(90deg,rgba(36,104,168,0.34) 0%,rgba(36,104,168,0.05) 100%)"></span>
+        <h3 style="margin:16px 0 0;font-size:14px;font-weight:700;line-height:1.35;letter-spacing:0.01em;color:var(--gold-700);text-wrap:pretty">Bonus Depreciation Funds</h3>
+        <p style="margin:10px 0 20px;font-size:14px;line-height:1.72;color:#48535F;text-wrap:pretty">Applies cost segregation methodologies to newly acquired and developed hotels, accelerating depreciation deductions that may pass through to investors, subject to applicable tax rules and individual investor circumstances. These deductions are intended to offset passive income from other sources, though actual tax benefits vary and depend on specific regulatory limits and personal tax profiles.</p>
+        <div style="margin:0 0 18px;padding:15px 0 0;border-top:1px solid var(--slate-200)"><span style="display:block;margin-bottom:5px;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#5A6675">Invest via</span><a href="#advantaged-strategy-2026" style="position:relative;z-index:2;display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:600;line-height:1.45;color:var(--ink-900);text-decoration:underline;text-decoration-color:rgba(36,104,168,0.32);text-underline-offset:3px" style-hover="color:var(--gold-700);text-decoration-color:var(--gold-500)">Driftwood Tax Advantage Strategy I</a></div>
+        <a href="https://driftwoodcapital.com/bonus-depreciation/" style="display:inline-flex;align-items:center;align-self:end;justify-self:start;gap:8px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold-700)" style-hover="gap:12px">Learn how it works<span aria-hidden="true">&#8594;</span></a>
+      </article>
+    </div>
+    <div class="dd-fn" style="display:grid;gap:10px;margin-top:28px;font-size:14px;line-height:1.7;color:var(--slate-600)">
+      <p style="margin:0">1. Qualified Opportunity Zone benefits are contingent on satisfying statutory and regulatory requirements, including holding-period requirements, and on the fund maintaining its qualification. Failure to satisfy those requirements may result in the loss of some or all of the anticipated tax benefits. Deferral and exclusion apply to federal tax; state treatment varies. The statutory period and the treatment available depend on the date of investment and the applicable regime.</p>
+      <p style="margin:0">2. Qualification of a Delaware Statutory Trust interest as like-kind replacement property under Section 1031 depends on the structure of the trust and the facts of the investor&#8217;s exchange, and on compliance with the statutory 45-day identification and 180-day closing deadlines. DST interests are illiquid, are subject to the sponsor&#8217;s business plan and disposition timing, and involve limitations on the trustee&#8217;s ability to act. There is no public market for DST interests and none is expected to develop. Loss of some or all of the investment is possible.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dd-past" id="past" data-screen-label="04 Past offerings" style="background:var(--slate-50);border-top:1px solid var(--slate-200)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <div class="dd-past__grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,{{ pastMin }}),1fr));gap:16px">
+      <sc-for list="{{ past }}" as="p" hint-placeholder-count="8">
+        <article class="dd-tile" style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:var(--ink-800);box-shadow:0 1px 2px rgba(11,43,72,0.04),0 18px 36px -22px rgba(11,43,72,0.4)">
+          <div style="position:absolute;inset:0">
+            <image-slot style="position:absolute;inset:0;width:100%;height:100%;display:block" id="{{ p.slotId }}" shape="rect" placeholder="Drop property photo"></image-slot>
+          </div>
+          <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,26,46,0) 40%,rgba(6,26,46,0.62) 70%,rgba(6,26,46,0.94) 100%)"></div>
+          <div class="dd-tile__chips" style="position:absolute;top:14px;left:14px;right:14px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none">
+            <span style="padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.9);color:var(--ink-800);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">Closed</span>
+          </div>
+          <div class="dd-tile__body" style="position:absolute;left:0;right:0;bottom:0;display:grid;gap:7px;padding:20px 20px 22px;pointer-events:none">
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal-soft)">{{ p.tag }}</span>
+            <h3 style="margin:0;font-size:17px;font-weight:500;line-height:1.25;letter-spacing:-0.018em;color:#fff;text-wrap:balance">{{ p.name }}</h3>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="dd-legal" id="legal" data-screen-label="05 Legal" style="background:var(--paper);border-top:1px solid var(--slate-200)">
+  <div style="display:grid;grid-template-columns:1fr;gap:32px;max-width:1334px;margin:0 auto;padding:clamp(56px,6vw,88px) 32px">
+    <div>
+      <h4 style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-800)">Legal disclosure</h4>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">This website is not an offer to sell or the solicitation of an offer to purchase securities. All information available in this website is general in nature, not directed to any particular person, and is for informational purposes only. This website excludes material information, including, but not limited to, risk factors to be considered by prospective investors. The information contained herein reflects the opinions and projections of Driftwood Capital, LLC as of the date of this website, which are subject to change without notice at any time. There is no obligation to update, modify, or amend the information herein or otherwise notify a recipient of these materials in the event that any information contained herein, or any opinion, projection, forecast, or estimate, changes or subsequently becomes inaccurate. The information provided herein is believed to be reliable and has been obtained from sources Driftwood Capital believes are reliable, but no representation or warranty is made, express or implied, with respect to the fairness, correctness, accuracy, reasonableness, or completeness of the information and opinions. Neither Driftwood Capital nor any of its affiliates, representatives, or executives represents that the information contained in this website is accurate, current, or complete. Driftwood Capital does not represent that any opinion or projection will be realized. For the avoidance of doubt, no investment advice is being provided through this website by Driftwood Capital or any of its affiliates (including Driftwood Advisors, LLC), representatives, or executives. Each recipient of this website should make such investigation as it deems necessary to arrive at an independent evaluation of the contents hereof and should consult its own legal, financial, and accounting advisors to determine the merits and risks of such an investment.</p>
+    </div>
+    <div>
+      <h4 style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-800)">* Target Returns</h4>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">The target returns shown in this document are hypothetical in nature, do not reflect actual results, and are not a guarantee of future results. Target returns are based on assumptions that may not prove to be accurate. There are several limitations inherent in target returns like those portrayed in this document. Additionally, a specific investor’s actual performance may differ materially from such illustrative data depending on numerous factors. No representations or warranties whatsoever are made by Driftwood Capital, its affiliates, subsidiaries, or any other person or entity regarding the future profitability of an investment vehicle or the results of making an investment. Projected or past performance is not a guarantee of future results. Due to various risks and uncertainties, actual events or results may differ materially from those reflected or contemplated in such forward-looking statements and may be worse due to various factors, including, without limitation, changes in laws, fluctuations in real estate markets, the tourism and hospitality industries, increases in costs, and adverse conditions in the credit and capital markets. Moreover, actual events are difficult to project and often depend on factors beyond the control of Driftwood Capital, its subsidiaries, and affiliates.</p>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="dd-footer" style="background:var(--ink-900);color:rgba(255,255,255,0.72)">
+  <div style="max-width:1334px;margin:0 auto;padding:48px 32px 40px;display:grid;gap:28px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
+      <img src="https://driftwooddealdirect.com/wp-content/uploads/dealdirect-logo.svg" alt="Driftwood Capital | DealDirect" style="height:36px;width:auto;filter:brightness(0) invert(1)">
+      <a href="https://app.junipersquare.com/login?path=%2Fi%2Fdriftwoodcapital" style="display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--teal-soft)" style-hover="color:#fff">Existing investor? Log into your dashboard.</a>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,0.12)"></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:12.5px;line-height:1.6">
+      <span>Copyright © 2026 • Driftwood Capital • 255 Alhambra Circle, Suite 760, Coral Gables, FL 33134 • 305.500.9900</span>
+      <nav aria-label="Legal" style="display:flex;gap:24px">
+        <a href="https://driftwoodcapital.com/privacy-policy/" style="display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,0.78)" style-hover="color:#fff">Privacy Policy</a>
+        <a href="https://driftwoodcapital.com/terms-of-use/" style="display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,0.78)" style-hover="color:#fff">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="dd-modal" role="dialog" aria-modal="true" aria-labelledby="dd-modal-h" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,26,46,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)" onClick="{{ closeModalBackdrop }}">
+    <div class="dd-modal__panel" style="position:relative;width:100%;max-width:520px;max-height:calc(100vh - 40px);overflow-y:auto;border-radius:24px;background:#fff;border:1px solid rgba(219,229,240,0.9);box-shadow:0 30px 80px -30px rgba(6,26,46,0.6);padding:36px 32px 32px">
+      <button type="button" aria-label="Close" onClick="{{ closeModal }}" style="position:absolute;top:14px;right:14px;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--slate-500);font-size:22px;line-height:1;cursor:pointer" style-hover="background:var(--slate-100)">&#215;</button>
+
+      <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+        <h2 id="dd-modal-h" style="margin:0 0 22px;font-size:28px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Login</h2>
+        <form onSubmit="{{ noop }}" style="display:grid;gap:16px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Email<input type="email" required="{{ true }}" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Password<input type="password" required="{{ true }}" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+          <button type="submit" style="height:52px;border:0;border-radius:12px;background:var(--ink-800);color:#fff;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">Log In</button>
+          <a href="https://driftwooddealdirect.com/forgot-password/" style="font-size:13px;min-height:44px;display:inline-flex;align-items:center">Forgot password</a>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ hasCtx }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0 0 18px;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-500)">{{ ctxName }}</p>
+      </sc-if>
+
+      <sc-if value="{{ isConfirm }}" hint-placeholder-val="{{ false }}">
+        <form data-hs-form="offering-request" onSubmit="{{ submitConfirm }}" style="display:grid;gap:16px">
+          <h2 id="dd-modal-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Confirm your email</h2>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--slate-600)">You're already registered. Confirm your email and we'll let you know when this offering opens.</p>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Email<input type="email" name="email" required="{{ true }}" autocomplete="email" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+          <button type="submit" style="height:52px;border:0;border-radius:12px;background:var(--ink-800);color:#fff;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">Get Notified</button>
+          <button type="button" onClick="{{ notYou }}" style="justify-self:start;min-height:44px;padding:0;border:0;background:none;font-family:inherit;font-size:13px;color:var(--gold-500);text-decoration:underline;cursor:pointer">Not registered yet? Register here</button>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
+        <form onSubmit="{{ nextStep }}">
+        <ol aria-label="Registration (Steps)" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 26px;padding:0;list-style:none">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="2">
+            <li style="display:grid;gap:8px">
+              <span style="display:block;height:3px;border-radius:2px;background:{{ s.bar }}"></span>
+              <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;color:{{ s.ink }}">{{ s.label }}</span>
+            </li>
+          </sc-for>
+        </ol>
+
+        <sc-if value="{{ step0 }}" hint-placeholder-val="{{ true }}">
+          <h2 id="dd-modal-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Accreditation Status</h2>
+          <p style="margin:10px 0 22px;font-size:14px;line-height:1.6;color:var(--slate-600)">Driftwood DealDirect opportunities are available to accredited investors. Please select the option that best describes your accreditation status.</p>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Are you an accredited investor?
+            <select value="{{ accred }}" onChange="{{ setAccred }}" style="height:48px;padding:0 12px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px;background:#fff;color:var(--ink-900)">
+              <option value="">-- Select an option</option>
+              <option value="income">Annual income exceeds $200K (for the last 2 years)</option>
+              <option value="joint">Joint household income greater than $300k (for the last 2 years)</option>
+              <option value="networth">Net worth exceeding $1M (excluding primary home)</option>
+              <option value="none">None of the above</option>
+            </select>
+          </label>
+        </sc-if>
+
+        <sc-if value="{{ step1 }}" hint-placeholder-val="{{ false }}">
+          <h2 id="dd-modal-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Personal Information</h2>
+          <p style="margin:10px 0 22px;font-size:14px;line-height:1.6;color:var(--slate-600)">Now that we know you are an accredited investor, we need to get some basic information about you.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">First name<input type="text" name="firstname" required="{{ true }}" autocomplete="given-name" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Last name<input type="text" name="lastname" required="{{ true }}" autocomplete="family-name" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Email<input type="email" name="email" required="{{ true }}" autocomplete="email" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Phone number<input type="tel" name="phone" required="{{ true }}" autocomplete="tel" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+          </div>
+          <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:12px;line-height:1.6;color:var(--slate-600)"><input type="checkbox" required="{{ true }}" style="margin-top:3px;width:18px;height:18px;flex-shrink:0">I consent to Driftwood Capital storing and processing my personal information and communicating with me via email, call, or text (SMS). I have read and agree to the <a href="https://driftwoodcapital.com/terms-of-use/">Terms of Use</a> and <a href="https://driftwoodcapital.com/privacy-policy/">Privacy Policy</a></label>
+        </sc-if>
+
+        <sc-if value="{{ stepSorry }}" hint-placeholder-val="{{ false }}">
+          <h2 id="dd-modal-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Our Apologies</h2>
+          <p style="margin:10px 0 0;font-size:14px;line-height:1.65;color:var(--slate-600)">Currently, our investment opportunities are exclusively available to accredited investors, in compliance with U.S. Securities and Exchange Commission (SEC) regulations. Before proceeding with your registration, please ensure you meet the criteria set by the SEC for accredited investors. If you're uncertain about these requirements, we recommend consulting with your financial advisor. We appreciate your understanding and look forward to potentially collaborating in the future.</p>
+        </sc-if>
+
+        
+        <div style="display:flex;justify-content:space-between;gap:10px;margin-top:28px">
+          <button type="button" onClick="{{ prevStep }}" disabled="{{ prevDisabled }}" style="height:48px;padding:0 20px;border-radius:12px;border:1px solid var(--slate-300);background:#fff;color:var(--ink-800);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;opacity:{{ prevOpacity }}">Previous</button>
+          <sc-if value="{{ showNext }}" hint-placeholder-val="{{ true }}">
+            <button type="submit" style="height:48px;padding:0 24px;border-radius:12px;border:0;background:var(--ink-800);color:#fff;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">{{ nextLabel }}</button>
+          </sc-if>
+        </div>
+      </form>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroVideoUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;veil&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;blur&quot;,&quot;gradient&quot;],&quot;default&quot;:&quot;blur&quot;,&quot;tsType&quot;:&quot;'blur'|'gradient'&quot;,&quot;section&quot;:&quot;Deal cards&quot;},&quot;pastDensity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;comfortable&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;comfortable&quot;,&quot;tsType&quot;:&quot;'comfortable'|'compact'&quot;,&quot;section&quot;:&quot;Past offerings&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled: false, modal: null, step: 0, accred: '', notify: 'closed', ctx: null };
+  videoRef = React.createRef();
+  componentDidMount() {
+    this._onScroll = () => {
+      const s = window.scrollY > 40;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    if (location.hash === '#signup') this.setState({ modal: 'signup' });
+    if (location.hash === '#login') this.setState({ modal: 'login' });
+    this._onKey = e => { if (e.key === 'Escape' && this.state.modal) this.setState({ modal: null }); };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('keydown', this._onKey);
+  }
+  renderVals() {
+    const { scrolled, modal, step, accred, notify, ctx } = this.state;
+    const veil = this.props.veil ?? 'blur';
+    const layout = this.props.pastDensity ?? 'comfortable';
+    const WP = 'https://driftwooddealdirect.com/wp-content/uploads/';
+    const live = [
+      { key: 'riverside-wharf-preferred-equity', title: 'Riverside Wharf Miami', tag: 'Preferred Equity', status: 'Open', dot: 'var(--teal-soft)',
+        summary: 'A transformative hospitality & entertainment development in the heart of Downtown Miami', img: WP + 'Riverside-Wharf_View-from-River.jpg',
+        href: 'Riverside Wharf Preferred Equity.dc.html', cta: 'View Offering', hasLink: true, soon: false, rendering: true },
+      { key: 'riverside-wharf-qoz', title: 'Riverside Wharf Miami', tag: 'QOZ', status: 'Coming soon', dot: '#E9C46A',
+        summary: '[Summary from offering CPT]', img: WP + 'Riverside-Wharf_Pooldeck.jpg', href: '', cta: '', hasLink: false, soon: true, rendering: true },
+      { key: 'courtyard-dst', title: 'Courtyard DST', tag: '[Type from CPT]', status: 'Open', dot: 'var(--teal-soft)',
+        summary: '[Summary from offering CPT]', img: '', href: '#', cta: 'View Offering', hasLink: true, soon: false },
+      { key: 'advantaged-strategy-2026', title: 'Advantaged Strategy 2026', tag: '[Type from CPT]', status: 'Open', dot: 'var(--teal-soft)',
+        summary: '[Summary from offering CPT]', img: '', href: '#', cta: 'View Offering', hasLink: true, soon: false }
+    ].map(o => ({ ...o, slotId: 'live-' + o.key, railHref: '#' + o.key }));
+    const past = Array.from({ length: 8 }, () => ['[Offering name from CPT]', '[Tag from CPT]']
+    ).map(([name, tag], i) => ({ name, tag, slotId: 'past-' + i }));
+
+    const labels = ['About Your Accreditation', 'About You'];
+    const stepIdx = step > 2 ? (step === 3 ? 0 : 1) : step;
+    const steps = labels.map((label, i) => ({ label, bar: i <= stepIdx ? 'var(--gold-500)' : 'var(--slate-200)', ink: i <= stepIdx ? 'var(--ink-800)' : 'var(--slate-500)' }));
+    const set = o => () => this.setState(o);
+
+    return {
+      headerBg: scrolled ? 'rgba(255,255,255,0.86)' : 'transparent',
+      headerBlur: scrolled ? 'blur(16px) saturate(1.5)' : 'none',
+      headerRule: scrolled ? 'rgba(219,229,240,0.9)' : 'transparent',
+      headerH: scrolled ? '68px' : '88px',
+      logoFilter: scrolled ? 'none' : 'brightness(0) invert(1)',
+      navInk: scrolled ? 'var(--ink-800)' : '#fff',
+      ghostBorder: scrolled ? 'var(--slate-300)' : 'rgba(255,255,255,0.42)',
+      primaryBg: scrolled ? 'var(--ink-800)' : '#fff',
+      primaryInk: scrolled ? '#fff' : 'var(--ink-900)',
+      actionsGap: '0',
+      heroVideoUrl: this.props.heroVideoUrl || 'https://driftwooddealdirect.com/wp-content/uploads/Dream_Website_banner.mp4',
+      videoRef: this.videoRef,
+      live, past,
+      blurDisplay: veil === 'blur' ? 'block' : 'none',
+      pastMin: layout === 'compact' ? '220px' : '280px',
+      openSignup: () => this.setState({ modal: 'signup', step: 0, accred: '', ctx: null }),
+      openLogin: set({ modal: 'login' }),
+      closeModal: set({ modal: null }),
+      closeModalBackdrop: e => { if (e.target === e.currentTarget) this.setState({ modal: null }); },
+      noop: e => e.preventDefault(),
+      modalOpen: !!modal, isLogin: modal === 'login', isSignup: modal === 'signup', isConfirm: modal === 'confirm',
+      hasCtx: !!ctx && modal !== 'login', ctxName: ctx === 'qoz' ? 'Riverside Wharf QOZ' : '',
+      submitConfirm: e => { e.preventDefault(); this.setState({ modal: null, notify: 'done' }); },
+      notYou: () => { try { localStorage.removeItem('dd_lead'); } catch (_) {} this.setState({ modal: 'signup', step: 0, accred: '' }); },
+      steps, step0: step === 0, step1: step === 1, step2: step === 2, stepSorry: step === 3, stepDone: step === 4,
+      accred, setAccred: e => this.setState({ accred: e.target.value }),
+      showNext: step < 3,
+      nextLabel: step === 1 ? 'Submit' : 'Next',
+      prevDisabled: step === 0 || step === 4,
+      prevOpacity: step === 0 || step === 4 ? 0.4 : 1,
+      prevStep: () => this.setState(s => ({ step: s.step === 3 ? 0 : Math.max(0, s.step - 1) })),
+      nextStep: e => { if (e && e.preventDefault) e.preventDefault(); this.setState(s => {
+        if (s.step === 0) { if (!s.accred) return null; return { step: s.accred === 'none' ? 3 : 1 }; }
+        if (s.step === 1) { try { localStorage.setItem('dd_lead', '1'); } catch (_) {} return { modal: null, step: 0, notify: s.ctx === 'qoz' ? 'done' : s.notify }; }
+        return { step: s.step + 1 };
+      }); },
+      notifyClosed: notify !== 'done', notifyDone: notify === 'done',
+      openNotify: () => { let known = false; try { known = !!localStorage.getItem('dd_lead'); } catch (_) {} this.setState(known ? { modal: 'confirm', ctx: 'qoz' } : { modal: 'signup', step: 0, accred: '', ctx: 'qoz' }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
