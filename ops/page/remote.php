@@ -107,7 +107,23 @@ if ( $action === 'media' ) {
 	$opts  = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%etch%' AND (option_name LIKE '%asset%' OR option_name LIKE '%collection%' OR option_name LIKE '%media%')" );
 	$types = array_values( array_filter( get_post_types(), fn( $n ) => preg_match( '/etch|asset|collection/i', $n ) ) );
 	$meta  = $wpdb->get_col( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE meta_key LIKE '%etch%' AND (meta_key LIKE '%asset%' OR meta_key LIKE '%collection%') LIMIT 20" );
-	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ] ];
+	// Etch's Asset Manager compressor (presets since 1.6.2) is undocumented: is it a server endpoint a deploy can call, or
+	// browser-only? Report its REST routes, preset options, the Etch files that mention compression, and what the
+	// server's image editor can encode, so imports can go through it instead of a hand-rolled conversion.
+	$routes = array_values( array_filter( array_keys( rest_get_server()->get_routes() ), fn( $r ) => preg_match( '#^/etch#i', $r ) && preg_match( '/asset|compress|preset|media|image|upload/i', $r ) ) );
+	$popts  = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%etch%' AND (option_name LIKE '%preset%' OR option_name LIKE '%compress%' OR option_name LIKE '%optimi%')" );
+	$files  = [];
+	$dir    = WP_PLUGIN_DIR . '/etch';
+	if ( is_dir( $dir ) ) {
+		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir, FilesystemIterator::SKIP_DOTS ) ) as $f ) {
+			if ( count( $files ) >= 25 || ! preg_match( '/\.(php|js)$/', $f->getFilename() ) || $f->getSize() > 8000000 || str_contains( $f->getPathname(), '/vendor/' ) ) { continue; }
+			if ( stripos( (string) file_get_contents( $f->getPathname() ), 'compress' ) !== false ) { $files[] = substr( $f->getPathname(), strlen( $dir ) + 1 ); }
+		}
+	}
+	$encode = [];
+	foreach ( [ 'image/webp', 'image/avif', 'image/jpeg' ] as $mime ) { $encode[ $mime ] = wp_image_editor_supports( [ 'mime_type' => $mime ] ); }
+	$compressor = [ 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
+	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ], 'etch_compressor' => $compressor ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
 	$cur = get_post_status( (int) $in['id'] );
