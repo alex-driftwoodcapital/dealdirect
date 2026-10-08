@@ -1,0 +1,54 @@
+# DealDirect: Etch + ACSS 4 rebuild (standing instructions)
+
+The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/README.md` once before page work. Where the handoff and this file disagree, this file wins.
+
+## Project values
+- STAGING_URL: https://wordpress-1077248-6717515.cloudwaysapps.com/ (Cloudways; the handoff's `…6707404` is NOT the build target)
+- LIVE_URL: https://driftwooddealdirect.com/ (WordPress + Bricks today). Read-only source of copy, media and SEO meta. Never write to it.
+- SSH: `master_peedmrgrfq@66.42.75.99`, key `~/.ssh/dealdirect_staging`, WP path `applications/kyvvrceayg/public_html` (profile: `.claude/skills/etch-page-editor/profiles/dealdirect-staging.env`)
+- Versions (2026-10-08): WordPress 7.1.3, Etch 1.6.8, ACSS 4.0.1, etch-theme 0.0.3
+- PAGE_IDS (staging): Home 48, Privacy Policy 3 (draft). Fresh install: everything else is created by this build.
+- TARGET_AUDIENCE: US accredited investors; EB-5 pages: foreign investors (EN/ES/PT)
+- PRIMARY_CTA: "Start Investing" (registration) · offering pages "Request Investor Details" · EB-5 "Connect with an EB-5 Specialist"
+- AUTHORIZED_SITE: staging only until Alex signs off in his own typed words.
+- HUBSPOT_PORTAL_ID: 2951523. Private app token: `DD_HUBSPOT_TOKEN` in staging `wp-config.php` only, never in the repo, Etch, JS or chat.
+- GTM: `GTM-NX8DQZGQ`
+
+## Where work runs
+- **Writes to staging** happen only from the Remote Control session on Alex's Mac (SSH works there). Cloud sessions cannot reach SSH, staging or the live site: they write specs, markup, CSS and code into this repo for the Mac session to apply.
+- Every write: snapshot first, re-read before editing, purge, verify at 375 / 768 / 1440 (`etch-page-editor`).
+
+## Fresh install (differs from the handoff)
+The handoff assumes staging is a copy of the Bricks site. It is not. So:
+- The `offering` CPT (rewrite slug `offering`), its fields (`handoff/docs/cpt-schema.md`) and the platform-stats options page are **created**, not exported. Field plugin: decide in Phase 1 from what is installed.
+- Pages are created with the **same slugs** as live (`handoff/docs/permalinks.md`); "same post ID" does not apply.
+- Media is imported from the live site's uploads (same filenames), not reused by attachment ID.
+- Copy, SEO title/description/OG and anchor IDs are lifted from the live pages verbatim.
+
+## Repo layout
+- `handoff/`: the design handoff as received (do not edit except the override note in its README).
+- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only).
+- `inventory/<date>/`: read-only exports of staging and the live site (copy, SEO meta, media list); committed so cloud sessions can read them.
+- `.claude/skills/`: the Etch/ACSS skills.
+
+## Skills
+Router: `website-helpers`. Load `etch-expert` and `acss-expert` before any page work. Edits: `etch-page-editor`. New pages: `etch-builder` (pilot gate first). Unsupervised runs: `site-build-runner`. Audits (read-only): `seo-geo-auditor`, `security-auditor`, `tracking-auditor`, `client-test-group`.
+The fixtures, examples and ACSS index inside the skills come from a previous build (TwoEleven); never reuse their IDs, copy or brand values.
+
+## Rules
+1. **Copy is verbatim.** Lift text from the live page or the design file. Never rewrite, shorten or "fix" it. Known typos and conflicts are tracked in `handoff/design/evidence-register/claims.js`; compliance decides.
+2. **Riverside Wharf is under construction.** Never carry over "shovel-ready", on any page or language.
+3. **Permalinks and anchor IDs are frozen** (`handoff/docs/permalinks.md`).
+4. **ACSS first.** Variables and utilities before custom CSS; verify every name exists on staging (`acss-expert` verify/lookup).
+5. **BEM classes** as named in `handoff/docs/etch-components.md`.
+6. Legal and footnote text: never below 12px or 4.5:1 contrast; one column at full content width. No section ships without its disclaimer block.
+7. Forms: custom Etch UI → `POST /wp-json/dealdirect/v1/submit` → HubSpot Forms API v3 (`handoff/docs/hubspot-setup-steps.md`). Non-accredited visitors are never sent to HubSpot.
+8. Platform figures come from the platform-stats options page (`handoff/docs/platform-stats.md`), never typed into a page.
+9. Saving a page in the Etch builder overwrites SSH/WP-CLI edits: never mix on the same page without re-reading.
+10. Compliance register: build with live figures as-is; every open `gap`/`check` must clear before go-live.
+
+## Brand
+Driftwood Capital design system (tokens in `handoff/README.md`, ACSS mapping in `handoff/docs/acss-mapping.md`). Plus Jakarta Sans only. Navy `#0B2B48` primary, ocean `#2468A8` accent, `#6FB0E0` accent on dark. No gold, no emoji, no coloured left-border cards, no accent rules above headings.
+
+## Build phases (one PR each)
+0 repo setup · 1 staging inventory + live content/media/SEO extraction · 2 ACSS settings + font · 3 global components · 4 EB-5 pilot (Alex reviews) · 5 offering template · 6 Home · 7 forms endpoint · 8 ES/PT EB-5 + /new-eb-5-page/ · 9 QA, crawl diff, compliance, go-live plan (Alex's typed OK).

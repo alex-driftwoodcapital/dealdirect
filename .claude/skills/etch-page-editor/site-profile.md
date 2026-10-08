@@ -15,4 +15,11 @@ Machine-read copy: `profiles/dealdirect-staging.env` (SSH target, WP path, purge
 | Stored in | `post_content` (blocks), `etch_styles`, `etch_global_stylesheets`, `etch_loops`; element scripts are base64 |
 
 ## DealDirect rules while editing
-TBD from the brand handoff: CTA label(s), button sizes, typefaces, colors, languages, copy rules. Until then, ask before inventing any brand rule; do not carry over another site's rules.
+Full list: repo root `CLAUDE.md` (wins) and `handoff/README.md`. The short version:
+- Copy verbatim from the live page or design file; never rewrite. Never "shovel-ready" (Riverside Wharf is under construction).
+- Permalinks and anchor IDs frozen (`handoff/docs/permalinks.md`). Offering anchors: `#metrics #overview #webinar #partners #offering #structure #assets #market #rationale #legal`.
+- Plus Jakarta Sans only. Navy `#0B2B48`, ocean `#2468A8`, `#6FB0E0` on dark. No gold, no emoji, no coloured left-border cards, no accent rules above headings.
+- CTAs: "Start Investing" (registration), "Request Investor Details" (offering pages, opens `#request` on the same page), "Connect with an EB-5 Specialist" (EB-5).
+- Legal/footnotes >= 12px, >= 4.5:1, one column at full content width. Every section keeps its disclaimer.
+- Dark `cover-bg` field only for hero, Get started band, footer; never two dark sections in a row.
+- Motion 160 to 480ms `cubic-bezier(.2,.7,.2,1)`; honour `prefers-reduced-motion` (no autoplay video, no transitions).

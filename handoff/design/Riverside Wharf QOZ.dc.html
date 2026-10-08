@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Riverside Wharf Miami - QOZ Common Equity - Driftwood Capital | DealDirect</title>
+<link rel="stylesheet" href="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/colors_and_type.css">
+<link rel="stylesheet" href="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/styles.css">
+<script src="_ds/driftwood-capital-design-system-9d3afadb-b605-4c8f-bf63-ba3657b86844/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:136px}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink-900);-webkit-font-smoothing:antialiased}
+a{color:var(--gold-500);text-decoration:none}
+a:hover{color:var(--gold-700)}
+:focus-visible{outline:2px solid var(--gold-500);outline-offset:3px;border-radius:4px}
+image-slot:not(:defined){display:block;background:var(--slate-100)}
+sup{font-size:0.85em;font-weight:700;line-height:0;vertical-align:0.45em;margin:0 0.08em}
+:is(h1,h2,h3,h4) sup{font-size:0.45em;font-weight:600;vertical-align:1.1em;margin-left:0.15em}
+@media (max-width:760px){.dd-header__links{display:none !important}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</helmet>
+
+<header class="dd-header" style="position:fixed;top:0;left:0;right:0;z-index:50;background:{{ headerBg }};backdrop-filter:{{ headerBlur }};-webkit-backdrop-filter:{{ headerBlur }};border-bottom:1px solid {{ headerRule }};transition:background 360ms cubic-bezier(.2,.7,.2,1),border-color 360ms">
+  <div style="display:flex;align-items:center;gap:24px;max-width:1334px;margin:0 auto;height:{{ headerH }};padding:0 32px;transition:height 360ms cubic-bezier(.2,.7,.2,1)">
+    <a href="DealDirect Home.dc.html" aria-label="Driftwood Capital | DealDirect home" style="display:flex;align-items:center;min-height:44px"><img src="https://driftwooddealdirect.com/wp-content/uploads/dealdirect-logo.svg" alt="Driftwood Capital | DealDirect logo" style="height:40px;width:auto;display:block;filter:{{ logoFilter }};transition:filter 320ms"></a>
+        <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+      <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:12px;background:{{ primaryBg }};color:{{ primaryInk }};font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase">Request Offering Details</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="rw-hero" data-screen-label="01 Hero" style="position:relative;display:flex;align-items:flex-end;min-height:min(78vh,760px);overflow:hidden;background:var(--ink-900)">
+  <video class="rw-hero-video" ref="{{ heroVideoRef }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" poster="https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_View-from-River.jpg" aria-label="Riverside Wharf Miami rendering video" src="https://driftwooddealdirect.com/wp-content/uploads/Dream_Website_banner.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+  <span class="rendering-chip" style="position:absolute;top:108px;right:32px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span>
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,18,31,0.6) 0%,rgba(4,18,31,0) 26%,rgba(4,18,31,0.25) 50%,rgba(4,18,31,0.9) 100%),linear-gradient(90deg,rgba(6,26,46,0.6) 0%,rgba(6,26,46,0) 70%)"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:1334px;margin:0 auto;padding:160px 32px clamp(44px,5vw,72px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal-soft);margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">QOZ Common Equity<span style="padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em">Coming soon</span></div>
+      
+      <h1 style="margin:0;font-size:clamp(42px,6vw,88px);font-weight:300;line-height:1.02;letter-spacing:-0.036em;color:#fff">Riverside Wharf Miami</h1>
+    </div>
+    <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:12px;background:#fff;color:var(--ink-900);font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;box-shadow:0 18px 40px -18px rgba(0,0,0,0.6)" style-hover="color:var(--ink-900)">Request Investor Details</a>
+  </div>
+</section>
+
+<section id="metrics" class="rw-metrics" data-screen-label="02 Target metrics" style="background:linear-gradient(180deg,#FFFFFF 0%,#F4F8FC 100%)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(56px,6vw,96px) 32px clamp(40px,4vw,56px)">
+    <h2 style="margin:0;font-size:clamp(26px,2.8vw,40px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">QOZ Common Equity Target Metrics<sup>* 1</sup></h2>
+    <p style="margin:12px 0 32px;font-size:clamp(18px,1.5vw,21px);line-height:1.45;color:var(--slate-600)">[QOZ target summary — from offering documents]</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
+      <div class="dw-stat-card" style="padding:28px 26px;border-radius:20px;border:1.5px solid transparent;background:linear-gradient(165deg,#fff 0%,#EDF2F7 100%) padding-box,linear-gradient(140deg,#fff 0%,rgba(127,184,224,0.4) 30%,rgba(11,43,72,0.08) 78%) border-box;box-shadow:0 18px 40px -26px rgba(11,43,72,0.35)">
+        <div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--gold-500)">[TBD]<span style="margin-left:0.25em">Target*</span></div>
+        <div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-800)">Net Quarterly Distributions<sup>1</sup></div>
+      </div>
+      <div class="dw-stat-card" style="padding:28px 26px;border-radius:20px;border:1.5px solid transparent;background:linear-gradient(165deg,#fff 0%,#EDF2F7 100%) padding-box,linear-gradient(140deg,#fff 0%,rgba(127,184,224,0.4) 30%,rgba(11,43,72,0.08) 78%) border-box;box-shadow:0 18px 40px -26px rgba(11,43,72,0.35)">
+        <div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]<span style="margin-left:0.25em">Target*</span></div>
+        <div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-800)">Net Equity Multiple</div>
+      </div>
+      <div class="dw-stat-card" style="padding:28px 26px;border-radius:20px;border:1.5px solid transparent;background:linear-gradient(165deg,#fff 0%,#EDF2F7 100%) padding-box,linear-gradient(140deg,#fff 0%,rgba(127,184,224,0.4) 30%,rgba(11,43,72,0.08) 78%) border-box;box-shadow:0 18px 40px -26px rgba(11,43,72,0.35)">
+        <div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]</div>
+        <div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-800)">Minimum Investment<sup>2</sup></div>
+      </div>
+      <div class="dw-stat-card" style="padding:28px 26px;border-radius:20px;border:1.5px solid transparent;background:linear-gradient(165deg,#fff 0%,#EDF2F7 100%) padding-box,linear-gradient(140deg,#fff 0%,rgba(127,184,224,0.4) 30%,rgba(11,43,72,0.08) 78%) border-box;box-shadow:0 18px 40px -26px rgba(11,43,72,0.35)">
+        <div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]</div>
+        <div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-800)">Assumed Hold Period<sup>3</sup></div>
+      </div>
+    </div>
+    <div class="dd-fn" style="display:grid;gap:10px;margin-top:28px;font-size:14px;line-height:1.7;color:var(--slate-600)">
+      <p style="margin:0"><sup>1</sup>Targeted preferred return anticipated to be paid current each quarter in arrears. All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be, rather, such projections or target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. The estimates reflect the best judgment of Driftwood Capital (and its subsidiaries); however, they involve a number of risks and uncertainties. No representations or warranties whatsoever are made by Driftwood Capital or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+      <p style="margin:0"><sup>2</sup>The minimum investment amount is subject to the discretion of the Manager. The Manager may, in its absolute discretion, permit or require a lower or higher initial or subsequent investment by any prospective or existing investor. Such discretion may be exercised without prior notice and without offering the same terms to other investors.</p>
+      <p style="margin:0"><sup>3</sup> The anticipated hold period is 5 years + two 1-year extension.</p>
+      <p style="margin:0">* Target internal rate of return (IRR) listed is aspirational and not a prediction or guarantee of performance. It is based on current market conditions, specific assumptions, and Driftwood financial modeling, which are subject to change. The calculations and assumptions used to derive the Target IRR are hypothetical. Specific calculations are available upon request. Actual realized data will differ materially. All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather, such projections or target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. There is no assurance that actual returns will meet or exceed the targeted returns, and they may be materially lower. These forward-looking statements are estimates reflecting the best judgment of Driftwood Capital (and its subsidiaries and/or affiliates). The target returns presented herein are hypothetical in nature, are based on a number of assumptions, do not reflect actual investment results, and there is no guarantee of future results. In addition, a specific investor’s actual performance may be materially different from such illustrative data depending on numerous factors. There are certain limitations inherent in hypothetical results like those portrayed herein. In fact, there are frequently sharp differences between hypothetical performance results and the actual results subsequently achieved by any transaction. One of the limitations of hypothetical performance results is that they do not reflect transactions in actual client accounts and do not reflect the impact that material economic and market factors may have had on the decision-making associated with the transactions and funds. Unlike an actual performance record, hypothetical performance results do not represent actual completed transactions. The information contained herein is intended only for qualified investors who are knowledgeable about investments and the associated risks. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. Potential investors should conduct their own due diligence and consult their own legal, tax, and financial advisors before investing. This document does not constitute an offering of securities.</p>
+      <a href="#legal" style="font-weight:600;min-height:44px;display:inline-flex;align-items:center">Click here to see important disclaimers and disclosures</a>
+    </div>
+  </div>
+</section>
+
+<nav class="rw-subnav" aria-label="On this page" style="position:sticky;top:68px;z-index:40;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px) saturate(1.5);-webkit-backdrop-filter:blur(16px) saturate(1.5);border-top:1px solid var(--slate-200);border-bottom:1px solid var(--slate-200)">
+  <div style="display:flex;gap:4px;max-width:1334px;margin:0 auto;padding:0 24px;overflow-x:auto;scrollbar-width:none">
+    <sc-for list="{{ subnav }}" as="n" hint-placeholder-count="10">
+      <a href="{{ n.href }}" style="flex-shrink:0;display:inline-flex;align-items:center;height:52px;padding:0 12px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-800);white-space:nowrap" style-hover="color:var(--gold-500)">{{ n.label }}</a>
+    </sc-for>
+  </div>
+</nav>
+
+<section id="overview" class="rw-overview" data-screen-label="03 Overview" style="background:var(--paper)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(28px,4vw,64px);align-items:stretch;max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px clamp(40px,4vw,56px)">
+    <figure style="margin:0;position:relative;min-height:360px;border-radius:24px;overflow:hidden;box-shadow:0 20px 44px -20px rgba(11,43,72,0.26),0 52px 96px -44px rgba(11,43,72,0.32)">
+      <img src="https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_Pooldeck.jpg" alt="Riverside Wharf Pool deck" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      <span class="rendering-chip" style="position:absolute;top:16px;left:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span>
+    </figure>
+    <div>
+      <h2 style="margin:0;font-size:clamp(28px,3.2vw,46px);font-weight:300;line-height:1.1;letter-spacing:-0.032em;color:var(--ink-900);text-wrap:balance">A hospitality &amp; entertainment development in Miami's vibrant riverfront district</h2>
+      <div style="display:grid;gap:16px;margin-top:24px;font-size:16px;line-height:1.75;color:#48535F">
+        <p style="margin:0">This two tower project is planned to include a 167-key luxury Dream Hotel, two high-end restaurants, approximately 18,000 square feet of meeting and event space, and over 40,000 square feet of premier entertainment venues, including a signature nightclub managed by Las Vegas–based operator Tao Group Hospitality, historically known for some of the highest-grossing venues in the nation<sup>1</sup>, a rooftop day club, and a reimagined Wharf Miami along the riverfront<sup>2</sup>.</p>
+        <p style="margin:0">Designed to foster a vibrant, ‘round-the-clock’ environment, the project features complementary components intended to serve a broad spectrum of local and visiting audiences.</p>
+        <p style="margin:0">Located in a market characterized by high barriers to entry, this opportunity reflects the sponsors, Driftwood Capital (“Driftwood”) and MV Real Estate Holdings (“MV”, together the “Sponsors”), strategic focus on supply-constrained environments.</p>
+        <p style="margin:0">The project is structured with the objective of generating cash flows upon commencement of operations. The capital stack is designed to include the EB-5 Immigrant Investor Program as a potential funding source. Furthermore, the project’s location in a federally designated Opportunity Zone may offer specific tax efficiencies to eligible investors<sup>3</sup>.</p>
+      </div>
+      <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:52px;margin-top:28px;padding:0 26px;border-radius:12px;background:var(--ink-800);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:var(--ink-700);color:#fff">Request Offering Details</a>
+    </div>
+  </div>
+  <div class="dd-fn" style="display:grid;gap:10px;max-width:1334px;margin:0 auto;padding:0 32px clamp(56px,6vw,88px);font-size:14px;line-height:1.7;color:var(--slate-600)">
+    <p style="margin:0">1 Profile Magazine. (September 29, 2025). Tao Group Hospitality Maintains Its Edge While Expanding.</p>
+    <p style="margin:0">2 These project descriptions, including the number of hotel keys, restaurant concepts, and specific square footage for meeting, event, and entertainment venues, represent planned developments and current intentions of management. These statements are "forward-looking" and are subject to change. There is no guarantee that the project will be completed as described or at all.</p>
+    <p style="margin:0">3 Such benefits are subject to individual investor eligibility and prevailing tax regulations. The availability of Opportunity Zone tax benefits and EB-5 visa eligibility is subject to complex federal regulations and individual circumstances. Driftwood does not provide tax, legal, or immigration advice. Investors should consult with their own professional advisors regarding the potential tax and immigration consequences of an investment.</p>
+    <p style="margin:0">All information is as of the date indicated and is subject to change without notice. There can be no assurance or guarantees that the anticipated design, specifications, and/or strategies will be achieved or met or that Driftwood its affiliates and/or its subsidiaries will be able to implement its strategy and/or approach or achieve its investment objectives. No representations or warranties whatsoever are made by Driftwood, its affiliates and/or its subsidiaries. The data herein is for informational purposes only.</p>
+    <p style="margin:0">Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The description of the project listed herein is summary in nature and does not include all of the relevant and potential high degree of risks. Anyone considering an investment must read and review in its entirety the private placement memorandum, subscription agreement and the operating agreement of the investment entity (collectively the “Offering Documents”), which describe the terms and risks of investment in detail. Any terms in this document that conflict with the Offering Documents shall be superseded by the terms of the Offering Documents. Any person considering an investment should be aware of all the risks and should consult their own investment, legal, business, tax and financial advisors, to determine the merits and risks of such investments. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+  </div>
+</section>
+
+<section id="webinar" class="rw-video" data-screen-label="04 Video" style="background:#0B2B48 url('assets/cover-bg.png') center/cover no-repeat">
+  <div style="max-width:1100px;margin:0 auto;padding:clamp(64px,7vw,104px) 32px">
+    <div style="position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.16);box-shadow:0 40px 90px -40px rgba(0,0,0,0.8)">
+      <sc-if value="{{ videoPoster }}" hint-placeholder-val="{{ true }}">
+        <image-slot style="position:absolute;inset:0;width:100%;height:100%;display:block" id="rw-webinar" shape="rect" placeholder="Drop video poster image"></image-slot>
+        <button type="button" class="rw-video__play" onClick="{{ playVideo }}" aria-label="Play video" style="position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;border:1px solid rgba(255,255,255,0.5);background:rgba(6,26,46,0.55);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,0.35),0 20px 40px -16px rgba(0,0,0,0.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 240ms cubic-bezier(.2,.7,.2,1),background 240ms" style-hover="background:rgba(6,26,46,0.75);transform:translate(-50%,-50%) scale(1.05)" style-active="transform:translate(-50%,-50%) scale(0.972)">
+          <span aria-hidden="true" style="display:block;width:0;height:0;margin-left:6px;border-style:solid;border-width:13px 0 13px 22px;border-color:transparent transparent transparent #fff"></span>
+        </button>
+      </sc-if>
+      <sc-if value="{{ videoPlaying }}" hint-placeholder-val="{{ false }}">
+        <iframe src="https://player.vimeo.com/video/1073671948?byline=0&amp;title=0&amp;autoplay=1" title="Riverside Wharf Miami video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="partners" class="rw-partners" data-screen-label="05 Partners" style="background:var(--slate-50);border-top:1px solid var(--slate-200)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:20px;max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <article style="display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);border:1px solid rgba(219,229,240,0.7);box-shadow:0 1px 2px rgba(11,43,72,0.025),0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13)">
+      <div style="position:relative;aspect-ratio:16/9"><image-slot style="position:absolute;inset:0;width:100%;height:100%;display:block" id="rw-tao" src="https://driftwooddealdirect.com/wp-content/uploads/Night-club-Lobby.jpg" shape="rect" placeholder="TAO Group Hospitality image"></image-slot><span class="rendering-chip" style="position:absolute;top:16px;left:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span></div>
+      <div style="padding:clamp(28px,3vw,40px)">
+        <h2 style="margin:0;font-size:clamp(24px,2.4vw,32px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Partnering with TAO Group Hospitality</h2>
+        <p style="margin:16px 0 0;font-size:15.5px;line-height:1.75;color:#48535F">To elevate the entertainment experience, Riverside Wharf Miami has partnered with Tao Group Hospitality to manage its nightlife and daylife venues. With more than 25 years of experience operating leading restaurants, nightclubs, lounges, and day clubs around the world, Tao Group Hospitality is known for delivering distinctive culinary experiences and premium entertainment, continually reinventing the future of hospitality through innovative, high-impact guest experiences.</p>
+        <a href="https://taogroup.com/" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:10px;font-size:14px;font-weight:600">Learn more about TAO Group Hospitality.<span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </article>
+    <article style="display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);border:1px solid rgba(219,229,240,0.7);box-shadow:0 1px 2px rgba(11,43,72,0.025),0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13)">
+      <div style="position:relative;aspect-ratio:16/9"><image-slot style="position:absolute;inset:0;width:100%;height:100%;display:block" id="rw-dream" src="https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf-Coastal-Bar.jpg" shape="rect" placeholder="Dream Hotels image"></image-slot><span class="rendering-chip" style="position:absolute;top:16px;left:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span></div>
+      <div style="padding:clamp(28px,3vw,40px)">
+        <h2 style="margin:0;font-size:clamp(24px,2.4vw,32px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Dream Hotels, part of the Hyatt family</h2>
+        <p style="margin:16px 0 0;font-size:15.5px;line-height:1.75;color:#48535F">Recognized as a premier lifestyle brand characterized by upscale amenities and integrated nightlife. Dream properties are designed with a strategic focus on generating a significant portion of revenue through non-room offerings, including dining and entertainment.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="offering" class="rw-offering" data-screen-label="06 Offering" style="background:var(--paper);border-top:1px solid var(--slate-200)">
+  <div class="rw-offering__grid" style="display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,80px);max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px clamp(40px,4vw,56px)">
+    <div class="rw-stack" style="flex:1 1 340px;max-width:460px">
+      <h3 style="margin:0;font-size:clamp(24px,2.4vw,32px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Anticipated Capitalization Stack<sup>1</sup></h3>
+      <div style="margin-top:6px;font-size:clamp(36px,3.6vw,52px);font-weight:300;letter-spacing:-0.04em;color:var(--ink-900)">~336M</div>
+      <div style="display:grid;gap:3px;margin-top:24px;max-width:420px">
+        <div class="rw-stack__row rw-stack__row--offering" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:100px;padding:14px 24px;border-radius:14px;background:var(--gold-500);color:#fff;margin:0 -10px;z-index:1;box-shadow:0 18px 36px -14px rgba(36,104,168,0.75),inset 0 1px 0 rgba(255,255,255,0.35);">
+          <span style="display:grid;gap:2px">
+            <strong style="font-size:24px;font-weight:600;letter-spacing:-0.02em">~$96M</strong>
+            <span style="font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#fff">Total equity</span>
+          </span>
+          <span style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;color:#fff">100%</span>
+        </div>
+        <div class="rw-stack__row" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 20px;border-radius:3px;background:var(--slate-200);color:var(--ink-900);">
+          <span style="display:grid;gap:2px">
+            <strong style="font-size:18px;font-weight:500;letter-spacing:-0.02em">~$35M</strong>
+            <span style="font-size:13px;font-weight:500;color:var(--slate-600)">Preferred equity</span>
+          </span>
+          <span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--slate-600)">71%</span>
+        </div>
+        <div class="rw-stack__row" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:70px;padding:12px 20px;border-radius:3px;background:var(--ink-600);color:#fff;">
+          <span style="display:grid;gap:2px">
+            <strong style="font-size:18px;font-weight:500;letter-spacing:-0.02em">~$60M</strong>
+            <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.86)">EB-5 mezzanine loan</span>
+          </span>
+          <span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:rgba(255,255,255,0.86)">61%</span>
+        </div>
+        <div class="rw-stack__row" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:128px;padding:12px 20px;border-radius:3px 3px 14px 14px;background:var(--ink-800);color:#fff;">
+          <span style="display:grid;gap:2px">
+            <strong style="font-size:18px;font-weight:500;letter-spacing:-0.02em">~$145M</strong>
+            <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.86)">Total senior debt</span>
+          </span>
+          <span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:rgba(255,255,255,0.86)">43%</span>
+        </div>
+      </div>
+    </div>
+    <div class="rw-highlights" style="flex:1.6 1 480px;min-width:0">
+      <h3 style="margin:0;font-size:clamp(24px,2.4vw,32px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Offering highlights</h3>
+      <ul style="display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:24px 0 0;padding:0;list-style:none">
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">[QOZ highlight — from offering documents]</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">[QOZ highlight — from offering documents]</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">The project is located within a Qualified Opportunity Zone, which may provide tax benefits to eligible investors.</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">The project is structured with the objective of generating diversified revenue streams through its integrated retail, entertainment, and hospitality components.</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">The planned development includes nearly 100,000 square feet of entertainment space, including a nightclub, day club, upscale restaurants, and a large outdoor venue<sup>4</sup>.</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">Special use designations allowing for later operating hours which are expected to provide competitive positioning among Miami’s nightlife districts<sup>5</sup>.</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">The hospitality component may benefit from access to Hyatt’s global booking system and loyalty program.</li>
+        <li style="padding:18px 24px;border-radius:16px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9);font-size:15px;line-height:1.6;color:#48535F;text-wrap:pretty">The investment structure provides for a one-time 1.0% initial structuring fee and a 1.0% annual asset management fee<sup>6</sup>.</li>
+      </ul>
+      <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:52px;margin-top:28px;padding:0 26px;border-radius:12px;background:var(--ink-800);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:var(--ink-700);color:#fff">Request Offering Details</a>
+    </div>
+  </div>
+  <div class="dd-fn" style="display:grid;gap:10px;max-width:1334px;margin:0 auto;padding:0 32px clamp(56px,6vw,88px);font-size:14px;line-height:1.7;color:var(--slate-600)">
+    <p style="margin:0"><sup>1</sup>As of November 25, 2025., Driftwood confirmed projected sources of capital total of ~$336M. Figures shown are approximate and subject to change due to current market and other conditions. Driftwood is actively negotiating with a lender to increase loan proceeds and has expanded capacity to accept additional commitments of common equity. While Driftwood believes it is reasonably likely to secure additional financing and fill the new equity slots, there can be no assurance that any additional funds—debt or equity—will ultimately be obtained. The capitalization stack shown above represents the current financing plan, however, final amounts and percentages are subject to change based on market conditions and final executed loan documents, and there can be no assurance that the project will be fully capitalized as described.</p>
+    <p style="margin:0"><sup>2</sup>The preferred equity position remains subordinate to all senior secured debt. Projected combined leverage approximately 71% loan-to-cost. The realization of the projected LTC is based on current development budget, financing assumptions, and capitalization structure; dependent on the successful execution of operational optimization and brand standard initiatives, which is subject to change.</p>
+    <p style="margin:0"><sup>3</sup>. Subject to available cash flow and the discretion of the Manager. Distributions are projected and are not guaranteed. Target returns are forward looking and based on a number of assumptions; they do not reflect actual investment results. Target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. Forward-looking statements involve a number of risks and uncertainties that could cause actual results to differ materially from those suggested by the forecasts and are not guarantees of performance or results.</p>
+    <p style="margin:0">3 QOZ investments are highly complex and carry specific tax implications under the Tax Cuts and Jobs Act of 2017. Nothing herein is intended as nor should be construed as tax advice. Tax laws are subject to change, and the availability and impact of any potential tax benefits will depend on individual investor circumstances. Independent tax and legal advice should be sought.</p>
+    <p style="margin:0">4 These project descriptions, including the number of hotel keys, restaurant concepts, and specific square footage for meeting, event, and entertainment venues, represent planned developments and current intentions of management. These statements are "forward-looking" and are subject to change. There is no guarantee that the project will be completed as described or at all.</p>
+    <p style="margin:0">5 These features are expected to support operations, but outcomes depend on leasing, construction, permitting, market demand, operating performance, and other risks.</p>
+    <p style="margin:0">6 For a complete schedule of all potential fees and expenses, please refer to the 'Fees and Expenses' section of the Private Placement Memorandum (PPM).</p>
+    <p style="margin:0">All information is as of the date indicated and is subject to change without notice. There can be no assurance or guarantees that the anticipated design, specifications, and/or strategies will be achieved or met or that Driftwood its affiliates and/or its subsidiaries will be able to implement its strategy and/or approach or achieve its investment objectives. No representations or warranties whatsoever are made by Driftwood, its affiliates and/or its subsidiaries. The data herein is for informational purposes only.</p>
+    <p style="margin:0">All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather, such projections or target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. The target returns presented herein are hypothetical in nature, are based on a number of assumptions, do not reflect actual investment results, and there is no guarantee of future results. In addition, a specific investor’s actual performance may be materially different from such illustrative data depending on numerous factors. There are certain limitations inherent in hypothetical results like those portrayed herein. In fact, there are frequently sharp differences between hypothetical performance results and the actual results subsequently achieved by any transaction. One of the limitations of hypothetical performance results is that they do not reflect transactions in actual client accounts and do not reflect the impact that material economic and market factors may have had on the decision-making associated with the transactions and funds. Unlike an actual performance record, hypothetical performance results do not represent actual completed transactions. The information contained herein is intended only for qualified investors who are knowledgeable about investments and the associated risks. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. Potential investors should conduct their own due diligence and consult their own legal, tax, and financial advisors before investing.</p>
+  </div>
+</section>
+
+<section id="market" class="rw-market" data-screen-label="07 Market" style="background:var(--ink-900);color:#fff">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px clamp(48px,5vw,72px)">
+    <div class="rw-market__grid" style="display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,80px)">
+      <div style="flex:1 1 340px;max-width:460px">
+        <h2 style="margin:0;font-size:clamp(28px,3.2vw,46px);font-weight:300;line-height:1.1;letter-spacing:-0.032em;color:#fff;text-wrap:balance">Strategic market fundamentals &amp; key demand drivers</h2>
+        <p style="margin:22px 0 0;font-size:16px;line-height:1.75;color:rgba(255,255,255,0.86)">Characterized by global connectivity, cultural tourism, and a robust calendar of year-round events, Miami serves as a primary gateway for both leisure and business activity. Proximate anchors, including PortMiami and Miami International Airport, alongside a developed urban core, underpin the region’s position as a destination for business, leisure, and lifestyle-focused hospitality.</p>
+        <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:52px;margin-top:28px;padding:0 26px;border-radius:12px;border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.1);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:rgba(255,255,255,0.18);color:#fff">Request Information</a>
+      </div>
+      <ul class="rw-market__list" style="flex:1.6 1 480px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin:0;padding:0;list-style:none;align-content:start">
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">Florida’s tourism demand remained strong following a record 2024, with the state welcoming 34.3 million visitors in Q3 2025 alone, underscoring sustained domestic and international travel activity<sup>1</sup></li>
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">Miami International Airport served nearly 56 million passengers in 2025, an increase of 3.5 million year-over-year, reinforcing Miami’s role as a top U.S. and global gateway<sup>2</sup></li>
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">Miami MSA was ranked the #2 housing market in the U.S. for 2025, driven by population growth, housing demand, and investment activity<sup>3</sup>; and ranked No. 5 globally for millionaire growth in 2025, with the resident millionaire population increasing 94% over the past decade, reflecting continued capital inflows and high-income migration<sup>4</sup></li>
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">Miami also ranked as the #2 most attractive U.S. market for hotel investment in 2025<sup>5</sup></li>
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">Miami’s Downtown submarket, luxury and upper-upscale segment, continued to outperform the broader Miami market in 2025, generating 5.9% trailing-12-month revenue per available room (RevPAR) growth through November 2025, potentially driven by higher occupancy (+4.6%) and average daily rate (ADR) growth (+1.2%)<sup>6</sup></li>
+        <li style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);font-size:15px;line-height:1.6;color:rgba(255,255,255,0.9)">The luxury and upper-upscale segment in the Miami market posted a 12-month ADR of $344.19 and RevPAR of $245.64, which is among the highest in the U.S.<sup>6</sup></li>
+      </ul>
+    </div>
+    <div class="dd-fn" style="display:grid;gap:10px;margin-top:40px;font-size:14px;line-height:1.7;color:rgba(255,255,255,0.72)">
+      <p style="margin:0">1. VISIT FLORIDA, Florida’s Tourism Industry Maintains Year-Over-Year Growth in Q3 2025, December 31, 2025; 2. Miami-Dade County / J.D. Power, MIA Is North America’s Most-Improved Mega Airport, 2025–2026; 3. Miami Realtors, “Miami MSA Ranked No. 2 Top Housing Market in the U.S. for 2025; 4. MIAMI Association of Realtors®, Miami MSA Ranked No. 5 in the World for Most Millionaire Growth, April 24, 2025; Henley &amp; Partners, World’s Wealthiest Cities Report 2025; 5. CBRE, “U.S. Hotel Investor Intentions Survey 2025”; 6.1. Miami - FL USA Hospitality Market Report, CoStar / Driftwood Capital, November 2025</p>
+      <p style="margin:0">This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein are summary in nature and do not include all of the relevant and potentially high degree of risks. Anyone considering an investment must read and review in its entirety the private placement memorandum, subscription agreement and the operating agreement of the investment entity (collectively the “Offering Documents”), which describe the terms and risks of investment in detail. Any terms in this document that conflict with the Offering Documents shall be superseded by the terms of the Offering Documents. Any person considering an investment should be aware of all the risks and should consult their own investment, legal, business, tax and financial advisors, to determine the merits and risks of such investments. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+    </div>
+  </div>
+</section>
+
+<section id="structure" class="rw-oz" data-screen-label="08 OZ benefits" style="background:var(--slate-50)">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(28px,4vw,64px);align-items:center;max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px clamp(40px,4vw,56px)">
+    <div>
+      <h2 style="margin:0;font-size:clamp(28px,3.2vw,46px);font-weight:300;line-height:1.1;letter-spacing:-0.032em;color:var(--ink-900)">Potential Opportunity Zone tax incentives<sup>1</sup></h2>
+      <p style="margin:20px 0 0;font-size:16px;line-height:1.75;color:#48535F">Established under the 2017 Tax Cuts and Jobs Act, Opportunity Zone Funds seek to stimulate investment in designated communities.</p>
+      <div style="display:grid;gap:12px;margin-top:24px">
+        <div style="padding:22px 24px;border-radius:16px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><strong style="display:block;font-size:15px;font-weight:600;color:var(--ink-900)">Capital Gain Exclusion:</strong><p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:#48535F">For qualifying investments held for 10 years, any appreciation on the OZ investment itself may be excluded from federal income tax upon disposition.</p></div>
+        <div style="padding:22px 24px;border-radius:16px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><strong style="display:block;font-size:15px;font-weight:600;color:var(--ink-900)">Tax Deferral and Recognition:</strong><p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:#48535F">The Opportunity Zone framework allows investors to reinvest eligible capital gains into a Qualified Opportunity Fund (QOF), providing a strategic pathway for tax deferral. This structure enables investors to defer the recognition of those gains until a future inclusion event or a date prescribed by federal statute. By utilizing this deferral, investors can maintain a larger portion of their capital as "working capital" within the project. This allows for the potential to earn returns on the full amount of the reinvested proceeds—including capital that would otherwise have been directed toward immediate tax liabilities—thereby maximizing the investment base and its long-term growth potential</p></div>
+      </div>
+      <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:52px;margin-top:28px;padding:0 26px;border-radius:12px;background:var(--ink-800);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:var(--ink-700);color:#fff">Request Investor Details</a>
+    </div>
+    <figure style="position:relative;margin:0;aspect-ratio:4/5;max-height:680px;border-radius:24px;overflow:hidden;box-shadow:0 20px 44px -20px rgba(11,43,72,0.26),0 52px 96px -44px rgba(11,43,72,0.32)">
+      <img src="https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_Dream-Hotel-Prefunction.jpg" alt="Riverside Wharf Dream Hotel Pre-function" style="width:100%;height:100%;object-fit:cover;display:block">
+      <span class="rendering-chip" style="position:absolute;top:16px;left:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span>
+    </figure>
+  </div>
+  <div class="dd-fn" style="display:grid;gap:10px;max-width:1334px;margin:0 auto;padding:0 32px clamp(56px,6vw,88px);font-size:14px;line-height:1.7;color:var(--slate-600)">
+    <p style="margin:0"><sup>1</sup>Information is for illustrative purposes only. For detailed information, please refer to your own business, tax, and legal advisors. Additional information may also be obtained at: IRS <a href="https://www.irs.gov/credits-deductions/businesses/opportunity-zones">https://www.irs.gov/credits-deductions/businesses/opportunity-zones</a>.</p>
+    <p style="margin:0">This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes tax advice or an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein are summary in nature and do not include all of the relevant and potentially high degree of risks. Each prospective investor should consult its own tax, legal, and financial adviser regarding all aspects of the Federal Qualified Opportunity Zone Program and the U.S. federal income as well as other tax consequences to it in light of such investor’s particular circumstances with respect to an investment in the Project and to determine the merits and risks of such an investment. The description of the project listed herein is summary in nature and does not include all of the relevant and potentially high degree of risks. Anyone considering an investment must read and review in its entirety the private placement memorandum, subscription agreement and the operating agreement of the investment entity (collectively the “Offering Documents”), which describe the terms and risks of investment in detail.</p>
+  </div>
+</section>
+
+<section class="rw-metrics2" data-screen-label="09 Target metrics (repeat)" style="background:var(--slate-50);color:var(--ink-900)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(64px,7vw,104px) 32px">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px">
+      <h2 style="margin:0;font-size:clamp(26px,2.8vw,40px);font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Target Metrics*</h2>
+      <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:12px;background:var(--ink-800);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:var(--ink-700);color:#fff">Download Brochure</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:32px;gap:12px">
+      <div style="padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9)"><div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--gold-500)">[TBD]<span style="margin-left:0.25em">Target*</span></div><div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:#48535F">Net Quarterly Distributions<sup>1</sup></div></div>
+      <div style="padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9)"><div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]<span style="margin-left:0.25em">Target*</span></div><div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:#48535F">Net Equity Multiple</div></div>
+      <div style="padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9)"><div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]</div><div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:#48535F">Minimum Investment<sup>2</sup></div></div>
+      <div style="padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#FFFFFF 0%,#F7FAFD 100%);border:1px solid rgba(219,229,240,0.9)"><div style="font-size:clamp(28px,2.6vw,38px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900)">[TBD]</div><div style="margin-top:12px;font-size:15px;font-weight:500;line-height:1.4;color:#48535F">Assumed Hold Period<sup>3</sup></div></div>
+    </div>
+    <div class="dd-fn" style="display:grid;gap:10px;margin-top:28px;font-size:14px;line-height:1.7;color:var(--slate-600)">
+      <p style="margin:0"><sup>1</sup>Targeted preferred return anticipated to be paid current each quarter in arrears. All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be, rather, such projections or target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. The estimates reflect the best judgment of Driftwood Capital (and its subsidiaries); however, they involve a number of risks and uncertainties. No representations or warranties whatsoever are made by Driftwood Capital or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+      <p style="margin:0"><sup>2</sup>The minimum investment amount is subject to the discretion of the Manager. The Manager may, in its absolute discretion, permit or require a lower or higher initial or subsequent investment by any prospective or existing investor. Such discretion may be exercised without prior notice and without offering the same terms to other investors.</p>
+      <p style="margin:0"><sup>3</sup> The anticipated hold period is 5 years + two 1-year extension.</p>
+      <p style="margin:0">* Target internal rate of return (IRR) listed is aspirational and not a prediction or guarantee of performance. It is based on current market conditions, specific assumptions, and Driftwood financial modeling, which are subject to change. The calculations and assumptions used to derive the Target IRR are hypothetical. Specific calculations are available upon request. Actual realized data will differ materially. All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather, such projections or target returns should be viewed as merely an estimate of what results could be if the underlying assumptions and estimates prove to be accurate. There is no assurance that actual returns will meet or exceed the targeted returns, and they may be materially lower. These forward-looking statements are estimates reflecting the best judgment of Driftwood Capital (and its subsidiaries and/or affiliates). The target returns presented herein are hypothetical in nature, are based on a number of assumptions, do not reflect actual investment results, and there is no guarantee of future results. In addition, a specific investor’s actual performance may be materially different from such illustrative data depending on numerous factors. There are certain limitations inherent in hypothetical results like those portrayed herein. In fact, there are frequently sharp differences between hypothetical performance results and the actual results subsequently achieved by any transaction. One of the limitations of hypothetical performance results is that they do not reflect transactions in actual client accounts and do not reflect the impact that material economic and market factors may have had on the decision-making associated with the transactions and funds. Unlike an actual performance record, hypothetical performance results do not represent actual completed transactions. The information contained herein is intended only for qualified investors who are knowledgeable about investments and the associated risks. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. Potential investors should conduct their own due diligence and consult their own legal, tax, and financial advisors before investing. This document does not constitute an offering of securities.</p>
+      <a href="#legal" style="font-weight:600;color:var(--gold-500);min-height:44px;display:inline-flex;align-items:center">Click here to see important disclaimers and disclosures</a>
+    </div>
+  </div>
+</section>
+
+<section id="assets" class="rw-program" data-screen-label="10 Proposed program" style="background:var(--paper)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px">
+      <div>
+        <h2 style="margin:0;font-size:clamp(28px,3.2vw,46px);font-weight:300;letter-spacing:-0.032em;color:var(--ink-900)">Proposed program</h2>
+      </div>
+      <div role="tablist" aria-label="Program" style="display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:14px;background:var(--slate-100)">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.onClick }}" style="height:44px;padding:0 18px;border:0;border-radius:10px;background:{{ t.bg }};color:{{ t.ink }};box-shadow:{{ t.shadow }};font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 200ms">{{ t.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div role="tabpanel" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:stretch">
+      <div style="display:grid;gap:10px">
+        <figure style="margin:0;position:relative;aspect-ratio:3/2;border-radius:22px;overflow:hidden;background:var(--slate-100)">
+          <div role="img" aria-label="{{ heroAlt }}" style="position:absolute;inset:0;background-image:{{ heroBg }};background-size:cover;background-position:center"></div>
+          <span class="rendering-chip" style="position:absolute;top:16px;left:16px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(6,26,46,0.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.16);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;pointer-events:none">Rendering</span>
+        </figure>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px">
+          <sc-for list="{{ thumbs }}" as="g" hint-placeholder-count="5">
+            <button type="button" onClick="{{ g.onClick }}" aria-label="Show image {{ g.n }}" style="padding:0;aspect-ratio:1;border-radius:10px;overflow:hidden;border:2px solid {{ g.border }};background:var(--slate-100);cursor:pointer">
+              <span aria-hidden="true" style="display:block;width:100%;height:100%;background-image:{{ g.bg }};background-size:cover;background-position:center"></span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="padding:clamp(28px,3vw,44px);border-radius:22px;background:linear-gradient(160deg,#FFFFFF 0%,#FDFEFE 54%,#F5F9FD 100%);border:1px solid rgba(219,229,240,0.7);box-shadow:0 10px 28px -16px rgba(11,43,72,0.09),0 34px 60px -34px rgba(11,43,72,0.13)">
+        <sc-if value="{{ tabHotel }}" hint-placeholder-val="{{ true }}">
+          <h3 style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Dream Hotel</h3>
+          <ul style="margin:18px 0 0;padding-left:18px;display:grid;gap:8px;font-size:15px;line-height:1.6;color:#48535F"><li>Dream by Hyatt (upper-upscale lifestyle brand)<br>167-Keys</li></ul>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">Amenities:</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px;line-height:1.6;color:#48535F"><li>Rooftop Pool and Bar</li><li>Fitness Facility</li><li>Lobby Lounge &amp; Bar</li></ul>
+        </sc-if>
+        <sc-if value="{{ tabRest }}" hint-placeholder-val="{{ false }}">
+          <h3 style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Unique high-end restaurant experiences</h3>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">High-end: Asian Concept</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>~10,300 SF of front of house</li><li>~196-person seating capacity</li><li>Two-story restaurant with a “Samurai Garden”</li><li>Balcony terrace and private dining room</li></ul>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">High-end: Coastal Italian Concept</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>~8,200 SF of front of house</li><li>~180-person seating capacity</li><li>Dessert room and private dining flex space</li><li>Outdoor terrace overlooking Miami River</li></ul>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">Three-meal: French Bistro Concept</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>~2,025 SF of “front of house” space</li><li>~80-person seating capacity</li><li>Marra Forina brick pizza oven</li></ul>
+        </sc-if>
+        <sc-if value="{{ tabEnt }}" hint-placeholder-val="{{ false }}">
+          <h3 style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Signature Entertainment Venues</h3>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">Nightclub</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>~23,000 SF multilevel venue</li><li>Top-tier service and cutting-edge sound &amp; entertainment systems</li><li>Performances by a curated list of renowned DJs</li></ul>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">Day Club</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>~14,000 SF with 8 plunge pools</li><li>13 luxurious private cabanas with private bathrooms</li><li>State-of-the-art sound &amp; lighting system</li><li>Live DJ booth for dynamic entertainment</li></ul>
+          <p style="margin:20px 0 8px;font-size:14px;font-weight:700;color:var(--ink-900)">Wharf Food &amp; Beverage Venue</p>
+          <ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;line-height:1.6;color:#48535F"><li>Nautical-themed F&amp;B venue</li><li>~33,000 SF along the riverfront</li><li>Two outdoor bars</li><li>Elevated VIP section with a live DJ booth</li></ul>
+        </sc-if>
+        <sc-if value="{{ tabConf }}" hint-placeholder-val="{{ false }}">
+          <h3 style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">State-of-the-art meeting &amp; event space</h3>
+          <ul style="margin:18px 0 0;padding-left:18px;display:grid;gap:8px;font-size:15px;line-height:1.6;color:#48535F"><li>~18,000 SF including 3K of balcony</li><li>Full-service kitchen</li><li>Outdoor pre-function terrace overlooking</li><li>Miami River</li></ul>
+        </sc-if>
+      </div>
+    </div>
+    <p class="dd-fn" style="margin:28px 0 0;font-size:14px;line-height:1.7;color:var(--slate-600)">Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein is summary in nature and does not include all of the relevant and potential high degree of risks. Anyone considering an investment must read and review in its entirety the private placement memorandum, subscription agreement and the operating agreement of the investment entity (collectively the “Offering Documents”), which describe the terms and risks of investment in detail. Any terms in this document that conflict with the Offering Documents shall be superseded by the terms of the Offering Documents. Any person considering an investment should be aware of all the risks and should consult their own investment, legal, business, tax and financial advisors to determine the merits and risks of such an investments. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+  </div>
+</section>
+
+<section id="rationale" class="rw-rationale" data-screen-label="11 Investment rationale" style="background:var(--slate-50);border-top:1px solid var(--slate-200)">
+  <div style="max-width:1334px;margin:0 auto;padding:clamp(72px,8vw,120px) 32px">
+    <h2 style="margin:0 0 36px;font-size:clamp(28px,3.2vw,46px);font-weight:300;letter-spacing:-0.032em;color:var(--ink-900)">Investment rationale</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:16px">
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Efficient land structure</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">The Project’s mix of fee simple ownership and a long-term City of Miami land lease results in a blended land basis of approximately $9M per acre—roughly 60% below the area’s average land sale price of $28M per acre (STR, Nov. 2023).</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Favorable long-term ground lease</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">The Project was awarded an 80-year ground lease from the City of Miami, with two optional 10-year extensions— which Driftwood believes provides long-term stability, control, and favorable lease terms.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Parking cost efficiency</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">By utilizing off-site parking, the Project is expected to save approximately $9.5M in construction costs while still capturing valet revenue on-site.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Entertainment experience and proof of concept</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">The Wharf concept has demonstrated success on the current site. Since its 2017 inception, consistently earning over $20M annually, without permanent structures. The Sponsor anticipates the fully developed new Wharf will yield comparable or higher revenue. More details on The Wharf are available <a href="https://linklock.titanhq.com/analyse?url=https%3A%2F%2Fbreakwaterhg.com%2Fportfolio%2Fthe-wharf-miami%2F&amp;data=eJx0yt1KwzAUAOCnSS-ElOU0NS0YcakGvBDENzjmZw1rdkKWUfDpZZdeeP19Tks4THKSwNUjSC5HNXBU3vF5AD87J-PosfP6ocv66f14-PwS4sMoGOdXmMwMYlHTAsYaC4uQ5s1IePnT-gvmUr0Qfanke7q1jejcO8rP3VVfYqgJmTz4mmLbibzDkhpu99BVjSfK4ec_v-m1tXJlw5GBZWC_a8Dzji3U9XQPDGyh2iJtiRjYtga-r1gjzwlzYmB_AwAA___kdlBh"><strong>here</strong></a>.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Fully entitled project in a high barrier to entry market</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">Positioned along the Miami River with approved density and zoning, the site is viewed by the Sponsors as difficult to replicate. A $125M loan term sheet has been secured from a national bank, with lender due diligence currently in progress.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Entertainment-driven income with structured cash flow potential</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">Key elements such as the nightclub, day club, and The Wharf are expected to be structured with lease and profit-sharing arrangements, which the Sponsors believe may offer a combination of stable, lease-backed income and operational upside. In Year 1, approximately 49% of targeted* NOI is anticipated to come from these entertainment venues, supporting hotel ramp-up. Additional potential ancillary income streams include social memberships, valet parking, and revenue from a riverfront marina with boat valet and short-term dockage.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Unique zoning advantage with extended operating hours</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">Positioned along the Miami River with approved density and zoning, the site is viewed by the Sponsors as difficult to replicate. A $145M loan term sheet has been secured from a national bank, with lender due diligence currently in progress. The Project’s Special Use Zoning allows liquor service until 5 AM and early openings for the hotel’s bistro, supporting 24/7 operations across its entertainment and F&amp;B venues. The Sponsors anticipate this extended operating window, combined with limited nearby competition and the ongoing Miami Beach moratorium, provides a distinct competitive edge and may enhance revenue potential.</p></article>
+      <article style="padding:28px;border-radius:20px;background:#fff;border:1px solid rgba(219,229,240,0.9)"><h4 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-0.015em;color:var(--ink-900)">Irreplaceable riverfront location</h4><p style="margin:12px 0 0;font-size:14.5px;line-height:1.7;color:#48535F">Strategically located on the Miami River in Downtown Miami and linked to the <a href="https://www.aplaceunderthepalms.com/miami-river-and-bay-walks/">Riverwalk</a>, the Sponsors believe the Project boasts an ideal setting. Upon completion, it is expected to be the sole hotel in its competitive set situated directly on the Miami River. The Sponsors expect this unique positioning will provide a competitive edge by potentially increasing the hotel’s demand, offering enhanced accessibility, scenic views, and superior amenities.</p></article>
+    </div>
+    <p class="dd-fn" style="margin:28px 0 0;font-size:14px;line-height:1.7;color:var(--slate-600)">Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein is summary in nature and does not include all of the relevant and potential high degree of risks. Anyone considering an investment must read and review in its entirety the private placement memorandum, subscription agreement and the operating agreement of the investment entity (collectively the “Offering Documents”), which describe the terms and risks of investment in detail. Any terms in this document that conflict with the Offering Documents shall be superseded by the terms of the Offering Documents. Any person considering an investment should be aware of all the risks and should consult their own investment, legal, business, tax and financial advisors to determine the merits and risks of such an investments. No representations or warranties whatsoever are made by Driftwood Capital, LLC or any other person or entity as to the future profitability of investment outcomes or the results of making an investment.</p>
+  </div>
+</section>
+
+<section id="legal" class="dd-legal" data-screen-label="12 Legal" style="background:var(--paper);border-top:1px solid var(--slate-200)">
+  <div style="display:grid;grid-template-columns:1fr;gap:28px;max-width:1334px;margin:0 auto;padding:clamp(56px,6vw,88px) 32px">
+    <div style="display:grid;gap:28px;align-content:start">
+      <div><h4 style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-800)">Legal disclosure</h4>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">This website is not an offer to sell or the solicitation of an offer to purchase securities. All information available in this website is general in nature, not directed to any particular person, and is for informational purposes only. This website excludes material information, including, but not limited to, risk factors to be considered by prospective investors. The information contained herein reflects the opinions and projections of Driftwood Capital, LLC as of the date of this website, which are subject to change without notice at any time. There is no obligation to update, modify, or amend the information herein or otherwise notify a recipient of these materials in the event that any information contained herein, or any opinion, projection, forecast, or estimate, changes or subsequently becomes inaccurate. The information provided herein is believed to be reliable and has been obtained from sources Driftwood Capital believes are reliable, but no representation or warranty is made, express or implied, with respect to the fairness, correctness, accuracy, reasonableness, or completeness of the information and opinions. Neither Driftwood Capital nor any of its affiliates, representatives, or executives represents that the information contained in this website is accurate, current, or complete. Driftwood Capital does not represent that any opinion or projection will be realized. For the avoidance of doubt, no investment advice is being provided through this website by Driftwood Capital or any of its affiliates (including Driftwood Advisors, LLC), representatives, or executives. Each recipient of this website should make such investigation as it deems necessary to arrive at an independent evaluation of the contents hereof and should consult its own legal, financial, and accounting advisors to determine the merits and risks of such an investment.</p></div>
+      <div><h4 style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-800)">* Target Returns</h4>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">The target returns shown in this document are hypothetical in nature, do not reflect actual results, and are not a guarantee of future results. Target returns are based on assumptions that may not prove to be accurate. There are several limitations inherent in target returns like those portrayed in this document. Additionally, a specific investor’s actual performance may differ materially from such illustrative data depending on numerous factors. No representations or warranties whatsoever are made by Driftwood Capital, its affiliates, subsidiaries, or any other person or entity regarding the future profitability of an investment vehicle or the results of making an investment. Projected or past performance is not a guarantee of future results. Due to various risks and uncertainties, actual events or results may differ materially from those reflected or contemplated in such forward-looking statements and may be worse due to various factors, including, without limitation, changes in laws, fluctuations in real estate markets, the tourism and hospitality industries, increases in costs, and adverse conditions in the credit and capital markets. Moreover, actual events are difficult to project and often depend on factors beyond the control of Driftwood Capital, its subsidiaries, and affiliates.</p></div>
+    </div>
+    <div style="display:grid;gap:28px;align-content:start">
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">These types of investments are appropriate only for investors with the financial ability to withstand a total loss and who do not require immediate access to their capital. There are no guarantees of performance, and returns may not meet expectations or keep pace with inflation, potentially resulting in reduced purchasing power over time. Additionally, political or regulatory developments in the region which may adversely impact operations and returns. Investments in real estate involve numerous risks, many of which are beyond Driftwood’s control. These include, but are not limited to, changes in local and national economic conditions, interest rates, availability of debt financing and refinancing, real estate taxes, utility rates, operating expenses and cyclical nature of real estate values. Additional risks stem from evolving environmental, zoning, and other regulatory requirements, as well as fiscal policy changes and the development of competing properties. Real estate investments may also be affected by physical deterioration, casualty events, or natural disasters—such as hurricanes, floods, or earthquakes—some of which may not be fully insurable or may result in significant costs or disruptions. The Fund’s focus on hospitality-related real estate also introduces risks specific to the tourism and lodging sectors, which are subject to cyclical demand and broader economic volatility. Fluctuations in consumer confidence, unemployment levels, construction material costs, labor availability, and insurance coverage can impact performance. Moreover, adverse conditions in real estate and credit markets may limit the Fund’s ability to acquire, finance, or divest properties efficiently. In periods of strong real estate pricing, acquisition costs may rise potentially constraining diversification and reducing the ability to achieve desired returns. Please refer to the offering documents for a complete listing of risks, legal disclosures and pertinent information.</p>
+      <div><h4 style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-800)">Renderings</h4>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:var(--slate-600)">This document contains artist’s renderings, which are conceptual and shown for representational and illustrative purposes only. Actual finished spaces, decorations, and/or specifications may vary in dimension and/or detail and are subject to change.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dd-cta" data-screen-label="13 Get started" style="background:var(--paper);padding:0 32px clamp(56px,6vw,96px)">
+  <div style="max-width:1334px;margin:0 auto;border-radius:24px;background:#0B2B48 url('assets/cover-bg.png') center/cover no-repeat;padding:clamp(48px,6vw,88px) clamp(28px,5vw,72px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px">
+    <div style="max-width:620px">
+      <h2 style="margin:0;font-size:clamp(30px,3.6vw,52px);font-weight:300;line-height:1.06;letter-spacing:-0.034em;color:#fff">Ready to get started?</h2>
+      <p style="margin:16px 0 0;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:rgba(255,255,255,0.86)">Join our network of accredited investors and unlock access to direct investments in institutional-grade real estate deals.</p>
+    </div>
+    <a href="#request" onClick="{{ openRequest }}" style="display:inline-flex;align-items:center;height:56px;padding:0 32px;border-radius:12px;background:#fff;color:var(--ink-900);font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase" style-hover="color:var(--ink-900)">Start Investing</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="dd-footer" style="background:var(--ink-900);color:rgba(255,255,255,0.72)">
+  <div style="max-width:1334px;margin:0 auto;padding:48px 32px 40px;display:grid;gap:28px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
+      <img src="https://driftwooddealdirect.com/wp-content/uploads/dealdirect-logo.svg" alt="Driftwood Capital | DealDirect" style="height:36px;width:auto;filter:brightness(0) invert(1)">
+      <a href="https://app.junipersquare.com/login?path=%2Fi%2Fdriftwoodcapital" style="display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--teal-soft)" style-hover="color:#fff">Existing investor? Log into your dashboard.</a>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,0.12)"></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:12.5px;line-height:1.6">
+      <span>Copyright © 2026 • Driftwood Capital • 255 Alhambra Circle, Suite 760, Coral Gables, FL 33134 • 305.500.9900</span>
+      <nav aria-label="Legal" style="display:flex;gap:24px">
+        <a href="https://driftwoodcapital.com/privacy-policy/" style="display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,0.78)" style-hover="color:#fff">Privacy Policy</a>
+        <a href="https://driftwoodcapital.com/terms-of-use/" style="display:inline-flex;align-items:center;min-height:44px;color:rgba(255,255,255,0.78)" style-hover="color:#fff">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ rqOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="rq-h" data-offering="Riverside Wharf QOZ" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,26,46,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)" onClick="{{ rqBackdrop }}">
+    <div style="position:relative;width:100%;max-width:520px;max-height:calc(100vh - 40px);overflow-y:auto;border-radius:24px;background:#fff;border:1px solid rgba(219,229,240,0.9);box-shadow:0 30px 80px -30px rgba(6,26,46,0.6);padding:36px 32px 32px">
+      <button type="button" aria-label="Close" onClick="{{ rqClose }}" style="position:absolute;top:14px;right:14px;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--slate-500);font-size:22px;line-height:1;cursor:pointer" style-hover="background:var(--slate-100)">&#215;</button>
+      <p style="margin:0 0 18px;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-500)">Riverside Wharf QOZ</p>
+
+      <sc-if value="{{ rqConfirm }}" hint-placeholder-val="{{ false }}">
+        <form data-hs-form="offering-request" onSubmit="{{ rqSubmitConfirm }}" style="display:grid;gap:16px">
+          <h2 id="rq-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Confirm your email</h2>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--slate-600)">You're already registered. Confirm your email and we'll send the details for this offering.</p>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Email<input type="email" name="email" required="{{ true }}" autocomplete="email" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+          <button type="submit" style="height:52px;border:0;border-radius:12px;background:var(--ink-800);color:#fff;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">Request Details</button>
+          <button type="button" onClick="{{ rqNotYou }}" style="justify-self:start;min-height:44px;padding:0;border:0;background:none;font-family:inherit;font-size:13px;color:var(--gold-500);text-decoration:underline;cursor:pointer">Not registered yet? Register here</button>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ rqReg }}" hint-placeholder-val="{{ true }}">
+        <form data-hs-form="registration" onSubmit="{{ rqNext }}">
+          <ol aria-label="Registration (Steps)" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 26px;padding:0;list-style:none">
+            <sc-for list="{{ rqSteps }}" as="s" hint-placeholder-count="2">
+              <li style="display:grid;gap:8px"><span style="display:block;height:3px;border-radius:2px;background:{{ s.bar }}"></span><span style="font-size:11px;font-weight:600;letter-spacing:0.04em;color:{{ s.ink }}">{{ s.label }}</span></li>
+            </sc-for>
+          </ol>
+          <sc-if value="{{ rq0 }}" hint-placeholder-val="{{ true }}">
+            <h2 id="rq-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Accreditation Status</h2>
+            <p style="margin:10px 0 22px;font-size:14px;line-height:1.6;color:var(--slate-600)">Driftwood DealDirect opportunities are available to accredited investors. Please select the option that best describes your accreditation status.</p>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Are you an accredited investor?
+              <select name="accredited_investor" required="{{ true }}" value="{{ rqAccred }}" onChange="{{ rqSetAccred }}" style="height:48px;padding:0 12px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px;background:#fff;color:var(--ink-900)">
+                <option value="">-- Select an option</option>
+                <option value="income">Annual income exceeds $200K (for the last 2 years)</option>
+                <option value="joint">Joint household income greater than $300k (for the last 2 years)</option>
+                <option value="networth">Net worth exceeding $1M (excluding primary home)</option>
+                <option value="none">None of the above</option>
+              </select>
+            </label>
+          </sc-if>
+          <sc-if value="{{ rq1 }}" hint-placeholder-val="{{ false }}">
+            <h2 id="rq-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Personal Information</h2>
+            <p style="margin:10px 0 22px;font-size:14px;line-height:1.6;color:var(--slate-600)">Now that we know you are an accredited investor, we need to get some basic information about you.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+              <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">First name<input type="text" name="firstname" required="{{ true }}" autocomplete="given-name" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+              <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Last name<input type="text" name="lastname" required="{{ true }}" autocomplete="family-name" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+              <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Email<input type="email" name="email" required="{{ true }}" autocomplete="email" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+              <label style="display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink-800)">Phone number<input type="tel" name="phone" required="{{ true }}" autocomplete="tel" style="height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--slate-300);font-family:inherit;font-size:15px"></label>
+            </div>
+            <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:12px;line-height:1.6;color:var(--slate-600)"><input type="checkbox" name="consent" required="{{ true }}" style="margin-top:3px;width:18px;height:18px;flex-shrink:0"><span>I consent to Driftwood Capital storing and processing my personal information and communicating with me via email, call, or text (SMS). I have read and agree to the <a href="https://driftwoodcapital.com/terms-of-use/">Terms of Use</a> and <a href="https://driftwoodcapital.com/privacy-policy/">Privacy Policy</a></span></label>
+          </sc-if>
+          <sc-if value="{{ rqSorry }}" hint-placeholder-val="{{ false }}">
+            <h2 id="rq-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Our Apologies</h2>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.65;color:var(--slate-600)">Currently, our investment opportunities are exclusively available to accredited investors, in compliance with U.S. Securities and Exchange Commission (SEC) regulations. Before proceeding with your registration, please ensure you meet the criteria set by the SEC for accredited investors. If you're uncertain about these requirements, we recommend consulting with your financial advisor. We appreciate your understanding and look forward to potentially collaborating in the future.</p>
+          </sc-if>
+          <div style="display:flex;justify-content:space-between;gap:10px;margin-top:28px">
+            <button type="button" onClick="{{ rqPrev }}" disabled="{{ rqPrevDisabled }}" style="height:48px;padding:0 20px;border-radius:12px;border:1px solid var(--slate-300);background:#fff;color:var(--ink-800);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;opacity:{{ rqPrevOpacity }}">Previous</button>
+            <sc-if value="{{ rqShowNext }}" hint-placeholder-val="{{ true }}">
+              <button type="submit" style="height:48px;padding:0 24px;border-radius:12px;border:0;background:var(--ink-800);color:#fff;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">{{ rqNextLabel }}</button>
+            </sc-if>
+          </div>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ rqDone }}" hint-placeholder-val="{{ false }}">
+        <h2 id="rq-h" style="margin:0;font-size:26px;font-weight:300;letter-spacing:-0.03em;color:var(--ink-900)">Request received</h2>
+        <p style="margin:10px 0 24px;font-size:14px;line-height:1.65;color:var(--slate-600)">Thank you. Our investor relations team will send you the details for Riverside Wharf QOZ.</p>
+        <button type="button" onClick="{{ rqClose }}" style="height:48px;padding:0 24px;border-radius:12px;border:0;background:var(--ink-800);color:#fff;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink-700)">Close</button>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;visitor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;new&quot;,&quot;returning&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'new'|'returning'&quot;,&quot;section&quot;:&quot;Request form&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled: false, tab: 0, img: 0 };
+  componentDidMount() {
+    this._onScroll = () => { const s = window.scrollY > 40; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    this._onKey = e => { if (e.key === 'Escape' && this.state.rq) this.setState({ rq: null }); };
+    window.addEventListener('keydown', this._onKey);
+    if (location.hash === '#request') this.rqOpenFn();
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); }
+  heroVideoRef = v => {
+    if (!v || v === this._hv) return;
+    this._hv = v;
+    v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+    v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.autoplay = false; v.pause(); return; }
+    const go = () => v.play().catch(() => {});
+    go(); v.addEventListener('canplay', go, { once: true });
+  };
+
+  rqOpenFn = e => {
+    if (e) e.preventDefault();
+    const v = this.props.visitor ?? 'auto';
+    let known = v === 'returning';
+    if (v === 'auto') { try { known = !!localStorage.getItem('dd_lead'); } catch (_) {} }
+    this.setState({ rq: known ? 'confirm' : 'reg', rqStep: 0, rqAccred: '' });
+  };
+  rqVals() {
+    const { rq, rqStep = 0, rqAccred = '' } = this.state;
+    const idx = rqStep === 3 ? 0 : rqStep;
+    const close = () => this.setState({ rq: null });
+    return {
+      openRequest: this.rqOpenFn,
+      rqOpen: !!rq, rqConfirm: rq === 'confirm', rqReg: rq === 'reg', rqDone: rq === 'done',
+      rqClose: close, rqBackdrop: e => { if (e.target === e.currentTarget) close(); },
+      rqNotYou: () => { try { localStorage.removeItem('dd_lead'); } catch (_) {} this.setState({ rq: 'reg', rqStep: 0, rqAccred: '' }); },
+      rqSubmitConfirm: e => { e.preventDefault(); this.setState({ rq: 'done' }); },
+      rqSteps: ['About Your Accreditation', 'About You'].map((label, i) => ({ label, bar: i <= idx ? 'var(--gold-500)' : 'var(--slate-200)', ink: i <= idx ? 'var(--ink-800)' : 'var(--slate-500)' })),
+      rq0: rqStep === 0, rq1: rqStep === 1, rqSorry: rqStep === 3,
+      rqAccred, rqSetAccred: e => this.setState({ rqAccred: e.target.value }),
+      rqShowNext: rqStep < 3, rqNextLabel: rqStep === 1 ? 'Submit' : 'Next',
+      rqPrevDisabled: rqStep === 0, rqPrevOpacity: rqStep === 0 ? 0.4 : 1,
+      rqPrev: () => this.setState(s => ({ rqStep: s.rqStep === 3 ? 0 : Math.max(0, s.rqStep - 1) })),
+      rqNext: e => {
+        e.preventDefault();
+        const s = this.state;
+        if (s.rqStep === 0) return this.setState({ rqStep: s.rqAccred === 'none' ? 3 : 1 });
+        if (s.rqStep === 1) { try { localStorage.setItem('dd_lead', '1'); } catch (_) {} this.setState({ rq: 'done' }); }
+      }
+    };
+  }
+  renderVals() {
+    const { scrolled, tab, img } = this.state;
+    const W = 'https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf';
+    const galleries = [
+      ['_View-from-River.jpg', '_Pooldeck.jpg', '_Exterior-view-from-street.jpg', '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-22.jpg', '_View-from-exterior.jpg', '_Complex.jpg'],
+      ['-AFT-show-kitchen.jpg', '-AFT-Bar.jpg', '-Coastal-Bar.jpg', '_Dream-Hotel-Wine-Bar.jpg', '-Coastal-dining.jpg'],
+      ['-Night-club-Lobby.jpg', '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-15.jpg', '-Night-club-Main-Floor.jpg', '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-10.jpg', '-Night-club-Sunset-Lounge.jpg', '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-40.jpg', '-RIVERSIDE-WHARF_DAYCLUB_View02b-2023-01-20.jpg', '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-33.jpg'],
+      ['_Ballroom.jpg', '_Dream-Hotel-Prefunction.jpg']
+    ].map(g => g.map(f => W + f));
+    const labels = ['Hotel', 'Restaurants', 'Entertainment', 'Conference'];
+    const g = galleries[tab];
+    return {
+      ...this.rqVals(),
+      heroVideoRef: this.heroVideoRef,
+      headerBg: scrolled ? 'rgba(255,255,255,0.9)' : 'transparent',
+      headerBlur: scrolled ? 'blur(16px) saturate(1.5)' : 'none',
+      headerRule: scrolled ? 'rgba(219,229,240,0.9)' : 'transparent',
+      headerH: scrolled ? '68px' : '88px',
+      logoFilter: scrolled ? 'none' : 'brightness(0) invert(1)',
+      navInk: scrolled ? 'var(--ink-800)' : '#fff',
+      ghostBorder: scrolled ? 'var(--slate-300)' : 'rgba(255,255,255,0.42)',
+      primaryBg: scrolled ? 'var(--ink-800)' : '#fff',
+      primaryInk: scrolled ? '#fff' : 'var(--ink-900)',
+      subnav: [['Metrics', 'metrics'], ['Overview', 'overview'], ['Video', 'webinar'], ['Partners', 'partners'], ['Offering', 'offering'], ['OZ Benefits', 'structure'], ['Program', 'assets'], ['Market', 'market'], ['Rationale', 'rationale'], ['Legal', 'legal']].map(([label, id]) => ({ label, href: '#' + id })),
+      tabs: labels.map((label, i) => ({ label, selected: i === tab ? 'true' : 'false', bg: i === tab ? '#fff' : 'transparent', ink: i === tab ? 'var(--ink-900)' : 'var(--slate-600)', shadow: i === tab ? '0 4px 12px -6px rgba(11,43,72,0.3)' : 'none', onClick: () => this.setState({ tab: i, img: 0 }) })),
+      videoPoster: !this.state.playing, videoPlaying: !!this.state.playing,
+      playVideo: () => this.setState({ playing: true }),
+      tabHotel: tab === 0, tabRest: tab === 1, tabEnt: tab === 2, tabConf: tab === 3,
+      heroBg: `url('${g[Math.min(img, g.length - 1)]}')`, heroAlt: 'Riverside Wharf ' + labels[tab],
+      thumbs: g.map((src, i) => ({ bg: `url('${src}')`, n: i + 1, border: i === img ? 'var(--gold-500)' : 'transparent', onClick: () => this.setState({ img: i }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
