@@ -34,9 +34,10 @@ def texts(path: str, start='<main', end='</main>') -> list:
 
 
 class Copy:
-    """q('Access the path') -> the one design string starting with that prefix (error if 0 or >1 match)."""
-    def __init__(self, path):
-        self.all = texts(path)
+    """q('Access the path') -> the one design string starting with that prefix (error if 0 or >1 match).
+    start/end bound the region read (default <main>…</main>; the footer is '<footer', '</footer>')."""
+    def __init__(self, path, start='<main', end='</main>'):
+        self.all = texts(path, start, end)
 
     def __call__(self, prefix: str) -> str:
         if prefix in self.all:  # an exact string wins over longer strings sharing the prefix

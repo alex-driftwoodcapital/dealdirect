@@ -10,7 +10,7 @@ import json, os, re, shlex, subprocess, sys, time
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path[:0] = [os.path.join(ROOT, 'site', 'lib')]
-import etch
+import etch, svg
 
 PAGE = sys.argv[1] if len(sys.argv) > 1 else sys.exit(__doc__)
 WRITE = os.environ.get('RUN_YES') == '1'
@@ -67,7 +67,8 @@ try:
             if WRITE:
                 upload(open(os.path.join(ROOT, src), 'rb').read(), path)
             sources[slug] = path
-    got = helper('media', sources, mode)
+    got = helper('media', sources, mode) if sources else {}
+    got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
         print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else ''))
     errors = [s for s, r in got.items() if str(r['status']).startswith('ERROR')]
@@ -79,7 +80,8 @@ try:
         stamp = time.strftime('%Y%m%d-%H%M%S')
         remote(f'mkdir -p ~/backups && wp option get etch_styles --format=json > ~/backups/etch_styles-pre-{PAGE}-{stamp}.json')
         print(f'  backup: ~/backups/etch_styles-pre-{PAGE}-{stamp}.json')
-    st = helper('styles', records, mode)
+    st = helper('styles', records, mode) if records else {'records': {}, 'written': False}
+    st['records'] = st['records'] or {}
     counts = {}
     for sel, r in st['records'].items():
         counts[r['status']] = counts.get(r['status'], 0) + 1
@@ -87,21 +89,36 @@ try:
             print(f'  {sel:40} {r["status"]}')
     print(f'  {counts}; written: {st["written"]}')
 
-    step('page')
-    pg = helper('page', {'slug': meta['slug']}, 'dry')
+    KIND = meta.get('kind', 'page')
+    PTYPE = {'page': 'page', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
+    want = meta.get('status', 'draft' if KIND == 'page' else 'publish')
+    step(KIND)
+    pg = helper('page', {'slug': meta['slug'], 'post_type': PTYPE}, 'dry')
+    template = open(f'{B}/content.tpl.html').read()
+    ref_slugs = sorted(set(re.findall(r'\{\{ref:([^}]*)\}\}', template)))
+    refs = helper('refs', {'slugs': ref_slugs}, 'dry') if ref_slugs else {}
     if not WRITE:
-        want = meta.get('status', 'draft')
+        if KIND == 'template':
+            inv = helper('inventory', {}, 'dry')
+            print(f'  staging now (theme {inv["active_theme"]}): ' + ('; '.join(inv['posts']) or 'no templates, parts or components yet'))
+        what = f'{PTYPE} "{meta["title"]}" ({meta["slug"]})'
         if pg['id']:
-            print(f'  would update page #{pg["id"]} ({pg["status"]}) /{meta["slug"]}/' + (f', then set status {want}' if pg['status'] != want else ''))
+            print(f'  would update {what} #{pg["id"]} ({pg["status"]})' + (f', then set status {want}' if pg['status'] != want else ''))
         else:
-            print(f'  would create page "{meta["title"]}" /{meta["slug"]}/ as {want}')
-        missing_media = [s for s, r in got.items() if not r['id']]
-        print(f'  placeholders resolve after media import ({len(missing_media)} pending) and style upsert')
+            print(f'  would create {what} as {want}')
+        for slug, rid in refs.items():
+            print(f'  component {slug}: ' + (f'#{rid}' if rid else 'not on staging yet: created by the component step of this deploy'))
+        if svg.MARKER.search(template):  # fetch + sanitize now, so a bad SVG fails the PR check, not the deploy
+            n = svg.expand(template).count('"tag":"path"')
+            print(f'  inline SVG fetched and converted ({n} paths)')
         print('dry run OK (set RUN_YES=1 to write)')
         sys.exit(0)
 
+    missing_refs = [s for s, rid in refs.items() if not rid]
+    if missing_refs:
+        sys.exit(f'STOP: components not on staging yet: {missing_refs} (deploy them first; ops/deploy-all.sh orders them)')
     sel2id = {sel: r['id'] for sel, r in st['records'].items()}
-    content = etch.resolve(open(f'{B}/content.tpl.html').read(), sel2id, {s: r['id'] for s, r in got.items()})
+    content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs)
     final = f'{B}/content.html'
     open(final, 'w').write(content)
     run_env = {**os.environ, 'RUN_YES': '1', 'ETCH_PROFILE': PROFILE}
@@ -110,10 +127,14 @@ try:
         snap = subprocess.run([f'{EDITOR}/snapshot.sh', str(pid)], capture_output=True, text=True, env=run_env, check=True).stdout.strip().splitlines()[-1]
         return [l.split('\t')[3].strip() for l in open(f'{snap}/manifest.tsv') if l.startswith(f'post\t{pid}\t')][0]
 
+    if not pg['id'] and KIND != 'page':
+        # components and templates are created empty, then filled through the same guarded update path
+        pg = {'id': helper('create', {'post_type': PTYPE, 'slug': meta['slug'], 'title': meta['title']}, 'write')['id'], 'deployed_sha': ''}
+        print(f'  created {PTYPE} #{pg["id"]} {meta["slug"]}')
     if pg['id']:
         sha = live_sha(pg['id'])
         if pg['deployed_sha'] and sha != pg['deployed_sha']:
-            sys.exit(f'STOP: page #{pg["id"]} changed since the last deploy (live {sha}, deployed {pg["deployed_sha"]}). '
+            sys.exit(f'STOP: {PTYPE} #{pg["id"]} changed since the last deploy (live {sha}, deployed {pg["deployed_sha"]}). '
                      'Someone saved it in the builder or edited it: re-read and merge before overwriting.')
         args = [f'{EDITOR}/edit-run.sh', str(pg['id']), final, '--expect-sha', sha]
     else:
@@ -124,7 +145,7 @@ try:
         sys.exit(f'STOP: edit-run.sh exited {r.returncode}')
     pid = int(re.findall(r'post id: (\d+)', r.stdout)[-1])
     helper('mark', {'id': pid, 'sha': live_sha(pid)}, 'write')
-    st_ = helper('status', {'id': pid, 'status': meta.get('status', 'draft')}, 'write')
-    print(f'done: page #{pid} /{meta["slug"]}/ status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else ''))
+    st_ = helper('status', {'id': pid, 'status': want}, 'write')
+    print(f'done: {PTYPE} #{pid} {meta["slug"]} status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else ''))
 finally:
     remote(f'rm -rf {TMP}', check=False)

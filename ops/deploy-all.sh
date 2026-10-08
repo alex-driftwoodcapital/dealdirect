@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Everything the site needs on STAGING, in order: plugin -> ACSS settings -> every page in site/pages/.
+# Everything the site needs on STAGING, in order: plugin -> ACSS settings -> components -> templates -> pages (site/pages/).
 #   bash ops/deploy-all.sh             dry run (what each step would change)
 #   RUN_YES=1 bash ops/deploy-all.sh   deploy
 # Used by .github/workflows/staging.yml (dry run on PRs, deploy on merge to main); also runs fine on the Mac.
@@ -18,8 +18,8 @@ if [ "${RUN_YES:-}" = 1 ] && [ -n "${DD_HUBSPOT_TOKEN:-}" ]; then
 fi
 echo; echo "### plugin"; bash ops/deploy-core.sh
 echo; echo "### ACSS settings"; bash ops/acss/apply.sh
-for f in site/pages/*.py; do
-  page=$(basename "$f" .py)
-  echo; echo "### page: $page"; python3 ops/page/deploy.py "$page"
+# components first, then templates (they reference components), then pages: each module's META order (pages 100)
+for page in $(python3 -I site/order.py); do
+  echo; echo "### $page"; python3 ops/page/deploy.py "$page"
 done
 echo; echo "### done ($mode)"

@@ -16,8 +16,11 @@ if subprocess.run([sys.executable, '-I', os.path.join(HERE, 'check_copy.py'), a.
 mod = importlib.import_module(a.page)
 out = a.out or os.path.join(HERE, '..', 'build', a.page)
 os.makedirs(out, exist_ok=True)
-rules = styles.parse(os.path.join(HERE, 'styles', a.page + '.css'))
+css = os.path.join(HERE, 'styles', a.page + '.css')
 classes = etch.all_classes(mod.PAGE)
+rules = styles.parse(css) if os.path.exists(css) else {}
+if classes and not rules:
+    sys.exit(f'{a.page}: classes on the page but no {os.path.relpath(css)}')
 unused = [s for s in rules if s[1:] not in classes]
 if unused:
     sys.exit(f'rules for classes not on the page: {unused}')

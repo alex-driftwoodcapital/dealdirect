@@ -50,10 +50,36 @@ if ( $action === 'media' ) {
 	if ( $write && $changed ) { update_option( 'etch_styles', $styles ); }
 	$out = [ 'records' => $out, 'changed' => $changed, 'written' => $write && $changed > 0 ];
 } elseif ( $action === 'page' ) {
-	// $in: {slug}. The page (any status) with that slug, and the sha we recorded at our last deploy.
-	// explicit statuses: 'any' skips drafts when WP-CLI runs logged out
-	$p = get_posts( [ 'post_type' => 'page', 'name' => $in['slug'], 'post_status' => [ 'draft', 'pending', 'private', 'future', 'publish' ], 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ] );
+	// $in: {slug, post_type}. The post with that slug (any status; for wp_template only the active theme's), and the
+	// sha we recorded at our last deploy. explicit statuses: 'any' skips drafts when WP-CLI runs logged out.
+	$type = $in['post_type'] ?? 'page';
+	$q    = [ 'post_type' => $type, 'name' => $in['slug'], 'post_status' => [ 'draft', 'pending', 'private', 'future', 'publish' ], 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ];
+	if ( $type === 'wp_template' ) { $q['tax_query'] = [ [ 'taxonomy' => 'wp_theme', 'field' => 'name', 'terms' => get_stylesheet() ] ]; }
+	$p = get_posts( $q );
 	$out = $p ? [ 'id' => $p[0]->ID, 'status' => $p[0]->post_status, 'deployed_sha' => (string) get_post_meta( $p[0]->ID, '_dd_deployed_sha', true ) ] : [ 'id' => null ];
+} elseif ( $action === 'create' ) {
+	// $in: {post_type, slug, title}. Empty published wp_block / wp_template (with the active theme term) that the
+	// normal update path (edit-run.sh) then fills. Pages are created by edit-run.sh --new instead.
+	if ( ! in_array( $in['post_type'], [ 'wp_block', 'wp_template' ], true ) ) { WP_CLI::error( 'create: wp_block or wp_template only' ); }
+	if ( ! $write ) { $out = [ 'id' => null ]; } else {
+		$id = wp_insert_post( [ 'post_type' => $in['post_type'], 'post_name' => $in['slug'], 'post_title' => $in['title'], 'post_status' => 'publish', 'post_content' => '' ], true );
+		if ( is_wp_error( $id ) ) { WP_CLI::error( $id->get_error_message() ); }
+		if ( $in['post_type'] === 'wp_template' ) { wp_set_object_terms( $id, get_stylesheet(), 'wp_theme' ); }
+		$out = [ 'id' => $id ];
+	}
+} elseif ( $action === 'refs' ) {
+	// $in: {slugs: [...]}. Component (wp_block) ids by slug, for {{ref:<slug>}} placeholders.
+	foreach ( $in['slugs'] as $slug ) {
+		$p = get_posts( [ 'post_type' => 'wp_block', 'name' => $slug, 'post_status' => [ 'publish', 'draft', 'private' ], 'numberposts' => 1, 'orderby' => 'ID', 'order' => 'ASC' ] );
+		$out[ $slug ] = $p ? $p[0]->ID : null;
+	}
+} elseif ( $action === 'inventory' ) {
+	// Read-only: what templates, template parts and components exist now (printed in dry runs).
+	foreach ( get_posts( [ 'post_type' => [ 'wp_template', 'wp_template_part', 'wp_block' ], 'post_status' => 'any', 'numberposts' => 200 ] ) as $p ) {
+		$theme = wp_get_object_terms( $p->ID, 'wp_theme', [ 'fields' => 'names' ] );
+		$out[] = sprintf( '%s #%d %s (%s)%s', $p->post_type, $p->ID, $p->post_name, $p->post_status, $theme && ! is_wp_error( $theme ) ? ' theme=' . implode( ',', $theme ) : '' );
+	}
+	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
 	$cur = get_post_status( (int) $in['id'] );
