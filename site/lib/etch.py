@@ -7,7 +7,7 @@ Classes carry style-record IDs (the builder adds them on save otherwise; PILOT.m
 site-specific (ACSS utilities get empty-CSS records too), so the markup holds placeholders resolved at deploy time:
   {{style:.<class>}}  -> id of the etch_styles record with that selector (created first if missing)
   {{media:<slug>}}    -> WordPress attachment ID"""
-import hashlib, json, re
+import base64, hashlib, json, re
 
 BUILTIN_STYLES = {'section': 'etch-section-style', 'container': 'etch-container-style'}
 
@@ -47,8 +47,8 @@ class Text(Node):
 
 
 class El(Node):
-    def __init__(self, tag, name, cls=None, attrs=None, children=(), etch=None):
-        self.tag, self.name, self.cls, self.attrs, self.etch = tag, name, cls, dict(attrs or {}), etch
+    def __init__(self, tag, name, cls=None, attrs=None, children=(), etch=None, script=None):
+        self.tag, self.name, self.cls, self.attrs, self.etch, self.script = tag, name, cls, dict(attrs or {}), etch, script
         self.children = [Text(c) if isinstance(c, str) else c for c in children if c is not None]
 
     def render(self):
@@ -65,6 +65,9 @@ class El(Node):
         d = {'metadata': {'name': self.name}, 'tag': self.tag, 'attributes': attrs or []}
         if styles:
             d['styles'] = styles
+        if self.script:
+            # stored base64 with a 7-char id (catalogue.md "Scripts"); enqueued in <head> as a deferred module
+            d['script'] = {'code': base64.b64encode(self.script.encode()).decode(), 'id': style_id('script:' + self.name)}
         inner = '\n'.join(c.render() for c in self.children)
         return '<!-- wp:etch/element ' + _json(d) + ' -->\n' + (inner + '\n' if inner else '') + '<!-- /wp:etch/element -->'
 
@@ -86,6 +89,29 @@ class Img(Node):
         attrs = {'mediaId': '{{media:%s}}' % self.media, 'useSrcSet': 'true', 'loading': self.loading, 'alt': self.alt}
         d = {'metadata': {'name': self.name}, 'tag': 'img', 'attributes': attrs}
         return '<!-- wp:etch/dynamic-image ' + _json(d) + ' -->\n\n<!-- /wp:etch/dynamic-image -->'
+
+
+class Component(Node):
+    """Instance of an Etch component (wp_block). ref is a placeholder {{ref:<slug>}} -> numeric post id at deploy."""
+    def __init__(self, name, slug, props=None):
+        self.name, self.slug, self.props = name, slug, props or []
+
+    def render(self):
+        d = {'metadata': {'name': self.name}, 'ref': '{{ref:%s}}' % self.slug, 'attributes': self.props}
+        return '<!-- wp:etch/component ' + _json(d) + ' -->\n\n<!-- /wp:etch/component -->'
+
+
+class Svg(Node):
+    """Inline SVG fetched at build/deploy time (WordPress refuses SVG uploads by default). Renders a marker that
+    svg.expand() replaces with svg/g/path elements, the form fixtures/parts/footer.html stores."""
+    def __init__(self, name, url, label, cls=None):
+        self.name, self.url, self.label, self.cls = name, url, label, cls
+
+    def render(self):
+        return '<!-- dd:svg ' + _json({'name': self.name, 'url': self.url, 'label': self.label, 'cls': self.cls}) + ' -->'
+
+    def classes(self):
+        return self.cls.split() if self.cls else []
 
 
 def section(name, cls, heading_id, children, attrs=None, tag='section'):
@@ -113,9 +139,10 @@ def all_classes(nodes):
 
 
 _PLACEHOLDER = re.compile(r'\{\{(style|media):([^}]*)\}\}')
+_REF = re.compile(r'"\{\{ref:([^}]*)\}\}"')
 
 
-def resolve(markup: str, sel2id: dict, media2id: dict) -> str:
+def resolve(markup: str, sel2id: dict, media2id: dict, ref2id: dict = None) -> str:
     """Swap {{style:.x}} / {{media:slug}} for real ids. Raises on anything unresolved, so nothing half-built is written."""
     missing = []
 
@@ -128,6 +155,14 @@ def resolve(markup: str, sel2id: dict, media2id: dict) -> str:
         return str(table[key])
 
     out = _PLACEHOLDER.sub(sub, markup)
+
+    def ref(m):  # component refs are JSON numbers in saved markup ("ref":143)
+        if m.group(1) not in (ref2id or {}):
+            missing.append('ref:' + m.group(1))
+            return m.group(0)
+        return str(int(ref2id[m.group(1)]))
+
+    out = _REF.sub(ref, out)
     if missing:
         raise KeyError('unresolved: ' + ', '.join(sorted(set(missing))))
     return out

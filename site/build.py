@@ -16,13 +16,22 @@ if subprocess.run([sys.executable, '-I', os.path.join(HERE, 'check_copy.py'), a.
 mod = importlib.import_module(a.page)
 out = a.out or os.path.join(HERE, '..', 'build', a.page)
 os.makedirs(out, exist_ok=True)
-rules = styles.parse(os.path.join(HERE, 'styles', a.page + '.css'))
+css = os.path.join(HERE, 'styles', a.page + '.css')
 classes = etch.all_classes(mod.PAGE)
+rules = styles.parse(css) if os.path.exists(css) else {}
+if classes and not rules:
+    sys.exit(f'{a.page}: classes on the page but no {os.path.relpath(css)}')
 unused = [s for s in rules if s[1:] not in classes]
 if unused:
     sys.exit(f'rules for classes not on the page: {unused}')
 open(os.path.join(out, 'content.tpl.html'), 'w').write(etch.page(mod.PAGE))
 json.dump(styles.records(classes, rules), open(os.path.join(out, 'records.json'), 'w'), indent=1, ensure_ascii=False)
-json.dump(mod.MEDIA, open(os.path.join(out, 'media.json'), 'w'), indent=1)
+media = {}
+for slug, v in mod.MEDIA.items():
+    src, coll = v if isinstance(v, tuple) else (v, None)
+    if not coll:
+        sys.exit(f'{a.page}: media {slug} has no Asset Manager collection (MEDIA = {{slug: (source, collection)}})')
+    media[slug] = {'src': src, 'collection': coll}
+json.dump(media, open(os.path.join(out, 'media.json'), 'w'), indent=1)
 json.dump(getattr(mod, 'META', {}), open(os.path.join(out, 'meta.json'), 'w'), indent=1, ensure_ascii=False)
 print(f'{a.page}: {len(classes)} classes, {len(mod.MEDIA)} media -> {os.path.relpath(out)}')

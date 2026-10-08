@@ -1,0 +1,45 @@
+/* Site header: handoff/README.md Home §1. Over the hero: transparent, white logo, 88px. After 40px scroll
+   ([data-scrolled], set by the component script): rgba(255,255,255,.86) + blur, hairline, 68px, logo in colour. */
+.site-header {
+  padding: 0; /* ACSS gives <header> its own padding; the rail owns spacing here */
+  position: fixed;
+  inset-block-start: var(--wp-admin--admin-bar--height, 0px);
+  inset-inline: 0;
+  z-index: 50;
+  background: transparent;
+  border-block-end: 1px solid transparent;
+  transition: background-color 360ms cubic-bezier(.2,.7,.2,1), border-color 360ms cubic-bezier(.2,.7,.2,1);
+  &[data-scrolled] {
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(16px) saturate(1.5);
+    border-block-end-color: rgba(219, 229, 240, 0.9);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    & * { transition: none; }
+  }
+}
+.site-header__rail {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
+  block-size: 88px;
+  padding-inline: var(--gutter);
+  transition: block-size 360ms cubic-bezier(.2,.7,.2,1);
+  [data-scrolled] > & { block-size: 68px; }
+}
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  min-block-size: 44px;
+}
+.site-header__logo-svg {
+  display: block;
+  block-size: 40px;
+  inline-size: auto;
+  filter: brightness(0) invert(1);
+  transition: filter 320ms cubic-bezier(.2,.7,.2,1);
+  [data-scrolled] & { filter: none; }
+}

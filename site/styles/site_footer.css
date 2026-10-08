@@ -1,0 +1,63 @@
+/* Site footer: the footer of every design file. Navy, white logo, teal-soft dashboard link, hairline, copyright and
+   legal links (tap targets >= 44px). */
+.site-footer {
+  padding: 0; /* ACSS may pad <footer>; the inner rail owns spacing */
+  background: var(--primary-ultra-dark);
+  color: color-mix(in oklch, var(--white) 72%, transparent);
+  --focus-color: var(--white);
+}
+.site-footer__inner {
+  display: grid;
+  gap: 28px;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
+  padding: 48px var(--gutter) 40px;
+}
+.site-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.site-footer__logo {
+  display: block;
+  block-size: 36px;
+  inline-size: auto;
+  filter: brightness(0) invert(1);
+}
+.site-footer__login {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+  &:hover { color: var(--white); }
+}
+.site-footer__rule {
+  block-size: 1px;
+  background: color-mix(in oklch, var(--white) 12%, transparent);
+}
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.site-footer__copy { margin: 0; }
+.site-footer__legal {
+  display: flex;
+  gap: 24px;
+}
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  color: color-mix(in oklch, var(--white) 78%, transparent);
+  text-decoration: none;
+  &:hover { color: var(--white); }
+}

@@ -9,9 +9,9 @@ from design import norm
 
 mod = importlib.import_module(sys.argv[1])
 mine = [norm(t) for t in etch.all_texts(mod.PAGE)]
-design = set(mod.q.all)
+design = set(mod.q.all) if mod.q else set()  # q None: a part with no visible copy (header logo, template)
 extra = [t for t in mine if t and t not in design and t not in mod.NON_DESIGN and not t.startswith('{options.')]
-missing = [t for t in mod.q.all if t not in set(mine)]
+missing = [t for t in (mod.q.all if mod.q else []) if t not in set(mine)]
 banned = [t for t in mine if 'shovel' in t.lower()]  # CLAUDE.md rule 2
 for label, items in (('not design copy', extra), ('design copy missing from page', missing), ('banned wording', banned)):
     for t in items:
