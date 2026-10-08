@@ -122,7 +122,15 @@ if ( $action === 'media' ) {
 	}
 	$encode = [];
 	foreach ( [ 'image/webp', 'image/avif', 'image/jpeg' ] as $mime ) { $encode[ $mime ] = wp_image_editor_supports( [ 'mime_type' => $mime ] ); }
-	$compressor = [ 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
+	// Read-only: the saved presets through Etch's own route (as an admin), and how its service stores them.
+	$admins = get_users( [ 'role' => 'administrator', 'number' => 1, 'fields' => 'ID' ] );
+	if ( $admins ) { wp_set_current_user( (int) $admins[0] ); }
+	$res     = rest_do_request( new WP_REST_Request( 'GET', '/etch-api/compression-presets' ) );
+	$presets = [ 'status' => $res->get_status(), 'data' => $res->get_data() ];
+	wp_set_current_user( 0 );
+	$svc     = $dir . '/classes/Services/CompressionPresetService.php';
+	$storage = is_file( $svc ) ? array_values( array_filter( array_map( 'trim', file( $svc ) ), fn( $l ) => preg_match( '/get_option|update_option|post_type|\$wpdb|table|const |register_post_type|get_posts|meta/i', $l ) ) ) : [];
+	$compressor = [ 'presets' => $presets, 'preset_storage' => array_slice( $storage, 0, 25 ), 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
 	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ], 'etch_compressor' => $compressor ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
