@@ -1,0 +1,5 @@
+.plan-grid { display: grid; grid-template-columns: var(--grid-auto-3); gap: var(--grid-gap); }
+.plan { display: grid; gap: var(--space-s); padding: var(--space-l); border: var(--border); border-radius: var(--radius); background: var(--white); box-shadow: var(--box-shadow-1); }
+.plan h3 { font-size: var(--h4); }
+.plan__price { font-size: var(--h2); font-weight: 700; color: var(--primary); }
+.plan .btn--secondary { justify-self: start; }

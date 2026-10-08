@@ -1,0 +1,37 @@
+{
+ "plgrid1": {
+  "type": "class",
+  "selector": ".plan-grid",
+  "collection": "default",
+  "css": "display: grid;\ngrid-template-columns: var(--grid-auto-3);\ngap: var(--grid-gap);\npadding: 0;\nlist-style: none;",
+  "readonly": false
+ },
+ "plcard1": {
+  "type": "class",
+  "selector": ".plan-card",
+  "collection": "default",
+  "css": "display: grid;\ngap: var(--space-s);\nalign-content: start;\npadding: var(--space-l);\nborder: var(--border);\nborder-radius: var(--radius);\nbackground: var(--white);\nbox-shadow: var(--box-shadow-1);",
+  "readonly": false
+ },
+ "plname1": {
+  "type": "class",
+  "selector": ".plan-card__name",
+  "collection": "default",
+  "css": "font-size: var(--h4);",
+  "readonly": false
+ },
+ "plprice1": {
+  "type": "class",
+  "selector": ".plan-card__price",
+  "collection": "default",
+  "css": "font-size: var(--h3);\ncolor: var(--primary);\nfont-weight: 800;",
+  "readonly": false
+ },
+ "pldesc1": {
+  "type": "class",
+  "selector": ".plan-card__desc",
+  "collection": "default",
+  "css": "color: var(--text-dark-muted);\nfont-size: var(--text-m);",
+  "readonly": false
+ }
+}

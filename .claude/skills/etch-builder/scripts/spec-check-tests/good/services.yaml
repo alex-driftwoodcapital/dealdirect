@@ -1,0 +1,78 @@
+# A complete spec that must pass (0 errors). Test data only: copy, IDs and images are made up for the checker.
+spec_version: 1
+page: {title: "Services", slug: services-test, status: draft, template: default}
+site_profile: twoeleven-staging
+site_classes: [callout-band, service-card]
+references:
+  source: refs/mockup.png
+  shots: {375: refs/services-375.png, 1440: refs/services-1440.png}
+tokens:
+  surfaces: {paper: bg--ultra-light, light: bg--light, ink: bg--dark, butter: --secondary}
+  type: {h1: --h1, h2: --h2, body: --text-m}
+  space: {section: --section-space-m, gap: --space-l}
+
+sections:
+  - id: services-intro
+    role: hero
+    landmark: section
+    heading: {level: 1, text: "Websites that bring people in", highlight: "bring people in"}
+    content:
+      - {type: kicker, text: "Services"}
+      - {type: p, text: "One partner for how you reach, mobilize and fund."}
+      - {type: link, text: "Book a free review", href: /book/, style: btn--secondary}
+      - {type: button, text: "Watch the tour", action: "open dialog tour-video", style: btn--secondary btn--outline}
+    layout:
+      pattern: split
+      wide: "2 columns, text 7 / media 5, media right, top aligned"
+      narrow: "stacked, media first"
+      measure: 60ch
+    surface: ink
+    media:
+      - {media_id: 812, alt: "Alex at a community event", ratio: "4/3", fit: cover, loading: eager}
+    responsive:
+      - "columns switch to stacked when the section container is under 48rem"
+    motion: {ref: art-director/reference/site-motion.md#reveal, reduced_motion: "show final state"}
+    must_match: [order, copy, surface, columns, heading sizes, button roles]
+    may_differ: [exact line breaks]
+
+  - id: services-list
+    role: features
+    landmark: section
+    heading: {level: 2, text: "What I do"}
+    content:
+      - {type: p, text: "Pick one, or all three."}
+      - {type: h3, text: "Reach"}
+      - {type: list, items: ["Websites", "Google Ad Grant"]}
+    layout:
+      pattern: new
+      wide: "auto-fit grid of cards, min 18rem, gap var(--space-l)"
+      narrow: "one column"
+    surface: paper
+    data:
+      loop: {key: services, source: "WP Query post_type=service", args: {$count: 6}, item: service,
+             inner: {key: service-tags, source: "terms of service.id", item: tag}}
+    responsive: ["intrinsic only (auto-fit grid)"]
+    must_match: [order, copy, columns]
+
+  - id: services-cta
+    role: cta
+    landmark: section
+    heading: {level: 2, text: "Not sure which fits?"}
+    component: {use: existing, ref: 143, props: {tone: butter, buttonLabel: "Book a free review", buttonUrl: /book/}}
+    layout: {pattern: callout-band, wide: "one row: copy left, button right", narrow: "stacked"}
+    surface: butter
+    responsive: ["intrinsic only"]
+    must_match: [copy, surface, button roles]
+
+  - id: tour-video
+    role: dialog
+    landmark: dialog
+    heading: {level: 2, text: "The 3-minute tour"}
+    content:
+      - {type: embed, source: "page 48 Home > Tour dialog (video player)"}
+      - {type: button, text: "Close", action: close, style: btn--secondary}
+    layout: {pattern: new, wide: "centred card, max 60rem, scrim on both sides", narrow: "full width with gutters"}
+    surface: paper
+    states: ["close is a round icon button top right"]
+    responsive: ["intrinsic only"]
+    must_match: [copy, states]

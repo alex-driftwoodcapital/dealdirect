@@ -1,0 +1,3 @@
+.hero { padding: 24px; background: hsl(var(--primary-h) var(--primary-s) var(--primary-l)); }
+.hero .grid--3 { gap: var(--space-m); }
+.hero a { color: #2446D8; }

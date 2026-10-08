@@ -1,0 +1,7 @@
+.card-grid { grid-template-columns: repeat(3, 1fr); color: var(--primary-trans-10); }
+.hero { background: hsl(var(--primary-h) var(--primary-s) var(--primary-l)); padding: 24px; border-radius: 16px; font-size: 13px; }
+.x { ?grid-3; ?not-a-recipe; }
+.y { @btn; color: #2446D8; gap: var(--space-3xs); }
+.link--primary { --foo: 1; }
+@import url("other.css");
+.z { width: fluid(40, 60); color: var(--body-color); }
