@@ -130,7 +130,20 @@ if ( $action === 'media' ) {
 	wp_set_current_user( 0 );
 	$svc     = $dir . '/classes/Services/CompressionPresetService.php';
 	$storage = is_file( $svc ) ? array_values( array_filter( array_map( 'trim', file( $svc ) ), fn( $l ) => preg_match( '/get_option|update_option|post_type|\$wpdb|table|const |register_post_type|get_posts|meta/i', $l ) ) ) : [];
-	$compressor = [ 'presets' => $presets, 'preset_storage' => array_slice( $storage, 0, 25 ), 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
+	// How the browser worker turns a preset into an encode (quality from 'compression', the 'resize' shape): short
+	// excerpts around those words in Etch's own compress worker and preset service, read-only.
+	$excerpts = [];
+	foreach ( glob( $dir . '/apps/dist/builder/compress.worker-*.js' ) ?: [] as $wf ) {
+		$js = (string) file_get_contents( $wf );
+		foreach ( [ 'quality', 'resize', 'compression', 'maxWidth', 'width' ] as $word ) {
+			$at = 0;
+			for ( $n = 0; $n < 3 && ( $at = stripos( $js, $word, $at ) ) !== false; $n++, $at += strlen( $word ) ) {
+				$excerpts[ $word ][] = substr( $js, max( 0, $at - 90 ), 180 );
+			}
+		}
+	}
+	$svc_resize = is_file( $svc ) ? array_values( array_filter( array_map( 'trim', file( $svc ) ), fn( $l ) => stripos( $l, 'resize' ) !== false || stripos( $l, 'compression' ) !== false ) ) : [];
+	$compressor = [ 'presets' => $presets, 'worker_excerpts' => $excerpts, 'service_lines' => array_slice( $svc_resize, 0, 30 ), 'preset_storage' => array_slice( $storage, 0, 25 ), 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
 	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ], 'etch_compressor' => $compressor ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
