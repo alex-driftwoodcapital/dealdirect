@@ -59,18 +59,18 @@ upload(open(os.path.join(ROOT, 'ops', 'page', 'remote.php'), 'rb').read(), f'{TM
 try:
     step('media')
     sources = {}
-    for slug, src in media.items():
-        if src.startswith('http'):
-            sources[slug] = src
-        else:  # local handoff file: upload to the host's tmp dir under its real filename
+    for slug, m in media.items():
+        src = m['src']
+        if not src.startswith('http'):  # local handoff file: upload to the host's tmp dir under its real filename
             path = f'{TMP}/{os.path.basename(src)}'
             if WRITE:
                 upload(open(os.path.join(ROOT, src), 'rb').read(), path)
-            sources[slug] = path
+            src = path
+        sources[slug] = {'src': src, 'collection': m['collection']}
     got = helper('media', sources, mode) if sources else {}
     got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
-        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else ''))
+        print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + f'  -> {r.get("collection", "")}')
     errors = [s for s, r in got.items() if str(r['status']).startswith('ERROR')]
     if errors:
         sys.exit(f'STOP: media failed: {errors}')

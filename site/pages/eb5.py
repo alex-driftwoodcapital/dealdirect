@@ -263,18 +263,19 @@ PAGE = [hero, benefits, reqs, offerings, program, process, driftwood, track, faq
 # Strings on the page that are not design copy: arrows, numbering, the approx sign the design's <dw-stat approx> renders,
 # and the prior-project data from the design script.
 NON_DESIGN = {'→', '+', '±', '1', '2', '1.', '2.', '3.', '4.', '5.'} | {v for t in TRACK for v in t[:6]}
-MEDIA = {  # slug -> source (file in handoff/design/assets/eb5/ or a live-site upload URL)
-    'eb5-family-flag-front': 'handoff/design/assets/eb5/eb5-family-flag-front.webp',
-    'eb5-passports': 'handoff/design/assets/eb5/eb5-passports.webp',
-    'eb5-green-card': 'handoff/design/assets/eb5/eb5-green-card.webp',
-    'eb5-flag-wood-wide': 'handoff/design/assets/eb5/eb5-flag-wood-wide.webp',
-    'Riverside-Wharf_View-from-River': 'https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_View-from-River.jpg',
-    'Marriott-Residence-Inn-Miami-': 'https://driftwooddealdirect.com/wp-content/uploads/Marriott-Residence-Inn-Miami-.jpeg',
-    'tru-home2': 'https://driftwooddealdirect.com/wp-content/uploads/tru-home2.jpg',
-    'canopy-wpb': 'https://driftwooddealdirect.com/wp-content/uploads/canopy-wpb.jpg',
-    'canopy-tempe': 'https://driftwooddealdirect.com/wp-content/uploads/canopy-tempe.jpg',
-    'element-melbourne': 'https://driftwooddealdirect.com/wp-content/uploads/element-melbourne.jpg',
-    'StaybridgeSuites_Wilmington_EXT': 'https://driftwooddealdirect.com/wp-content/uploads/StaybridgeSuites_Wilmington_EXT.jpg',
+# slug -> (source, Etch Asset Manager collection). Source: a file in handoff/design/assets/ or a live-site upload URL.
+MEDIA = {
+    'eb5-family-flag-front': ('handoff/design/assets/eb5/eb5-family-flag-front.webp', 'EB-5'),
+    'eb5-passports': ('handoff/design/assets/eb5/eb5-passports.webp', 'EB-5'),
+    'eb5-green-card': ('handoff/design/assets/eb5/eb5-green-card.webp', 'EB-5'),
+    'eb5-flag-wood-wide': ('handoff/design/assets/eb5/eb5-flag-wood-wide.webp', 'EB-5'),
+    'Riverside-Wharf_View-from-River': ('https://driftwooddealdirect.com/wp-content/uploads/Riverside-Wharf_View-from-River.jpg', 'Riverside Wharf'),
+    'Marriott-Residence-Inn-Miami-': ('https://driftwooddealdirect.com/wp-content/uploads/Marriott-Residence-Inn-Miami-.jpeg', 'Prior Projects'),
+    'tru-home2': ('https://driftwooddealdirect.com/wp-content/uploads/tru-home2.jpg', 'Prior Projects'),
+    'canopy-wpb': ('https://driftwooddealdirect.com/wp-content/uploads/canopy-wpb.jpg', 'Prior Projects'),
+    'canopy-tempe': ('https://driftwooddealdirect.com/wp-content/uploads/canopy-tempe.jpg', 'Prior Projects'),
+    'element-melbourne': ('https://driftwooddealdirect.com/wp-content/uploads/element-melbourne.jpg', 'Prior Projects'),
+    'StaybridgeSuites_Wilmington_EXT': ('https://driftwooddealdirect.com/wp-content/uploads/StaybridgeSuites_Wilmington_EXT.jpg', 'Prior Projects'),
 }
 
 META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments', 'status': 'publish'}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)

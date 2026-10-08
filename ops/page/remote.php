@@ -7,23 +7,39 @@ $write = $mode === 'write';
 $out   = [];
 
 if ( $action === 'media' ) {
-	// $in: {slug: source}. source = host path of an uploaded local file, or a URL (the host downloads it).
+	// $in: {slug: {src, collection}}. src = host path of an uploaded local file, or a URL (the host downloads it).
+	// Every image goes into its Etch Asset Manager collection: taxonomy etch_collection on attachments (read from
+	// staging 2026-10-08); a missing collection is created; existing collections on the image are kept.
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	global $wpdb;
-	foreach ( $in as $slug => $src ) {
+	$tax = 'etch_collection';
+	if ( ! taxonomy_exists( $tax ) ) { WP_CLI::error( "taxonomy $tax not registered: is Etch active?" ); }
+	foreach ( $in as $slug => $m ) {
+		[ $src, $coll ] = [ $m['src'], $m['collection'] ];
 		$name = basename( parse_url( $src, PHP_URL_PATH ) );
 		// Same filename already in the library (a previous run): reuse it, never re-upload.
 		$id = (int) $wpdb->get_var( $wpdb->prepare(
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND (meta_value = %s OR meta_value LIKE %s) ORDER BY post_id LIMIT 1",
 			$name, '%/' . $wpdb->esc_like( $name ) ) );
-		if ( $id ) { $out[ $slug ] = [ 'id' => $id, 'status' => 'exists' ]; continue; }
-		if ( ! $write ) { $out[ $slug ] = [ 'id' => null, 'status' => 'would import ' . $name ]; continue; }
-		$tmp = preg_match( '#^https?://#', $src ) ? download_url( $src, 60 ) : $src;
-		if ( is_wp_error( $tmp ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $tmp->get_error_message() ]; continue; }
-		$id = media_handle_sideload( [ 'name' => $name, 'tmp_name' => $tmp ], 0 );
-		$out[ $slug ] = is_wp_error( $id ) ? [ 'id' => null, 'status' => 'ERROR ' . $id->get_error_message() ] : [ 'id' => $id, 'status' => 'imported' ];
+		$status = $id ? 'exists' : 'imported';
+		if ( ! $id ) {
+			if ( ! $write ) { $out[ $slug ] = [ 'id' => null, 'status' => 'would import ' . $name, 'collection' => "would add to $coll" ]; continue; }
+			$tmp = preg_match( '#^https?://#', $src ) ? download_url( $src, 60 ) : $src;
+			if ( is_wp_error( $tmp ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $tmp->get_error_message() ]; continue; }
+			$id = media_handle_sideload( [ 'name' => $name, 'tmp_name' => $tmp ], 0 );
+			if ( is_wp_error( $id ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $id->get_error_message() ]; continue; }
+		}
+		$has = has_term( $coll, $tax, $id );
+		if ( ! $has && $write ) {
+			if ( ! term_exists( $coll, $tax ) ) {
+				$t = wp_insert_term( $coll, $tax );
+				if ( is_wp_error( $t ) ) { $out[ $slug ] = [ 'id' => $id, 'status' => 'ERROR collection ' . $t->get_error_message() ]; continue; }
+			}
+			wp_set_object_terms( $id, $coll, $tax, true );
+		}
+		$out[ $slug ] = [ 'id' => $id, 'status' => $status, 'collection' => $has ? "in $coll" : ( $write ? "added to $coll" : "would add to $coll" ) ];
 	}
 } elseif ( $action === 'styles' ) {
 	// $in: {id: record}. Upsert by selector: an existing record keeps its id and gets our css; a new one gets our id.

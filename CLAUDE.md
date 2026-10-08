@@ -24,7 +24,7 @@ The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/
 The handoff assumes staging is a copy of the Bricks site. It is not. So:
 - The `offering` CPT (rewrite slug `offering`), its fields (`handoff/docs/cpt-schema.md`) and the platform-stats options page are **created**, not exported. Field plugin: Secure Custom Fields (installed on staging). The CPT, field groups and options page are registered in code by `dealdirect-core`, not in the SCF admin UI.
 - Pages are created with the **same slugs** as live (`handoff/docs/permalinks.md`); "same post ID" does not apply.
-- Media is imported from the live site's uploads (same filenames), not reused by attachment ID.
+- Media is imported from the live site's uploads (same filenames), not reused by attachment ID, and every image goes into an **Etch Asset Manager collection** (taxonomy `etch_collection`; never Uncategorized). Collections: Brand, EB-5, one per offering (e.g. Riverside Wharf), Prior Projects, Video, Docs. Each page's `MEDIA` gives `(source, collection)`; the build refuses an image without one.
 - Copy, SEO title/description/OG and anchor IDs are lifted from the live pages verbatim.
 
 ## Repo layout

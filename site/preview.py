@@ -39,7 +39,8 @@ builtin = {k: v for k, v in json.load(open(fixtures)).items() if k.startswith('e
 sel2id = {v['selector']: k for k, v in {**records, **builtin}.items()}
 # local files render as-is; live-site images (unreachable here) become a labelled grey placeholder
 src_of = {}
-for slug, src in media.items():
+for slug, m in media.items():
+    src = m['src'] if isinstance(m, dict) else m
     src_of[slug] = os.path.relpath(os.path.join(ROOT, src), B) if not src.startswith('http') else ''
 body = open(os.path.join(B, 'content.tpl.html')).read()
 if tpl_markup:
