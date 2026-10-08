@@ -1,0 +1,42 @@
+# Phase 1 inventory without the Mac: Actions tab > "Inventory" > Run workflow (the GitHub app too).
+# READ-ONLY on both sites (ops/inventory.sh: WP-CLI reads on staging, public GETs on the live site). The result is
+# pushed to the branch inventory/<YYYYMMDD> so cloud sessions can read it; nothing is merged or deployed.
+name: Inventory
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: inventory
+  cancel-in-progress: true
+
+permissions:
+  contents: write   # pushes the inventory/<date> branch only
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ETCH_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+      ETCH_SSH_KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: SSH to staging
+        run: bash .claude/skills/etch-page-editor/scripts/ssh-setup.sh --check
+      - name: Inventory (read-only)
+        run: bash ops/inventory.sh 2>&1 | tee inventory.log
+      - name: Push to inventory/<date>
+        run: |
+          day=$(date +%Y%m%d)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "inventory/$day"
+          git add "inventory/$day"
+          git commit -q -m "chore: inventory $day (staging read-only + live public pages)"
+          git push -f origin "inventory/$day"
+          { echo "Pushed branch inventory/$day"; echo '```'; tail -n 60 inventory.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

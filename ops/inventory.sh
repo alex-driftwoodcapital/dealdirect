@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Phase 1 inventory. READ-ONLY on both sites. Run from the repo root on the Mac (needs SSH to staging + internet):
+# Phase 1 inventory. READ-ONLY on both sites. Run by .github/workflows/inventory.yml (Actions > Inventory), or from the
+# repo root on the Mac (needs SSH to staging + internet). User accounts are never exported (the output is committed):
 #   bash ops/inventory.sh            -> writes inventory/<YYYYMMDD>/
 # Staging: WP-CLI reads over SSH. Live: public GETs only (pages, sitemap, WP REST), no login, no form posts.
 set -euo pipefail
@@ -21,7 +22,6 @@ s options-site.txt      "wp option get home; wp option get siteurl; wp option ge
 s options-etch-acss.txt "wp option list --search=\"*etch*\" --fields=option_name,autoload --format=csv; wp option list --search=\"*automatic*\" --fields=option_name,autoload --format=csv; wp option list --search=\"*acss*\" --fields=option_name,autoload --format=csv"
 s acss-files.txt        "find wp-content/uploads -maxdepth 3 -iname \"*automatic*.css\" -o -maxdepth 3 -iname \"*acss*.css\" | head -20"
 s media-count.txt       "wp post list --post_type=attachment --format=count"
-s users.csv             "wp user list --fields=ID,user_login,roles --format=csv"
 # the compiled ACSS stylesheet, for acss-expert/scripts/build-index.py
 css=$(r "find wp-content/uploads -maxdepth 3 -name automatic.css | head -1" || true)
 [ -n "$css" ] && r "cat $css" > "$OUT/staging/automatic.css" && echo "  saved automatic.css ($css)"
