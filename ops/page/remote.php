@@ -6,30 +6,105 @@ $in    = $file ? json_decode( (string) file_get_contents( $file ), true ) : [];
 $write = $mode === 'write';
 $out   = [];
 
+// Etch Asset Manager compression, done server-side the way the builder does it (staging, Etch 1.6.8): presets live in
+// the etch_compression_presets option {name, compression 0-100, outputFormat webp|avif|jpeg|png, overwrite, resize};
+// the builder encodes with quality = 100 - compression; resize is {type: axis (axis width|height) | side (side
+// long|short), pixels, downscaleOnly} or {type: scale, ...}. The builder's own encoder (Squoosh) runs in the
+// browser, so deploy imports apply the same preset here with WordPress's image editor.
+function dd_preset( ?string $want ) {
+	$all = array_values( array_filter( (array) get_option( 'etch_compression_presets', [] ), 'is_array' ) );
+	if ( $want !== null && $want !== '' ) {
+		foreach ( $all as $p ) { if ( ( $p['name'] ?? '' ) === $want ) { return $p; } }
+		return new WP_Error( 'preset', "no Etch compression preset named \"$want\" (saved: " . ( implode( ', ', array_column( $all, 'name' ) ) ?: 'none' ) . ')' );
+	}
+	if ( count( $all ) === 1 ) { return $all[0]; }
+	return new WP_Error( 'preset', $all
+		? 'several Etch compression presets (' . implode( ', ', array_column( $all, 'name' ) ) . '): set COMPRESS_PRESET in the staging profile'
+		: 'no Etch compression preset saved: create one in the Asset Manager (Etch builder) first' );
+}
+
+function dd_preset_label( array $p ): string {
+	$r = $p['resize'] ?? null;
+	$rs = ! is_array( $r ) ? 'no resize' : ( ( $r['type'] ?? '' ) === 'scale' ? 'scale ' . ( $r['scale'] ?? $r['factor'] ?? '?' )
+		: ( ( $r[ $r['type'] ] ?? '?' ) . ' ' . ( $r['pixels'] ?? '?' ) . 'px' . ( ! empty( $r['downscaleOnly'] ) ? ' (downscale only)' : '' ) ) );
+	return sprintf( '"%s": %s q%d, %s', $p['name'] ?? '?', $p['outputFormat'] ?? 'webp', 100 - (int) ( $p['compression'] ?? 25 ), $rs );
+}
+
+// Returns [path, filename] of the compressed file, or WP_Error. $name keeps its basename, new extension.
+function dd_compress( string $file, string $name, array $p ) {
+	$fmt  = $p['outputFormat'] ?? 'webp';
+	$mime = [ 'webp' => 'image/webp', 'avif' => 'image/avif', 'jpeg' => 'image/jpeg', 'png' => 'image/png' ][ $fmt ] ?? null;
+	if ( ! $mime || ! wp_image_editor_supports( [ 'mime_type' => $mime ] ) ) { return new WP_Error( 'fmt', "server cannot encode $fmt" ); }
+	$ed = wp_get_image_editor( $file );
+	if ( is_wp_error( $ed ) ) { return $ed; }
+	[ 'width' => $w, 'height' => $h ] = $ed->get_size();
+	$r = $p['resize'] ?? null;
+	if ( is_array( $r ) && $w && $h ) {
+		$type = $r['type'] ?? '';
+		if ( $type === 'scale' ) {
+			$f = (float) ( $r['scale'] ?? $r['factor'] ?? 0 );
+			if ( $f <= 0 ) { return new WP_Error( 'resize', 'scale preset without a factor: ' . wp_json_encode( $r ) ); }
+			[ $tw, $th ] = [ (int) round( $w * $f ), (int) round( $h * $f ) ];
+		} else {
+			$dim = $type === 'axis' ? ( ( $r['axis'] ?? '' ) === 'height' ? 'h' : 'w' )
+				: ( ( ( $r['side'] ?? '' ) === 'short' ) === ( $w >= $h ) ? 'h' : 'w' );  // long side of a landscape = width
+			$px  = (int) ( $r['pixels'] ?? 0 );
+			$cur = $dim === 'w' ? $w : $h;
+			$f   = $px > 0 ? $px / $cur : 1;
+			[ $tw, $th ] = [ (int) round( $w * $f ), (int) round( $h * $f ) ];
+		}
+		$down_only = ! empty( $r['downscaleOnly'] );
+		if ( $tw > 0 && $th > 0 && ( $tw < $w || ( ! $down_only && $tw !== $w ) ) ) {
+			$res = $ed->resize( $tw, $th, false );
+			if ( is_wp_error( $res ) ) { return $res; }
+		}
+	}
+	$ed->set_quality( max( 1, min( 100, 100 - (int) ( $p['compression'] ?? 25 ) ) ) );
+	$out_name = pathinfo( $name, PATHINFO_FILENAME ) . '.' . ( $fmt === 'jpeg' ? 'jpg' : $fmt );
+	$saved    = $ed->save( get_temp_dir() . 'dd-' . wp_generate_password( 8, false ) . '-' . $out_name, $mime );
+	return is_wp_error( $saved ) ? $saved : [ $saved['path'], $out_name ];
+}
+
 if ( $action === 'media' ) {
-	// $in: {slug: {src, collection}}. src = host path of an uploaded local file, or a URL (the host downloads it).
-	// Every image goes into its Etch Asset Manager collection: taxonomy etch_collection on attachments (read from
-	// staging 2026-10-08); a missing collection is created; existing collections on the image are kept.
+	// $in: {preset: name|null, items: {slug: {src, collection[, name]}}}. src = host path of an uploaded local file, or a
+	// URL (the host downloads it). Images are compressed with the Etch preset before import (videos, SVG and PDFs as
+	// they are); the source filename is kept in _dd_source so the next run finds the image again. Every file goes into
+	// its Etch Asset Manager collection (taxonomy etch_collection); missing collections are created, existing kept.
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	global $wpdb;
 	$tax = 'etch_collection';
 	if ( ! taxonomy_exists( $tax ) ) { WP_CLI::error( "taxonomy $tax not registered: is Etch active?" ); }
-	foreach ( $in as $slug => $m ) {
+	$preset = null;
+	foreach ( $in['items'] as $slug => $m ) {
 		[ $src, $coll ] = [ $m['src'], $m['collection'] ];
 		$name = $m['name'] ?? basename( parse_url( $src, PHP_URL_PATH ) );  // name: for sources whose URL has no filename
-		// Same filename already in the library (a previous run): reuse it, never re-upload.
-		$id = (int) $wpdb->get_var( $wpdb->prepare(
+		// A previous run: our import of this source (_dd_source), else the same filename in the library. Never re-upload.
+		$id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_dd_source' AND meta_value = %s ORDER BY post_id LIMIT 1", $name ) );
+		$id = $id ?: (int) $wpdb->get_var( $wpdb->prepare(
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND (meta_value = %s OR meta_value LIKE %s) ORDER BY post_id LIMIT 1",
 			$name, '%/' . $wpdb->esc_like( $name ) ) );
 		$status = $id ? 'exists' : 'imported';
 		if ( ! $id ) {
-			if ( ! $write ) { $out[ $slug ] = [ 'id' => null, 'status' => 'would import ' . $name, 'collection' => "would add to $coll" ]; continue; }
-			$tmp = preg_match( '#^https?://#', $src ) ? download_url( $src, 60 ) : $src;
+			$is_image = (bool) preg_match( '/\.(jpe?g|png|webp|avif)$/i', $name );
+			if ( $is_image && $preset === null ) { $preset = dd_preset( $in['preset'] ?? null ); }
+			if ( $is_image && is_wp_error( $preset ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'BLOCKED ' . $preset->get_error_message() ]; continue; }
+			$how = $is_image ? 'compress with ' . dd_preset_label( $preset ) : 'as is';
+			if ( ! $write ) { $out[ $slug ] = [ 'id' => null, 'status' => "would import $name ($how)", 'collection' => "would add to $coll" ]; continue; }
+			$tmp = preg_match( '#^https?://#', $src ) ? download_url( $src, 120 ) : $src;
 			if ( is_wp_error( $tmp ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $tmp->get_error_message() ]; continue; }
-			$id = media_handle_sideload( [ 'name' => $name, 'tmp_name' => $tmp ], 0 );
+			[ $file, $file_name ] = [ $tmp, $name ];
+			if ( $is_image ) {
+				$c = dd_compress( $tmp, $name, $preset );
+				if ( is_wp_error( $c ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR compress ' . $c->get_error_message() ]; continue; }
+				[ $file, $file_name ] = $c;
+				$status = sprintf( 'imported %s (%s, %d KB -> %d KB)', $file_name, dd_preset_label( $preset ), filesize( $tmp ) / 1024, filesize( $file ) / 1024 );
+			}
+			$id = media_handle_sideload( [ 'name' => $file_name, 'tmp_name' => $file ], 0 );
 			if ( is_wp_error( $id ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $id->get_error_message() ]; continue; }
+			update_post_meta( $id, '_dd_source', $name );
+			if ( $is_image ) { update_post_meta( $id, '_dd_preset', $preset ); }
 		}
 		$has = has_term( $coll, $tax, $id );
 		if ( ! $has && $write ) {
@@ -107,49 +182,10 @@ if ( $action === 'media' ) {
 	$opts  = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%etch%' AND (option_name LIKE '%asset%' OR option_name LIKE '%collection%' OR option_name LIKE '%media%')" );
 	$types = array_values( array_filter( get_post_types(), fn( $n ) => preg_match( '/etch|asset|collection/i', $n ) ) );
 	$meta  = $wpdb->get_col( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} WHERE meta_key LIKE '%etch%' AND (meta_key LIKE '%asset%' OR meta_key LIKE '%collection%') LIMIT 20" );
-	// Etch's Asset Manager compressor (presets since 1.6.2) is undocumented: is it a server endpoint a deploy can call, or
-	// browser-only? Report its REST routes, preset options, the Etch files that mention compression, and what the
-	// server's image editor can encode, so imports can go through it instead of a hand-rolled conversion.
-	$routes = array_values( array_filter( array_keys( rest_get_server()->get_routes() ), fn( $r ) => preg_match( '#^/etch#i', $r ) && preg_match( '/asset|compress|preset|media|image|upload/i', $r ) ) );
-	$popts  = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%etch%' AND (option_name LIKE '%preset%' OR option_name LIKE '%compress%' OR option_name LIKE '%optimi%')" );
-	$files  = [];
-	$dir    = WP_PLUGIN_DIR . '/etch';
-	if ( is_dir( $dir ) ) {
-		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir, FilesystemIterator::SKIP_DOTS ) ) as $f ) {
-			if ( count( $files ) >= 25 || ! preg_match( '/\.(php|js)$/', $f->getFilename() ) || $f->getSize() > 8000000 || str_contains( $f->getPathname(), '/vendor/' ) ) { continue; }
-			if ( stripos( (string) file_get_contents( $f->getPathname() ), 'compress' ) !== false ) { $files[] = substr( $f->getPathname(), strlen( $dir ) + 1 ); }
-		}
-	}
+	// Etch compression presets the deploy applies to imported images (see dd_preset), and what the host can encode.
 	$encode = [];
 	foreach ( [ 'image/webp', 'image/avif', 'image/jpeg' ] as $mime ) { $encode[ $mime ] = wp_image_editor_supports( [ 'mime_type' => $mime ] ); }
-	// Read-only: the saved presets through Etch's own route (as an admin), and how its service stores them.
-	$admins = get_users( [ 'role' => 'administrator', 'number' => 1, 'fields' => 'ID' ] );
-	if ( $admins ) { wp_set_current_user( (int) $admins[0] ); }
-	$res     = rest_do_request( new WP_REST_Request( 'GET', '/etch-api/compression-presets' ) );
-	$presets = [ 'status' => $res->get_status(), 'data' => $res->get_data() ];
-	wp_set_current_user( 0 );
-	$svc     = $dir . '/classes/Services/CompressionPresetService.php';
-	$storage = is_file( $svc ) ? array_values( array_filter( array_map( 'trim', file( $svc ) ), fn( $l ) => preg_match( '/get_option|update_option|post_type|\$wpdb|table|const |register_post_type|get_posts|meta/i', $l ) ) ) : [];
-	// How Etch turns a preset into an encode: the builder maps 'compression' to the Squoosh encoder's quality and
-	// reads 'resize'; the service validates the resize shape. Short excerpts, read-only.
-	$excerpts = [];
-	$bjs      = $dir . '/apps/dist/builder/builder.js';
-	if ( is_file( $bjs ) ) {
-		$js = (string) file_get_contents( $bjs );
-		foreach ( [ 'compression', 'outputFormat', 'resize' ] as $word ) {
-			$at = 0;
-			for ( $n = 0; $n < 4 && ( $at = strpos( $js, $word, $at ) ) !== false; $n++, $at += strlen( $word ) ) {
-				$excerpts[ $word ][] = substr( $js, max( 0, $at - 120 ), 260 );
-			}
-		}
-	}
-	$svc_resize = [];
-	if ( is_file( $svc ) ) {
-		$src = (string) file_get_contents( $svc );
-		$at  = strpos( $src, 'function validate_resize(' );
-		if ( $at !== false ) { $svc_resize = array_values( array_filter( array_map( 'trim', explode( "\n", substr( $src, $at, 2600 ) ) ) ) ); }
-	}
-	$compressor = [ 'presets' => $presets, 'builder_excerpts' => $excerpts, 'validate_resize' => array_slice( $svc_resize, 0, 60 ), 'preset_storage' => array_slice( $storage, 0, 25 ), 'rest_routes' => $routes, 'options' => $popts, 'files_mentioning_compress' => $files, 'server_can_encode' => $encode, 'imagick' => extension_loaded( 'imagick' ), 'gd' => extension_loaded( 'gd' ) ];
+	$compressor = [ 'presets' => array_map( 'dd_preset_label', array_values( array_filter( (array) get_option( 'etch_compression_presets', [] ), 'is_array' ) ) ), 'server_can_encode' => $encode ];
 	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ], 'etch_compressor' => $compressor ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.

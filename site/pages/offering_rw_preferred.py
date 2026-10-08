@@ -285,7 +285,7 @@ MEDIA = {
     # Vimeo's poster frame for the webinar (design src); its URL has no filename, so it is named here.
     'riverside-wharf-webinar-poster': ('https://i.vimeocdn.com/video/2192570125-97b8978ab21cef729947bb6150572d3d869d9d7201c95d3f32a26fc55c5db2da-d_1920x1080?f=webp&region=us',
                                        'Riverside Wharf', 'riverside-wharf-webinar-poster.webp'),
-    'cover-bg': ('site/assets/cover-bg.webp', 'Brand'),  # handoff/design/assets/cover-bg.png at 1920px, WebP
+    'cover-bg': ('handoff/design/assets/cover-bg.png', 'Brand'),  # 4K original; the deploy compresses it with the Etch preset
 }
 
 META = {'kind': 'offering', 'title': 'Riverside Wharf Preferred Equity', 'slug': 'riverside-wharf-preferred-equity',

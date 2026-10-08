@@ -2,7 +2,8 @@
 """Deploy a built page to STAGING over SSH + WP-CLI. Run from the repo root on the Mac.
   python3 ops/page/deploy.py eb5             dry run: what would be imported, added, updated, written
   RUN_YES=1 python3 ops/page/deploy.py eb5   do it
-Steps: build (copy gate) -> media: reuse by filename or import (local files uploaded, live URLs fetched by the host)
+Steps: build (copy gate) -> media: reuse (by source filename) or import (local files uploaded, live URLs fetched by the
+host; images compressed with the Etch Asset Manager preset first, as the builder does on upload)
 -> style records upserted by selector (backup of etch_styles first) -> placeholders resolved -> page written by
 etch-page-editor/scripts/edit-run.sh (snapshot, lint, write, purge, diff; a new page is created as a draft)
 -> sha recorded in post meta -> status set from the page's META (staging pages publish; live is never written). An existing page that changed since our last deploy (builder save, manual edit) STOPS."""
@@ -16,9 +17,9 @@ PAGE = sys.argv[1] if len(sys.argv) > 1 else sys.exit(__doc__)
 WRITE = os.environ.get('RUN_YES') == '1'
 EDITOR = os.path.join(ROOT, '.claude', 'skills', 'etch-page-editor', 'scripts')
 PROFILE = os.environ.get('ETCH_PROFILE', os.path.join(ROOT, '.claude', 'skills', 'etch-page-editor', 'profiles', 'dealdirect-staging.env'))
-env_dump = subprocess.run(['bash', '-c', f'set -a; . {shlex.quote(PROFILE)}; echo "$SITE_NAME"; echo "$SSH_CMD"; echo "$WP_PATH"; echo "$PURGE_CMD"'],
+env_dump = subprocess.run(['bash', '-c', f'set -a; . {shlex.quote(PROFILE)}; echo "$SITE_NAME"; echo "$SSH_CMD"; echo "$WP_PATH"; echo "$PURGE_CMD"; echo "$COMPRESS_PRESET"'],
                           capture_output=True, text=True, check=True).stdout.splitlines()
-SITE, SSH, WP, PURGE = env_dump[:4]
+SITE, SSH, WP, PURGE, PRESET = (env_dump + [''] * 5)[:5]
 if 'STAGING' not in SITE:
     sys.exit(f'REFUSED: staging profile only ({SITE})')
 
@@ -67,12 +68,13 @@ try:
                 upload(open(os.path.join(ROOT, src), 'rb').read(), path)
             src = path
         sources[slug] = {'src': src, 'collection': m['collection'], **({'name': m['name']} if m.get('name') else {})}
-    got = helper('media', sources, mode) if sources else {}
+    # Images are compressed on the host with the Etch Asset Manager preset (COMPRESS_PRESET, or the only one saved).
+    got = helper('media', {'preset': os.environ.get('COMPRESS_PRESET') or PRESET or None, 'items': sources}, mode) if sources else {}
     got = got or {}  # PHP encodes an empty map as []
     for slug, r in got.items():
         print(f'  {slug:36} {r["status"]}' + (f' (#{r["id"]})' if r['id'] else '') + f'  -> {r.get("collection", "")}')
-    errors = [s for s, r in got.items() if str(r['status']).startswith('ERROR')]
-    if errors:
+    errors = [s for s, r in got.items() if str(r['status']).startswith(('ERROR', 'BLOCKED'))]
+    if errors:  # also in a dry run: the PR check shows what would block the deploy
         sys.exit(f'STOP: media failed: {errors}')
 
     step('style records')
