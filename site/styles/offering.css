@@ -460,3 +460,220 @@
   line-height: 1.6;
   color: color-mix(in oklch, var(--white) 90%, transparent);
 }
+
+/* ---------- QOZ additions: hero status badge, cap-stack modifiers ---------- */
+.offering-hero__badge {
+  margin-inline-start: 12px;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+}
+.cap-stack__layer--lead {
+  /* only with --highlight: the highlighted layer at the top of the stack (QOZ) is taller and rounder */
+  &.cap-stack__layer--highlight { min-block-size: 100px; border-radius: 14px; }
+}
+.cap-stack__layer--light {
+  min-block-size: 64px;
+  background: var(--base-semi-light);
+  color: var(--primary-ultra-dark);
+  & .cap-stack__label, & .cap-stack__pct { color: var(--base-dark); }
+}
+
+/* ---------- Opportunity Zone benefits (#structure) ---------- */
+.offering-oz {
+  padding-block: clamp(72px, 8vw, 120px) clamp(56px, 6vw, 88px);
+  background: var(--base);
+}
+.offering-oz__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+.offering-oz__title {
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.032em;
+  color: var(--primary-ultra-dark);
+}
+.offering-oz__intro {
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.offering-oz__benefits {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 28px;
+}
+.offering-oz__benefit {
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid rgba(219, 229, 240, 0.9);
+  & p { margin: 8px 0 0; font-size: 15px; line-height: 1.7; }
+}
+.offering-oz__benefit-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-ultra-dark);
+}
+.offering-oz__media {
+  aspect-ratio: 4 / 5;
+  max-block-size: 680px;
+  & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; }
+}
+
+/* ---------- program tabs (#assets) ---------- */
+.program-tabs {
+  padding-block: clamp(72px, 8vw, 120px);
+  background: var(--white);
+  & [hidden] { display: none; }
+}
+.program-tabs__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-block-end: 28px;
+}
+.program-tabs__title {
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 300;
+  letter-spacing: -0.032em;
+  color: var(--primary-ultra-dark);
+}
+.program-tabs__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--base-light);
+}
+.program-tabs__tab {
+  block-size: 44px;
+  padding-inline: 18px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--base-dark);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms;
+  &[aria-selected="true"] {
+    background: var(--white);
+    color: var(--primary-ultra-dark);
+    box-shadow: 0 4px 12px -6px rgba(11, 43, 72, 0.3);
+  }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+.program-tabs__panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+.program-tabs__gallery {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.program-tabs__stage {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--base-light);
+  & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; }
+}
+.program-tabs__slide {
+  position: absolute;
+  inset: 0;
+  & img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+}
+.program-tabs__thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(84px, 100%), 1fr));
+  gap: 8px;
+}
+.program-tabs__thumb {
+  padding: 0;
+  aspect-ratio: 1;
+  min-block-size: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: var(--base-light);
+  cursor: pointer;
+  &[aria-pressed="true"] { border-color: var(--secondary); }
+  & img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+}
+.program-tabs__spec { padding: clamp(28px, 3vw, 44px); }
+.program-tabs__spec-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--primary-ultra-dark);
+}
+.program-tabs__spec-lead {
+  margin: 20px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+}
+.program-tabs__spec-list {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-inline-start: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ---------- investment rationale (#rationale) ---------- */
+.offering-rationale {
+  padding-block: clamp(72px, 8vw, 120px);
+  background: var(--base);
+}
+.offering-rationale__title {
+  margin: 0 0 36px;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 300;
+  letter-spacing: -0.032em;
+  color: var(--primary-ultra-dark);
+}
+.offering-rationale__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
+}
+.rationale-card {
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1px solid rgba(219, 229, 240, 0.9);
+}
+.rationale-card__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--primary-ultra-dark);
+}
+.rationale-card__text {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  & a { color: var(--secondary); }
+}
