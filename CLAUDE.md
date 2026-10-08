@@ -27,7 +27,7 @@ The handoff assumes staging is a copy of the Bricks site. It is not. So:
 
 ## Repo layout
 - `handoff/`: the design handoff as received (do not edit except the override note in its README).
-- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging, dry run by default).
+- `ops/`: scripts run from the Mac session (`ops/inventory.sh`: Phase 1, read-only; `ops/deploy-core.sh`: deploys the plugin to staging; `ops/acss/apply.sh`: applies the DealDirect ACSS settings built by `ops/acss/build-settings.py`; all dry run by default).
 - `wp-content/plugins/dealdirect-core/`: the site plugin (offering CPT + SCF fields, Platform stats options page, HubSpot proxy `dealdirect/v1`). Tests: `php tests/run.php` (+ `tests/README.md`).
 - `inventory/<date>/`: read-only exports of staging and the live site (copy, SEO meta, media list); committed so cloud sessions can read them.
 - `.claude/skills/`: the Etch/ACSS skills.

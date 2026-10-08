@@ -30,4 +30,5 @@ Measured values come from `index/automatic.css` and `index/acss-settings.json`; 
 
 ## Open items
 - Export DealDirect's ACSS build and settings; rebuild the index.
-- Apply the brand mapping above in the ACSS dashboard (Phase 2), then re-measure.
+- Apply the brand mapping above: `ops/acss/apply.sh` (input keys from `ops/acss/build-settings.py`), then Save once in the ACSS dashboard if the stylesheet did not regenerate, then re-measure.
+- Upload Plus Jakarta Sans (variable woff2) and set `font-1-src`.
