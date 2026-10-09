@@ -160,8 +160,8 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
             El('p', 'Eyebrow', 'eyebrow eyebrow--dark', children=[q('EB-5 Investment')]),
             El('h1', 'Heading', 'eb-hero__title', {'id': 'eb-hero-h'}, [q('Riverside Wharf Miami')]),
         ]),
-    ])
-    benefits = section('Benefits', 'eb-benefits', 'eb-benefits-h', [
+    ], attrs={'id': 'hero'})  # the live page's section anchors (hero, intro, investment-process, ...) are kept
+    benefits = section('Benefits', 'eb-benefits', 'eb-benefits-h', attrs={'id': 'intro'}, children=[
         El('h2', 'Heading', 'eb-benefits__title', {'id': 'eb-benefits-h'}, [q('Access the path to U.S. Citizenship')]),
         El('div', 'Row', 'eb-benefits__row', children=[
             El('figure', 'Image', 'media-card', children=[Img('Passports', 'eb5-passports', alt['passports'])]),
@@ -226,7 +226,7 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
             El('figure', 'Image', 'media-card', children=[Img('Green card', 'eb5-green-card', alt['green_card'])]),
         ]),
     ], attrs={'id': 'program'})
-    process = section('Immigration timeline', 'eb-process', 'process-h', [
+    process = section('Immigration timeline', 'eb-process', 'process-h', attrs={'id': 'investment-process'}, children=[
         El('h2', 'Heading', 'eb-process__title', {'id': 'process-h'}, [q('Illustrative EB-5 Immigration Timeline')]),
         El('ol', 'Steps', 'eb-process__steps', children=[
             El('li', 'Step', 'eb-process__step', children=[
@@ -238,7 +238,7 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
         El('p', 'Footnote', 'footnotes footnotes--dark', children=[q('Actual timeline will vary')]),
     ])
     driftwood = section('Driftwood Capital', 'eb-direct', 'driftwood-h', [
-        El('div', 'Intro', 'eb-direct__intro', children=[
+        El('div', 'Intro', 'eb-direct__intro', {'id': 'driftwood-advantage'}, children=[  # live anchor; the section keeps the design's #driftwood
             El('h2', 'Heading', 'eb-direct__title', {'id': 'driftwood-h'}, [q('Benefits of investing directly')]),
             El('p', 'Lede', 'eb-direct__lede', children=[q('EB-5 Projects directly from the developer')]),
         ]),
@@ -262,12 +262,12 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
             El('p', 'Footnote 2', children=[q('2. Includes hotels and employees') + ' ', fig('date', '{options.acf.as_of}'), q('.')]),
         ]),
     ], attrs={'id': 'driftwood'}, script=LOCALIZE_SCRIPT if localize else None)
-    track = section('Prior EB-5 projects', 'eb-track', 'track-h', [
+    track = section('Prior EB-5 projects', 'eb-track', 'track-h', attrs={'id': 'track-record'}, children=[
         El('h2', 'Heading', 'eb-track__title', {'id': 'track-h'}, [q('Prior EB-5 Projects')]),
         El('ul', 'Projects', 'eb-track__grid', children=[tile(*t) for t in track_rows]),
         El('p', 'Footnote', 'footnotes', children=[q('To date, all six (6)')]),
     ])
-    faq = section('FAQ', 'eb-faq', 'faq-h', [
+    faq = section('FAQ', 'eb-faq', 'faq-h', attrs={'id': 'faq'}, children=[
         El('div', 'Grid', 'eb-faq__grid', children=[
             El('h2', 'Heading', 'eb-faq__title', {'id': 'faq-h'}, [q('Frequently Asked Questions')]),
             El('div', 'Questions', 'eb-faq__list', children=[faq_item(i) for i in range(len(FAQ))]),
