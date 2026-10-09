@@ -249,7 +249,7 @@ guide = El('div', 'Guide', 'qoz-guide', children=[
     ]),
     block('qoz-new', '02', H_NEW, [
         prose([about[1]]),
-        El('div', 'Cards', 'qoz-cards', children=[card(L_DEFER, mech[0], 'qoz-card qoz-card--dark'), card(L_STEP, mech[1])]),
+        El('div', 'Cards', 'qoz-cards', children=[card(L_DEFER, mech[0]), card(L_STEP, mech[1])]),
     ]),
     block('structure', '03', H_HOW, [  # the design's #structure anchor (old sub-nav links) lands here
         oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
