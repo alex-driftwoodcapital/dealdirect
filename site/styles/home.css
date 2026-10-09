@@ -1,0 +1,397 @@
+/* Style records for the Home page. One top-level rule per class = one etch_styles record. ACSS variables first;
+   literal values only where the design has no token. Values from handoff/design/DealDirect Home.dc.html.
+   DS -> ACSS: ink-900 --primary-ultra-dark, ink-800 --primary, gold-500 --secondary, gold-700 --secondary-dark,
+   teal-soft --accent, slate-50 --base, slate-200 --base-semi-light (handoff/docs/acss-mapping.md). */
+
+/* ---------- hero ---------- */
+.home-hero {
+  position: relative;
+  min-block-size: min(94vh, 920px);
+  justify-content: flex-end;
+  padding-block: 0;  /* the copy block carries the hero spacing */
+  overflow: hidden;
+  background: var(--primary-ultra-dark);
+}
+.home-hero__inner {
+  /* not positioned: the video and veil size against the full-bleed section, not the 1334px container */
+  flex: 1;
+  justify-content: center;
+  padding-block: clamp(140px, 18vh, 200px) clamp(40px, 5vw, 64px);
+}
+.home-hero__video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  display: block;
+}
+.home-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(6, 26, 46, 0.88) 0%, rgba(6, 26, 46, 0.62) 48%, rgba(6, 26, 46, 0.3) 100%),
+              linear-gradient(180deg, rgba(4, 18, 31, 0.55) 0%, rgba(4, 18, 31, 0) 22%, rgba(4, 18, 31, 0) 56%, rgba(4, 18, 31, 0.82) 100%);
+}
+.home-hero__copy {
+  position: relative;
+  z-index: 2;
+}
+.home-hero__title {
+  margin: 0;
+  max-inline-size: 13ch;
+  font-size: clamp(42px, 6vw, 88px);
+  font-weight: 300;
+  line-height: 1.03;
+  letter-spacing: -0.036em;
+  color: var(--white);
+  text-wrap: balance;
+}
+.home-hero__lede {
+  margin: 26px 0 0;
+  max-inline-size: 60ch;
+  font-size: clamp(16px, 1.45vw, 20px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: color-mix(in oklch, var(--white) 92%, transparent);
+  text-wrap: pretty;
+}
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-start: 36px;
+  & .button { block-size: 52px; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6); }
+}
+
+/* ---------- live offerings ---------- */
+.home-live {
+  padding-block: clamp(72px, 8vw, 120px);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 70%, #EDF4FA 100%);
+  border-block-start: 1px solid var(--base-semi-light);
+}
+.home-live__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+}
+.deal-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-block-size: 440px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  background: linear-gradient(165deg, #0F3457 0%, #081F36 100%) padding-box,
+              linear-gradient(140deg, #ffffff 0%, rgba(127, 184, 224, 0.4) 30%, rgba(11, 43, 72, 0.08) 78%) border-box;
+  box-shadow: 0 18px 40px -26px rgba(11, 43, 72, 0.5);
+  /* status and rendering come from the offering's fields (data attributes set by the loop) */
+  &[data-status="coming_soon"] .deal-card__cta { display: none; }
+  &:not([data-status="coming_soon"]) .deal-card__notify { display: none; }
+  &:not([data-rendering="1"]) .deal-card__rendering { display: none; }
+}
+.deal-card__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  & img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+}
+.deal-card__rendering {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-end: 16px;
+  z-index: 3;
+}
+.deal-card__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(6, 26, 46, 0.94) 0%, rgba(6, 26, 46, 0.94) 46%, rgba(6, 26, 46, 0.68) 57%,
+              rgba(6, 26, 46, 0.24) 67%, transparent 74%);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 38% 0 0;
+    backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 58%);
+  }
+}
+.deal-card__chip {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-start: 16px;
+  z-index: 2;
+}
+.deal-card__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 24px 22px;
+}
+.deal-card__eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.deal-card__title {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-wrap: balance;
+}
+.deal-card__summary {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: color-mix(in oklch, var(--white) 80%, transparent);
+  text-wrap: pretty;
+}
+.deal-card__cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  min-block-size: 44px;
+  margin-block-start: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+  transition: gap 280ms;
+  &:hover { gap: 14px; color: var(--white); }
+  &:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+.deal-card__notify {
+  /* <button> elements: ACSS's button reset (button:not(nav button, [class*="btn--"])) reads these, and outranks a
+     single class, so the values go through its variables */
+  --btn-letter-spacing: 0.13em;
+  --btn-text-transform: uppercase;
+  --btn-font-weight: 700;
+  --btn-font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  min-block-size: 44px;
+  margin-block-start: 2px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  &:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+}
+.deal-card__notified {
+  margin: 2px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--white);
+  &[hidden] { display: none; }
+}
+
+/* ---------- tax-advantaged routes ---------- */
+.home-tax {
+  padding-block: clamp(72px, 8vw, 120px);
+  background: linear-gradient(180deg, #F7FAFD 0%, #EDF4FA 100%);
+  border-block-start: 1px solid var(--base-semi-light);
+}
+.home-tax__intro { margin-block-end: clamp(28px, 3vw, 40px); }
+.home-tax__eyebrow { margin-block-end: 14px; }
+.home-tax__title {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  color: var(--primary-ultra-dark);
+  text-wrap: balance;
+}
+.home-tax__lede {
+  margin: 18px 0 0;
+  max-inline-size: 62ch;
+  font-size: clamp(15.5px, 1.4vw, 17.5px);
+  line-height: 1.74;
+  text-wrap: pretty;
+}
+.home-tax__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  /* three routes side by side; subgrid rows line the parts up across the cards */
+  @media (width >= 64em) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto auto auto 1fr auto auto;
+  }
+}
+.tax-route {
+  position: relative;
+  display: grid;
+  padding: 28px 26px 26px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #FFFFFF 0%, #FDFEFE 54%, #F5F9FD 100%);
+  border: 1px solid rgba(219, 229, 240, 0.7);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.025), 0 10px 28px -16px rgba(11, 43, 72, 0.09), 0 34px 60px -34px rgba(11, 43, 72, 0.13);
+  @media (width >= 64em) { grid-row: span 7; grid-template-rows: subgrid; row-gap: 0; }
+}
+.tax-route__num {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--secondary);
+}
+.tax-route__label {
+  margin: 14px 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--base-semi-dark);
+}
+.tax-route__position {
+  margin: 8px 0 0;
+  font-size: clamp(19px, 1.8vw, 23px);
+  font-weight: 400;
+  line-height: 1.26;
+  letter-spacing: -0.02em;
+  color: var(--primary-ultra-dark);
+  text-wrap: pretty;
+}
+.tax-route__title {
+  margin: 18px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--secondary-dark);
+  text-wrap: pretty;
+}
+.tax-route__body {
+  margin: 10px 0 20px;
+  font-size: 14px;
+  line-height: 1.72;
+  text-wrap: pretty;
+  & sup { font-weight: 700; color: var(--secondary-dark); }
+}
+.tax-route__via {
+  margin: 0 0 18px;
+  padding-block-start: 15px;
+  border-block-start: 1px solid var(--base-semi-light);
+}
+.tax-route__via-label {
+  display: block;
+  margin-block-end: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--base-semi-dark);
+}
+.tax-route__vehicle {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--primary-ultra-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(36, 104, 168, 0.32);
+  text-underline-offset: 3px;
+}
+.tax-route__more {
+  display: inline-flex;
+  align-items: center;
+  align-self: end;
+  justify-self: start;
+  gap: 8px;
+  min-block-size: 44px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--secondary-dark);
+}
+
+/* ---------- past offerings ---------- */
+.home-past {
+  padding-block: clamp(72px, 8vw, 120px);
+  background: var(--base);
+  border-block-start: 1px solid var(--base-semi-light);
+}
+.home-past__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.past-tile {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--primary);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 18px 36px -22px rgba(11, 43, 72, 0.4);
+}
+.past-tile__photo {
+  position: absolute;
+  inset: 0;
+  & img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+}
+.past-tile__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 26, 46, 0) 40%, rgba(6, 26, 46, 0.62) 70%, rgba(6, 26, 46, 0.94) 100%);
+}
+.past-tile__chip {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-start: 14px;
+}
+.past-tile__body {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: grid;
+  gap: 7px;
+  padding: 20px 20px 22px;
+}
+.past-tile__tag {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.past-tile__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  color: var(--white);
+  text-wrap: balance;
+}

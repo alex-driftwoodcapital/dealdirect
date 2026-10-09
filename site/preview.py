@@ -8,7 +8,7 @@ can't be fetched here (live site unreachable from some sessions) fall back to th
 import html, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..')
-sys.path[:0] = [os.path.join(HERE, 'lib')]
+sys.path[:0] = [os.path.join(HERE, 'lib'), os.path.join(HERE, 'pages')]
 import etch
 
 import argparse, svg
@@ -45,6 +45,72 @@ for slug, m in media.items():
 body = open(os.path.join(B, 'content.tpl.html')).read()
 if tpl_markup:
     body = tpl_markup.replace('<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->', body)
+
+
+def offering_items():
+    """Loop data for the preview: every offering module's META (slug + card fields), as Etch would see the posts."""
+    import glob, importlib
+    items = []
+    for f in sorted(glob.glob(os.path.join(HERE, 'pages', 'offering_*.py'))):
+        m = importlib.import_module(os.path.basename(f)[:-3])
+        meta = dict(m.META.get('fields', {}))
+        for k, v in meta.items():
+            mm = re.fullmatch(r'\{\{media:([^}]*)\}\}', str(v))
+            if mm:
+                meta[k] = mm.group(1)
+                media.setdefault(mm.group(1), m.MEDIA[mm.group(1)][0])
+        items.append({'slug': m.META['slug'], 'permalink': {'relative': f"/offering/{m.META['slug']}/"}, 'meta': meta})
+    return items
+
+
+def expand_loops(markup, loops):
+    """Expand etch/loop blocks (nested too) the way the page's LOOPS queries would: meta_query IN on the offerings,
+    ordered by home_order, posts_per_page honoured. {item.x.y} and .equal(a, t, f) are evaluated; nothing else is."""
+    open_re = re.compile(r'<!-- wp:etch/loop (\{.*?\}) -->')
+    m = open_re.search(markup)
+    if not m:
+        return markup
+    depth, i = 1, m.end()
+    while depth:
+        nxt_open, nxt_close = open_re.search(markup, i), markup.find('<!-- /wp:etch/loop -->', i)
+        if nxt_open and nxt_open.start() < nxt_close:
+            depth, i = depth + 1, nxt_open.end()
+        else:
+            depth, i = depth - 1, nxt_close + len('<!-- /wp:etch/loop -->')
+    d = json.loads(m.group(1))
+    inner = markup[m.end():i - len('<!-- /wp:etch/loop -->')]
+    args = loops[d['loopId']]['config']['args']
+    want = args['meta_query'][0]['value']
+    rows = sorted([it for it in ITEMS if it['meta'].get('offering_status') in want], key=lambda it: it['meta'].get('home_order', 0))
+    if args.get('posts_per_page', -1) > 0:
+        rows = rows[:args['posts_per_page']]
+    var = d['itemId']
+
+    def value(it, path):
+        for k in path.split('.'):
+            it = it.get(k, '') if isinstance(it, dict) else ''
+        return str(it)
+
+    def sub(mm):
+        v = value(it, mm.group(1))
+        if mm.group(2):
+            a = re.findall(r'\\"(.*?)\\"', mm.group(2))
+            v = a[1] if v == a[0] else a[2]
+        return v.replace('"', '\\"')
+    out = []
+    for it in rows:
+        out.append(re.sub(r'\{' + var + r'\.([A-Za-z_.]+?)(?:\.equal\((.*?)\))?\}', sub, inner))
+    return markup[:m.start()] + expand_loops(''.join(out), loops) + expand_loops(markup[i:], loops)
+
+
+import importlib
+page_mod = importlib.import_module(page)
+ITEMS = offering_items() if getattr(page_mod, 'LOOPS', None) else []
+for slug in list(media):
+    m_ = media[slug]
+    src = m_['src'] if isinstance(m_, dict) else m_
+    src_of[slug] = os.path.relpath(os.path.join(ROOT, src), B) if not src.startswith('http') else ''
+body = expand_loops(body, getattr(page_mod, 'LOOPS', {}))
 markup = etch.resolve(svg.expand(body, fetch_or_standin), sel2id, {k: k for k in media}, None, src_of)
 STATS = {'{options.acf.years_experience}': '30+', '{options.acf.properties}': '78', '{options.acf.aum}': '~$3.5B',
          '{options.acf.employees.numberFormat()}': '6,000', '{options.acf.as_of}': 'September 1, 2026'}

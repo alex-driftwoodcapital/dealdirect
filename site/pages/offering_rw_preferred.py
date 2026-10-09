@@ -71,5 +71,11 @@ MEDIA = {
     'cover-bg': ('handoff/design/assets/cover-bg.png', 'Brand'),  # 4K original; the deploy compresses it with the Etch preset
 }
 
-META = {'kind': 'offering', 'title': 'Riverside Wharf Preferred Equity', 'slug': 'riverside-wharf-preferred-equity',
-        'status': 'publish'}  # frozen permalink /offering/riverside-wharf-preferred-equity/ (handoff/docs/permalinks.md)
+COPY_SOURCE = 'DealDirect Home.dc.html'  # card field values below are checked against it (copy gate)
+META = {'kind': 'offering', 'title': 'Riverside Wharf Miami – Preferred Equity', 'slug': 'riverside-wharf-preferred-equity',
+        'status': 'publish',
+        'fields': {  # Home card (DealDirect Home.dc.html live data, key riverside-wharf-preferred-equity)
+            'offering_status': 'open', 'offering_tag': 'Preferred Equity', 'card_title': 'Riverside Wharf Miami',
+            'card_summary': 'A transformative hospitality & entertainment development in the heart of Downtown Miami',
+            'card_image': '{{media:Riverside-Wharf_View-from-River}}', 'card_cta_label': 'View Offering', 'card_rendering': 1, 'home_order': 1,
+        }}  # frozen permalink /offering/riverside-wharf-preferred-equity/ (handoff/docs/permalinks.md)

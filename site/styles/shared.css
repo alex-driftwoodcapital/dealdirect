@@ -26,6 +26,12 @@
 }
 
 .button {
+  /* <button> elements: ACSS's button reset (button:not(nav button, [class*="btn--"])) reads these, and outranks a
+     single class, so the values go through its variables */
+  --btn-letter-spacing: 0.13em;
+  --btn-text-transform: uppercase;
+  --btn-font-weight: 700;
+  --btn-font-family: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;

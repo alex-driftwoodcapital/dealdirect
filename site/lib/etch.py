@@ -87,9 +87,30 @@ class Img(Node):
         self.name, self.media, self.alt, self.loading = name, media, alt, loading
 
     def render(self):
-        attrs = {'mediaId': '{{media:%s}}' % self.media, 'useSrcSet': 'true', 'loading': self.loading, 'alt': self.alt}
+        # media: a slug from the page's MEDIA, or a dynamic expression such as "{item.meta.card_image}"
+        mid = self.media if self.media.startswith('{') else '{{media:%s}}' % self.media
+        attrs = {'mediaId': mid, 'useSrcSet': 'true', 'loading': self.loading, 'alt': self.alt}
         d = {'metadata': {'name': self.name}, 'tag': 'img', 'attributes': attrs}
         return '<!-- wp:etch/dynamic-image ' + _json(d) + ' -->\n\n<!-- /wp:etch/dynamic-image -->'
+
+
+class Loop(Node):
+    """Etch loop (fixtures/pages/work.html): `loop_id` is the key of its record in the etch_loops option (the page's
+    LOOPS, upserted by the deploy); children render once per item, reading `{<item>.field}` expressions."""
+    def __init__(self, name, loop_id, item, children):
+        self.name, self.loop_id, self.item = name, loop_id, item
+        self.children = [Text(c) if isinstance(c, str) else c for c in children]
+
+    def render(self):
+        d = {'metadata': {'name': self.name}, 'loopId': self.loop_id, 'itemId': self.item}
+        inner = '\n'.join(c.render() for c in self.children)
+        return '<!-- wp:etch/loop ' + _json(d) + ' -->\n' + inner + '\n<!-- /wp:etch/loop -->'
+
+    def texts(self):
+        return [t for c in self.children for t in c.texts()]
+
+    def classes(self):
+        return [x for c in self.children for x in c.classes()]
 
 
 class Component(Node):

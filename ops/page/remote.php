@@ -160,6 +160,40 @@ if ( $action === 'media' ) {
 	}
 	if ( $write && $changed ) { update_option( 'etch_styles', $styles ); }
 	$out = [ 'records' => $out, 'changed' => $changed, 'written' => $write && $changed > 0 ];
+} elseif ( $action === 'loops' ) {
+	// $in: {id: record}. Etch loop records in the etch_loops option (fixtures/loops-used.json shape: key, name, global,
+	// config{type, args}). Upsert by id; a record whose 'key' is already used under another id is refused, never guessed.
+	$loops = get_option( 'etch_loops', [] );
+	$loops = is_array( $loops ) ? $loops : [];
+	$changed = 0;
+	foreach ( $in as $id => $rec ) {
+		foreach ( $loops as $oid => $o ) {
+			if ( $oid !== $id && ( $o['key'] ?? '' ) === $rec['key'] ) { WP_CLI::error( "loop key {$rec['key']} already used by loop $oid" ); }
+		}
+		$same = isset( $loops[ $id ] ) && wp_json_encode( $loops[ $id ] ) === wp_json_encode( $rec );
+		$out[ $id ] = [ 'key' => $rec['key'], 'status' => $same ? 'same' : ( isset( $loops[ $id ] ) ? 'update' : 'add' ) ];
+		if ( ! $same ) { $loops[ $id ] = $rec; $changed++; }
+	}
+	if ( $write && $changed ) { update_option( 'etch_loops', $loops ); }
+	$out = [ 'loops' => $out, 'changed' => $changed, 'written' => $write && $changed > 0 ];
+} elseif ( $action === 'fields' ) {
+	// $in: {id, fields: {name: value}}. SCF fields of an offering (field keys field_dd_<name>, dealdirect-core), written
+	// with update_field so SCF stores its reference meta too. Reports each change; writes only in write mode.
+	if ( ! function_exists( 'update_field' ) ) { WP_CLI::error( 'Secure Custom Fields is not active' ); }
+	foreach ( array_keys( $in['fields'] ) as $name ) {
+		// an unknown key would be saved as a meta named "field_dd_<name>" (SCF falls back to it): refuse instead
+		if ( ! acf_get_field( 'field_dd_' . $name ) ) { WP_CLI::error( "field $name is not registered (dealdirect-core not deployed?)" ); }
+	}
+	foreach ( $in['fields'] as $name => $value ) {
+		// Compare with what is stored, not get_field(): it returns the field's default (e.g. status "open") when nothing is
+		// saved, and an unsaved field is invisible to the Home loops' meta_query.
+		$id   = (int) $in['id'];
+		$cur  = get_post_meta( $id, $name, true );
+		$same = metadata_exists( 'post', $id, $name ) && get_post_meta( $id, '_' . $name, true ) === 'field_dd_' . $name
+			&& (string) ( is_array( $cur ) ? wp_json_encode( $cur ) : $cur ) === (string) ( is_array( $value ) ? wp_json_encode( $value ) : $value );
+		$out[ $name ] = $same ? 'same' : ( $write ? 'set' : 'would set' );
+		if ( ! $same && $write ) { update_field( 'field_dd_' . $name, $value, (int) $in['id'] ); }
+	}
 } elseif ( $action === 'page' ) {
 	// $in: {slug, post_type}. The post with that slug (any status; for wp_template only the active theme's), and the
 	// sha we recorded at our last deploy. explicit statuses: 'any' skips drafts when WP-CLI runs logged out.
@@ -209,9 +243,14 @@ if ( $action === 'media' ) {
 	$out = [ 'active_theme' => get_stylesheet(), 'posts' => $out, 'asset_storage' => [ 'attachment_taxonomies' => $tax, 'options' => $opts, 'post_types' => $types, 'attachment_meta' => $meta ], 'etch_compressor' => $compressor ];
 } elseif ( $action === 'status' ) {
 	// $in: {id, status}. Staging pages are published on Alex's word (2026-10-08); live is never written from here.
-	$cur = get_post_status( (int) $in['id'] );
-	if ( $write && $cur !== $in['status'] ) { wp_update_post( [ 'ID' => (int) $in['id'], 'post_status' => $in['status'] ] ); }
-	$out = [ 'from' => $cur, 'to' => $in['status'], 'changed' => $write && $cur !== $in['status'] ];
+	// $in may carry title: META's title is kept in sync too (live post titles, e.g. "Riverside Wharf Miami – Preferred Equity").
+	$cur   = get_post_status( (int) $in['id'] );
+	$title = get_the_title( (int) $in['id'] );
+	$retitle = isset( $in['title'] ) && html_entity_decode( $title, ENT_QUOTES, 'UTF-8' ) !== $in['title'];
+	if ( $write && ( $cur !== $in['status'] || $retitle ) ) {
+		wp_update_post( array_merge( [ 'ID' => (int) $in['id'], 'post_status' => $in['status'] ], $retitle ? [ 'post_title' => $in['title'] ] : [] ) );
+	}
+	$out = [ 'from' => $cur, 'to' => $in['status'], 'changed' => $write && $cur !== $in['status'], 'title' => $retitle ? ( $write ? 'retitled' : 'would retitle' ) : 'same' ];
 } elseif ( $action === 'mark' ) {
 	// $in: {id, sha}. Record what we wrote, so the next deploy can tell a builder save from our own content.
 	if ( $write ) { update_post_meta( (int) $in['id'], '_dd_deployed_sha', $in['sha'] ); }

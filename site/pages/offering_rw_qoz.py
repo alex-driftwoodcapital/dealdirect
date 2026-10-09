@@ -133,4 +133,10 @@ MEDIA = {
     **{W + s: (UP + W + s + '.jpg', 'Riverside Wharf') for _, suffixes in GALLERIES for s in suffixes},
 }
 
-META = {'kind': 'offering', 'title': 'Riverside Wharf QOZ', 'slug': 'riverside-wharf-qoz', 'status': 'publish'}
+COPY_SOURCE = 'DealDirect Home.dc.html'  # card field values below are checked against it (copy gate)
+META = {'kind': 'offering', 'title': 'Riverside Wharf Miami – QOZ Common Equity', 'slug': 'riverside-wharf-qoz', 'status': 'publish',
+        'fields': {  # Home card (DealDirect Home.dc.html live data, key riverside-wharf-qoz); the summary is the design's placeholder
+            'offering_status': 'coming_soon', 'offering_tag': 'QOZ', 'card_title': 'Riverside Wharf Miami',
+            'card_summary': '[Summary from offering CPT]', 'card_image': '{{media:Riverside-Wharf_Pooldeck}}', 'card_cta_label': '',
+            'card_rendering': 1, 'home_order': 2,
+        }}

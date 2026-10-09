@@ -48,4 +48,5 @@ for slug, v in mod.MEDIA.items():
     media[slug] = {'src': src, 'collection': coll, **({'name': name} if name else {})}
 json.dump(media, open(os.path.join(out, 'media.json'), 'w'), indent=1)
 json.dump(getattr(mod, 'META', {}), open(os.path.join(out, 'meta.json'), 'w'), indent=1, ensure_ascii=False)
+json.dump(getattr(mod, 'LOOPS', {}), open(os.path.join(out, 'loops.json'), 'w'), indent=1, ensure_ascii=False)
 print(f'{a.page}: {len(classes)} classes, {len(mod.MEDIA)} media -> {os.path.relpath(out)}')
