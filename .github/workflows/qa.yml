@@ -1,7 +1,8 @@
 # Staging QA in a real browser, read-only (GETs only): after every staging deploy from main, or on demand
 # (Actions tab > "QA" > Run workflow). Results (report.md + screenshots at 375/768/1440) are pushed to the branch
 # qa/latest so cloud sessions can read them, and shown in the run summary. Secrets: STAGING_HTTP_USER /
-# STAGING_HTTP_PASSWORD (Cloudways password protection).
+# STAGING_HTTP_PASSWORD (Cloudways password protection). Also runs the live-vs-staging crawl diff (ops/qa/crawl.mjs:
+# every live sitemap/REST URL on both sites; GETs only on live) into crawl.md on the same branch.
 name: QA
 
 on:
@@ -41,10 +42,15 @@ jobs:
         id: check
         run: node ops/qa/check.mjs
         continue-on-error: true
+      - name: Crawl diff, live vs staging
+        id: crawl
+        run: node ops/qa/crawl.mjs
+        continue-on-error: true
       - name: Push results to qa/latest
         if: always()
         run: |
           cat qa-out/report.md >> "$GITHUB_STEP_SUMMARY"
+          cat qa-out/crawl.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
           sha=$(git rev-parse --short HEAD)
           mv qa-out /tmp/qa-out
           git config user.name "github-actions[bot]"
@@ -56,5 +62,5 @@ jobs:
           git commit -q -m "chore: staging QA for $sha ($(date -u +%Y-%m-%dT%H:%MZ))"
           git push -f origin HEAD:qa/latest
       - name: Fail on problems
-        if: steps.check.outcome == 'failure'
+        if: steps.check.outcome == 'failure' || steps.crawl.outcome == 'failure'
         run: exit 1
