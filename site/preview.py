@@ -22,12 +22,16 @@ tpl_markup = None
 if args.template:
     T = os.path.join(ROOT, 'build', args.template)
     tpl_markup = open(os.path.join(T, 'content.tpl.html')).read()
-    for slug_mod in sorted(set(re.findall(r'\{\{ref:([^}]*)\}\}', tpl_markup))):
+
+
+def expand_components(markup):
+    """Components (template's or page's own) expanded in place, their style records added."""
+    for slug_mod in sorted(set(re.findall(r'\{\{ref:([^}]*)\}\}', markup))):
         mod_dir = os.path.join(ROOT, 'build', slug_mod.replace('-', '_'))
         records.update(json.load(open(os.path.join(mod_dir, 'records.json'))))
         part = open(os.path.join(mod_dir, 'content.tpl.html')).read()
-        tpl_markup = re.sub(r'<!-- wp:etch/component \{[^>]*"\{\{ref:%s\}\}"[^>]*-->\s*<!-- /wp:etch/component -->' % re.escape(slug_mod), lambda m: part, tpl_markup)
-
+        markup = re.sub(r'<!-- wp:etch/component \{[^>]*"\{\{ref:%s\}\}"[^>]*-->\s*<!-- /wp:etch/component -->' % re.escape(slug_mod), lambda m: part, markup)
+    return markup
 
 def fetch_or_standin(url):
     try:
@@ -45,6 +49,8 @@ for slug, m in media.items():
 body = open(os.path.join(B, 'content.tpl.html')).read()
 if tpl_markup:
     body = tpl_markup.replace('<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->', body)
+body = expand_components(body)
+sel2id = {v['selector']: k for k, v in {**records, **builtin}.items()}  # with the components' records
 
 
 def offering_items():

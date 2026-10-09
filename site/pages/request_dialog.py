@@ -23,7 +23,7 @@ DYNAMIC_COPY = {q('Riverside Wharf Preferred Equity'), q(DONE_TEXT)}
 
 SCRIPT = r"""// request-dialog: registration / offering request (handoff/docs/hubspot-setup-steps.md). Scoped; no globals.
 (() => {
-  const dlg = document.querySelector('.dd-dialog');
+  const dlg = document.querySelector('[data-dialog="request"]');
   if (!dlg) return;
   const API = '/wp-json/dealdirect/v1/';
   const $ = (s, el = dlg) => el.querySelector(s);
@@ -87,6 +87,8 @@ SCRIPT = r"""// request-dialog: registration / offering request (handoff/docs/hu
   });
   if (location.hash === '#request' && document.querySelector('main[data-page-name]')) {
     open(document.querySelector('a[href="#request"]') || document.body);
+  } else if (location.hash === '#signup') {  // other pages' "Start Investing" links to /#signup
+    open(document.querySelector('[data-modal-open="registration"]:not([data-page-uri])') || document.body);
   }
 
   const done = () => {
@@ -238,7 +240,7 @@ finished = El('div', 'Done', 'dd-dialog__view', {'data-view': 'done', 'hidden': 
 ])
 
 PAGE = [
-    El('dialog', 'Request dialog', 'dd-dialog', {'aria-labelledby': 'dd-step0-h'}, script=SCRIPT, children=[
+    El('dialog', 'Request dialog', 'dd-dialog', {'data-dialog': 'request', 'aria-labelledby': 'dd-step0-h'}, script=SCRIPT, children=[
         El('div', 'Panel', 'dd-dialog__panel', children=[
             El('button', 'Close', 'dd-dialog__close', {'type': 'button', 'aria-label': 'Close', 'data-close': ''}, [q('×')]),
             El('p', 'Offering', 'dd-dialog__eyebrow', {'data-dd-name': '', 'hidden': ''}),
@@ -247,7 +249,7 @@ PAGE = [
     ]),
 ]
 
-STYLESHEETS = ['shared']
+STYLESHEETS = ['shared', 'dialog']
 # Not design copy: the step labels and Next/Submit (design script data: rqSteps, rqNextLabel), the period after the
 # offering name, and the start of the done sentence (design: "...details for <offering name>.", name filled at runtime).
 NON_DESIGN = set(STEPS) | {'Next', 'Submit', '.', DONE_TEXT}

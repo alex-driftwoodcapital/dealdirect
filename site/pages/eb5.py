@@ -1,10 +1,10 @@
 """EB-5 Investments (/eb-5-investments/): Etch build of handoff/design/EB-5 Investments.dc.html.
 Section order, anchors and copy follow the design; every string comes from the design file via q().
 Header, footer and the registration dialog are site-wide pieces built separately: CTAs that open the
-dialog carry data-modal-open="eb5-register"."""
+dialog carry data-modal-open="eb5-register" (the EB-5 dialog component, site/pages/eb5_dialog.py, ends the page)."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
-from etch import El, Img, section
+from etch import El, Img, Component, section
 from design import Copy
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'EB-5 Investments.dc.html')
@@ -258,7 +258,8 @@ cta = section('Get started', 'cta-band', 'cta-h', [
     ]),
 ])
 
-PAGE = [hero, benefits, reqs, offerings, program, process, driftwood, track, faq, legal, cta]
+PAGE = [hero, benefits, reqs, offerings, program, process, driftwood, track, faq, legal, cta,
+        Component('EB-5 dialog', 'eb5-dialog')]  # site/pages/eb5_dialog.py; opened by data-modal-open="eb5-register"
 
 # Strings on the page that are not design copy: arrows, numbering, the approx sign the design's <dw-stat approx> renders,
 # and the prior-project data from the design script.
