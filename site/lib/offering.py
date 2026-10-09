@@ -246,7 +246,8 @@ class Offering:
     def webinar(video_src, video_title, poster=None, poster_alt='', extra=None):
         frame = [Img('Poster', poster, poster_alt)] if poster else []
         return section('Webinar', 'offering-video', None, [
-            Img('Background', 'cover-bg', ''),
+            # eager: as a lazy image Chrome never requested it at 768 (QA, 2026-10-09: "HTTP not requested")
+            Img('Background', 'cover-bg', '', loading='eager'),
             El('div', 'Frame', 'offering-video__frame', {'data-video-src': video_src, 'data-video-title': video_title},
                script=VIDEO_SCRIPT, children=frame + [
                 El('button', 'Play', 'offering-video__play', {'type': 'button', 'aria-label': 'Play video'}, [

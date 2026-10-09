@@ -286,7 +286,8 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
     ] + legal_extra[1:], attrs={'id': 'legal'})
     cta = section('Get started', 'cta-band', 'cta-h', [
         El('div', 'Card', 'cta-band__card', children=[
-            Img('Background', 'eb5-flag-wood-wide', ''),
+            # eager: as a lazy image Chrome never requested it at 1440 (QA, 2026-10-09: "HTTP not requested")
+            Img('Background', 'eb5-flag-wood-wide', '', loading='eager'),
             El('div', 'Scrim', 'cta-band__scrim', {'aria-hidden': 'true'}),
             El('div', 'Copy', 'cta-band__copy', children=[
                 El('h2', 'Heading', 'cta-band__title', {'id': 'cta-h'}, [q('Ready to get started?')]),
