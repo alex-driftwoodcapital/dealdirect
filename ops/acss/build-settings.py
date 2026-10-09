@@ -43,7 +43,10 @@ SHADES = {
 
 s = {}
 for name, hx in COLORS.items():
+    # ACSS 4.0.1 builds each colour from <color>-{l,c,h}-oklch; color-<name> (hex) is only what the dashboard shows,
+    # so writing it alone left staging on the previous build's palette (teal --primary, QA 2026-10-09).
     s[f'color-{name}'] = hx
+    s[f'{name}-l-oklch'], s[f'{name}-c-oklch'], s[f'{name}-h-oklch'] = oklch(hx)
     s[f'option-{name}-clr'] = 'on'
 for name, shades in SHADES.items():
     for shade, hx in shades.items():
