@@ -105,8 +105,8 @@
 }
 .deal-card__rendering {
   position: absolute;
-  inset-block-start: 16px;
-  inset-inline-end: 16px;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
   z-index: 3;
 }
 .deal-card__veil {
@@ -126,8 +126,8 @@
 }
 .deal-card__chip {
   position: absolute;
-  inset-block-start: 16px;
-  inset-inline-start: 16px;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
   z-index: 2;
 }
 .deal-card__body {
@@ -372,8 +372,8 @@
 }
 .past-tile__chip {
   position: absolute;
-  inset-block-start: 14px;
-  inset-inline-start: 14px;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
 }
 .past-tile__body {
   position: absolute;

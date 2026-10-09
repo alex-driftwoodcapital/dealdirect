@@ -104,11 +104,11 @@
     transition: transform 600ms cubic-bezier(.2,.7,.2,1);
   }
   &:hover img { transform: scale(1.04); }
-  & .rendering-chip { position: absolute; inset-block-end: 12px; inset-inline-start: 12px; z-index: 1; }
+  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
   @media (max-width: 767px) {
     border-radius: 14px;
     &:first-child { grid-column: span 2; grid-row: span 2; }
-    & .rendering-chip { inset-block-end: 8px; inset-inline-start: 8px; padding: 4px 8px; }
+    & .rendering-chip { inset-block-start: 8px; inset-inline-end: 8px; padding: 3px 8px; }
   }
   @media (min-width: 768px) {
     /* 19 tiles fill 7 rows of 4: two large (1st, 10th), three wide (4th, 15th, 19th) */
@@ -300,7 +300,7 @@
   gap: var(--space-l);
   align-items: start;
 }
-.qoz-hospitality__media { min-block-size: 360px; & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; } }
+.qoz-hospitality__media { min-block-size: 360px; & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; } }
 
 /* quick comparison: the article's QOZ 1.0 / 2.0 table, always open; rows stack into labelled cards below 768px */
 .qoz-quick {
