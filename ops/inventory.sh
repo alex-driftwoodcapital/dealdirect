@@ -53,5 +53,17 @@ if [ -f "$OUT/live/rest/offering.json" ]; then
     name="offering__$(basename "$u")"; [ -f "$OUT/live/pages/$name.html" ] || get -o "$OUT/live/pages/$name.html" "$u" || true
   done
 fi
+# extra copy sources (ops/sources.txt): public GETs, rendered HTML + the WP REST post when exposed
+mkdir -p "$OUT/sources"
+[ -f "$ROOT/ops/sources.txt" ] && grep -v '^\s*#' "$ROOT/ops/sources.txt" | sed 's/#.*//' | while read -r u; do
+  [ -n "$u" ] || continue
+  host=$(echo "$u" | sed -E 's#https?://([^/]+).*#\1#'); slug=$(basename "${u%/}")
+  code=$(curl -s -o "$OUT/sources/${host}__${slug}.html" -w '%{http_code}' -A "$UA" -L "$u" || true)
+  echo "  $code $u"
+  for t in posts pages; do
+    get -o "$OUT/sources/${host}__${slug}.$t.json" "https://$host/wp-json/wp/v2/$t?slug=$slug" || true
+    grep -q '"id"' "$OUT/sources/${host}__${slug}.$t.json" 2>/dev/null || rm -f "$OUT/sources/${host}__${slug}.$t.json"
+  done
+done
 echo "== done: $OUT"
 ls -R "$OUT" | head -60

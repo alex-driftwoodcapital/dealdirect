@@ -1,0 +1,4 @@
+# Extra public pages used as copy sources (CLAUDE.md rule 1: copy is lifted verbatim), fetched read-only by
+# ops/inventory.sh into inventory/<date>/sources/: the rendered HTML, plus the WordPress REST record when the site has one.
+# One URL per line; who asked for it and when after the #.
+https://driftwoodcapital.com/opportunity-zones-program-explained/   # Alex, 2026-10-09: QOZ information for /offering/riverside-wharf-qoz/
