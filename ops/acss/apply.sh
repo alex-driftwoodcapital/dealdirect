@@ -23,5 +23,5 @@ r "wp eval-file $TMP/apply.php $TMP/settings.json write; rm -rf $TMP"
 r "$PURGE_CMD" >/dev/null 2>&1 || true
 after=$(css_sha)
 echo "automatic.css sha: $before -> $after"
-[ "$before" != "$after" ] && echo "stylesheet regenerated" || echo "NOT regenerated yet: open WP Admin > Automatic.css dashboard and click Save once, then re-run the inventory to rebuild the index"
-echo "rollback: wp option update <option> --format=json < ~/backups/<option>-$STAMP.json (on the host), then Save in the ACSS dashboard"
+[ "$before" != "$after" ] && echo "stylesheet changed" || echo "stylesheet unchanged"
+echo "rollback: wp option update <option> --format=json < ~/backups/<option>-$STAMP.json (on the host), then wp acss css regenerate"
