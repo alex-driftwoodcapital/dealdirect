@@ -15,6 +15,7 @@ PAGE = build(q, TRACK, alt_texts(DESIGN))
 # Strings on the page that are not design copy: arrows, numbering, the approx sign the design's <dw-stat approx> renders,
 # and the prior-project data from the design script.
 NON_DESIGN = {'→', '+', '±', '1', '2', '1.', '2.', '3.', '4.', '5.'} | {v for t in TRACK for v in t[:6]}
+STYLESHEETS = ['shared', 'eb5_layout']  # the EB-5 pages share eb5_layout.css
 MEDIA = media(DESIGN)  # slug -> (source, Etch Asset Manager collection)
 
 META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments', 'status': 'publish'}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)

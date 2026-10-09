@@ -1,5 +1,5 @@
-/* Style records for the EB-5 page. One top-level rule per class = one etch_styles record (body = record css,
-   nesting with &). ACSS variables first; literal values only where the design has no ACSS token.
+/* Library sheet for the EB-5 pages (eb5, eb5_new, the ES/PT pages): all built by site/lib/eb5_page.py, so they share
+   these records. One top-level rule per class = one etch_styles record (body = record css, nesting with &). ACSS variables first; literal values only where the design has no ACSS token.
    Values from handoff/design/EB-5 Investments.dc.html and handoff/README.md (design tokens). */
 
 /* ---------- page sections ---------- */
