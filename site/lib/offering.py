@@ -7,12 +7,18 @@ from etch import El, Img, section
 ARROW = El('span', 'Arrow', attrs={'aria-hidden': 'true'}, children=['→'])
 UP = 'https://driftwooddealdirect.com/wp-content/uploads/'
 
-HERO_SCRIPT = """// offering-hero: muted background loop; never plays under prefers-reduced-motion (QA checklist). Scoped; no globals.
+HERO_SCRIPT = """// offering-hero: muted background loop on wider screens; never under prefers-reduced-motion (QA checklist). Scoped; no globals.
 const video = document.querySelector('.offering-hero__video');
-if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  video.muted = true;
-  video.preload = 'auto';
-  video.play().catch(() => {});
+if (video) {
+  // Plays only where it is cheap: wider screens, no reduced motion, no data saver. Phones keep the poster (the video is
+  // ~10 MB). While the hero is off screen the video pauses, so it is not decoded while the page scrolls.
+  const ok = window.matchMedia('(min-width: 768px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !(navigator.connection && navigator.connection.saveData);
+  if (ok) {
+    video.muted = true;
+    video.preload = 'auto';
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }).observe(video);
+  }
 }
 """
 VIDEO_SCRIPT = """// offering-video: replace the poster with the Vimeo player on click (no third-party request before that). Scoped.

@@ -116,13 +116,6 @@
   pointer-events: none;
   background: linear-gradient(to top, rgba(6, 26, 46, 0.94) 0%, rgba(6, 26, 46, 0.94) 46%, rgba(6, 26, 46, 0.68) 57%,
               rgba(6, 26, 46, 0.24) 67%, transparent 74%);
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 38% 0 0;
-    backdrop-filter: blur(12px);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 58%);
-  }
 }
 .deal-card__chip {
   position: absolute;

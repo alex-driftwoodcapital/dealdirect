@@ -86,8 +86,8 @@ if ( $action === 'media' ) {
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND (meta_value = %s OR meta_value LIKE %s) ORDER BY post_id LIMIT 1",
 			$name, '%/' . $wpdb->esc_like( $name ) ) );
 		$status = $id ? 'exists' : 'imported';
+		$is_image = (bool) preg_match( '/\.(jpe?g|png|webp|avif)$/i', $name );
 		if ( ! $id ) {
-			$is_image = (bool) preg_match( '/\.(jpe?g|png|webp|avif)$/i', $name );
 			if ( $is_image && $preset === null ) {
 				$preset = dd_preset( $in['preset'] ?? null );
 				// None saved yet and no name asked for: create the repo's starting preset (ops/page/compression-preset.json)
@@ -125,6 +125,41 @@ if ( $action === 'media' ) {
 			if ( is_wp_error( $id ) ) { $out[ $slug ] = [ 'id' => null, 'status' => 'ERROR ' . $id->get_error_message() ]; continue; }
 			update_post_meta( $id, '_dd_source', $name );
 			if ( $is_image ) { update_post_meta( $id, '_dd_preset', $preset ); }
+		}
+		// An image imported before compression (or uploaded by hand) that is not yet in the preset's format: re-encode it
+		// in place with the Etch preset, keeping the attachment id (pages and card fields point at the id), regenerate its
+		// sizes, and move the old original and its sizes to ~/backups/originals (outside the web root) instead of deleting.
+		if ( $status === 'exists' && $is_image && wp_attachment_is_image( $id ) && ! get_post_meta( $id, '_dd_preset', true ) ) {
+			if ( $preset === null ) { $preset = dd_preset( $in['preset'] ?? null ); }
+			$want = [ 'webp' => 'image/webp', 'avif' => 'image/avif', 'jpeg' => 'image/jpeg', 'png' => 'image/png' ][ is_wp_error( $preset ) ? '' : ( $preset['outputFormat'] ?? 'webp' ) ] ?? null;
+			$old  = get_attached_file( $id );
+			if ( $want && $old && file_exists( $old ) && get_post_mime_type( $id ) !== $want ) {
+				$kb = (int) ( filesize( $old ) / 1024 );
+				if ( ! $write ) {
+					$status = sprintf( 'exists, would recompress %s (%s, %d KB, %s)', basename( $old ), get_post_mime_type( $id ), $kb, dd_preset_label( $preset ) );
+				} else {
+					$c = dd_compress( $old, basename( $old ), $preset );
+					if ( is_wp_error( $c ) ) { $out[ $slug ] = [ 'id' => $id, 'status' => 'ERROR recompress ' . $c->get_error_message() ]; continue; }
+					[ $tmpfile, $new_name ] = $c;
+					$dir    = dirname( $old );
+					$target = $dir . '/' . wp_unique_filename( $dir, $new_name );
+					if ( ! @rename( $tmpfile, $target ) ) { $out[ $slug ] = [ 'id' => $id, 'status' => "ERROR recompress: cannot write $target" ]; continue; }
+					$bak = rtrim( (string) getenv( 'HOME' ), '/' ) . '/backups/originals/' . $id;
+					wp_mkdir_p( $bak );
+					$meta = wp_get_attachment_metadata( $id );
+					foreach ( (array) ( $meta['sizes'] ?? [] ) as $sz ) {
+						if ( ! empty( $sz['file'] ) && file_exists( "$dir/{$sz['file']}" ) ) { @rename( "$dir/{$sz['file']}", "$bak/{$sz['file']}" ); }
+					}
+					@rename( $old, $bak . '/' . basename( $old ) );
+					if ( ! empty( $meta['original_image'] ) && file_exists( "$dir/{$meta['original_image']}" ) ) { @rename( "$dir/{$meta['original_image']}", "$bak/{$meta['original_image']}" ); }
+					update_attached_file( $id, $target );
+					wp_update_post( [ 'ID' => $id, 'post_mime_type' => $want ] );
+					wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $target ) );
+					update_post_meta( $id, '_dd_preset', $preset );
+					update_post_meta( $id, '_dd_source', $name );  // the next run finds it by its source name, not the new file
+					$status = sprintf( 'recompressed %s -> %s (%s, %d KB -> %d KB; original in %s)', basename( $old ), basename( $target ), dd_preset_label( $preset ), $kb, filesize( $target ) / 1024, $bak );
+				}
+			}
 		}
 		$has = has_term( $coll, $tax, $id );
 		if ( ! $has && $write ) {

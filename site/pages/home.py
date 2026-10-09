@@ -13,12 +13,18 @@ DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design'
 q = Copy(DESIGN)
 COPY_SOURCE = 'DealDirect Home.dc.html'  # literals inside the card expressions are checked against it
 
-HERO_SCRIPT = """// home-hero: muted background loop; never plays under prefers-reduced-motion (QA checklist). Scoped; no globals.
+HERO_SCRIPT = """// home-hero: muted background loop on wider screens; never under prefers-reduced-motion (QA checklist). Scoped; no globals.
 const video = document.querySelector('.home-hero__video');
-if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  video.muted = true;
-  video.preload = 'auto';
-  video.play().catch(() => {});
+if (video) {
+  // Plays only where it is cheap: wider screens, no reduced motion, no data saver. Phones keep the poster (the video is
+  // ~10 MB). While the hero is off screen the video pauses, so it is not decoded while the page scrolls.
+  const ok = window.matchMedia('(min-width: 768px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !(navigator.connection && navigator.connection.saveData);
+  if (ok) {
+    video.muted = true;
+    video.preload = 'auto';
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }).observe(video);
+  }
 }
 """
 hero = section('Hero', 'home-hero', 'home-hero-h', [
