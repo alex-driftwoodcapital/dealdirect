@@ -66,8 +66,11 @@ s.update({
     'heading-color': 'var(--primary-ultra-dark)',
     'body-color': '#48535F',
     'body-bg-color': 'var(--white)',
-    # Type scale, desktop max / mobile min (px)
-    'h1-max': 88, 'h1-min': 42, 'h2-max': 56, 'h2-min': 30, 'h3-max': 32, 'h3-min': 24, 'h4-max': 18, 'h4-min': 17,
+    # Type scale, desktop max / mobile min (px), from the designs' sizes. Page CSS uses only these tokens
+    # (var(--h2), var(--text-m)...); site/build.py refuses literal font sizes. h2 = the section titles (28-46),
+    # text-xxl = the big stat figures (28-38), text-xl = card titles and big ledes (18-23).
+    'h1-max': 88, 'h1-min': 42, 'h2-max': 46, 'h2-min': 28, 'h3-max': 32, 'h3-min': 24, 'h4-max': 18, 'h4-min': 17,
+    'text-xxl-max': 38, 'text-xxl-min': 28, 'text-xl-max': 23, 'text-xl-min': 18,
     'text-l-max': 20, 'text-l-min': 16, 'text-m-max': 16, 'text-m-min': 15, 'text-s-max': 14, 'text-s-min': 14,
     'text-xs-max': 12, 'text-xs-min': 12,
     # Layout: content width 1334, gutter 32 desktop

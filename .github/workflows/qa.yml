@@ -1,0 +1,60 @@
+# Staging QA in a real browser, read-only (GETs only): after every staging deploy from main, or on demand
+# (Actions tab > "QA" > Run workflow). Results (report.md + screenshots at 375/768/1440) are pushed to the branch
+# qa/latest so cloud sessions can read them, and shown in the run summary. Secrets: STAGING_HTTP_USER /
+# STAGING_HTTP_PASSWORD (Cloudways password protection).
+name: QA
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Staging]
+    types: [completed]
+    branches: [main]
+
+concurrency:
+  group: qa
+  cancel-in-progress: true
+
+permissions:
+  contents: write   # pushes the qa/latest branch only
+
+jobs:
+  qa:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      QA_BASE_URL: https://wordpress-1077248-6717515.cloudwaysapps.com
+      QA_HTTP_USER: ${{ secrets.STAGING_HTTP_USER }}
+      QA_HTTP_PASSWORD: ${{ secrets.STAGING_HTTP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Playwright
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright@1.47.2
+          npx playwright install --with-deps chromium
+      - name: Check staging
+        id: check
+        run: node ops/qa/check.mjs
+        continue-on-error: true
+      - name: Push results to qa/latest
+        if: always()
+        run: |
+          cat qa-out/report.md >> "$GITHUB_STEP_SUMMARY"
+          sha=$(git rev-parse --short HEAD)
+          mv qa-out /tmp/qa-out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q --orphan qa-latest
+          git rm -rfq .
+          cp -r /tmp/qa-out/. .
+          git add -A
+          git commit -q -m "chore: staging QA for $sha ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push -f origin HEAD:qa/latest
+      - name: Fail on problems
+        if: steps.check.outcome == 'failure'
+        run: exit 1

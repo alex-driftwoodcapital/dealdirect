@@ -161,12 +161,29 @@ css = []
 for rec in {**builtin, **records}.values():
     if rec['css']:
         css.append(f"{rec['selector']} {{\n{rec['css']}\n}}")
+def type_scale():
+    """The DealDirect type tokens (--h1..--h6, --text-xs..--text-xxl) from ops/acss/dealdirect-settings.json, computed
+    the way ACSS does (fluid clamp between vp-min and vp-max), plus the self-hosted Plus Jakarta Sans."""
+    st = json.load(open(os.path.join(ROOT, 'ops', 'acss', 'dealdirect-settings.json')))
+    lo, hi = float(st['vp-min']), float(st['vp-max'])
+    out = []
+    for t in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'text-xxl', 'text-xl', 'text-l', 'text-m', 'text-s', 'text-xs']:
+        if f'{t}-min' in st and f'{t}-max' in st and str(st[f'{t}-min']) != '':
+            a, b = float(st[f'{t}-min']), float(st[f'{t}-max'])
+            slope = (b - a) / (hi - lo)
+            out.append(f'--{t}:clamp({a / 16}rem, calc({slope * 100:.4f}vw + {(a - slope * lo) / 16:.4f}rem), {b / 16}rem)')
+    font = os.path.relpath(os.path.join(ROOT, 'wp-content', 'plugins', 'dealdirect-core', 'assets', 'fonts',
+                                         'plus-jakarta-sans-latin-wght-normal.woff2'), B)
+    return ('@font-face{font-family:"Plus Jakarta Sans";src:url(' + font + ') format("woff2");font-weight:200 800;'
+            'font-display:swap}:root{' + ';'.join(out) + '}body{font-family:"Plus Jakarta Sans",system-ui,sans-serif}')
+
+
 acss = open(os.path.join(ROOT, '.claude', 'skills', 'acss-expert', 'index', 'automatic.css')).read()
 brand = """:root{--primary:#0B2B48;--primary-ultra-dark:#061A2E;--primary-semi-dark:#14385B;--secondary:#2468A8;--secondary-dark:#1B5388;
 --accent:#6FB0E0;--base:#F5F6F8;--base-light:#E9ECF0;--base-semi-light:#D3D8E0;--base-dark:#2E3744;--white:#fff;
 --text-dark:#48535F;--content-width:1334px;--gutter:32px;--primary-semi-light:#22527F}
 body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#48535F;background:#fff}
-h1,h2,h3,h4{font-weight:300;color:var(--primary-ultra-dark)}
+h1,h2,h3,h4{font-weight:300;color:var(--primary-ultra-dark)}""" + type_scale() + """
 @media (width < 768px){:root{--gutter:16px}}"""
 doc = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{page} preview</title><style>{acss}</style><style>{brand}</style><style>{chr(10).join(css)}</style></head>

@@ -30,7 +30,7 @@
   display: inline-flex;
   align-items: center;
   min-block-size: 44px;
-  font-size: 14px;
+  font-size: var(--text-s);
   color: var(--accent);
   text-decoration: none;
   &:hover { color: var(--white); }
@@ -45,7 +45,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px 32px;
-  font-size: 12.5px;
+  font-size: var(--text-xs);
   line-height: 1.6;
 }
 .site-footer__copy { margin: 0; }

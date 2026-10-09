@@ -53,7 +53,7 @@
 .eb-benefits__title {
   margin: 0 0 clamp(36px, 4vw, 56px);
   max-inline-size: 28ch;
-  font-size: clamp(28px, 3.4vw, 50px);
+  font-size: var(--h2);
   line-height: 1.1;
   letter-spacing: -0.032em;
   text-wrap: balance;
@@ -93,11 +93,11 @@
   padding: 22px 0;
   border-block-end: 1px solid var(--base-semi-light);
   &:last-child { border-block-end: 0; }
-  & p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dark); text-wrap: pretty; }
+  & p { margin: 0; font-size: var(--text-m); line-height: 1.6; color: var(--text-dark); text-wrap: pretty; }
 }
 .eb-benefits__item-title {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--text-l);
   font-weight: 500;
   letter-spacing: -0.015em;
   text-wrap: balance;
@@ -116,7 +116,7 @@
 }
 .eb-reqs__card {
   padding: clamp(28px, 3vw, 40px);
-  font-size: 15px;
+  font-size: var(--text-m);
   line-height: 1.7;
   color: var(--text-dark);
   & p { margin: 14px 0 0; }
@@ -124,7 +124,7 @@
 }
 .eb-reqs__title {
   margin: 0;
-  font-size: clamp(22px, 2.2vw, 28px);
+  font-size: var(--h3);
   font-weight: 400;
   letter-spacing: -0.02em;
 }
@@ -142,7 +142,7 @@
 }
 .eb-offerings__title {
   margin: 0 0 32px;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   letter-spacing: -0.032em;
 }
 .eb-project {
@@ -186,7 +186,7 @@
 }
 .eb-project__title {
   margin: 0;
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-size: var(--h3);
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: -0.025em;
@@ -194,7 +194,7 @@
 }
 .eb-project__summary {
   margin: 14px 0 0;
-  font-size: 15.5px;
+  font-size: var(--text-m);
   line-height: 1.7;
   color: var(--text-dark);
 }
@@ -215,7 +215,7 @@
 }
 .eb-program__copy {
   flex: 1 1 420px;
-  font-size: 16px;
+  font-size: var(--text-m);
   line-height: 1.75;
   color: var(--text-dark);
   & p { margin: 16px 0 0; }
@@ -224,14 +224,14 @@
 }
 .eb-program__title {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   line-height: 1.1;
   letter-spacing: -0.032em;
   text-wrap: balance;
 }
 .eb-program__sub {
   margin: 26px 0 0;
-  font-size: 18px;
+  font-size: var(--text-l);
   font-weight: 500;
 }
 
@@ -242,7 +242,7 @@
 }
 .eb-process__title {
   margin: 0 0 40px;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   letter-spacing: -0.032em;
   color: var(--white);
 }
@@ -257,7 +257,7 @@
 .eb-process__step {
   position: relative;
   padding: 28px 24px 8px 0;
-  & p:last-child { margin: 12px 0 0; font-size: 14.5px; line-height: 1.7; color: color-mix(in oklch, var(--white) 88%, transparent); }
+  & p:last-child { margin: 12px 0 0; font-size: var(--text-s); line-height: 1.7; color: color-mix(in oklch, var(--white) 88%, transparent); }
 }
 .eb-process__dot {
   position: absolute;
@@ -270,7 +270,7 @@
 }
 .eb-process__when {
   margin: 0;
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -281,14 +281,14 @@
 .eb-direct__intro { max-inline-size: 760px; }
 .eb-direct__title {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   line-height: 1.1;
   letter-spacing: -0.032em;
   text-wrap: balance;
 }
 .eb-direct__lede {
   margin: 16px 0 0;
-  font-size: clamp(16px, 1.3vw, 19px);
+  font-size: var(--text-l);
   font-weight: 300;
   line-height: 1.55;
   color: var(--base-dark);
@@ -315,13 +315,13 @@
   gap: 12px;
   padding: 18px 0;
   border-block-end: 1px solid var(--base-semi-light);
-  font-size: 15px;
+  font-size: var(--text-m);
   line-height: 1.6;
   color: var(--primary);
   &:last-child { border-block-end: 0; }
 }
 .eb-direct__num {
-  font-size: 12px;
+  font-size: var(--text-xs);
   line-height: 25px;
   color: var(--secondary);
 }
@@ -336,7 +336,7 @@
 .eb-track { background: var(--white); }
 .eb-track__title {
   margin: 0 0 36px;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   letter-spacing: -0.032em;
 }
 .eb-track__grid {
@@ -359,7 +359,7 @@
 }
 .eb-faq__title {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 46px);
+  font-size: var(--h2);
   letter-spacing: -0.032em;
 }
 .eb-faq__list {
