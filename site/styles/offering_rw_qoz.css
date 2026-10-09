@@ -1,4 +1,4 @@
-/* Riverside Wharf QOZ teaser (site/pages/offering_rw_qoz.py): key figures, renderings mosaic and the "Opportunity Zones
+/* Riverside Wharf QOZ teaser (site/pages/offering_rw_qoz.py): key figures and the "Opportunity Zones
    Program Explained" sections. Same system as the offering sheets: light bands on white/base, one navy band, cards
    with the offering border, ACSS type and spacing tokens only (CLAUDE.md rule 4). No coloured left borders, no gold. */
 
@@ -54,68 +54,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--secondary);
-}
-
-/* ---------- renderings mosaic (#renderings) ---------- */
-.qoz-gallery {
-  padding-block: var(--section-space-l) var(--section-space-m);
-  background: var(--white);
-  & .button { align-self: flex-start; margin-block-start: var(--space-l); }
-}
-.qoz-gallery__head {
-  display: grid;
-  gap: 12px;
-  margin-block-end: var(--space-l);
-}
-.qoz-gallery__title {
-  margin: 0;
-  font-size: var(--h2);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.032em;
-  color: var(--primary-ultra-dark);
-}
-.qoz-gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);  /* phones: two columns, the first rendering large */
-  grid-auto-rows: 130px;
-  grid-auto-flow: dense;
-  gap: 8px;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
-    gap: 12px;
-  }
-  @media (min-width: 1200px) { grid-auto-rows: 240px; }
-}
-.qoz-gallery__tile {
-  position: relative;
-  margin: 0;
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--base);
-  box-shadow: 0 14px 32px -20px rgba(11, 43, 72, 0.3);
-  & img {
-    position: absolute;
-    inset: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    transition: transform 600ms cubic-bezier(.2,.7,.2,1);
-  }
-  &:hover img { transform: scale(1.04); }
-  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
-  @media (max-width: 767px) {
-    border-radius: 14px;
-    &:first-child { grid-column: span 2; grid-row: span 2; }
-    & .rendering-chip { inset-block-start: 8px; inset-inline-end: 8px; padding: 3px 8px; }
-  }
-  @media (min-width: 768px) {
-    /* 19 tiles fill 7 rows of 4: two large (1st, 10th), three wide (4th, 15th, 19th) */
-    &:first-child, &:nth-child(10) { grid-column: span 2; grid-row: span 2; }
-    &:nth-child(4), &:nth-child(15), &:nth-child(19) { grid-column: span 2; }
-  }
-  @media (prefers-reduced-motion: reduce) { & img { transition: none; } &:hover img { transform: none; } }
 }
 
 /* ---------- the QOZ section (#qoz): every Opportunity Zone block in one section ---------- */
