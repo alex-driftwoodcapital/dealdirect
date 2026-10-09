@@ -85,6 +85,8 @@
  "option-base-clr": "on",
  "option-danger-clr": "on",
  "option-neutral-clr": "on",
+ "option-palette-unify-brand-lightness": "off",
+ "option-palette-unify-status-lightness": "off",
  "option-primary-clr": "on",
  "option-secondary-clr": "on",
  "option-tertiary-clr": "on",

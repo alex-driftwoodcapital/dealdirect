@@ -56,6 +56,9 @@ for name, shades in SHADES.items():
         s[f'{name}-{shade}-l-oklch'], s[f'{name}-{shade}-c-oklch'], s[f'{name}-{shade}-h-oklch'] = L, C, H
 
 s.update({
+    # Unified lightness off: with it on (the previous build's setting, still on staging) ACSS gives every brand colour's
+    # base swatch the same lightness (0.65), so navy rendered as a light blue (QA 2026-10-09).
+    'option-palette-unify-brand-lightness': 'off', 'option-palette-unify-status-lightness': 'off',
     'website-color-scheme': 'light only',
     # Typography: Plus Jakarta Sans variable (OFL), self-hosted: the latin subset (covers the EN/ES/PT copy) ships with
     # dealdirect-core, so the same file is on staging and live. Site-root path: works on any host.
