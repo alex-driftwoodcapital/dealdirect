@@ -22,6 +22,9 @@ s options-site.txt      "wp option get home; wp option get siteurl; wp option ge
 s options-etch-acss.txt "wp option list --search=\"*etch*\" --fields=option_name,autoload --format=csv; wp option list --search=\"*automatic*\" --fields=option_name,autoload --format=csv; wp option list --search=\"*acss*\" --fields=option_name,autoload --format=csv"
 s acss-files.txt        "find wp-content/uploads -maxdepth 3 -iname \"*automatic*.css\" -o -maxdepth 3 -iname \"*acss*.css\" | head -20"
 s media-count.txt       "wp post list --post_type=attachment --format=count"
+# uploads by size (originals and the generated sizes): what the pages can serve, for the image compression audit
+s uploads-by-size.tsv   "find wp-content/uploads -type f \\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" -o -iname \"*.webp\" -o -iname \"*.avif\" -o -iname \"*.mp4\" -o -iname \"*.webm\" \\) -printf \"%s\\t%p\\n\" | sort -rn | head -400"
+s attachments.csv       "wp post list --post_type=attachment --fields=ID,post_name,post_mime_type --format=csv"
 # the compiled ACSS stylesheet, for acss-expert/scripts/build-index.py
 css=$(r "find wp-content/uploads -maxdepth 3 -name automatic.css | head -1" || true)
 [ -n "$css" ] && r "cat $css" > "$OUT/staging/automatic.css" && echo "  saved automatic.css ($css)"
