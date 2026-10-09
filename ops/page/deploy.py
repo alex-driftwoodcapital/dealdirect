@@ -113,6 +113,16 @@ try:
             out[k] = v
         return out
 
+    def seo_data():
+        # META['seo']: title / robots overrides, og_image ('{{media:slug}}' -> attachment id), og_image_alt (includes/seo.php)
+        seo = dict(meta.get('seo', {}))
+        m = re.fullmatch(r'\{\{media:([^}]*)\}\}', str(seo.get('og_image', '')))
+        if m:
+            if not (got.get(m.group(1)) or {}).get('id'):
+                sys.exit(f'STOP: seo og_image: media {m.group(1)} not imported')
+            seo['og_image'] = got[m.group(1)]['id']
+        return seo
+
     KIND = meta.get('kind', 'page')
     PTYPE = {'page': 'page', 'offering': 'offering', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
     want = meta.get('status', 'draft' if KIND in ('page', 'offering') else 'publish')
@@ -140,6 +150,11 @@ try:
                 print('  card fields: ' + ', '.join(f'{k} {v}' for k, v in fr.items()))
             else:
                 print(f'  card fields: would set {", ".join(meta["fields"])} after the import/create')
+        if 'seo' in meta:
+            if pg['id'] and all((got.get(m) or {}).get('id') for m in re.findall(r'\{\{media:([^}]*)\}\}', json.dumps(meta['seo']))):
+                print('  seo: ' + helper('seo', {'id': pg['id'], 'seo': seo_data()}, 'dry')['seo'])
+            else:
+                print('  seo: would set after the import/create')
         if svg.MARKER.search(template):  # fetch + sanitize now, so a bad SVG fails the PR check, not the deploy
             n = svg.expand(template).count('"tag":"path"')
             print(f'  inline SVG fetched and converted ({n} paths)')
@@ -180,6 +195,8 @@ try:
     if meta.get('fields'):
         fr = helper('fields', {'id': pid, 'fields': card_fields()}, 'write')
         print('  card fields: ' + ', '.join(f'{k} {v}' for k, v in fr.items()))
+    if 'seo' in meta:
+        print('  seo: ' + helper('seo', {'id': pid, 'seo': seo_data()}, 'write')['seo'])
     st_ = helper('status', {'id': pid, 'status': want, 'title': meta['title']}, 'write')
     print(f'done: {PTYPE} #{pid} {meta["slug"]} status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else '')
       + (' · title updated' if st_.get('title') == 'retitled' else ''))

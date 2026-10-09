@@ -195,6 +195,14 @@ if ( $action === 'media' ) {
 		$out[ $name ] = $same ? 'same' : ( $write ? 'set' : 'would set' );
 		if ( ! $same && $write ) { update_field( 'field_dd_' . $name, $value, (int) $in['id'] ); }
 	}
+} elseif ( $action === 'seo' ) {
+	// $in: {id, seo}. The page's SEO data (META['seo'], og_image already an attachment id) as the post meta `_dd_seo` that
+	// dealdirect-core prints (includes/seo.php). Compared as JSON; written only in write mode.
+	$id   = (int) $in['id'];
+	$want = wp_json_encode( $in['seo'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	$same = get_post_meta( $id, '_dd_seo', true ) === $want;
+	if ( ! $same && $write ) { update_post_meta( $id, '_dd_seo', wp_slash( $want ) ); }
+	$out = [ 'seo' => $same ? 'same' : ( $write ? 'set' : 'would set' ) ];
 } elseif ( $action === 'page' ) {
 	// $in: {slug, post_type}. The post with that slug (any status; for wp_template only the active theme's), and the
 	// sha we recorded at our last deploy. explicit statuses: 'any' skips drafts when WP-CLI runs logged out.
