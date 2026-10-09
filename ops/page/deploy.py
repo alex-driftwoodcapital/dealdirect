@@ -131,7 +131,40 @@ try:
     template = open(f'{B}/content.tpl.html').read()
     ref_slugs = sorted(set(re.findall(r'\{\{ref:([^}]*)\}\}', template)))
     refs = helper('refs', {'slugs': ref_slugs}, 'dry') if ref_slugs else {}
+    run_env = {**os.environ, 'RUN_YES': '1', 'ETCH_PROFILE': PROFILE}
+
+    def live_snapshot(pid):
+        # (content sha, modified time, content) of the post on staging, from a read-only snapshot
+        snap = subprocess.run([f'{EDITOR}/snapshot.sh', str(pid)], capture_output=True, text=True, env=run_env, check=True).stdout.strip().splitlines()[-1]
+        row = [l.rstrip('\n').split('\t') for l in open(f'{snap}/manifest.tsv') if l.startswith(f'post\t{pid}\t')][0]
+        return row[3].strip(), row[2], open(f'{snap}/post-{pid}.html').read()
+
+    def drift(live, ours):
+        # What differs between the post on staging and what this deploy would write: visible texts and classes
+        # (placeholders and style ids aside). After a builder save this is mostly the editor's change.
+        texts = lambda m: [json.loads('"' + t + '"') for t in re.findall(r'"content":"((?:[^"\\]|\\.)*)"', m)]
+        classes = lambda m: {c for v in re.findall(r'"class":"((?:[^"\\]|\\.)*)"', m) for c in json.loads('"' + v + '"').split()}
+        lt, ot = texts(live), texts(ours)
+        out = [f'    text only on staging: {t[:90]!r}' for t in lt if t not in ot][:15]
+        out += [f'    text only in this build: {t[:90]!r}' for t in ot if t not in lt][:15]
+        lc, oc = classes(live), classes(ours)
+        if lc - oc: out.append('    classes only on staging: ' + ' '.join(sorted(lc - oc)[:30]))
+        if oc - lc: out.append('    classes only in this build: ' + ' '.join(sorted(oc - lc)[:30]))
+        return out or ['    same texts and classes (the change is in attributes, order or block settings)']
+
+    def edited_since_deploy(pid, deployed_sha, ours):
+        sha, mod, live = live_snapshot(pid)
+        if deployed_sha and sha != deployed_sha:
+            print(f'  CHANGED on staging since our last deploy (saved {mod} UTC; live {sha}, deployed {deployed_sha}):')
+            print('\n'.join(drift(live, ours)))
+            return sha, True
+        return sha, False
+
     if not WRITE:
+        if pg['id'] and KIND in ('page', 'offering'):
+            _, changed = edited_since_deploy(pg['id'], pg['deployed_sha'], template)
+            if changed:
+                print('  the deploy will STOP here until this edit is merged into site/pages or overwritten on purpose')
         if KIND == 'template':
             inv = helper('inventory', {}, 'dry')
             print(f'  staging now (theme {inv["active_theme"]}): ' + ('; '.join(inv['posts']) or 'no templates, parts or components yet'))
@@ -168,21 +201,19 @@ try:
     content = etch.resolve(svg.expand(template), sel2id, {s: r['id'] for s, r in got.items()}, refs, {s: r.get('url') for s, r in got.items()})
     final = f'{B}/content.html'
     open(final, 'w').write(content)
-    run_env = {**os.environ, 'RUN_YES': '1', 'ETCH_PROFILE': PROFILE}
 
     def live_sha(pid):
-        snap = subprocess.run([f'{EDITOR}/snapshot.sh', str(pid)], capture_output=True, text=True, env=run_env, check=True).stdout.strip().splitlines()[-1]
-        return [l.split('\t')[3].strip() for l in open(f'{snap}/manifest.tsv') if l.startswith(f'post\t{pid}\t')][0]
+        return live_snapshot(pid)[0]
 
     if not pg['id'] and KIND != 'page':
         # offerings, components and templates are created empty, then filled through the same guarded update path
         pg = {'id': helper('create', {'post_type': PTYPE, 'slug': meta['slug'], 'title': meta['title']}, 'write')['id'], 'deployed_sha': ''}
         print(f'  created {PTYPE} #{pg["id"]} {meta["slug"]}')
     if pg['id']:
-        sha = live_sha(pg['id'])
-        if pg['deployed_sha'] and sha != pg['deployed_sha']:
-            sys.exit(f'STOP: {PTYPE} #{pg["id"]} changed since the last deploy (live {sha}, deployed {pg["deployed_sha"]}). '
-                     'Someone saved it in the builder or edited it: re-read and merge before overwriting.')
+        sha, changed = edited_since_deploy(pg['id'], pg['deployed_sha'], content)
+        if changed and os.environ.get('OVERWRITE_EDITED') != str(pg['id']):
+            sys.exit(f'STOP: {PTYPE} #{pg["id"]} changed since the last deploy. Someone saved it in the builder or edited it: '
+                     f're-read and merge before overwriting (or set OVERWRITE_EDITED={pg["id"]} for one run; the snapshot above keeps the edit).')
         args = [f'{EDITOR}/edit-run.sh', str(pg['id']), final, '--expect-sha', sha]
     else:
         args = [f'{EDITOR}/edit-run.sh', '--new', meta['title'], meta['slug'], final]
