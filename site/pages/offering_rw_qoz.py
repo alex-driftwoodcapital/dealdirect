@@ -50,7 +50,7 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
                    (None, 'All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather')]
 # Sub-nav: the design's labels (its subnav data), in this page's section order, plus Renderings and QOZ 2.0 for the
 # teaser's own sections (#metrics now holds the key figures).
-SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('QOZ 2.0', 'qoz'),
+SUBNAV = [('Overview', 'overview'), ('Video', 'webinar'), ('Renderings', 'renderings'), ('QOZ 2.0', 'qoz'),
           ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Market update', 'market-update'), ('Legal', 'legal')]
 
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
@@ -137,28 +137,26 @@ facts = section('Key figures', 'qoz-facts', None, [
     ]),
 ], attrs={'id': 'metrics', 'aria-label': 'Key figures'})
 
-# Renderings mosaic (#renderings): the design's renderings; the first is the large tile.
-# Renderings mosaic (#renderings): 19 of the design's Riverside Wharf renderings (Alex, 2026-10-09: "add more renderings
-# to the gallery"), categories mixed; the large tiles are the 1st and 10th. The two left out show in the QOZ parts.
+# Renderings, placed with the content instead of one big grid (Alex, 2026-10-09: "use the renderings strategically across
+# the page not a massive grid, then below the video we can have a nice carousel to save space"): the hero (view from the
+# river), the overview (pool deck), the carousel under the video (the program's spaces, each captioned with its design
+# category), the OZ and hospitality parts (pre-function, complex), the partners (lobby, coastal bar), a wide aerial before
+# the market section and the riverfront F&B scene in the market update. Nothing is shown twice.
 P = '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-'
-MOSAIC = [('_View-from-River', 'View from River'), ('_Pooldeck', 'Pool deck'), ('-Night-club-Main-Floor', 'Nightclub main floor'),
-          ('-RIVERSIDE-WHARF_DAYCLUB_View02b-2023-01-20', 'Day club'), ('_Exterior-view-from-street', 'Exterior view from street'),
-          ('-Coastal-dining', 'Coastal dining'), (P + '22', 'Hotel'), ('-AFT-show-kitchen', 'Show kitchen'),
-          ('-Night-club-Sunset-Lounge', 'Nightclub sunset lounge'), ('_View-from-exterior', 'View from exterior'),
-          ('-Coastal-Bar', 'Coastal bar'), (P + '15', 'Entertainment'), ('_Dream-Hotel-Wine-Bar', 'Dream Hotel wine bar'),
-          ('-Night-club-Lobby', 'Nightclub lobby'), ('_Ballroom', 'Ballroom'), (P + '10', 'Entertainment'), ('-AFT-Bar', 'Bar'),
-          (P + '40', 'Entertainment'), (P + '33', 'Entertainment')]
-renderings = section('Renderings', 'qoz-gallery', 'qoz-gallery-h', [
-    El('div', 'Head', 'qoz-gallery__head', children=[
-        El('p', 'Eyebrow', 'eyebrow', children=[q('QOZ Common Equity')]),
-        El('h2', 'Heading', 'qoz-gallery__title', {'id': 'qoz-gallery-h'}, [q('Renderings')]),
-    ]),
-    El('div', 'Mosaic', 'qoz-gallery__grid', children=[
-        El('figure', 'Rendering', 'qoz-gallery__tile', children=[Img('Photo', W + s, 'Riverside Wharf ' + alt), o.chip()])
-        for s, alt in MOSAIC
-    ]),
-    o.request('Request Investor Details'),
-], attrs={'id': 'renderings'})
+CAROUSEL = [  # (suffix, alt, design gallery category)
+    ('_Exterior-view-from-street', 'Exterior view from street', 'Hotel'), (P + '22', 'Hotel', 'Hotel'),
+    ('-Coastal-dining', 'Coastal dining', 'Restaurants'), ('-AFT-show-kitchen', 'Show kitchen', 'Restaurants'),
+    ('-AFT-Bar', 'Bar', 'Restaurants'), ('_Dream-Hotel-Wine-Bar', 'Dream Hotel wine bar', 'Restaurants'),
+    ('-RIVERSIDE-WHARF_DAYCLUB_View02b-2023-01-20', 'Day club', 'Entertainment'), ('-Night-club-Main-Floor', 'Nightclub main floor', 'Entertainment'),
+    ('-Night-club-Sunset-Lounge', 'Nightclub sunset lounge', 'Entertainment'), (P + '15', 'Entertainment', 'Entertainment'),
+    (P + '10', 'Entertainment', 'Entertainment'), (P + '40', 'Entertainment', 'Entertainment'),
+    ('_Ballroom', 'Ballroom', 'Conference'),
+]
+renderings = o.carousel('QOZ Common Equity', 'Renderings', [(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL],
+                        'Request Investor Details')
+aerial = o.rendering_band(W + '_View-from-exterior', 'Riverside Wharf view from exterior')
+market_scene = El('figure', 'Image', 'media-card market-update__media', children=[
+    Img('Photo', W + P + '33', 'Riverside Wharf food and beverage venue'), o.chip()])
 
 
 # All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section", "Whatever can be on
@@ -301,14 +299,15 @@ PAGE = [
         ['The project is structured with the objective of generating cash flows', '3', '.']],
         ['1 Profile Magazine', '2 These project descriptions', '3 Such benefits', 'All information is as of the date indicated',
          'Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The description of the project']),
-    renderings,
     # No poster in the design (empty image slot): the frame shows the play button on the dark band until clicked.
     o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video'),
+    renderings,
     qoz,
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
+    aerial,
     o.market(MARKET, MARKET_NOTES),
-    market_update.build(o.fn(None, MARKET_NOTES[1])),
+    market_update.build(o.fn(None, MARKET_NOTES[1]), media=market_scene),
     o.legal(),
     o.cta(),
 ]

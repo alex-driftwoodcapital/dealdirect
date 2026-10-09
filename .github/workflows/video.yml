@@ -1,0 +1,66 @@
+# Hero video, on demand: Actions > "Hero video" > Run workflow. Fetches the hero loop from the live site (one GET,
+# read-only), reports its specs (ffprobe) and encodes lighter versions for the web: H.264 High, no audio, at most 30 fps,
+# start-fast (moov first), 1920 and 1280 wide. Results (videos + report.md) go to the branch media/hero-video; a session
+# reviews them and brings the chosen file into the repo as the hero's MEDIA source. Writes nothing to any site.
+name: Hero video
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Video URL (default: the live hero loop)'
+        type: string
+        default: 'https://driftwooddealdirect.com/wp-content/uploads/Dream_Website_banner.mp4'
+      crf:
+        description: 'x264 quality (lower = better, larger). 23-26 is typical for a background loop.'
+        type: string
+        default: '24'
+
+permissions:
+  contents: write   # pushes the media/hero-video branch only
+
+jobs:
+  encode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+      - name: Fetch, probe, encode
+        env:
+          SRC: ${{ inputs.source }}
+          CRF: ${{ inputs.crf }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          curl -sSfL "$SRC" -o in.mp4
+          probe() { ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,profile,width,height,r_frame_rate,bit_rate,pix_fmt -show_entries format=duration,size,bit_rate -of default=nw=1 "$1" | tr '\n' ' '; }
+          fps=$(ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 in.mp4)
+          rate=$(python3 -c "n,d='$fps'.split('/'); print(float(n)/float(d))")
+          r=$(python3 -c "print('-r 30' if $rate > 30.5 else '')")
+          audio=$(ffprobe -v error -select_streams a -show_entries stream=codec_name -of csv=p=0 in.mp4 | head -1)
+          {
+            echo "# Hero video encodes ($(date -u +%Y-%m-%dT%H:%MZ))"; echo
+            echo "Source: $SRC"; echo
+            echo "- original: $(probe in.mp4) audio: ${audio:-none}"
+          } > out/report.md
+          for w in 1920 1280; do
+            ffmpeg -v error -y -i in.mp4 -an -vf "scale='min($w,iw)':-2:flags=lanczos" $r -c:v libx264 -preset slow -crf "$CRF" \
+              -profile:v high -pix_fmt yuv420p -g 60 -movflags +faststart "out/Riverside-Wharf-hero-$w.mp4"
+            echo "- $w: $(probe out/Riverside-Wharf-hero-$w.mp4)" >> out/report.md
+          done
+          ls -l out >> out/report.md
+          cat out/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Push to media/hero-video
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mv out /tmp/out
+          git checkout -q --orphan media-hero
+          git rm -rfq .
+          git clean -fdxq
+          cp -r /tmp/out/. .
+          git add -A
+          git commit -q -m "chore: hero video encodes ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push -f origin HEAD:media/hero-video

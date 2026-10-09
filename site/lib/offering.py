@@ -95,6 +95,45 @@ document.querySelectorAll('.program-tabs').forEach((root) => {
 """
 
 
+CAROUSEL_SCRIPT = """// rendering-carousel: prev/next buttons, a "3 / 13" counter and arrow keys over a native scroll-snap track (swipe
+// and trackpad scroll need no script). Smooth unless the visitor asks for reduced motion. Scoped; without the script the
+// track still scrolls and the buttons stay hidden.
+document.querySelectorAll('.rendering-carousel').forEach((c) => {
+  const track = c.querySelector('.rendering-carousel__track');
+  const slides = track ? [...track.children] : [];
+  const ctl = c.querySelector('.rendering-carousel__controls');
+  if (!slides.length || !ctl) return;
+  const prev = ctl.querySelector('[data-dir="prev"]'), next = ctl.querySelector('[data-dir="next"]');
+  const count = ctl.querySelector('.rendering-carousel__count');
+  const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  let i = 0;
+  const go = (n) => {
+    n = Math.max(0, Math.min(slides.length - 1, n));
+    track.scrollTo({ left: slides[n].offsetLeft - slides[0].offsetLeft, behavior });
+  };
+  const update = () => {
+    count.textContent = (i + 1) + ' / ' + slides.length;
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  };
+  prev.addEventListener('click', () => go(i - 1));
+  next.addEventListener('click', () => go(i + 1));
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
+  });
+  if ('IntersectionObserver' in window) {
+    const seen = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { i = slides.indexOf(e.target); update(); } });
+    }, { root: track, threshold: 0.6 });
+    slides.forEach((s) => seen.observe(s));
+  }
+  ctl.hidden = false;
+  update();
+});
+"""
+
+
 def sup(n):
     return El('sup', 'Footnote ref', 'fn-ref', children=[n])
 
@@ -208,6 +247,43 @@ class Offering:
                 ]),
             ]),
         ], attrs={'id': 'webinar', 'aria-label': 'Riverside Wharf Miami webinar'})
+
+    def carousel(self, eyebrow, title, slides, request_label):
+        """Renderings carousel (#renderings): slides = [(media slug, alt, caption)], one per view on phones, the next one
+        peeking from tablets up. A native scroll-snap track (swipe, trackpad, keyboard); CAROUSEL_SCRIPT adds the
+        buttons and the counter."""
+        q = self.q
+        n = len(slides)
+        return section('Renderings', 'rendering-carousel', 'renderings-h', [
+            El('div', 'Head', 'rendering-carousel__head', children=[
+                El('div', 'Titles', 'rendering-carousel__titles', children=[
+                    El('p', 'Eyebrow', 'eyebrow', children=[q(eyebrow)]),
+                    El('h2', 'Heading', 'rendering-carousel__title', {'id': 'renderings-h'}, [q(title)]),
+                ]),
+                El('div', 'Controls', 'rendering-carousel__controls', {'hidden': ''}, [
+                    El('button', 'Previous', 'rendering-carousel__arrow', {'type': 'button', 'data-dir': 'prev', 'aria-label': 'Previous rendering',
+                                                                          'aria-controls': 'renderings-track'}),
+                    El('p', 'Counter', 'rendering-carousel__count', {'aria-live': 'polite'}),
+                    El('button', 'Next', 'rendering-carousel__arrow rendering-carousel__arrow--next', {'type': 'button', 'data-dir': 'next',
+                                                                                                  'aria-label': 'Next rendering', 'aria-controls': 'renderings-track'}),
+                ]),
+            ]),
+            El('ul', 'Track', 'rendering-carousel__track', {'id': 'renderings-track', 'tabindex': '0', 'aria-label': title}, children=[
+                El('li', 'Slide', 'rendering-carousel__slide', {'aria-roledescription': 'slide', 'aria-label': f'{k} of {n}'}, [
+                    El('figure', 'Rendering', 'rendering-carousel__figure', children=[
+                        Img('Photo', media, alt), self.chip(),
+                        El('figcaption', 'Caption', 'chip chip--glass rendering-carousel__caption', children=[caption]),
+                    ]),
+                ]) for k, (media, alt, caption) in enumerate(slides, 1)
+            ]),
+            self.request(request_label),
+        ], attrs={'id': 'renderings', 'aria-roledescription': 'carousel'}, script=CAROUSEL_SCRIPT)
+
+    def rendering_band(self, media, alt):
+        """One wide rendering between sections, with its Rendering tag."""
+        return section('Rendering', 'rendering-band', None, [
+            El('figure', 'Rendering', 'media-card rendering-band__figure', children=[Img('Photo', media, alt), self.chip()]),
+        ], attrs={'aria-label': alt})
 
     def partners(self):
         q = self.q
