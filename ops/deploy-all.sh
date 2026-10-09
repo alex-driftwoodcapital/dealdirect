@@ -22,4 +22,5 @@ echo; echo "### ACSS settings"; bash ops/acss/apply.sh
 for page in $(python3 -I site/order.py); do
   echo; echo "### $page"; python3 ops/page/deploy.py "$page"
 done
+echo; echo "### leftovers (previous build)"; bash ops/cleanup/retire.sh
 echo; echo "### done ($mode)"
