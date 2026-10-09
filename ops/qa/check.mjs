@@ -1,7 +1,8 @@
 // ROLE-TEMPLATE — staging QA in a real browser, run by .github/workflows/qa.yml (read-only: GETs only).
 // Every page at 375 / 768 / 1440: status, horizontal overflow, console errors, failed requests, the self-hosted
 // font and ACSS palette actually in use, <html lang>, title, robots, canonical, hreflang; full-page screenshots.
-// Plus the URL decisions (301s, 410s, 404). Writes qa-out/report.md, results.json and screenshots; exits 1 on a failure.
+// Plus the URL decisions (301s, 410s, 404), and images that never show. Writes qa-out/report.md, results.json,
+// screenshots and each page's rendered HTML at 1440 (html/); exits 1 on a failure.
 import { chromium, request } from 'playwright';
 import fs from 'fs';
 
@@ -10,6 +11,7 @@ const auth = { username: process.env.QA_HTTP_USER || '', password: process.env.Q
 if (!BASE) { console.error('QA_BASE_URL is not set'); process.exit(2); }
 const OUT = 'qa-out';
 fs.mkdirSync(`${OUT}/shots`, { recursive: true });
+fs.mkdirSync(`${OUT}/html`, { recursive: true });
 
 const PAGES = [
   ['home', '/', 'en-US'],
@@ -111,9 +113,18 @@ for (const [name, path, lang, want = 200] of PAGES) {
     });
     await page.waitForLoadState('networkidle').catch(() => {});
     await page.screenshot({ path: `${OUT}/shots/${name}-${w}.jpg`, fullPage: true, type: 'jpeg', quality: 70 });
+    // images that should show but don't (never loaded, or laid out at zero size), after the scroll-through
+    const blankImgs = await page.evaluate(() => [...document.querySelectorAll('main img')].filter((i) => {
+      const cs = getComputedStyle(i), r = i.getBoundingClientRect();
+      if (cs.display === 'none' || cs.visibility === 'hidden' || i.closest('[hidden], dialog:not([open])')) return false;
+      if (r.left >= window.innerWidth || r.right <= 0) return false;  // further along a carousel: lazy, loads on swipe
+      return !i.complete || i.naturalWidth === 0 || r.width < 2 || r.height < 2;
+    }).map((i) => `${i.alt || i.currentSrc.split('/').pop() || i.getAttribute('src') || '?'} (${Math.round(i.getBoundingClientRect().width)}x${Math.round(i.getBoundingClientRect().height)}, natural ${i.naturalWidth})`));
+    if (w === 1440) fs.writeFileSync(`${OUT}/html/${name}.html`, await page.content());  // the rendered DOM, for diagnosis
     const status = resp ? resp.status() : 0;
     const problems = [];
     if (status !== want) problems.push(`status ${status}, want ${want}`);
+    if (want === 200 && blankImgs.length) problems.push(`images not shown: ${blankImgs.slice(0, 4).join(', ')}${blankImgs.length > 4 ? ` +${blankImgs.length - 4}` : ''}`);
     if (info.overflow > 0) problems.push(`horizontal overflow ${info.overflow}px`);
     if (errors.length) problems.push(`console: ${errors[0]}`);
     if (failed.length) problems.push(`failed: ${failed.slice(0, 3).join(', ')}`);
