@@ -46,3 +46,28 @@ class Copy:
         if len(hits) != 1:
             raise KeyError(f'{prefix!r}: {len(hits)} matches {hits[:3]}')
         return hits[0]
+
+
+class Aligned:
+    """The same design in another language (the ES/PT EB-5 files mirror the EN one): q(en_prefix) finds the EN string, as
+    Copy does, and returns the target design's string at the same position. `extra` lists the target's own strings (by
+    position in the target) that have no EN counterpart; they are read with .extra(i). Fails when the two designs stop
+    lining up (different counts) or when one EN string maps to different target strings."""
+    def __init__(self, en: Copy, path, start='<main', end='</main>', extra=()):
+        target = texts(path, start, end)
+        self.extras = [target[i] for i in extra]
+        self.target = [t for i, t in enumerate(target) if i not in set(extra)]
+        self.en = en
+        if len(self.target) != len(en.all):
+            raise ValueError(f'{path}: {len(self.target)} strings vs {len(en.all)} in EN (after {len(self.extras)} extra)')
+        self.all = target  # what the copy gate checks the page against
+
+    def __call__(self, en_prefix: str) -> str:
+        s = self.en(en_prefix)
+        hits = {self.target[i] for i, t in enumerate(self.en.all) if t == s}
+        if len(hits) != 1:
+            raise KeyError(f'{en_prefix!r}: maps to {len(hits)} strings {sorted(hits)[:3]}')
+        return hits.pop()
+
+    def extra(self, i: int) -> str:
+        return self.extras[i]
