@@ -1,0 +1,40 @@
+/* Not-found template (site/pages/template_404.py). Dark like the page heroes: the fixed header is transparent with
+   light text until scrolled. Tokens only; sizes from the ACSS type scale. */
+
+.not-found {
+  display: flex;
+  align-items: center;
+  min-block-size: min(78vh, 760px);
+  padding-block: var(--section-space-xl);
+  background: var(--primary-ultra-dark);
+}
+
+.not-found__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-s);
+}
+
+.not-found__title {
+  margin: 0;
+  font-size: var(--h1);
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.not-found__text {
+  margin: 0;
+  max-inline-size: 56ch;
+  font-size: var(--text-l);
+  line-height: 1.6;
+  color: color-mix(in oklch, var(--white) 82%, transparent);
+}
+
+.not-found__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-block-start: var(--space-s);
+}

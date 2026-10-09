@@ -4,6 +4,7 @@ require __DIR__ . '/../includes/class-submission.php';
 require __DIR__ . '/../includes/i18n.php';
 require __DIR__ . '/../includes/seo.php';
 require __DIR__ . '/../includes/retired.php';
+require __DIR__ . '/../includes/tracking.php';
 use DealDirect\Submission as S;
 
 $fail = 0;
@@ -117,5 +118,9 @@ check( 'other paths are not retired', ! \DealDirect\is_retired_path( '/eb-5-inve
 check( 'old Riverside Wharf URL -> QOZ', \DealDirect\redirect_target( '/offering/riverside-wharf/' ) === '/offering/riverside-wharf-qoz/' );
 check( 'old EB-5 offering URL -> EB-5 page', \DealDirect\redirect_target( '/offering/riverside-wharf-eb-5/?utm_source=x' ) === '/eb-5-investments/' );
 check( 'kept URLs are not redirected', \DealDirect\redirect_target( '/offering/riverside-wharf-qoz/' ) === null && \DealDirect\redirect_target( '/eb-5-investments/' ) === null );
+
+check( 'GTM loads on the public (live) site', \DealDirect\gtm_enabled( true, false ) );
+check( 'GTM stays off on staging unless forced', ! \DealDirect\gtm_enabled( false, false ) && \DealDirect\gtm_enabled( false, true ) );
+check( 'GTM snippet carries the live container', str_contains( \DealDirect\gtm_head( \DealDirect\GTM_ID ), "'GTM-NX8DQZGQ'" ) && str_contains( \DealDirect\gtm_body( 'GTM-NX8DQZGQ' ), 'ns.html?id=GTM-NX8DQZGQ' ) );
 
 exit( $fail );

@@ -19,6 +19,7 @@ const PAGES = [
   ['eb5-new', '/new-eb-5-page/', 'en-US'],
   ['preferred-equity', '/offering/riverside-wharf-preferred-equity/', 'en-US'],
   ['qoz', '/offering/riverside-wharf-qoz/', 'en-US'],
+  ['not-found', '/qa-no-such-page/', 'en-US', 404],  // name, path, lang, status (200 unless given)
 ];
 const URLS = [  // path, expected status, expected Location (path) for redirects
   ['/offering/riverside-wharf/', 301, '/offering/riverside-wharf-qoz/'],
@@ -35,20 +36,23 @@ const urlRows = [];
 for (const [path, want, to] of URLS) {
   const r = await api.get(BASE + path, { maxRedirects: 0 });
   const loc = (r.headers()['location'] || '').replace(BASE, '');
-  const ok = r.status() === want && (!to || loc === to);
-  if (!ok) fails.push(`${path}: got ${r.status()}${loc ? ' -> ' + loc : ''}, want ${want}${to ? ' -> ' + to : ''}`);
-  urlRows.push(`| \`${path}\` | ${want}${to ? ' → `' + to + '`' : ''} | ${r.status()}${loc ? ' → `' + loc + '`' : ''} | ${ok ? 'ok' : '**FAIL**'} |`);
+  // 404 and 410 must show the DealDirect not-found template (site/pages/template_404.py), not a bare theme page
+  const body = want >= 400 ? await r.text() : '';
+  const tpl = want < 400 || body.includes('not-found__title');
+  const ok = r.status() === want && (!to || loc === to) && tpl;
+  if (!ok) fails.push(`${path}: got ${r.status()}${loc ? ' -> ' + loc : ''}${tpl ? '' : ' without the not-found template'}, want ${want}${to ? ' -> ' + to : ''}`);
+  urlRows.push(`| \`${path}\` | ${want}${to ? ' → `' + to + '`' : ''} | ${r.status()}${loc ? ' → `' + loc + '`' : ''}${tpl ? '' : ' (no not-found template)'} | ${ok ? 'ok' : '**FAIL**'} |`);
 }
 
 const browser = await chromium.launch();
-for (const [name, path, lang] of PAGES) {
+for (const [name, path, lang, want = 200] of PAGES) {
   for (const w of WIDTHS) {
     const ctx = await browser.newContext({ httpCredentials: auth, viewport: { width: w, height: 900 } });
     const page = await ctx.newPage();
     const errors = [], failed = [];
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
     page.on('pageerror', (e) => errors.push(e.message.slice(0, 160)));
-    page.on('response', (r) => { if (r.status() >= 400 && r.url().startsWith(BASE)) failed.push(`${r.status()} ${r.url().replace(BASE, '')}`); });
+    page.on('response', (r) => { if (r.status() >= 400 && r.url().startsWith(BASE) && r.url() !== BASE + path) failed.push(`${r.status()} ${r.url().replace(BASE, '')}`); });
     const resp = await page.goto(BASE + path, { waitUntil: 'networkidle', timeout: 60000 });
     await page.evaluate(() => document.fonts.ready);
     const info = await page.evaluate(() => {
@@ -70,7 +74,7 @@ for (const [name, path, lang] of PAGES) {
     await page.screenshot({ path: `${OUT}/shots/${name}-${w}.jpg`, fullPage: true, type: 'jpeg', quality: 70 });
     const status = resp ? resp.status() : 0;
     const problems = [];
-    if (status !== 200) problems.push(`status ${status}`);
+    if (status !== want) problems.push(`status ${status}, want ${want}`);
     if (info.overflow > 0) problems.push(`horizontal overflow ${info.overflow}px`);
     if (errors.length) problems.push(`console: ${errors[0]}`);
     if (failed.length) problems.push(`failed: ${failed.slice(0, 3).join(', ')}`);
