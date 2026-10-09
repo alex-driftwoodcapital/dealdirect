@@ -891,7 +891,7 @@
   &[hidden] { display: none; }
 }
 .rendering-carousel__count {
-  min-inline-size: 4.5ch;
+  min-inline-size: 9ch;  /* "10–13 / 13" without moving the arrows */
   margin: 0;
   font-size: var(--text-s);
   font-weight: 600;
