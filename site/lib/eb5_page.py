@@ -70,10 +70,30 @@ def alt_texts(design_path):
 SEO = {'og_image': '{{media:EB-5-Background}}', 'og_image_alt': 'Driftwood EB-5 Program'}
 
 
-def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog'):
+LOCALIZE_SCRIPT = """// eb5-stats-locale: platform figures in the page's language (handoff/docs/eb5-localization.md: Intl formatting).
+// The server renders them en-US; this rewrites the marked ones for <html lang>. Scoped; no globals.
+(() => {
+  const lang = document.documentElement.lang || 'en-US';
+  document.querySelectorAll('[data-dd-format="number"]').forEach((el) => {
+    const n = Number(el.textContent.replace(/[^0-9.]/g, ''));
+    if (Number.isFinite(n) && el.textContent.trim()) el.textContent = new Intl.NumberFormat(lang).format(n);
+  });
+  document.querySelectorAll('[data-dd-format="date"]').forEach((el) => {
+    const d = new Date(el.textContent.trim() + ' 12:00');  // noon: no timezone can move the day
+    if (!Number.isNaN(d.getTime())) el.textContent = new Intl.DateTimeFormat(lang, { dateStyle: 'long' }).format(d);
+  });
+})();
+"""
+
+
+def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
     """q: Copy/Aligned over one EB-5 design. legal_extra: the language's own legal blocks with no EN counterpart, the
-    first before "Renderings", the rest after it."""
+    first before "Renderings", the rest after it. localize: which platform figures follow the page language ('number':
+    the employees count, 'date': the as-of date); empty for EN."""
     legal_extra = list(legal_extra)
+
+    def fig(kind, expr):
+        return El('span', 'Figure', attrs={'data-dd-format': kind}, children=[expr]) if kind in localize else expr
     ARROW = El('span', 'Arrow', attrs={'aria-hidden': 'true'}, children=['→'])
 
     def link(text, href, name='Link'):
@@ -234,14 +254,14 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog'):
                 platform(['{options.acf.years_experience}', ' ' + q('Years')], q('Years of History'), '1'),
                 platform(['{options.acf.properties}'], q('Hotels Owned/ Managed'), '2'),
                 platform(['{options.acf.aum}'], q('Hospitality Assets Under Management'), '2'),
-                platform(['±', '{options.acf.employees.numberFormat()}'], q('Employees'), '2'),
+                platform(['±', fig('number', '{options.acf.employees.numberFormat()}')], q('Employees'), '2'),
             ]),
         ]),
         El('div', 'Footnotes', 'footnotes', children=[
             El('p', 'Footnote 1', children=[q('1. The founders and principals')]),
-            El('p', 'Footnote 2', children=[q('2. Includes hotels and employees') + ' ', '{options.acf.as_of}', q('.')]),
+            El('p', 'Footnote 2', children=[q('2. Includes hotels and employees') + ' ', fig('date', '{options.acf.as_of}'), q('.')]),
         ]),
-    ], attrs={'id': 'driftwood'})
+    ], attrs={'id': 'driftwood'}, script=LOCALIZE_SCRIPT if localize else None)
     track = section('Prior EB-5 projects', 'eb-track', 'track-h', [
         El('h2', 'Heading', 'eb-track__title', {'id': 'track-h'}, [q('Prior EB-5 Projects')]),
         El('ul', 'Projects', 'eb-track__grid', children=[tile(*t) for t in track_rows]),

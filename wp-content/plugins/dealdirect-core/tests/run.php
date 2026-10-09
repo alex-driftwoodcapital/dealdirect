@@ -3,6 +3,7 @@
 require __DIR__ . '/../includes/class-submission.php';
 require __DIR__ . '/../includes/i18n.php';
 require __DIR__ . '/../includes/seo.php';
+require __DIR__ . '/../includes/retired.php';
 use DealDirect\Submission as S;
 
 $fail = 0;
@@ -110,5 +111,11 @@ check( 'other pages keep the site language', \DealDirect\page_lang( 'new-eb-5-pa
 check( 'SEO title: live pattern by default', \DealDirect\seo_title( 'EB-5 Investments', [] ) === 'EB-5 Investments - Driftwood Capital | DealDirect' );
 check( 'SEO title: page override wins', \DealDirect\seo_title( 'X – Y', [ 'title' => 'X - Y - Driftwood Capital | DealDirect' ] ) === 'X - Y - Driftwood Capital | DealDirect' );
 check( 'robots string -> wp_robots directives', \DealDirect\robots_directives( 'follow, noindex, max-snippet:-1' ) === [ 'follow' => true, 'noindex' => true, 'max-snippet' => '-1' ] );
+
+check( 'retired login pages answer 410', \DealDirect\is_retired_path( '/forgot-password/' ) && \DealDirect\is_retired_path( '/admin-login?redirect=x' ) );
+check( 'other paths are not retired', ! \DealDirect\is_retired_path( '/eb-5-investments/' ) && ! \DealDirect\is_retired_path( '/forgot-password/extra/' ) );
+check( 'old Riverside Wharf URL -> QOZ', \DealDirect\redirect_target( '/offering/riverside-wharf/' ) === '/offering/riverside-wharf-qoz/' );
+check( 'old EB-5 offering URL -> EB-5 page', \DealDirect\redirect_target( '/offering/riverside-wharf-eb-5/?utm_source=x' ) === '/eb-5-investments/' );
+check( 'kept URLs are not redirected', \DealDirect\redirect_target( '/offering/riverside-wharf-qoz/' ) === null && \DealDirect\redirect_target( '/eb-5-investments/' ) === null );
 
 exit( $fail );

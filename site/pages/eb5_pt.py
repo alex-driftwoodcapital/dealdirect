@@ -13,7 +13,8 @@ DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design'
 q = Aligned(en.q, DESIGN, extra=[136, 139])  # 136: subject to change; 139: translation notice
 TRACK = track_data(DESIGN)
 LEGAL = [El('p', 'Text', children=[q.extra(0)]), El('p', 'Text', children=[q.extra(1)])]
-PAGE = build(q, TRACK, alt_texts(DESIGN), legal_extra=LEGAL, dialog='eb5-dialog-pt')
+PAGE = build(q, TRACK, alt_texts(DESIGN), legal_extra=LEGAL, dialog='eb5-dialog-pt',
+             localize=('number', 'date'))  # pt-BR: 6.000, translated date (eb5-localization.md)
 STYLESHEETS = en.STYLESHEETS
 NON_DESIGN = {'→', '+', '±', '1', '2', '1.', '2.', '3.', '4.', '5.'} | {v for t in TRACK for v in t[:6]}
 MEDIA = media(DESIGN)
