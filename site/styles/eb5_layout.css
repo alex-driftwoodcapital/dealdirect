@@ -229,6 +229,7 @@
   text-wrap: balance;
 }
 .eb-program__sub {
+  letter-spacing: 0;  /* design: a plain subheading, not ACSS's tight heading tracking */
   margin: 26px 0 0;
   font-size: var(--text-l);
   font-weight: 500;

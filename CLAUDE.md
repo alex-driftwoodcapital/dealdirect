@@ -16,7 +16,7 @@ The design handoff is in `handoff/` (README, `design/`, `docs/`). Read `handoff/
 - GTM: `GTM-NX8DQZGQ`
 
 ## Where work runs
-- **Staging deploys run in GitHub Actions** (`.github/workflows/staging.yml` → `ops/deploy-all.sh`): every PR gets a dry run against staging (the plan shows in the PR's checks), every merge to `main` deploys, and "Run workflow" (Actions tab, also from the GitHub app) deploys on demand. Secrets: `STAGING_SSH_KEY`, `STAGING_KNOWN_HOSTS`, optional `DD_HUBSPOT_TOKEN`.
+- **Staging deploys run in GitHub Actions** (`.github/workflows/staging.yml` → `ops/deploy-all.sh`): every PR gets a dry run against staging (the plan shows in the PR's checks), every merge to `main` deploys, and "Run workflow" (Actions tab, also from the GitHub app) deploys on demand. A page edited on staging outside the deploy (e.g. a builder save) stops the deploy, and the dry run already shows what differs; to overwrite it on purpose, run the workflow with mode `deploy` and `overwrite_edited` = that post id (one page per run; its snapshot artifact keeps the edited version). Secrets: `STAGING_SSH_KEY`, `STAGING_KNOWN_HOSTS`, optional `DD_HUBSPOT_TOKEN`.
 - Cloud sessions cannot reach SSH, staging or the live site: they write specs, markup, CSS and code into this repo and open PRs. Alex merges (or says "merge"); the workflow deploys. The Mac Remote Control session is only needed for things Actions can't do (e.g. a builder check).
 - Every write: snapshot first, re-read before editing, purge (`ops/deploy-all.sh` and the scripts it calls do this). Verify at 375 / 768 / 1440.
 

@@ -185,6 +185,13 @@ def type_scale():
     for t, (a, b) in space.items():
         slope = (b - a) / (hi - lo)
         out.append(f'--{t}:clamp({a / 16}rem, calc({slope * 100:.4f}vw + {(a - slope * lo) / 16:.4f}rem), {b / 16}rem)')
+    # Palette: the same OKLCH keys the deploy writes to ACSS (<color>[-<shade>]-{l,c,h}-oklch), so a palette mistake
+    # in ops/acss/build-settings.py shows here too.
+    for k in sorted(st):
+        m = re.match(r'([a-z]+(?:-[a-z]+(?:-[a-z]+)?)?)-l-oklch$', k)
+        if m and f'{m.group(1)}-c-oklch' in st:
+            n = m.group(1)
+            out.append(f'--{n}:oklch({st[k]} {st[n + "-c-oklch"]} {st[n + "-h-oklch"]})')
     font = os.path.relpath(os.path.join(ROOT, 'wp-content', 'plugins', 'dealdirect-core', 'assets', 'fonts',
                                          'plus-jakarta-sans-latin-wght-normal.woff2'), B)
     return ('@font-face{font-family:"Plus Jakarta Sans";src:url(' + font + ') format("woff2");font-weight:200 800;'

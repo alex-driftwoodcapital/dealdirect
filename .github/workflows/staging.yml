@@ -15,6 +15,10 @@ on:
         type: choice
         options: [dry-run, deploy]
         default: dry-run
+      overwrite_edited:
+        description: 'Post id of ONE page edited on staging outside the deploy, to overwrite with the repo version (its snapshot keeps the edit). Leave empty.'
+        type: string
+        default: ''
 
 concurrency:
   group: staging
@@ -36,6 +40,7 @@ jobs:
       ETCH_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
       ETCH_SSH_KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
       DD_HUBSPOT_TOKEN: ${{ secrets.DD_HUBSPOT_TOKEN }}
+      OVERWRITE_EDITED: ${{ inputs.overwrite_edited }}   # empty except on a manual run (ops/page/deploy.py)
       SNAP_DIR: ${{ github.workspace }}/snapshots
     steps:
       - uses: actions/checkout@v4

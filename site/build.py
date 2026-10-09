@@ -37,7 +37,9 @@ if classes and not rules:
     sys.exit(f'{a.page}: classes on the page but no {os.path.relpath(css)}')
 # Font sizes come from ACSS's type tokens (var(--h2), var(--text-m)...; scale in ops/acss/build-settings.py), never
 # px/rem/clamp() in page CSS: refuse a literal size so the pages keep following the ACSS scale.
-literal = sorted({sel for sel, css in rules.items()
+# Footnote marks (.fn-ref) are sized relative to their text (0.85em / 0.45em, the design's sup rules), so they follow it.
+EM_OK = {'.fn-ref'}
+literal = sorted({sel for sel, css in rules.items() if sel not in EM_OK
                   for v in re.findall(r'font-size:\s*([^;}]+)', css) if not re.match(r'(var\(--|inherit|1em|100%)', v.strip())})
 if literal:
     sys.exit(f'{a.page}: literal font sizes (use an ACSS token, e.g. var(--text-m)): {" ".join(literal)}')
