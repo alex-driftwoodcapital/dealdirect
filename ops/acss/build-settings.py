@@ -33,11 +33,13 @@ COLORS = {
     'tertiary': '#00AFA0',   # brand teal, logo only
     'base': '#F5F6F8',       # slate-50
     'neutral': '#A9B2BE',    # slate-300
+    'danger': '#B42318',     # form errors (dialog.css .dd-dialog__error): 6.1:1 on white
 }
 # Shade overrides from acss-mapping.md
 SHADES = {
     'primary': {'ultra-dark': '#061A2E', 'dark': '#061A2E', 'semi-dark': '#14385B', 'hover': '#14385B', 'semi-light': '#22527F', 'light': '#3A6E9E'},
     'secondary': {'dark': '#1B5388', 'hover': '#2060A0', 'light': '#5C97C9', 'ultra-light': '#B6D5EC'},
+    'danger': {'dark': '#B42318'},
     'base': {'ultra-light': '#FFFFFF', 'light': '#E9ECF0', 'semi-light': '#D3D8E0', 'semi-dark': '#4A5564', 'dark': '#2E3744', 'ultra-dark': '#1C2430'},
 }
 

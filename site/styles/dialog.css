@@ -219,7 +219,7 @@
   margin: 0;
   font-size: var(--text-s);
   line-height: 1.5;
-  color: var(--danger-dark, #B42318);
+  color: var(--danger-dark);
   &:empty { display: none; }
 }
 
