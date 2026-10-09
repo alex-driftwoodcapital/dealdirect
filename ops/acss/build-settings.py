@@ -52,9 +52,11 @@ for name, shades in SHADES.items():
 
 s.update({
     'website-color-scheme': 'light only',
-    # Typography: Plus Jakarta Sans variable, self-hosted. font-1-src is filled once the font file is uploaded.
+    # Typography: Plus Jakarta Sans variable (OFL), self-hosted: the latin subset (covers the EN/ES/PT copy) ships with
+    # dealdirect-core, so the same file is on staging and live. Site-root path: works on any host.
     'font-1-family-name': 'Plus Jakarta Sans', 'font-1-type': 'variable', 'font-1-weight': '200 800',
-    'font-1-style': 'normal', 'font-1-display': 'swap', 'font-1-format': 'woff2', 'font-1-src': '',
+    'font-1-style': 'normal', 'font-1-display': 'swap', 'font-1-format': 'woff2',
+    'font-1-src': '/wp-content/plugins/dealdirect-core/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2',
     'font-2-family-name': '', 'font-2-src': '',
     'text-font-family': '"Plus Jakarta Sans", system-ui, sans-serif',
     'heading-font-family': '"Plus Jakarta Sans", system-ui, sans-serif',
