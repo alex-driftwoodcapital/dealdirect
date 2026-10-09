@@ -93,8 +93,10 @@
   &:hover { transform: translateY(-4px); }
   @media (prefers-reduced-motion: reduce) { transition: none; &:hover { transform: none; } }
   /* status and rendering come from the offering's fields (data attributes set by the loop) */
-  &[data-status="coming_soon"] .deal-card__cta { display: none; }
-  &:not([data-status="coming_soon"]) .deal-card__notify { display: none; }
+  /* a coming-soon card with a CTA label links to its landing page instead of "Get notified" (Alex, 2026-10-09: the
+     QOZ card goes to its teaser, which has the reservation form) */
+  &[data-status="coming_soon"]:is([data-cta=""], :not([data-cta])) .deal-card__cta { display: none; }
+  &:not([data-status="coming_soon"]:is([data-cta=""], :not([data-cta]))) .deal-card__notify { display: none; }
   &:not([data-rendering="1"]) .deal-card__rendering { display: none; }
 }
 .deal-card__photo {
@@ -116,13 +118,6 @@
   pointer-events: none;
   background: linear-gradient(to top, rgba(6, 26, 46, 0.94) 0%, rgba(6, 26, 46, 0.94) 46%, rgba(6, 26, 46, 0.68) 57%,
               rgba(6, 26, 46, 0.24) 67%, transparent 74%);
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 38% 0 0;
-    backdrop-filter: blur(12px);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 58%);
-  }
 }
 .deal-card__chip {
   position: absolute;

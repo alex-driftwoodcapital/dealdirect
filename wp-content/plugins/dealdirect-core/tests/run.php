@@ -5,6 +5,7 @@ require __DIR__ . '/../includes/i18n.php';
 require __DIR__ . '/../includes/seo.php';
 require __DIR__ . '/../includes/retired.php';
 require __DIR__ . '/../includes/tracking.php';
+require __DIR__ . '/../includes/performance.php';
 use DealDirect\Submission as S;
 
 $fail = 0;
@@ -124,5 +125,13 @@ check( 'kept URLs are not redirected', \DealDirect\redirect_target( '/offering/r
 check( 'GTM loads on the public (live) site', \DealDirect\gtm_enabled( true, false ) );
 check( 'GTM stays off on staging unless forced', ! \DealDirect\gtm_enabled( false, false ) && \DealDirect\gtm_enabled( false, true ) );
 check( 'GTM snippet carries the live container', str_contains( \DealDirect\gtm_head( \DealDirect\GTM_ID ), "'GTM-NX8DQZGQ'" ) && str_contains( \DealDirect\gtm_body( 'GTM-NX8DQZGQ' ), 'ns.html?id=GTM-NX8DQZGQ' ) );
+
+// Page feel and loading (includes/performance.php)
+$pre = \DealDirect\font_preload( 'https://x.test/wp-content/plugins/dealdirect-core/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2' );
+check( 'font preload is a crossorigin woff2 preload', str_contains( $pre, 'rel="preload"' ) && str_contains( $pre, 'as="font"' ) && str_contains( $pre, 'type="font/woff2"' ) && str_contains( $pre, 'crossorigin' ) );
+check( 'preloaded font file ships with the plugin', is_file( __DIR__ . '/../' . \DealDirect\FONT_PATH ) );
+$css = \DealDirect\motion_css();
+check( 'smooth scrolling only without reduced motion', str_contains( $css, '@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}' ) && ! preg_match( '/^[^@]*scroll-behavior/', $css ) );
+check( 'anchors land below the header and section bar', str_contains( $css, 'scroll-padding-top:84px' ) && str_contains( $css, 'html:has(.offering-subnav){scroll-padding-top:136px}' ) );
 
 exit( $fail );

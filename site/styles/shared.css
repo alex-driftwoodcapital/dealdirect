@@ -107,8 +107,8 @@
   white-space: nowrap;
 }
 .chip--glass {
-  background: color-mix(in oklch, var(--primary-ultra-dark) 66%, transparent);
-  backdrop-filter: blur(8px);
+  /* no backdrop blur: dozens of blurred tags over moving images made scrolling stutter on phones */
+  background: color-mix(in oklch, var(--primary-ultra-dark) 80%, transparent);
   border: 1px solid color-mix(in oklch, var(--white) 16%, transparent);
   color: var(--white);
 }

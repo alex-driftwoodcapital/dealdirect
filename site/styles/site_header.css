@@ -10,9 +10,10 @@
   border-block-end: 1px solid transparent;
   transition: background-color 360ms cubic-bezier(.2,.7,.2,1), border-color 360ms cubic-bezier(.2,.7,.2,1);
   &[data-scrolled] {
-    background: rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(16px) saturate(1.5);
+    background: rgba(255, 255, 255, 0.97);
     border-block-end-color: rgba(219, 229, 240, 0.9);
+    /* blur on desktop only: a blurred fixed bar repaints on every scrolled frame, which stutters on phones */
+    @media (min-width: 1024px) { background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(16px) saturate(1.5); }
   }
   @media (prefers-reduced-motion: reduce) {
     transition: none;

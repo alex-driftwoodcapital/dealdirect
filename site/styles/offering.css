@@ -121,8 +121,8 @@
   position: sticky;
   inset-block-start: 68px;
   z-index: 40;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px) saturate(1.5);
+  background: rgba(255, 255, 255, 0.97);
+  @media (min-width: 1024px) { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px) saturate(1.5); }  /* blur on desktop only: costly to repaint on phones */
   border-block: 1px solid var(--base-semi-light);
 }
 /* wide screens: the row of links; below 1024px the dropdown (offering-subnav__menu) instead */
@@ -291,8 +291,7 @@
   block-size: 88px;
   border-radius: 50%;
   border: 1px solid color-mix(in oklch, var(--white) 50%, transparent);
-  background: rgba(6, 26, 46, 0.55);
-  backdrop-filter: blur(12px) saturate(1.4);
+  background: rgba(6, 26, 46, 0.7);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   display: flex;
@@ -406,14 +405,14 @@
   gap: 16px;
   padding: 12px 20px;
   border-radius: 3px;
-  color: var(--white);
+  color: var(--primary-ultra-dark);
 }
+/* Only the offering's own tranche (--highlight) is in colour; the other layers are muted tints with dark text
+   (Alex, 2026-10-09: "only highlight the tranche for that offering, find a way to mute the others"). */
 .cap-stack__layer--top {
   min-block-size: 92px;
   border-radius: 14px 14px 3px 3px;
   background: var(--base-light);
-  color: var(--primary-ultra-dark);
-  & .cap-stack__label, & .cap-stack__pct { color: var(--base-dark); }
 }
 .cap-stack__layer--highlight {
   z-index: 1;
@@ -422,6 +421,7 @@
   padding: 14px 24px;
   border-radius: 10px;
   background: var(--secondary);
+  color: var(--white);
   box-shadow: 0 18px 36px -14px rgba(36, 104, 168, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   & .cap-stack__amount { font-size: var(--text-xl); font-weight: 600; }
   & .cap-stack__label { font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); }
@@ -429,12 +429,12 @@
 }
 .cap-stack__layer--mezz {
   min-block-size: 70px;
-  background: var(--primary-semi-light);
+  background: color-mix(in oklch, var(--primary) 9%, var(--white));
 }
 .cap-stack__layer--senior {
   min-block-size: 128px;
   border-radius: 3px 3px 14px 14px;
-  background: var(--primary);
+  background: color-mix(in oklch, var(--primary) 15%, var(--white));
 }
 .cap-stack__text {
   display: grid;
@@ -448,13 +448,13 @@
 .cap-stack__label {
   font-size: var(--text-s);
   font-weight: 500;
-  color: color-mix(in oklch, var(--white) 86%, transparent);
+  color: var(--base-dark);
 }
 .cap-stack__pct {
   font-size: var(--text-s);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: color-mix(in oklch, var(--white) 86%, transparent);
+  color: var(--base-dark);
 }
 .highlights-list {
   flex: 1.6 1 480px;
@@ -550,9 +550,7 @@
 }
 .cap-stack__layer--light {
   min-block-size: 64px;
-  background: var(--base-semi-light);
-  color: var(--primary-ultra-dark);
-  & .cap-stack__label, & .cap-stack__pct { color: var(--base-dark); }
+  background: var(--base-light);
 }
 
 /* ---------- Opportunity Zone benefits (#structure) ---------- */
@@ -759,4 +757,82 @@
   font-size: var(--text-m);
   line-height: 1.7;
   & a { color: var(--secondary); }
+}
+
+/* ---------- Market update (#market-update, Riverside Wharf; site/lib/market_update.py) ---------- */
+.market-update {
+  padding-block: var(--section-space-l) var(--section-space-m);
+  background: var(--white);
+}
+.market-update__head {
+  display: grid;
+  gap: var(--space-s);
+  max-inline-size: 760px;
+}
+.market-update__title {
+  margin: 0;
+  font-size: var(--h2);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.032em;
+  color: var(--primary-ultra-dark);
+  text-wrap: balance;
+}
+.market-update__intro {
+  margin: 0;
+  font-size: var(--text-m);
+  line-height: 1.6;
+  color: var(--base-dark);
+}
+.market-update__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-s);
+  margin: var(--space-l) 0 0;
+  padding: 0;
+  list-style: none;
+  /* five cards, no hole: 2 + 2 + 1 wide on tablets, 3 + 2 on desktop */
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    & > :last-child { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(6, 1fr);
+    & > * { grid-column: span 2; }
+    & > :nth-child(n+4) { grid-column: span 3; }
+  }
+}
+.market-update__item {
+  padding: 20px;
+  border: 1px solid var(--base-semi-light);
+  border-radius: 14px;
+  background: var(--base);
+  @media (min-width: 768px) { padding: var(--space-m); }
+  font-size: var(--text-s);
+  line-height: 1.6;
+  color: var(--base-dark);
+  & strong { display: block; margin-block-end: var(--space-xs); font-size: var(--text-m); font-weight: 600; line-height: 1.35; color: var(--primary-ultra-dark); }
+  & .fn-ref a { color: var(--secondary); }
+}
+.market-update__closing {
+  max-inline-size: 760px;
+  margin: var(--space-l) 0 0;
+  font-size: var(--text-m);
+  line-height: 1.6;
+  color: var(--primary-ultra-dark);
+}
+.market-update__notes {
+  margin-block-start: var(--space-l);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--base-semi-light);
+}
+.market-update__sources {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-inline-start: 1.4em;
+  & li { scroll-margin-block-start: 140px; }
+}
+.market-update__back {
+  text-decoration: none;
 }

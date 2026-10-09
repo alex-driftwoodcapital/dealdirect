@@ -9,7 +9,8 @@ LOGO = 'https://driftwooddealdirect.com/wp-content/uploads/dealdirect-logo.svg'
 SCRIPT = """// site-header: frosted state after 40px (handoff README Home §1). Scoped; no globals.
 const header = document.querySelector('.site-header');
 if (header) {
-  const update = () => header.toggleAttribute('data-scrolled', window.scrollY > 40);
+  let on = null;  // only touch the DOM when the state flips, not on every scroll event
+  const update = () => { const now = window.scrollY > 40; if (now !== on) { on = now; header.toggleAttribute('data-scrolled', now); } };
   update();
   window.addEventListener('scroll', update, { passive: true });
 }

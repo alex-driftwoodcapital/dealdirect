@@ -4,7 +4,7 @@ Generated from `handoff/design/evidence-register/claims.js` by `ops/compliance/r
 Every figure on the rebuilt pages was lifted verbatim from the live site, which is not a source document, so a
 claim is only closed once compliance traces it to an offering document or accepts it in writing.
 
-**50 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 23 `check`.
+**56 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 29 `check`.
 Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 
 | Status | Meaning |
@@ -70,7 +70,18 @@ Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 | `check` | QOZ 2.0 | Article disclaimer on an offering page | "This blog is for informational and educational purposes only…" | Carried verbatim, so it says "This blog" on the offering page. Compliance decides whether the wording stands or an offering-page version replaces it. |
 | `check` | OZ benefits | Design OZ benefits next to the QOZ 2.0 explainer | "Capital Gain Exclusion" / "Tax Deferral and Recognition" (design) + QOZ 2.0 rules (article) | The design section cites the 2017 framework; the article explains QOZ 2.0 (investments from Jan 1, 2027). Confirm both read consistently for this offering's timing. |
 | `check` | Reserve | Reservation call to action | "Reserve Your Spot" (every request button on the QOZ page) | Alex, 2026-10-09: the teaser lets people "reserve their spot using the form". Opens the offering request dialog (accredited check, Registration / Offering Request forms). Confirm the wording for a coming-soon securities offering. |
-| `check` | Offering | Cap stack highlight | Total equity ~$96M | Highlighted as the QOZ offering layer; confirm the QOZ common equity amount and whether it should be shown separately from pref. |
+| `check` | Offering | Cap stack highlight | Common equity ~$96M | Both Riverside Wharf pages. Label changed from the designs' "Total equity" to "Common equity" (Alex, 2026-10-09: "96M is common equity, not total equity"). Each page shows only its own tranche in colour (QOZ: common equity; Pref: preferred equity), the others muted. Confirm the ~$96M common equity figure against the capitalization schedule, and how the ~$35M preferred layer relates to it (both pages still show the design's cumulative 100% / 71%). |
+
+## RW
+
+| Status | Section | Claim | Shown on the page | Note / what closes it |
+|---|---|---|---|---|
+| `check` | Market update | Wynwood acquisition and campus commitment | $1.1 billion · ~30 acres · $2 billion campus | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. Sources disagree on details: reports give ~30 to ~35 acres, and describe Griffin's $3B as a gift to Carnegie Mellon that covers the land and the campus. Confirm the $1.1B land price, the acreage and that the $2B is in addition to the land, or adjust the copy. |
+| `check` | Market update | Brickell waterfront assemblage | $520 million · Oak Row Equities, OKO Group, Mariposa Real Estate · 2025 | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. Reported as a record Brickell land deal (Dec 2025). Confirm the buyer group names as published. |
+| `check` | Market update | Brickell City Centre retail purchase | $512 million · Simon Property Group from Swire Properties · 2025 | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. Reports give $512.6M fixed plus up to $36.1M contingent consideration. Confirm the rounded figure is acceptable. |
+| `check` | Market update | Citadel headquarters site | $363 million · 2022 · global headquarters | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. The 2022 report attributed the buyer to Citadel through people familiar with the deal; the HQ plans were announced later (2024). Confirm the attribution and the "global headquarters" wording. |
+| `check` | Market update | Mandarin Oriental residences presales | $1.7 billion before groundbreaking · two penthouses ~$50 million each | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. Bloomberg (Oct 2026) reports the $1.7B; the penthouses were reported at about $49.9M each. Confirm the figures and that groundbreaking had not yet occurred at the date cited. |
+| `check` | Market update | Forward-looking closing statement | We believe this continued investment strengthens Miami’s appeal … supports the long-term opportunity for Riverside Wharf | Opinion framed as "We believe"; followed by the page's market disclaimer. Compliance to confirm. |
 
 ## EB-5
 

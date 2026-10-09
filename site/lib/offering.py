@@ -7,12 +7,18 @@ from etch import El, Img, section
 ARROW = El('span', 'Arrow', attrs={'aria-hidden': 'true'}, children=['→'])
 UP = 'https://driftwooddealdirect.com/wp-content/uploads/'
 
-HERO_SCRIPT = """// offering-hero: muted background loop; never plays under prefers-reduced-motion (QA checklist). Scoped; no globals.
+HERO_SCRIPT = """// offering-hero: muted background loop on wider screens; never under prefers-reduced-motion (QA checklist). Scoped; no globals.
 const video = document.querySelector('.offering-hero__video');
-if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  video.muted = true;
-  video.preload = 'auto';
-  video.play().catch(() => {});
+if (video) {
+  // Plays only where it is cheap: wider screens, no reduced motion, no data saver. Phones keep the poster (the video is
+  // ~10 MB). While the hero is off screen the video pauses, so it is not decoded while the page scrolls.
+  const ok = window.matchMedia('(min-width: 768px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !(navigator.connection && navigator.connection.saveData);
+  if (ok) {
+    video.muted = true;
+    video.preload = 'auto';
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }).observe(video);
+  }
 }
 """
 VIDEO_SCRIPT = """// offering-video: replace the poster with the Vimeo player on click (no third-party request before that). Scoped.
@@ -237,7 +243,7 @@ class Offering:
                         El('li', label, 'cap-stack__layer ' + mod, children=[
                             El('span', 'Amount and label', 'cap-stack__text', children=[
                                 El('strong', 'Amount', 'cap-stack__amount', children=[q(amount)]),
-                                El('span', 'Label', 'cap-stack__label', children=[q(label)]),
+                                El('span', 'Label', 'cap-stack__label', children=[label if label == COMMON_EQUITY else q(label)]),
                             ]),
                             El('span', 'Cumulative', 'cap-stack__pct', children=[q(pct)]),
                         ]) for amount, label, pct, mod in stack
@@ -392,6 +398,9 @@ class Offering:
 MARKET = [['Florida’s tourism demand', '1'], ['Miami International Airport served', '2'],
           ['Miami MSA was ranked', '3', '; and ranked No. 5', '4'], ['Miami also ranked', '5'],
           ['Miami’s Downtown submarket', '6'], ['The luxury and upper-upscale segment', '6']]
+# The ~$96M layer is the common equity, not the total equity the designs label it (Alex, 2026-10-09); pages list it in
+# NON_DESIGN and drop the design's 'Total equity'.
+COMMON_EQUITY = 'Common equity'
 MARKET_NOTES = ['1. VISIT FLORIDA', 'This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes an offering']
 METRIC_NOTES = [('1', 'Targeted preferred return anticipated'), ('2', 'The minimum investment amount'),
                 ('3', 'The anticipated hold period'), (None, '* Target internal rate of return')]

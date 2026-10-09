@@ -13,12 +13,18 @@ DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design'
 q = Copy(DESIGN)
 COPY_SOURCE = 'DealDirect Home.dc.html'  # literals inside the card expressions are checked against it
 
-HERO_SCRIPT = """// home-hero: muted background loop; never plays under prefers-reduced-motion (QA checklist). Scoped; no globals.
+HERO_SCRIPT = """// home-hero: muted background loop on wider screens; never under prefers-reduced-motion (QA checklist). Scoped; no globals.
 const video = document.querySelector('.home-hero__video');
-if (video && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  video.muted = true;
-  video.preload = 'auto';
-  video.play().catch(() => {});
+if (video) {
+  // Plays only where it is cheap: wider screens, no reduced motion, no data saver. Phones keep the poster (the video is
+  // ~10 MB). While the hero is off screen the video pauses, so it is not decoded while the page scrolls.
+  const ok = window.matchMedia('(min-width: 768px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !(navigator.connection && navigator.connection.saveData);
+  if (ok) {
+    video.muted = true;
+    video.preload = 'auto';
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }).observe(video);
+  }
 }
 """
 hero = section('Hero', 'home-hero', 'home-hero-h', [
@@ -39,7 +45,7 @@ hero = section('Hero', 'home-hero', 'home-hero-h', [
 # ---------- live offerings: a loop over open + coming-soon offerings ----------
 STATUS = '{item.meta.offering_status.equal("coming_soon", "Coming soon", "Open")}'
 card = El('article', 'Offering card', 'deal-card', {
-    'id': '{item.slug}', 'data-status': '{item.meta.offering_status}', 'data-rendering': '{item.meta.card_rendering}'}, [
+    'id': '{item.slug}', 'data-status': '{item.meta.offering_status}', 'data-cta': '{item.meta.card_cta_label}', 'data-rendering': '{item.meta.card_rendering}'}, [
     El('div', 'Photo', 'deal-card__photo', children=[Img('Photo', '{item.meta.card_image}', '')]),
     El('span', 'Rendering chip', 'chip chip--glass rendering-chip deal-card__rendering', children=[q('Rendering')]),
     El('div', 'Veil', 'deal-card__veil', {'aria-hidden': 'true'}),
@@ -68,7 +74,8 @@ ROUTES = [  # (number, position label, position, heading, body, footnote ref, in
     ('02', 'You are', 'A 1031 exchange buyer', 'Delaware Statutory Trusts', 'Offers fractional interests', '2',
      'Driftwood Hotel Income I, DST', '#driftwood-hotel-income-i-dst', 'https://driftwoodcapital.com/1031-exchanges-and-dsts/'),
     ('03', 'You are seeking', 'To offset passive income', 'Bonus Depreciation Funds', 'Applies cost segregation', None,
-     'Driftwood Tax Advantage Strategy I', '#driftwood-tax-advantage-strategy-i', 'https://driftwoodcapital.com/bonus-depreciation/'),
+     'Driftwood Tax Advantage Strategy I', '/offering/driftwood-tax-advantage-strategy-i/',  # 302s to its card_url (Alex: dtas1 for now)
+     'https://driftwoodcapital.com/bonus-depreciation/'),
 ]
 
 

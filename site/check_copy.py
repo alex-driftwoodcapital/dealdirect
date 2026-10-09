@@ -16,15 +16,16 @@ for extra_copy in getattr(mod, 'COPY_EXTRA', []):
     design |= set(extra_copy.all)
 # A text that is one dynamic expression ({item.title}, {item.meta.x.equal("a", "Open", "Closed")}) is data, not copy;
 # but every quoted literal in it is shown text, so it must be verbatim in the design source (identifiers such as
-# field values "coming_soon" excepted). Same for an offering's card field values (META['fields'], Home design data).
+# field values "coming_soon" excepted). Same for an offering's card field values (META['fields'], Home design data),
+# unless the page lists the value in NON_DESIGN (e.g. the QOZ teaser's Reserve label, Alex).
 SOURCE = os.path.join(HERE, '..', 'handoff', 'design', getattr(mod, 'COPY_SOURCE', ''))
 raw = html.unescape(open(SOURCE, encoding='utf-8').read()) if getattr(mod, 'COPY_SOURCE', None) else ''
 def in_source(lit):
     return re.fullmatch(r'[a-z_]*', lit) or lit in raw
 expr = [t for t in mine if re.fullmatch(r'\{[^{}]*(\{[^{}]*\}[^{}]*)*\}', t) and not t.startswith('{options.')]
 literals = [l for t in expr for l in re.findall(r'"([^"]*)"', t) if not in_source(l)]
-field_vals = [v for v in getattr(mod, 'META', {}).get('fields', {}).values()
-              if isinstance(v, str) and not v.startswith('{{') and not in_source(v)]
+field_vals = [v for k, v in getattr(mod, 'META', {}).get('fields', {}).items() if k != 'card_url'  # a link, not shown text
+              if isinstance(v, str) and not v.startswith('{{') and not in_source(v) and v not in mod.NON_DESIGN]
 extra = [t for t in mine if t and t not in design and t not in mod.NON_DESIGN and not t.startswith('{options.') and t not in expr]
 extra += [f'expression literal {l!r}' for l in literals] + [f'card field value {v!r}' for v in field_vals]
 # DROPPED_COPY: design strings a page leaves out on purpose (each with who decided, in the page module), e.g. a teaser
