@@ -44,7 +44,7 @@ The fixtures, examples and ACSS index inside the skills come from a previous bui
 1. **Copy is verbatim.** Lift text from the live page or the design file. Never rewrite, shorten or "fix" it. Known typos and conflicts are tracked in `handoff/design/evidence-register/claims.js`; compliance decides.
 2. **Riverside Wharf is under construction.** Never carry over "shovel-ready", on any page or language.
 3. **Permalinks and anchor IDs are frozen** (`handoff/docs/permalinks.md`).
-4. **ACSS first.** Variables and utilities before custom CSS; verify every name exists on staging (`acss-expert` verify/lookup).
+4. **ACSS first.** Variables and utilities before custom CSS; verify every name exists on staging (`acss-expert` verify/lookup). Font sizes are ACSS type tokens only (`var(--h1)`…`var(--h4)`, `var(--text-xs)`…`var(--text-xxl)`), never px/rem/`clamp()`: the scale is set from the designs in `ops/acss/build-settings.py` and `site/build.py` refuses a literal size (Alex, 2026-10-09).
 5. **BEM classes** as named in `handoff/docs/etch-components.md`.
 6. Legal and footnote text: never below 12px or 4.5:1 contrast; one column at full content width. No section ships without its disclaimer block.
 7. Forms: custom Etch UI → `POST /wp-json/dealdirect/v1/submit` → HubSpot Forms API v3 (`handoff/docs/hubspot-setup-steps.md`). Non-accredited visitors are never sent to HubSpot. Submissions go to the HubSpot forms themselves (Registration, Offering Request, EB-5 Registration GUIDs), so they count as those forms' submissions: follow-up emails and brochures are sent by HubSpot workflows (Alex, 2026-10-09). The site never hosts or emails a brochure.

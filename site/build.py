@@ -2,7 +2,7 @@
 """Build a page for deploy: python3 -I site/build.py eb5 [--out build/eb5]
 Writes content.tpl.html (Etch markup with {{style:}}/{{media:}} placeholders), records.json (style records for every
 class on the page, from site/styles/<page>.css) and media.json (slug -> source). Fails if the copy gate fails."""
-import argparse, importlib, json, os, subprocess, sys
+import argparse, importlib, json, os, re, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.join(HERE, 'pages'), os.path.join(HERE, 'lib')]
 import etch, styles
@@ -35,6 +35,12 @@ for lib in getattr(mod, 'STYLESHEETS', ['shared']):
     rules.update({s: r for s, r in sheet.items() if s[1:] in classes})
 if classes and not rules:
     sys.exit(f'{a.page}: classes on the page but no {os.path.relpath(css)}')
+# Font sizes come from ACSS's type tokens (var(--h2), var(--text-m)...; scale in ops/acss/build-settings.py), never
+# px/rem/clamp() in page CSS: refuse a literal size so the pages keep following the ACSS scale.
+literal = sorted({sel for sel, css in rules.items()
+                  for v in re.findall(r'font-size:\s*([^;}]+)', css) if not re.match(r'(var\(--|inherit|1em|100%)', v.strip())})
+if literal:
+    sys.exit(f'{a.page}: literal font sizes (use an ACSS token, e.g. var(--text-m)): {" ".join(literal)}')
 hooks = [c for c in classes if '.' + c not in rules]
 # A hook still gets a style record, so a class styled in a sheet this page doesn't load would overwrite that sheet's
 # record with empty css on staging (every page deploys every record for its classes): refuse to build.

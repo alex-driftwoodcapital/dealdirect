@@ -41,7 +41,7 @@
 .home-hero__title {
   margin: 0;
   max-inline-size: 13ch;
-  font-size: clamp(42px, 6vw, 88px);
+  font-size: var(--h1);
   font-weight: 300;
   line-height: 1.03;
   letter-spacing: -0.036em;
@@ -51,7 +51,7 @@
 .home-hero__lede {
   margin: 26px 0 0;
   max-inline-size: 60ch;
-  font-size: clamp(16px, 1.45vw, 20px);
+  font-size: var(--text-l);
   font-weight: 300;
   line-height: 1.6;
   color: color-mix(in oklch, var(--white) 92%, transparent);
@@ -137,7 +137,7 @@
 }
 .deal-card__eyebrow {
   margin: 0;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -145,7 +145,7 @@
 }
 .deal-card__title {
   margin: 0;
-  font-size: 21px;
+  font-size: var(--text-xl);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -154,7 +154,7 @@
 }
 .deal-card__summary {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--text-s);
   line-height: 1.6;
   color: color-mix(in oklch, var(--white) 80%, transparent);
   text-wrap: pretty;
@@ -166,7 +166,7 @@
   gap: 10px;
   min-block-size: 44px;
   margin-block-start: 2px;
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -194,7 +194,7 @@
   border: 0;
   background: none;
   font-family: inherit;
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -205,7 +205,7 @@
 }
 .deal-card__notified {
   margin: 2px 0 0;
-  font-size: 13px;
+  font-size: var(--text-s);
   line-height: 1.6;
   color: var(--white);
   &:focus { outline: none; }  /* takes focus from the dialog when it closes (tabindex -1), not a tab stop */
@@ -222,7 +222,7 @@
 .home-tax__eyebrow { margin-block-end: 14px; }
 .home-tax__title {
   margin: 0;
-  font-size: clamp(26px, 3vw, 40px);
+  font-size: var(--h2);
   font-weight: 300;
   line-height: 1.14;
   letter-spacing: -0.03em;
@@ -232,7 +232,7 @@
 .home-tax__lede {
   margin: 18px 0 0;
   max-inline-size: 62ch;
-  font-size: clamp(15.5px, 1.4vw, 17.5px);
+  font-size: var(--text-m);
   line-height: 1.74;
   text-wrap: pretty;
 }
@@ -258,14 +258,14 @@
 }
 .tax-route__num {
   margin: 0;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--secondary);
 }
 .tax-route__label {
   margin: 14px 0 0;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -273,7 +273,7 @@
 }
 .tax-route__position {
   margin: 8px 0 0;
-  font-size: clamp(19px, 1.8vw, 23px);
+  font-size: var(--text-xl);
   font-weight: 400;
   line-height: 1.26;
   letter-spacing: -0.02em;
@@ -282,7 +282,7 @@
 }
 .tax-route__title {
   margin: 18px 0 0;
-  font-size: 14px;
+  font-size: var(--text-s);
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0.01em;
@@ -291,7 +291,7 @@
 }
 .tax-route__body {
   margin: 10px 0 20px;
-  font-size: 14px;
+  font-size: var(--text-s);
   line-height: 1.72;
   text-wrap: pretty;
   & sup { font-weight: 700; color: var(--secondary-dark); }
@@ -304,7 +304,7 @@
 .tax-route__via-label {
   display: block;
   margin-block-end: 5px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -314,7 +314,7 @@
   display: inline-flex;
   align-items: center;
   min-block-size: 44px;
-  font-size: 13px;
+  font-size: var(--text-s);
   font-weight: 600;
   line-height: 1.45;
   color: var(--primary-ultra-dark);
@@ -329,7 +329,7 @@
   justify-self: start;
   gap: 8px;
   min-block-size: 44px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -382,7 +382,7 @@
 }
 .past-tile__tag {
   margin: 0;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -390,7 +390,7 @@
 }
 .past-tile__title {
   margin: 0;
-  font-size: 17px;
+  font-size: var(--text-m);
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.018em;
