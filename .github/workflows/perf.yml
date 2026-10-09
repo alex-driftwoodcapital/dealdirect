@@ -1,0 +1,73 @@
+# Staging performance, read-only (GETs only), on demand: Actions > "Perf" > Run workflow. A throttled phone loads and
+# scrolls each page (ops/qa/perf.mjs: images actually shown with format, bytes and natural vs displayed size, video,
+# LCP, CLS, long tasks, transfer by type), then Lighthouse (mobile) scores each page. Results go to the branch qa/perf
+# (perf.md, lighthouse.md, the raw JSON) so cloud sessions can read them. Secrets: STAGING_HTTP_USER / _PASSWORD.
+name: Perf
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: perf
+  cancel-in-progress: true
+
+permissions:
+  contents: write   # pushes the qa/perf branch only
+
+jobs:
+  perf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      QA_BASE_URL: https://wordpress-1077248-6717515.cloudwaysapps.com
+      QA_HTTP_USER: ${{ secrets.STAGING_HTTP_USER }}
+      QA_HTTP_PASSWORD: ${{ secrets.STAGING_HTTP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Playwright + Lighthouse
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright@1.47.2 lighthouse@12.2.1
+          npx playwright install --with-deps chromium
+      - name: Phone probe
+        run: node ops/qa/perf.mjs
+        continue-on-error: true
+      - name: Lighthouse (mobile)
+        continue-on-error: true
+        run: |
+          export CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())")
+          hdr=$(node -e "console.log(JSON.stringify({Authorization:'Basic '+Buffer.from(process.env.QA_HTTP_USER+':'+process.env.QA_HTTP_PASSWORD).toString('base64')}))")
+          mkdir -p qa-out/lh
+          for p in / /eb-5-investments/ /offering/riverside-wharf-preferred-equity/ /offering/riverside-wharf-qoz/; do
+            n=$(echo "$p" | tr -c 'a-z0-9\n' '-' | sed 's/^-*//; s/-*$//'); n=${n:-home}
+            npx lighthouse "$QA_BASE_URL$p" --quiet --only-categories=performance --form-factor=mobile \
+              --extra-headers="$hdr" --chrome-flags="--headless=new --no-sandbox" --output=json --output-path="qa-out/lh/$n.json" || true
+          done
+          node -e '
+            const fs=require("fs"); const out=["# Lighthouse (mobile, simulated throttling)",""];
+            for (const f of fs.readdirSync("qa-out/lh")) { const r=JSON.parse(fs.readFileSync("qa-out/lh/"+f)); const a=r.audits;
+              out.push(`## ${f.replace(".json","")}: performance ${Math.round((r.categories.performance.score||0)*100)}`,
+                `FCP ${a["first-contentful-paint"].displayValue} · LCP ${a["largest-contentful-paint"].displayValue} · TBT ${a["total-blocking-time"].displayValue} · CLS ${a["cumulative-layout-shift"].displayValue} · Speed Index ${a["speed-index"].displayValue} · weight ${a["total-byte-weight"].displayValue}`, "");
+              const ops=Object.values(a).filter(x=>x.details&&x.details.type==="opportunity"&&(x.numericValue||0)>0).sort((x,y)=>y.numericValue-x.numericValue).slice(0,8);
+              ops.forEach(x=>out.push(`- ${x.title}: ${x.displayValue||""}`));
+              const lcpEl=a["largest-contentful-paint-element"]; if (lcpEl&&lcpEl.details) out.push("", "LCP element: "+JSON.stringify(lcpEl.details.items?.[0]?.items?.[0]?.node?.snippet||"").slice(0,200));
+              out.push(""); }
+            fs.writeFileSync("qa-out/lighthouse.md", out.join("\n")+"\n");'
+      - name: Push results to qa/perf
+        if: always()
+        run: |
+          cat qa-out/perf.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          cat qa-out/lighthouse.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          sha=$(git rev-parse --short HEAD)
+          mv qa-out /tmp/qa-out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q --orphan qa-perf
+          git rm -rfq .
+          cp -r /tmp/qa-out/. .
+          git add -A
+          git commit -q -m "chore: staging perf for $sha ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push -f origin HEAD:qa/perf
