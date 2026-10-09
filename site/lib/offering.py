@@ -30,6 +30,31 @@ document.querySelectorAll('.offering-video__frame').forEach((frame) => {
   });
 });
 """
+SUBNAV_SCRIPT = """// offering-subnav: marks the section being read (aria-current; the phone dropdown's label follows it) and closes the
+// dropdown after a pick, on Escape and on a tap outside. Scoped; the links work without it.
+document.querySelectorAll('.offering-subnav').forEach((nav) => {
+  const menu = nav.querySelector('.offering-subnav__menu');
+  const current = nav.querySelector('.offering-subnav__current');
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const close = () => { if (menu) menu.open = false; };
+  links.forEach((a) => a.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu && menu.open) { close(); menu.querySelector('summary').focus(); } });
+  document.addEventListener('click', (e) => { if (menu && menu.open && !menu.contains(e.target)) close(); });
+  const ids = [...new Set(links.map((a) => a.getAttribute('href').slice(1)))];
+  const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  const mark = (id) => {
+    links.forEach((a) => { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    const hit = links.find((a) => a.getAttribute('href') === '#' + id);
+    if (hit && current) current.textContent = hit.textContent;
+  };
+  const seen = new IntersectionObserver((entries) => {
+    const shown = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (shown.length) mark(shown[0].target.id);
+  }, { rootMargin: '-130px 0px -60% 0px' });
+  sections.forEach((s) => seen.observe(s));
+});
+"""
 PROGRAM_SCRIPT = """// program-tabs: tabs (click, arrow keys, Home/End) switch panels; thumbnails switch the panel's image. Scoped.
 document.querySelectorAll('.program-tabs').forEach((root) => {
   const tabs = [...root.querySelectorAll('[role="tab"]')];
@@ -137,11 +162,19 @@ class Offering:
 
     @staticmethod
     def subnav(items):
+        """Section bar (sticky under the header): the row of links on wide screens; below 1024px a dropdown whose
+        summary shows the section being read and opens the same links. Labels and anchors come from the page."""
+        link = lambda cls, label, anchor: El('a', label, cls, {'href': '#' + anchor}, [label])
         return El('nav', 'On this page', 'offering-subnav', {'aria-label': 'On this page'}, [
-            El('div', 'Rail', 'offering-subnav__rail', children=[
-                El('a', label, 'offering-subnav__link', {'href': '#' + anchor}, [label]) for label, anchor in items
+            El('div', 'Rail', 'offering-subnav__rail', children=[link('offering-subnav__link', l, a) for l, a in items]),
+            El('details', 'Menu', 'offering-subnav__menu', children=[
+                El('summary', 'Toggle', 'offering-subnav__toggle', children=[
+                    El('span', 'Current section', 'offering-subnav__current', children=[items[0][0]]),
+                    El('span', 'Chevron', 'offering-subnav__chevron', {'aria-hidden': 'true'}),
+                ]),
+                El('div', 'Sections', 'offering-subnav__list', children=[link('offering-subnav__item', l, a) for l, a in items]),
             ]),
-        ])
+        ], script=SUBNAV_SCRIPT)
 
     def overview(self, image, alt, title, paras, notes):
         q = self.q
