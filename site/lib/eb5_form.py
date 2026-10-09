@@ -69,7 +69,7 @@ SCRIPT = r"""// eb5-dialog: EB-5 Registration (handoff/docs/hubspot-setup-steps.
                     page_language: document.documentElement.lang || '' },
           consent: { agreed: f.consent.checked, text: $('.dd-dialog__consent-text').textContent.replace(/\s+/g, ' ').trim() },
           utm: utm(), hutk: cookie('hubspotutk') || '', pageUri: location.origin + location.pathname, pageName: document.title,
-          website: f.website.value }),
+          website: f.dd_trap ? f.dd_trap.value : '' }),
       });
       data = await res.json();
     } catch (_) {
@@ -187,7 +187,7 @@ def build(q, t, en_countries, local_countries=None, consent_tail=None):
             El('span', 'Consent text', 'dd-dialog__consent-text', children=consent),
         ]),
         # honeypot: people never see or fill it (dealdirect-core drops submissions that do)
-        El('input', 'Website (leave empty)', 'dd-dialog__hp', {'type': 'text', 'name': 'website', 'tabindex': '-1', 'autocomplete': 'off', 'aria-hidden': 'true'}),
+        El('input', 'Website (leave empty)', 'dd-dialog__hp', {'type': 'text', 'name': 'dd_trap', 'tabindex': '-1', 'autocomplete': 'off', 'aria-hidden': 'true'}),
     ])
     sorry = El('div', 'Apologies', 'dd-dialog__stepbox', {'data-step': 'sorry', 'hidden': ''}, [
         heading('h_sorry', 'eb-sorry-h'),

@@ -1,0 +1,27 @@
+# Read-only diagnosis of the site forms on staging, on demand: Actions > "Forms check" > Run workflow. Checks the HubSpot
+# token and forms from staging, the /dealdirect/v1 endpoint from outside, and today's form requests in staging's logs
+# (ops/forms/check.sh). Submits nothing to HubSpot.
+name: Forms check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ETCH_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+      ETCH_SSH_KNOWN_HOSTS: ${{ secrets.STAGING_KNOWN_HOSTS }}
+      STAGING_HTTP_USER: ${{ secrets.STAGING_HTTP_USER }}
+      STAGING_HTTP_PASSWORD: ${{ secrets.STAGING_HTTP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check
+        run: bash ops/forms/check.sh 2>&1 | tee forms.log
+      - name: Summary
+        if: always()
+        run: '{ echo "\`\`\`"; cat forms.log 2>/dev/null; echo "\`\`\`"; } >> "$GITHUB_STEP_SUMMARY"'
