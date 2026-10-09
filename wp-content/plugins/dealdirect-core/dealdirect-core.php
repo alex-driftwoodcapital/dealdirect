@@ -16,6 +16,7 @@ require_once __DIR__ . '/includes/rest.php';
 require_once __DIR__ . '/includes/i18n.php';
 require_once __DIR__ . '/includes/seo.php';
 require_once __DIR__ . '/includes/retired.php';
+require_once __DIR__ . '/includes/tracking.php';
 
 // Register the CPT before flushing so /offering/{slug}/ resolves right after activation.
 register_activation_hook( __FILE__, function () {
