@@ -41,8 +41,7 @@
   position: absolute;
   inset-block-start: 16px;
   inset-inline-end: 16px;
-  display: grid;
-  place-items: center;
+  display: block;
   inline-size: 44px;
   block-size: 44px;
   padding: 0;
@@ -55,7 +54,9 @@
   transition: background-color 160ms;
   &::before, &::after {
     content: "";
-    grid-area: 1 / 1;
+    position: absolute;
+    inset: 0;
+    margin: auto;  /* exact centre, whatever the hidden "×" text does */
     inline-size: 18px;
     block-size: 2px;
     border-radius: 1px;

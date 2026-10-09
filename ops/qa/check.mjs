@@ -138,6 +138,28 @@ for (const [name, path, lang, want = 200] of PAGES) {
       return `${i.alt || i.currentSrc.split('/').pop() || '?'} (${Math.round(i.getBoundingClientRect().width)}x${Math.round(i.getBoundingClientRect().height)}, natural ${i.naturalWidth}, file ${i.currentSrc.split('/').pop()}, HTTP ${st})`;
     }));
     if (w === 1440) fs.writeFileSync(`${OUT}/html/${name}.html`, await page.content());  // the rendered DOM, for diagnosis
+    if (w === 375 && name === 'qoz') {  // footnote marks breaking lines on phones: what styles the mark and its parent
+      const diag = await page.evaluate(() => {
+        const sup = document.querySelector('p > .fn-ref'); if (!sup) return { none: true };
+        const pick = (el) => { const cs = getComputedStyle(el); return { tag: el.tagName, cls: el.className, display: cs.display, flexDirection: cs.flexDirection,
+          lineHeight: cs.lineHeight, whiteSpace: cs.whiteSpace, float: cs.float, position: cs.position, width: cs.width }; };
+        const rules = [];
+        for (const ss of document.styleSheets) {
+          let list; try { list = ss.cssRules; } catch { continue; }
+          const walk = (l) => { for (const r of l) {
+            if (r.selectorText) for (const el of [sup, sup.parentElement]) { try { if (el.matches(r.selectorText)) rules.push({ sheet: (ss.href || 'inline').split('/').pop(), on: el.tagName, sel: r.selectorText.slice(0, 200), css: r.style.cssText.slice(0, 300) }); } catch {} }
+            if (r.cssRules) walk(r.cssRules); } };
+          walk(list);
+        }
+        return { sup: pick(sup), parent: pick(sup.parentElement), grand: pick(sup.parentElement.parentElement), rules };
+      });
+      fs.writeFileSync(`${OUT}/html/diag-fnref-375.json`, JSON.stringify(diag, null, 1));
+      const acss = await page.evaluate(() => [...document.querySelectorAll('link[rel=stylesheet]')].map((l) => l.href));
+      for (const href of acss.filter((h) => /automatic/.test(h))) {
+        const r = await page.request.get(href).catch(() => null);
+        if (r && r.ok()) fs.writeFileSync(`${OUT}/html/automatic.css`, await r.text());
+      }
+    }
     const status = resp ? resp.status() : 0;
     const problems = [];
     if (status !== want) problems.push(`status ${status}, want ${want}`);

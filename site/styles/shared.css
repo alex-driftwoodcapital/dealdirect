@@ -222,19 +222,29 @@
   &::-webkit-details-marker { display: none; }
 }
 .faq__icon {
-  /* the "+" in a round button, centred; it turns into a cross when the answer is open */
-  display: grid;
-  place-items: center;
+  /* a round button with a drawn plus (two centred bars) that turns into a cross when the answer is open; the "+" in the
+     markup stays as its text but is not painted, because a font glyph never sits on the button's centre */
+  position: relative;
+  display: block;
   flex-shrink: 0;
   inline-size: 36px;
   block-size: 36px;
   border-radius: 50%;
   background: var(--base-light);
-  color: var(--secondary);
-  font-size: var(--text-l);
-  font-weight: 400;
-  line-height: 1;
+  color: transparent;
+  overflow: hidden;
   transition: transform 200ms cubic-bezier(.2,.7,.2,1), background-color 200ms;
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;  /* exact centre of the circle, whatever the hidden text does */
+    inline-size: 14px;
+    block-size: 2px;
+    border-radius: 1px;
+    background: var(--secondary);
+  }
+  &::after { transform: rotate(90deg); }
   [open] > .faq__q & { transform: rotate(45deg); background: var(--base-semi-light); }
   @media (prefers-reduced-motion: reduce) { transition: none; }
 }
