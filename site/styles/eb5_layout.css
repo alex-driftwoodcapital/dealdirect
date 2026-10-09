@@ -80,6 +80,7 @@
   padding: 8px 28px;
   list-style: none;
   border-radius: 20px;
+  @media (max-width: 767px) { padding: 4px 20px; }
   background: var(--white);
   border: 1px solid rgba(219, 229, 240, 0.9);
   box-shadow: 0 1px 2px rgba(11, 43, 72, 0.025), 0 10px 28px -16px rgba(11, 43, 72, 0.09);
@@ -115,6 +116,7 @@
 }
 .eb-reqs__card {
   padding: var(--space-l);
+  @media (max-width: 767px) { padding: 20px; }
   font-size: var(--text-m);
   line-height: 1.7;
   color: var(--text-dark);
@@ -167,20 +169,22 @@
 }
 .eb-project__chips {
   position: absolute;
-  inset-block-start: 16px;
-  inset-inline-start: 16px;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
+  inset-inline-end: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 .eb-project__rendering {
   position: absolute;
-  inset-block-end: 16px;  /* bottom on small screens: top-right collides with the two chips at 375 */
-  inset-inline-end: 16px;
-  @media (width >= 48em) { inset-block: 16px auto; }
+  inset-block-end: 12px;  /* bottom on small screens: top-right collides with the two chips at 375 */
+  inset-inline-end: 12px;
+  @media (width >= 48em) { inset-block: 12px auto; }
 }
 .eb-project__body {
   padding: var(--space-l);
+  @media (max-width: 767px) { padding: 20px; }
   & .button { margin-block-start: 26px; }
 }
 .eb-project__title {

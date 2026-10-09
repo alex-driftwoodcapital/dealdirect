@@ -19,8 +19,12 @@
   line-height: 0;
   vertical-align: 0.45em;
   margin: 0 0.08em;
-  :is(h1, h2, h3, h4) & { font-size: 0.45em; font-weight: 600; vertical-align: 1.1em; margin: 0 0 0 0.15em; }
-  .stat-card__value & { font-size: 0.42em; font-weight: 600; vertical-align: 1.15em; margin: 0 0 0 0.12em; }
+  /* never below 12px (CLAUDE.md rule 6), however small the text it marks */
+  font-size: max(0.85em, var(--text-xs));
+  /* in headings and figures the mark hangs from the top of the text (an em offset would push a 12px mark into the
+     line above when the heading or figure wraps) */
+  :is(h1, h2, h3, h4) & { font-size: max(0.45em, var(--text-xs)); font-weight: 600; line-height: 1; vertical-align: text-top; margin: 0 0 0 0.15em; }
+  .stat-card__value & { font-size: max(0.42em, var(--text-xs)); font-weight: 600; line-height: 1; vertical-align: text-top; margin: 0 0 0 0.12em; }
 }
 
 .eyebrow {
@@ -90,12 +94,17 @@
 }
 
 .chip {
-  padding: 6px 12px;
+  /* one compact tag everywhere (status, category, "Rendering"): 12px text, ~24px tall */
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
   border-radius: 999px;
   font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .chip--glass {
   background: color-mix(in oklch, var(--primary-ultra-dark) 66%, transparent);
@@ -109,7 +118,9 @@
   font-weight: 700;
 }
 
-.rendering-chip { pointer-events: none; }  /* the design's mono face is dropped: Plus Jakarta Sans only (CLAUDE.md) */
+.rendering-chip { pointer-events: none; }
+/* Where tags sit on images: status and category tags top-left, the "Rendering" label top-right, 12px from the edges
+   (each image's own rule repeats these values so no record order can move them). */  /* the design's mono face is dropped: Plus Jakarta Sans only (CLAUDE.md) */
 
 .card-light {
   border-radius: 22px;
@@ -133,6 +144,8 @@
     block-size: 100%;
     object-fit: cover;
   }
+  & > .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
+  @media (max-width: 767px) { min-block-size: 260px; border-radius: 18px; }
 }
 
 .stat-card {
@@ -241,8 +254,8 @@
 }
 .tile__chip {
   position: absolute;
-  inset-block-start: 14px;
-  inset-inline-start: 14px;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
 }
 .tile__body {
   position: absolute;
@@ -327,6 +340,7 @@
   padding: var(--section-space-m) var(--space-xl-to-l);
   border-radius: 24px;
   background: var(--primary);
+  @media (max-width: 767px) { padding: 40px 20px; border-radius: 18px; gap: 24px; }
   & img {
     position: absolute;
     inset: 0;

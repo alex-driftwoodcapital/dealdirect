@@ -29,7 +29,7 @@
 }
 .offering-hero__rendering {
   position: absolute;
-  inset-block-start: 108px;
+  inset-block-start: 84px;  /* 16px under the fixed header */
   inset-inline-end: var(--gutter);
   z-index: 3;
 }
@@ -49,7 +49,14 @@
   justify-content: space-between;
   gap: 28px;
 }
-.offering-hero__eyebrow { margin-block-end: 16px; }
+.offering-hero__eyebrow {
+  /* the status badge sits on the eyebrow's line, centred with it */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-block-end: 16px;
+}
 .offering-hero__title {
   margin: 0;
   font-size: var(--h1);
@@ -88,6 +95,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 16px;
+  @media (max-width: 767px) {  /* phones: 2 x 2 compact figures instead of four tall cards */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    & .stat-card--tall { padding: 16px; border-radius: 14px; }
+    & .stat-card__value { font-size: var(--text-xl); }
+    & .stat-card__label { margin-top: 8px; font-size: var(--text-s); }
+    & .stat-card__qualifier { display: block; margin: 2px 0 0; font-size: var(--text-s); }  /* "Target*" under the figure */
+  }
 }
 .offering-metrics--repeat {
   padding-block: var(--section-space-m);
@@ -261,10 +276,11 @@
     block-size: 100%;
     object-fit: cover;
   }
-  & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; }
+  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
 }
 .partner-card__body {
   padding: var(--space-l);
+  @media (max-width: 767px) { padding: 20px; }
   & .link-arrow { margin-block-start: 10px; }
 }
 .partner-card__title {
@@ -462,11 +478,7 @@
 }
 
 /* ---------- QOZ additions: hero status badge, cap-stack modifiers ---------- */
-.offering-hero__badge {
-  margin-inline-start: 12px;
-  vertical-align: middle;
-  letter-spacing: 0.08em;
-}
+.offering-hero__badge { margin: 0; }
 .cap-stack__layer--lead {
   /* only with --highlight: the highlighted layer at the top of the stack (QOZ) is taller and rounder */
   &.cap-stack__layer--highlight { min-block-size: 100px; border-radius: 14px; }
@@ -523,7 +535,7 @@
 .offering-oz__media {
   aspect-ratio: 4 / 5;
   max-block-size: 680px;
-  & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; }
+  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
 }
 
 /* ---------- program tabs (#assets) ---------- */
@@ -600,7 +612,7 @@
   border-radius: 22px;
   overflow: hidden;
   background: var(--base-light);
-  & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; }
+  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
 }
 .program-tabs__slide {
   position: absolute;

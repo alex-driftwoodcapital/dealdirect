@@ -64,7 +64,8 @@ for (const [, path, lang, want = 200] of PAGES) {
 const browser = await chromium.launch();
 for (const [name, path, lang, want = 200] of PAGES) {
   for (const w of WIDTHS) {
-    const ctx = await browser.newContext({ httpCredentials: auth, viewport: { width: w, height: 900 } });
+    // phones as phones (touch, overlay scrollbars): the screenshot is the full 375px, no scrollbar strip
+    const ctx = await browser.newContext({ httpCredentials: auth, viewport: { width: w, height: 900 }, ...(w < 768 ? { isMobile: true, hasTouch: true } : {}) });
     const page = await ctx.newPage();
     const errors = [], failed = [];
     // a page that should answer 404 logs its own 404 as a console error: that one is expected
@@ -98,6 +99,16 @@ for (const [name, path, lang, want = 200] of PAGES) {
         h2: getComputedStyle(document.documentElement).getPropertyValue('--h2').trim().slice(0, 60),
       };
     });
+    // Lazy images (loading="lazy") only load near the viewport: scroll the page through once so the full-page
+    // screenshot shows every image, then back to the top (the fixed header and hero are captured as on arrival).
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight * 0.8) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForLoadState('networkidle').catch(() => {});
     await page.screenshot({ path: `${OUT}/shots/${name}-${w}.jpg`, fullPage: true, type: 'jpeg', quality: 70 });
     const status = resp ? resp.status() : 0;
     const problems = [];
