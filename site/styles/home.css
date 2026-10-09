@@ -272,7 +272,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--base-semi-dark);
+  color: #5A6675;  /* design value; no ACSS shade matches */
 }
 .tax-route__position {
   margin: 8px 0 0;
@@ -311,7 +311,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--base-semi-dark);
+  color: #5A6675;  /* design value; no ACSS shade matches */
 }
 .tax-route__vehicle {
   display: inline-flex;

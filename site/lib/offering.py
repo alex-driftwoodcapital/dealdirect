@@ -65,7 +65,7 @@ document.querySelectorAll('.program-tabs').forEach((root) => {
 
 
 def sup(n):
-    return El('sup', 'Footnote ref', children=[n])
+    return El('sup', 'Footnote ref', 'fn-ref', children=[n])
 
 
 class Offering:

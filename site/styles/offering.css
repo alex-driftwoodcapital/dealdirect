@@ -634,9 +634,9 @@
 }
 .program-tabs__spec-lead {
   margin: 20px 0 0;
-  font-size: var(--text-m);
-  font-weight: 600;
-  color: var(--primary);
+  font-size: var(--text-s);
+  font-weight: 700;
+  color: var(--primary-ultra-dark);
 }
 .program-tabs__spec-list {
   display: grid;

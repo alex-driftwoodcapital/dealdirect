@@ -84,7 +84,7 @@
   margin: 0;
   font-size: var(--text-s);
   line-height: 1.6;
-  color: var(--base-semi-dark);
+  color: var(--base-dark);  /* design slate-600 */
 }
 
 .dd-dialog__steps {
@@ -193,7 +193,7 @@
   align-items: flex-start;
   font-size: var(--text-xs);
   line-height: 1.6;
-  color: var(--base-semi-dark);
+  color: var(--base-dark);  /* design slate-600 */
   & a { color: var(--secondary); }
 }
 
@@ -258,6 +258,8 @@
 
 .dd-dialog__link {
   --btn-font-weight: 400;
+  --btn-text-decoration: underline;
+  --btn-text-decoration-hover: underline;
   --btn-font-family: inherit;
   justify-self: start;
   min-block-size: 44px;

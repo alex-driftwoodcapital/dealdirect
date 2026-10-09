@@ -107,7 +107,7 @@ def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog', localize=()):
         ])
 
     def sup(n):
-        return El('sup', 'Footnote ref', children=[n])
+        return El('sup', 'Footnote ref', 'fn-ref', children=[n])
 
     def req_card(title, intro, items, closing):
         return El('article', title, 'card-light eb-reqs__card', children=[
