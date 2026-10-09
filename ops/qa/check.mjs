@@ -130,7 +130,13 @@ for (const [name, path, lang, want = 200] of PAGES) {
       if (cs.display === 'none' || cs.visibility === 'hidden' || i.closest('[hidden], dialog:not([open]), details:not([open])')) return false;  // closed parts load on opening
       if (r.left >= window.innerWidth || r.right <= 0) return false;  // further along a carousel: lazy, loads on swipe
       return !i.complete || i.naturalWidth === 0 || r.width < 2 || r.height < 2;
-    }).map((i) => `${i.alt || i.currentSrc.split('/').pop() || i.getAttribute('src') || '?'} (${Math.round(i.getBoundingClientRect().width)}x${Math.round(i.getBoundingClientRect().height)}, natural ${i.naturalWidth})`));
+    }).map((i) => {
+      // the file the browser picked from srcset and the HTTP status it got (Resource Timing), to tell a broken file
+      // from one that never loaded
+      const t = performance.getEntriesByName(i.currentSrc)[0];
+      const st = t ? (t.responseStatus || 'no status') : 'not requested';
+      return `${i.alt || i.currentSrc.split('/').pop() || '?'} (${Math.round(i.getBoundingClientRect().width)}x${Math.round(i.getBoundingClientRect().height)}, natural ${i.naturalWidth}, file ${i.currentSrc.split('/').pop()}, HTTP ${st})`;
+    }));
     if (w === 1440) fs.writeFileSync(`${OUT}/html/${name}.html`, await page.content());  // the rendered DOM, for diagnosis
     const status = resp ? resp.status() : 0;
     const problems = [];
