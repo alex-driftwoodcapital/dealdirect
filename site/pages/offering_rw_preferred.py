@@ -5,7 +5,8 @@ the design file via q(). Sections: site/lib/offering.py."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
 from design import Copy
-from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP
+from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP, COMMON_EQUITY
+import market_update
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'Riverside Wharf Preferred Equity.dc.html')
 q = Copy(DESIGN)
@@ -18,7 +19,7 @@ METRICS = [  # (value, qualifier, label, footnote ref, accent)
     ('5-Year', None, 'Assumed Hold Period', '3', False),
 ]
 STACK = [  # (amount, label, cumulative %, modifier): the preferred-equity layer is this offering's highlight
-    ('~$96M', 'Total equity', '100%', 'cap-stack__layer--top'),
+    ('~$96M', COMMON_EQUITY, '100%', 'cap-stack__layer--top'),
     ('~$35M', 'Preferred equity', '71%', 'cap-stack__layer--highlight'),
     ('~$60M', 'EB-5 mezzanine loan', '61%', 'cap-stack__layer--mezz'),
     ('~$145M', 'Total senior debt', '43%', 'cap-stack__layer--senior'),
@@ -34,7 +35,7 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
                    (None, 'All information is as of the date indicated'),
                    (None, 'All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather')]
 SUBNAV = [('Metrics', 'metrics'), ('Overview', 'overview'), ('Video', 'webinar'), ('Partners', 'partners'),
-          ('Offering', 'offering'), ('Market', 'market'), ('Legal', 'legal')]
+          ('Offering', 'offering'), ('Market', 'market'), ('Market update', 'market-update'), ('Legal', 'legal')]
 
 STYLESHEETS = ['shared', 'offering']
 PAGE = [
@@ -50,6 +51,7 @@ PAGE = [
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
     o.market(MARKET, MARKET_NOTES),
+    market_update.build(o.fn(None, MARKET_NOTES[1])),
     o.metrics_repeat(METRICS, METRIC_NOTES),
     o.legal(),
     o.cta(),
@@ -57,6 +59,11 @@ PAGE = [
 
 # Not design copy: the arrow and the sub-nav labels, which the design renders from its script data (subnav: [...]).
 NON_DESIGN = {'→'} | {label for label, _ in SUBNAV}
+# The ~$96M layer's label (Alex, 2026-10-09: "96M is common equity, not total equity") and the market update's footnote
+# marks; the update's copy is Alex's (site/sources/riverside-wharf-market-update.html).
+NON_DESIGN |= {COMMON_EQUITY} | market_update.NON_DESIGN
+COPY_EXTRA = [market_update.COPY]
+DROPPED_COPY = {q('Total equity')}  # replaced by COMMON_EQUITY (Alex, 2026-10-09)
 # slug -> (source, Etch Asset Manager collection[, filename]). Live-site uploads keep their filenames; images are
 # compressed on import with the Etch Asset Manager preset.
 MEDIA = {

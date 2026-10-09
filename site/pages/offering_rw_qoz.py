@@ -15,7 +15,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
 from etch import El, Img, section, all_texts
 from article import Article
 from design import Copy, norm
-from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP, sup
+from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP, COMMON_EQUITY, sup
+import market_update
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'Riverside Wharf QOZ.dc.html')
 q = Copy(DESIGN)
@@ -23,7 +24,7 @@ RESERVE = 'Reserve Your Spot'  # Alex, 2026-10-09 ("reserve their spot using the
 o = Offering(q, cta=RESERVE)
 ARTICLE = os.path.join(os.path.dirname(__file__), '..', 'sources', 'driftwoodcapital-opportunity-zones-program-explained.html')
 oz_src = Article(ARTICLE, "<div id='inner_content", '<footer id="main-footer"', 'oz-note-', 'oz-ref-')
-COPY_EXTRA = [oz_src.copy]
+COPY_EXTRA = [oz_src.copy, market_update.COPY]  # + Alex's market update (site/sources/riverside-wharf-market-update.html)
 
 METRICS = [  # (value, qualifier, label, footnote ref, accent): values are the design's [TBD] placeholders
     ('[TBD]', 'Target*', 'Net Quarterly Distributions', '1', True),
@@ -31,8 +32,8 @@ METRICS = [  # (value, qualifier, label, footnote ref, accent): values are the d
     ('[TBD]', None, 'Minimum Investment', '2', False),
     ('[TBD]', None, 'Assumed Hold Period', '3', False),
 ]
-STACK = [  # the total-equity layer is this offering's highlight (claims.js: confirm the QOZ common equity amount)
-    ('~$96M', 'Total equity', '100%', 'cap-stack__layer--highlight cap-stack__layer--lead'),
+STACK = [  # the common-equity layer is this offering's highlight; the others are muted
+    ('~$96M', COMMON_EQUITY, '100%', 'cap-stack__layer--highlight cap-stack__layer--lead'),
     ('~$35M', 'Preferred equity', '71%', 'cap-stack__layer--light'),
     ('~$60M', 'EB-5 mezzanine loan', '61%', 'cap-stack__layer--mezz'),
     ('~$145M', 'Total senior debt', '43%', 'cap-stack__layer--senior'),
@@ -50,7 +51,7 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
 # Sub-nav: the design's labels (its subnav data), in this page's section order, plus Renderings and QOZ 2.0 for the
 # teaser's own sections (#metrics now holds the key figures).
 SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('QOZ 2.0', 'qoz'),
-          ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Legal', 'legal')]
+          ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Market update', 'market-update'), ('Legal', 'legal')]
 
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
 OZ_BENEFITS = [('Capital Gain Exclusion:', 'For qualifying investments held for 10 years'),
@@ -307,6 +308,7 @@ PAGE = [
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
     o.market(MARKET, MARKET_NOTES),
+    market_update.build(o.fn(None, MARKET_NOTES[1])),
     o.legal(),
     o.cta(),
 ]
@@ -320,13 +322,16 @@ DROPPED_COPY = {q(t) for t in ('[TBD]', 'Target*', 'Net Quarterly Distributions'
                                'The anticipated hold period', '* Target internal rate of return', 'Click here to see important disclaimers',
                                '[QOZ highlight', 'Target Metrics*', 'Request Offering Details', 'Request Information',
                                'Request Investor Details', 'Download Brochure', 'Start Investing',
-                               'QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary')}
+                               'QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary',
+                               'Total equity')}  # 'Total equity': the ~$96M layer is common equity (Alex, 2026-10-09)
 # Alex, 2026-10-09: "Remove program, and rationale for now. This page should enhance the oz information." Both sections
 # stay defined above; their strings that appear nowhere else on the page are dropped.
 DROPPED_COPY |= ({norm(t) for t in all_texts([program, rationale])} & set(q.all)) - {norm(t) for t in all_texts(PAGE)}
 
 # Not design copy: the arrow, the reserve label (Alex), the accordion icon, the sub-nav labels (design script data) and the program tab labels (design script data).
 NON_DESIGN = {'→', RESERVE, ICON} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
+# The ~$96M layer's label (Alex, 2026-10-09) and the market update's footnote marks and back-links.
+NON_DESIGN |= {COMMON_EQUITY} | market_update.NON_DESIGN
 # slug -> (source, Etch Asset Manager collection). Live-site uploads keep their filenames; images are compressed on
 # import with the Etch Asset Manager preset.
 MEDIA = {
@@ -342,7 +347,8 @@ COPY_SOURCE = 'DealDirect Home.dc.html'  # card field values below are checked a
 META = {'kind': 'offering', 'title': 'Riverside Wharf Miami – QOZ Common Equity', 'slug': 'riverside-wharf-qoz', 'status': 'publish',
         'fields': {  # Home card (DealDirect Home.dc.html live data, key riverside-wharf-qoz); the summary is the design's placeholder
             'offering_status': 'coming_soon', 'offering_tag': 'QOZ', 'card_title': 'Riverside Wharf Miami',
-            'card_summary': '[Summary from offering CPT]', 'card_image': '{{media:Riverside-Wharf_Pooldeck}}', 'card_cta_label': '',
+            'card_summary': '[Summary from offering CPT]', 'card_image': '{{media:Riverside-Wharf_Pooldeck}}', 'card_cta_label': RESERVE,  # links to this teaser (Alex, 2026-10-09)
+           
             'card_rendering': 1, 'home_order': 2,
         },
         # no live page of its own: title from the live pattern; og:image as live /offering/riverside-wharf/
