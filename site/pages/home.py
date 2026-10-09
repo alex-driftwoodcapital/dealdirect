@@ -30,7 +30,7 @@ if (video) {
 hero = section('Hero', 'home-hero', 'home-hero-h', [
     # No autoplay attribute: the script starts it, so reduced-motion visitors only get the poster (LCP image).
     El('video', 'Hero video', 'home-hero__video', {
-        'src': '{{mediaurl:Dream_Website_banner}}', 'poster': '{{mediaurl:Riverside-Wharf_View-from-River}}',
+        'src': '{{mediaurl:Riverside-Wharf-hero}}', 'poster': '{{mediaurl:Riverside-Wharf_View-from-River}}',
         'muted': '', 'loop': '', 'playsinline': '', 'preload': 'none', 'aria-hidden': 'true'}, script=HERO_SCRIPT),
     El('div', 'Veil', 'home-hero__veil', {'aria-hidden': 'true'}),
     El('div', 'Copy', 'home-hero__copy', children=[
@@ -151,7 +151,8 @@ LOOPS = {
 # Not design copy: the arrow. Card text is offering data (fields), checked on the offering modules.
 NON_DESIGN = {'→'}
 MEDIA = {
-    'Dream_Website_banner': (UP + 'Dream_Website_banner.mp4', 'Video'),
+    # the live loop (Dream_Website_banner.mp4) re-encoded lighter for the web, 1080p 10.5 -> 6.4 MB (site/media/README.md)
+    'Riverside-Wharf-hero': ('site/media/Riverside-Wharf-hero.mp4', 'Video'),
     'Riverside-Wharf_View-from-River': (UP + 'Riverside-Wharf_View-from-River.jpg', 'Riverside Wharf'),
 }
 META = {'title': 'Home', 'slug': 'home', 'status': 'publish', 'seo': {}}  # front page (page_on_front = 48); live head: pattern title, no og:image

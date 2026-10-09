@@ -291,7 +291,7 @@ qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
 
 STYLESHEETS = ['shared', 'offering']  # + this page's site/styles/offering_rw_qoz.css
 PAGE = [
-    o.hero('QOZ Common Equity', 'Dream_Website_banner', 'Riverside-Wharf_View-from-River', 'Riverside Wharf Miami rendering video', badge='Coming soon'),
+    o.hero('QOZ Common Equity', 'Riverside-Wharf-hero', 'Riverside-Wharf_View-from-River', 'Riverside Wharf Miami rendering video', badge='Coming soon'),
     facts,
     o.subnav(SUBNAV),
     o.overview('Riverside-Wharf_Pooldeck', 'Riverside Wharf Pool deck', 'A hospitality & entertainment development', [
@@ -335,7 +335,8 @@ NON_DESIGN |= {COMMON_EQUITY} | market_update.NON_DESIGN
 # import with the Etch Asset Manager preset.
 MEDIA = {
     'Riverside-Wharf_View-from-River': (UP + 'Riverside-Wharf_View-from-River.jpg', 'Riverside Wharf'),
-    'Dream_Website_banner': (UP + 'Dream_Website_banner.mp4', 'Video'),
+    # the live loop (Dream_Website_banner.mp4) re-encoded lighter for the web, 1080p 10.5 -> 6.4 MB (site/media/README.md)
+    'Riverside-Wharf-hero': ('site/media/Riverside-Wharf-hero.mp4', 'Video'),
     'Riverside-Wharf_Pooldeck': (UP + 'Riverside-Wharf_Pooldeck.jpg', 'Riverside Wharf'),
     'Night-club-Lobby': (UP + 'Night-club-Lobby.jpg', 'Riverside Wharf'),
     'cover-bg': ('handoff/design/assets/cover-bg.png', 'Brand'),
