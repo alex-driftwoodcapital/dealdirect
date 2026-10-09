@@ -47,13 +47,28 @@ for (const [path, want, to] of URLS) {
   urlRows.push(`| \`${path}\` | ${want}${to ? ' → `' + to + '`' : ''} | ${r.status()}${loc ? ' → `' + loc + '`' : ''}${tpl ? '' : ' (no not-found template)'} | ${ok ? 'ok' : '**FAIL**'} |`);
 }
 
+// Stale page cache: a cache-busted fetch (?ddqa=<time>) carries markers of the current build that the plain URL lacks.
+// Markers: the layout rails (site/lib/etch.py section()), the exit-link dialog, the response header the cache adds.
+const MARKERS = ['dd-rail', 'data-dialog="exit"'];
+const cacheRows = [];
+for (const [, path, lang, want = 200] of PAGES) {
+  if (want !== 200) continue;
+  const plain = await api.get(BASE + path), busted = await api.get(BASE + path + '?ddqa=' + Date.now());
+  const [pb, bb] = [await plain.text(), await busted.text()];
+  const missing = MARKERS.filter((m) => bb.includes(m) && !pb.includes(m) && (m !== 'data-dialog="exit"' || lang.startsWith('en')));
+  const via = ['x-cache', 'x-varnish', 'age', 'x-proxy-cache', 'cf-cache-status'].map((h) => plain.headers()[h] ? `${h}: ${plain.headers()[h]}` : '').filter(Boolean).join(', ');
+  if (missing.length) fails.push(`${path}: served from a stale cache (plain URL lacks ${missing.join(', ')}; a cache-busted fetch has them)${via ? ' [' + via + ']' : ''}`);
+  cacheRows.push(`| \`${path}\` | ${missing.length ? '**stale**: lacks ' + missing.join(', ') : 'fresh'} | ${via || '–'} |`);
+}
+
 const browser = await chromium.launch();
 for (const [name, path, lang, want = 200] of PAGES) {
   for (const w of WIDTHS) {
     const ctx = await browser.newContext({ httpCredentials: auth, viewport: { width: w, height: 900 } });
     const page = await ctx.newPage();
     const errors = [], failed = [];
-    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
+    // a page that should answer 404 logs its own 404 as a console error: that one is expected
+    page.on('console', (m) => { if (m.type() === 'error' && !(want !== 200 && /status of 404/.test(m.text()))) errors.push(m.text().slice(0, 160)); });
     page.on('pageerror', (e) => errors.push(e.message.slice(0, 160)));
     page.on('response', (r) => { if (r.status() >= 400 && r.url().startsWith(BASE) && r.url() !== BASE + path) failed.push(`${r.status()} ${r.url().replace(BASE, '')}`); });
     const resp = await page.goto(BASE + path, { waitUntil: 'networkidle', timeout: 60000 });
@@ -116,6 +131,7 @@ const md = [
   ...rows.map((r) => `| [${r.name}](shots/${r.name}-${r.w}.jpg) | ${r.w} | ${r.status} | ${r.overflow > 0 ? r.overflow + 'px' : '–'} | ${r.jakarta ? 'Jakarta' : r.bodyFont} | ${r.lang} | ${r.robots.slice(0, 30)} | ${r.hreflang} | ${r.problems.join('; ') || 'ok'} |`),
   '', '## Titles', '', ...rows.filter((r) => r.w === 1440).map((r) => `- \`${r.path}\`: ${r.title}`),
   '', '## Old URLs', '', '| Path | Want | Got | |', '|---|---|---|---|', ...urlRows, '',
+  '## Page cache', '', '| Page | Plain URL vs cache-busted | Cache headers |', '|---|---|---|', ...cacheRows, '',
 ].join('\n');
 fs.writeFileSync(`${OUT}/report.md`, md);
 fs.writeFileSync(`${OUT}/results.json`, JSON.stringify({ fails, rows, urls: urlRows }, null, 1));

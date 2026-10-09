@@ -23,4 +23,5 @@ for page in $(python3 -I site/order.py); do
   echo; echo "### $page"; python3 ops/page/deploy.py "$page"
 done
 echo; echo "### leftovers (previous build)"; bash ops/cleanup/retire.sh
+echo; echo "### caches"; if [ "${RUN_YES:-}" = 1 ]; then bash ops/purge.sh; else bash ops/purge.sh --check; fi
 echo; echo "### done ($mode)"

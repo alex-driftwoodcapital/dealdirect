@@ -30,7 +30,9 @@ async function get(base, path, auth) {
     const loc = (r.headers.get('location') || '').replace(base, '');
     const pick = (re) => (body.match(re) || [, ''])[1].replace(/\s+/g, ' ').trim();
     const canonical = pick(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)/i).replace(/^https?:\/\/[^/]+/, '');
-    const ids = [...new Set([...body.matchAll(/\sid=["']([^"']+)["']/g)].map((m) => m[1]))];
+    // content anchors only: ids on <link>/<script>/<style>/<meta> are the theme's assets, not anchors
+    const ids = [...new Set([...body.matchAll(/<(\w+)\b[^>]*\sid=["']([^"']+)["']/g)]
+      .filter((m) => !/^(link|script|style|meta|noscript|iframe)$/i.test(m[1])).map((m) => m[2]))];
     return { status: r.status, loc, title: decode(pick(/<title[^>]*>([^<]*)/i)), h1: decode(pick(/<h1[^>]*>([\s\S]*?)<\/h1>/i).replace(/<[^>]+>/g, '')), canonical, ids };
   } catch (e) {
     return { status: 0, error: String(e).slice(0, 120), ids: [] };
@@ -54,7 +56,7 @@ async function liveUrls() {
 }
 
 // ids the builders add on their own (not content anchors)
-const NOISE = /^(wp-|etch-|bricks|brx|brxe-|gtm|__|query-|tns|ac-|rank-math|ez-toc)/;
+const NOISE = /^(wp-|etch-|bricks|brx|brxe-|gtm|__|query-|tns|ac-|rank-math|ez-toc|x-|jiewnm|external-link-modal)/;
 const rows = [], fails = [];
 const urls = [...new Set([...(await liveUrls()), ...Object.keys(EXPECTED), ...EXTRA])];
 for (const path of urls) {
