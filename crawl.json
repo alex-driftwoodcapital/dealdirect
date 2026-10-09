@@ -1,0 +1,125 @@
+[
+ {
+  "path": "/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/admin-login/",
+  "live": 200,
+  "staging": 410,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/eb-5-investments/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": [
+   "h1 “Get your Green Card by investing in hotels in the U.S.” → “Riverside Wharf Miami”"
+  ]
+ },
+ {
+  "path": "/forgot-password/",
+  "live": 200,
+  "staging": 410,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/inversiones-eb-5/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": [
+   "h1 “Obtenga su residencia americana invirtiendo en hoteles en U.” → “Riverside Wharf Miami”"
+  ]
+ },
+ {
+  "path": "/investimentos-eb-5/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": [
+   "h1 “Obtenha sua residência americana investindo em hotéis nos EU” → “Riverside Wharf Miami”"
+  ]
+ },
+ {
+  "path": "/new-eb-5-page/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": [
+   "h1 “Access the path to U.S. Citizenship by investing in a hotel ” → “Riverside Wharf Miami”"
+  ]
+ },
+ {
+  "path": "/offering/riverside-wharf-eb-5/",
+  "live": 200,
+  "staging": 301,
+  "loc": "/eb-5-investments/",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/offering/riverside-wharf-preferred-equity/",
+  "live": 200,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": [
+   "anchors dropped by the design (decision pending): #structure #assets #rationale",
+   "h1 “” → “Riverside Wharf Miami”"
+  ]
+ },
+ {
+  "path": "/offering/riverside-wharf/",
+  "live": 200,
+  "staging": 301,
+  "loc": "/offering/riverside-wharf-qoz/",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/registration-success/",
+  "live": 200,
+  "staging": 410,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/reset-password/",
+  "live": 200,
+  "staging": 410,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/offering/driftwood-tax-advantage-strategy-i/",
+  "live": 404,
+  "staging": 302,
+  "loc": "https://dtas1.driftwoodcapital.com/",
+  "problems": [],
+  "notes": []
+ },
+ {
+  "path": "/offering/riverside-wharf-qoz/",
+  "live": 404,
+  "staging": 200,
+  "loc": "",
+  "problems": [],
+  "notes": []
+ }
+]

@@ -1,0 +1,637 @@
+{
+ "sup": {
+  "tag": "SUP",
+  "cls": "fn-ref",
+  "display": "inline",
+  "flexDirection": "row",
+  "lineHeight": "0px",
+  "whiteSpace": "pretty",
+  "float": "none",
+  "position": "static",
+  "width": "auto"
+ },
+ "parent": {
+  "tag": "P",
+  "cls": "stat-card__label",
+  "display": "block",
+  "flexDirection": "row",
+  "lineHeight": "21.0216px",
+  "whiteSpace": "pretty",
+  "float": "none",
+  "position": "static",
+  "width": "132.266px"
+ },
+ "grand": {
+  "tag": "DIV",
+  "cls": "stat-card stat-card--tall offering-stat",
+  "display": "flex",
+  "flexDirection": "column",
+  "lineHeight": "22.0907px",
+  "whiteSpace": "pretty",
+  "float": "none",
+  "position": "static",
+  "width": "166.266px"
+ },
+ "rules": [
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "*, ::before, ::after",
+   "css": "box-sizing: border-box;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "*, ::before, ::after",
+   "css": "box-sizing: border-box;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "*",
+   "css": "margin: 0px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "*",
+   "css": "margin: 0px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "p, h1, h2, h3, h4, h5, h6",
+   "css": "overflow-wrap: break-word;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(16px) saturate(1.5);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(16px) saturate(1.5);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": ".fn-ref",
+   "css": "font-weight: 700; line-height: 0; vertical-align: 0.45em; margin: 0px 0.08em; font-size: max(0.85em, var(--text-xs));"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 10px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 10px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": ".stat-card__label",
+   "css": "margin: 0px; font-size: var(--text-s); line-height: 1.4; color: var(--base-dark); overflow-wrap: anywhere; hyphens: auto;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px) saturate(1.5);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px) saturate(1.5);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "display: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "display: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "display: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "display: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "min-block-size: 260px; border-radius: 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "min-block-size: 260px; border-radius: 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-auto-columns: calc(33.3333% - 8px);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-auto-columns: calc(33.3333% - 8px);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-auto-columns: calc(25% - 9px);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-auto-columns: calc(25% - 9px);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-auto-columns: 82%;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-auto-columns: 82%;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-auto-columns: 74%;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-auto-columns: 74%;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "aspect-ratio: 16 / 9;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "aspect-ratio: 16 / 9;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: var(--space-l);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: var(--space-l);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: 18px; padding-block-start: var(--space-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: 18px; padding-block-start: var(--space-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "aspect-ratio: 16 / 10; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "aspect-ratio: 16 / 10; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 18px; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 18px; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: 8px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: 8px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 16px 16px 16px 60px; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 16px 16px 16px 60px; border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "inset-block-start: 16px; inset-inline-start: 16px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "inset-block-start: 16px; inset-inline-start: 16px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "display: block;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "display: block;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "display: block; padding: 16px 24px; font-size: var(--text-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "display: block; padding: 16px 24px; font-size: var(--text-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 16px 24px; display: grid; gap: 10px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 16px 24px; display: grid; gap: 10px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "display: block; padding: 0px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "display: block; padding: 0px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "margin-inline: -12px; padding: 10px 12px; border-radius: 12px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "margin-inline: -12px; padding: 10px 12px; border-radius: 12px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "border-radius: 14px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: 14px; padding: 16px 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: 14px; padding: 16px 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "min-block-size: 60px; padding: 16px 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "min-block-size: 60px; padding: 16px 18px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "font-size: var(--text-l);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "font-size: var(--text-l);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "transition: none;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "gap: 18px; padding: 0px 18px 22px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "gap: 18px; padding: 0px 18px 22px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 20px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 20px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "aspect-ratio: 21 / 9;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "aspect-ratio: 21 / 9;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-template-columns: minmax(0px, 1.1fr) minmax(0px, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-template-columns: minmax(0px, 1.1fr) minmax(0px, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(2, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(2, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(6, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "grid-template-columns: repeat(6, 1fr);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: var(--space-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: var(--space-m);"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&:first-child",
+   "css": "margin-top: 0px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 40px 20px; border-radius: 18px; gap: 24px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 40px 20px; border-radius: 18px; gap: 24px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "SUP",
+   "sel": "&",
+   "css": "padding: 36px 20px 24px;"
+  },
+  {
+   "sheet": "inline",
+   "on": "P",
+   "sel": "&",
+   "css": "padding: 36px 20px 24px;"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "SUP",
+   "sel": "*, ::before, ::after",
+   "css": "box-sizing: border-box;"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "P",
+   "sel": "*, ::before, ::after",
+   "css": "box-sizing: border-box;"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "P",
+   "sel": ":where(p)",
+   "css": "line-height: var(--text-line-height, calc(6px + 2ex));"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "SUP",
+   "sel": "*, ::before, ::after",
+   "css": "animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important;"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "P",
+   "sel": "*, ::before, ::after",
+   "css": "animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important;"
+  },
+  {
+   "sheet": "automatic.css?ver=1791556954",
+   "on": "P",
+   "sel": "body :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li)",
+   "css": "margin-block: 0px;"
+  }
+ ]
+}

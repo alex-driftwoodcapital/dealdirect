@@ -1,0 +1,1257 @@
+{
+ "fails": [],
+ "rows": [
+  {
+   "name": "home",
+   "path": "/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "Home - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "home",
+   "path": "/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Home - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "home",
+   "path": "/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Home - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5",
+   "path": "/eb-5-investments/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en",
+   "title": "EB-5 Investments - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/eb-5-investments/",
+   "hreflang": 4,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5",
+   "path": "/eb-5-investments/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en",
+   "title": "EB-5 Investments - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/eb-5-investments/",
+   "hreflang": 4,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5",
+   "path": "/eb-5-investments/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en",
+   "title": "EB-5 Investments - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/eb-5-investments/",
+   "hreflang": 4,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-es",
+   "path": "/inversiones-eb-5/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "es",
+   "title": "Inversiones EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/inversiones-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-es",
+   "path": "/inversiones-eb-5/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "es",
+   "title": "Inversiones EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/inversiones-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-es",
+   "path": "/inversiones-eb-5/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "es",
+   "title": "Inversiones EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/inversiones-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-pt",
+   "path": "/investimentos-eb-5/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "pt-BR",
+   "title": "Investimentos EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/investimentos-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-pt",
+   "path": "/investimentos-eb-5/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "pt-BR",
+   "title": "Investimentos EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/investimentos-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-pt",
+   "path": "/investimentos-eb-5/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "pt-BR",
+   "title": "Investimentos EB-5 - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/investimentos-eb-5/",
+   "hreflang": 4,
+   "exitDialog": false,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-new",
+   "path": "/new-eb-5-page/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "New EB-5 Page - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-new",
+   "path": "/new-eb-5-page/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "New EB-5 Page - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "eb5-new",
+   "path": "/new-eb-5-page/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "New EB-5 Page - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "preferred-equity",
+   "path": "/offering/riverside-wharf-preferred-equity/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami - Preferred Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-preferred-equity/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "preferred-equity",
+   "path": "/offering/riverside-wharf-preferred-equity/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami - Preferred Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-preferred-equity/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "preferred-equity",
+   "path": "/offering/riverside-wharf-preferred-equity/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami - Preferred Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-preferred-equity/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "qoz",
+   "path": "/offering/riverside-wharf-qoz/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami – QOZ Common Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-qoz/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "qoz",
+   "path": "/offering/riverside-wharf-qoz/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami – QOZ Common Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-qoz/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "qoz",
+   "path": "/offering/riverside-wharf-qoz/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Riverside Wharf Miami – QOZ Common Equity - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "https://wordpress-1077248-6717515.cloudwaysapps.com/offering/riverside-wharf-qoz/",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "dst",
+   "path": "/offering/driftwood-hotel-income-i-dst/",
+   "w": 375,
+   "status": 200,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "Driftwood Hotel Income I, DST - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "dst",
+   "path": "/offering/driftwood-hotel-income-i-dst/",
+   "w": 768,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Driftwood Hotel Income I, DST - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "dst",
+   "path": "/offering/driftwood-hotel-income-i-dst/",
+   "w": 1440,
+   "status": 200,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Driftwood Hotel Income I, DST - Driftwood Capital | DealDirect",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "not-found",
+   "path": "/qa-no-such-page/",
+   "w": 375,
+   "status": 404,
+   "overflow": 0,
+   "lang": "en-US",
+   "title": "Page not found – Etch WP",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "not-found",
+   "path": "/qa-no-such-page/",
+   "w": 768,
+   "status": 404,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Page not found – Etch WP",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  },
+  {
+   "name": "not-found",
+   "path": "/qa-no-such-page/",
+   "w": 1440,
+   "status": 404,
+   "overflow": -15,
+   "lang": "en-US",
+   "title": "Page not found – Etch WP",
+   "robots": "noindex, nofollow",
+   "canonical": "",
+   "hreflang": 0,
+   "exitDialog": true,
+   "palette": {
+    "primary": {
+     "css": "oklch(0.283 0.065 249.49)",
+     "rgb": [
+      11,
+      43,
+      72
+     ]
+    },
+    "secondary": {
+     "css": "oklch(0.508 0.122 250.54)",
+     "rgb": [
+      36,
+      104,
+      168
+     ]
+    },
+    "accent": {
+     "css": "oklch(0.732 0.097 241.76)",
+     "rgb": [
+      111,
+      176,
+      224
+     ]
+    }
+   },
+   "jakarta": true,
+   "bodyFont": "Plus Jakarta Sans",
+   "primary": "oklch(0.283 0.065 249.49)",
+   "h2": "clamp(1.75rem, calc(1.8480492813vw + 1.3341889117rem), 2.875",
+   "errors": [],
+   "failed": [],
+   "problems": []
+  }
+ ],
+ "urls": [
+  "| `/offering/riverside-wharf/` | 301 → `/offering/riverside-wharf-qoz/` | 301 → `/offering/riverside-wharf-qoz/` | ok |",
+  "| `/offering/riverside-wharf-eb-5/` | 301 → `/eb-5-investments/` | 301 → `/eb-5-investments/` | ok |",
+  "| `/admin-login/` | 410 | 410 | ok |",
+  "| `/forgot-password/` | 410 | 410 | ok |",
+  "| `/reset-password/` | 410 | 410 | ok |",
+  "| `/registration-success/` | 410 | 410 | ok |",
+  "| `/qa-no-such-page/` | 404 | 404 | ok |",
+  "| `/offering/driftwood-tax-advantage-strategy-i/` | 302 → `https://dtas1.driftwoodcapital.com/` | 302 → `https://dtas1.driftwoodcapital.com/` | ok |"
+ ]
+}
