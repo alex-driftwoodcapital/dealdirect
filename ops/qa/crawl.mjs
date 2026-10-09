@@ -33,7 +33,8 @@ async function get(base, path, auth) {
     // content anchors only: ids on <link>/<script>/<style>/<meta> are the theme's assets, not anchors
     const ids = [...new Set([...body.matchAll(/<(\w+)\b[^>]*\sid=["']([^"']+)["']/g)]
       .filter((m) => !/^(link|script|style|meta|noscript|iframe)$/i.test(m[1])).map((m) => m[2]))];
-    return { status: r.status, loc, title: decode(pick(/<title[^>]*>([^<]*)/i)), h1: decode(pick(/<h1[^>]*>([\s\S]*?)<\/h1>/i).replace(/<[^>]+>/g, '')), canonical, ids };
+    const linked = [...new Set([...body.matchAll(/href=["'][^"'#]*#([A-Za-z0-9_-]+)["']/g)].map((m) => m[1]))];
+    return { status: r.status, loc, title: decode(pick(/<title[^>]*>([^<]*)/i)), h1: decode(pick(/<h1[^>]*>([\s\S]*?)<\/h1>/i).replace(/<[^>]+>/g, '')), canonical, ids, linked };
   } catch (e) {
     return { status: 0, error: String(e).slice(0, 120), ids: [] };
   }
@@ -55,8 +56,17 @@ async function liveUrls() {
   return [...paths].sort();
 }
 
-// ids the builders add on their own (not content anchors)
-const NOISE = /^(wp-|etch-|bricks|brx|brxe-|gtm|__|query-|tns|ac-|rank-math|ez-toc|x-|jiewnm|external-link-modal)/;
+// Anchors that must survive (CLAUDE.md rule 3): the frozen list in handoff/docs/permalinks.md, plus every id the live page
+// links to (href="#id": its sub-nav, "skip to"), plus the EB-5 pages' live section ids. Other live ids are the old
+// builder's and form plugin's (field ids, wrappers) and are not compared.
+const FROZEN = { offering: ['metrics', 'overview', 'webinar', 'partners', 'offering', 'structure', 'assets', 'market', 'rationale', 'legal'],
+  eb5: ['legal', 'hero', 'intro', 'investment-process', 'driftwood-advantage', 'track-record', 'faq'] };
+const kindOf = (path) => path.startsWith('/offering/') ? 'offering' : /eb-5|inversiones|investimentos/.test(path) ? 'eb5' : '';
+const NOISE = /^(brx-|bricks|wp-|gtm)/;
+// Live anchors the approved design removed with their sections (reported for a decision, not failed)
+const DROPPED = {
+  '/offering/riverside-wharf-preferred-equity/': ['structure', 'assets', 'rationale'],  // PE design: no structure/assets/rationale sections
+};
 const rows = [], fails = [];
 const urls = [...new Set([...(await liveUrls()), ...Object.keys(EXPECTED), ...EXTRA])];
 for (const path of urls) {
@@ -70,9 +80,13 @@ for (const path of urls) {
   } else if (l.status !== s.status) {
     problems.push(`status live ${l.status} / staging ${s.status}`);
   }
-  const lost = l.status === 200 && s.status === 200 ? l.ids.filter((id) => !NOISE.test(id) && !s.ids.includes(id)) : [];
+  const must = new Set([...(FROZEN[kindOf(path)] || []).filter((id) => l.ids.includes(id)), ...(l.linked || []).filter((id) => !NOISE.test(id))]);
+  const missing = l.status === 200 && s.status === 200 ? [...must].filter((id) => !s.ids.includes(id)) : [];
+  const dropped = missing.filter((id) => (DROPPED[path] || []).includes(id));
+  const lost = missing.filter((id) => !dropped.includes(id));
   if (lost.length) problems.push(`anchor ids missing on staging: ${lost.join(' ')}`);
   const notes = [];
+  if (dropped.length) notes.push(`anchors dropped by the design (decision pending): #${dropped.join(' #')}`);
   if (l.status === 200 && s.status === 200) {
     if (l.title !== s.title) notes.push(`title “${l.title}” → “${s.title}”`);
     if (l.canonical !== s.canonical) notes.push(`canonical ${l.canonical || '–'} → ${s.canonical || '–'}`);

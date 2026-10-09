@@ -11,13 +11,14 @@ Nothing here runs without Alex's typed OK (CLAUDE.md: AUTHORIZED_SITE is staging
 | 2 | Riverside Wharf QOZ metrics: the `[TBD]` placeholders and the Pref footnotes carried on the QOZ page replaced or approved | Compliance / Alex | Register item "RW QOZ · Metrics" closed |
 | 3 | All live offerings on the new Home (incl. Tax Advantaged Strategies 2026 and the Income hotel fund DST) with their card fields and pages | Build | Home loop shows every live/coming-soon offering; crawl diff has no missing offering URL |
 | 4 | Design fidelity pass against the handoff on every page (hero titles, link colors, section details) | Build, Alex reviews | Side-by-side screenshots at 375 / 768 / 1440 |
-| 5 | 404 page copy approved (currently placeholder) | Alex | `site/pages/template_404.py` strings moved out of placeholder status |
+| 5 | 404 page copy approved (written 2026-10-09 at Alex's request) | Alex | Alex's OK on `site/pages/template_404.py` |
 | 6 | HubSpot test submissions on staging: Registration, Offering Request, EB-5 Registration, each reaching its form and triggering its workflow (follow-up email / brochure) | Alex (test email) | Submission visible in HubSpot under each form |
 | 7 | HubSpot tracking tag confirmed inside the GTM container (the site loads only GTM) | Alex / marketing | GTM preview on staging with `DD_GTM_ON_STAGING` shows the HubSpot tag firing |
 | 8 | Cookie notice: the first-party cookies `dd_lead` and `dd_utm` (and GTM's) listed in the cookie notice and the Privacy Policy; consent tool and GTM consent mode chosen | Alex / legal | Privacy Policy page published with the list |
 | 9 | Privacy Policy and Terms of Use pages exist at the footer's URLs | Alex / legal | Crawl diff: both 200 |
 | 10 | QA job green on staging (browser checks + crawl diff, live vs staging) | Build | `qa/latest` report: no problems |
-| 11 | Previous build's leftover components/templates on staging removed (etchnavcomponent, etchburgercomponent, header, footer, home template) | Build (needs permission to change staging) | Staging inventory lists only this repo's posts |
+| 12 | Preferred Equity's live sub-nav anchors `#structure` `#assets` `#rationale`: the approved design has no such sections; decide where each lands (or accept the loss) | Alex | Crawl diff no longer lists "anchors dropped by the design" |
+| 11 | Previous build's leftover components/templates on staging removed (etchnavcomponent, etchburgercomponent, header, footer, home template) | Build | Done 2026-10-09 (in WP Trash, JSON backup); `ops/cleanup/retire.sh` keeps it so |
 
 ## 2. Choose the switch method (Alex)
 
