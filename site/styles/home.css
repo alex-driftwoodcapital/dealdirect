@@ -16,7 +16,7 @@
   /* not positioned: the video and veil size against the full-bleed section, not the 1334px container */
   flex: 1;
   justify-content: center;
-  padding-block: clamp(140px, 18vh, 200px) clamp(40px, 5vw, 64px);
+  padding-block: clamp(140px, 18vh, 200px) var(--section-space-s);
 }
 .home-hero__video {
   position: absolute;
@@ -67,7 +67,7 @@
 
 /* ---------- live offerings ---------- */
 .home-live {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 70%, #EDF4FA 100%);
   border-block-start: 1px solid var(--base-semi-light);
 }
@@ -214,11 +214,11 @@
 
 /* ---------- tax-advantaged routes ---------- */
 .home-tax {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: linear-gradient(180deg, #F7FAFD 0%, #EDF4FA 100%);
   border-block-start: 1px solid var(--base-semi-light);
 }
-.home-tax__intro { margin-block-end: clamp(28px, 3vw, 40px); }
+.home-tax__intro { margin-block-end: var(--space-l); }
 .home-tax__eyebrow { margin-block-end: 14px; }
 .home-tax__title {
   margin: 0;
@@ -339,7 +339,7 @@
 
 /* ---------- past offerings ---------- */
 .home-past {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: var(--base);
   border-block-start: 1px solid var(--base-semi-light);
 }

@@ -304,7 +304,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 28px 48px;
-  padding: clamp(48px, 6vw, 88px) clamp(28px, 5vw, 72px);
+  padding: var(--section-space-m) var(--space-xl-to-l);
   border-radius: 24px;
   background: var(--primary);
   & img {

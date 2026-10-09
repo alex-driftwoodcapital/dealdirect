@@ -18,7 +18,7 @@
 .offering-hero__inner {
   /* not positioned: the video and veil size against the full-bleed section, not the 1334px container */
   inline-size: 100%;
-  padding-block: 160px clamp(44px, 5vw, 72px);
+  padding-block: 160px var(--section-space-s);
 }
 .offering-hero__video {
   position: absolute;
@@ -61,7 +61,7 @@
 
 /* ---------- target metrics ---------- */
 .offering-metrics {
-  padding-block: clamp(56px, 6vw, 96px) clamp(40px, 4vw, 56px);
+  padding-block: var(--section-space-m) var(--section-space-s);
   background: linear-gradient(180deg, #FFFFFF 0%, #F4F8FC 100%);
 }
 .offering-metrics__head {
@@ -90,7 +90,7 @@
   gap: 16px;
 }
 .offering-metrics--repeat {
-  padding-block: clamp(64px, 7vw, 104px);
+  padding-block: var(--section-space-m);
   background: var(--base);
   & .offering-metrics__grid { margin-block-start: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
 }
@@ -137,13 +137,13 @@
 
 /* ---------- overview (media-split) ---------- */
 .offering-overview {
-  padding-block: clamp(72px, 8vw, 120px) clamp(56px, 6vw, 88px);
+  padding-block: var(--section-space-l) var(--section-space-m);
   background: var(--white);
 }
 .media-split {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
-  gap: clamp(28px, 4vw, 64px);
+  gap: var(--space-xl-to-l);
   align-items: stretch;
   & .media-card { min-block-size: 360px; }
 }
@@ -171,7 +171,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(64px, 7vw, 104px);
+  padding-block: var(--section-space-m);
   background: var(--primary);
   & > .offering-video__inner > img {
     position: absolute;
@@ -236,7 +236,7 @@
 
 /* ---------- partners ---------- */
 .offering-partners {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: var(--base);
   border-block-start: 1px solid var(--base-semi-light);
 }
@@ -264,7 +264,7 @@
   & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; }
 }
 .partner-card__body {
-  padding: clamp(28px, 3vw, 40px);
+  padding: var(--space-l);
   & .link-arrow { margin-block-start: 10px; }
 }
 .partner-card__title {
@@ -282,14 +282,14 @@
 
 /* ---------- offering structure: capitalization stack + highlights ---------- */
 .offering-structure {
-  padding-block: clamp(72px, 8vw, 120px) clamp(56px, 6vw, 88px);
+  padding-block: var(--section-space-l) var(--section-space-m);
   background: var(--white);
   border-block-start: 1px solid var(--base-semi-light);
 }
 .offering-structure__row {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(36px, 5vw, 80px);
+  gap: var(--space-xl-to-l);
 }
 .cap-stack {
   flex: 1 1 340px;
@@ -406,7 +406,7 @@
 
 /* ---------- market (dark band) ---------- */
 .metrics-band {
-  padding-block: clamp(72px, 8vw, 120px) clamp(48px, 5vw, 72px);
+  padding-block: var(--section-space-l) var(--section-space-m);
   background: var(--base);
 }
 .metrics-band--dark {
@@ -418,7 +418,7 @@
 .metrics-band__row {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(36px, 5vw, 80px);
+  gap: var(--space-xl-to-l);
 }
 .metrics-band__intro {
   flex: 1 1 340px;
@@ -480,13 +480,13 @@
 
 /* ---------- Opportunity Zone benefits (#structure) ---------- */
 .offering-oz {
-  padding-block: clamp(72px, 8vw, 120px) clamp(56px, 6vw, 88px);
+  padding-block: var(--section-space-l) var(--section-space-m);
   background: var(--base);
 }
 .offering-oz__row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
-  gap: clamp(28px, 4vw, 64px);
+  gap: var(--space-xl-to-l);
   align-items: center;
 }
 .offering-oz__title {
@@ -528,7 +528,7 @@
 
 /* ---------- program tabs (#assets) ---------- */
 .program-tabs {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: var(--white);
   & [hidden] { display: none; }
 }
@@ -624,7 +624,7 @@
   &[aria-pressed="true"] { border-color: var(--secondary); }
   & img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
 }
-.program-tabs__spec { padding: clamp(28px, 3vw, 44px); }
+.program-tabs__spec { padding: var(--space-l); }
 .program-tabs__spec-title {
   margin: 0;
   font-size: var(--h3);
@@ -649,7 +649,7 @@
 
 /* ---------- investment rationale (#rationale) ---------- */
 .offering-rationale {
-  padding-block: clamp(72px, 8vw, 120px);
+  padding-block: var(--section-space-l);
   background: var(--base);
 }
 .offering-rationale__title {
