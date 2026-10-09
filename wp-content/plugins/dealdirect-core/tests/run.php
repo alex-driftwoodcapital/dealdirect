@@ -1,6 +1,7 @@
 <?php
 // Unit tests for DealDirect\Submission (no WordPress needed). Run: php tests/run.php
 require __DIR__ . '/../includes/class-submission.php';
+require __DIR__ . '/../includes/i18n.php';
 use DealDirect\Submission as S;
 
 $fail = 0;
@@ -98,5 +99,11 @@ check( 'HubSpot invalid email -> plain message', S::hubspot_error( 400, '{"error
 check( 'HubSpot unknown error -> generic message', str_starts_with( S::hubspot_error( 500, 'oops' ), 'We could not send' ) );
 check( 'subscription error detected', S::is_subscription_error( '{"errors":[{"message":"Invalid subscription type id 3199624"}]}' ) );
 check( 'other error is not a subscription error', ! S::is_subscription_error( '{"errors":[{"message":"Required field email missing"}]}' ) );
+
+$h = \DealDirect\hreflang_links( 'https://example.com/' );
+check( 'hreflang group: en, es, pt-BR + x-default', array_keys( $h ) === [ 'en', 'es', 'pt-BR', 'x-default' ] );
+check( 'x-default is the EN page', $h['x-default'] === 'https://example.com/eb-5-investments/' && $h['es'] === 'https://example.com/inversiones-eb-5/' );
+check( 'PT page lang is pt-BR', \DealDirect\page_lang( 'investimentos-eb-5' ) === 'pt-BR' );
+check( 'other pages keep the site language', \DealDirect\page_lang( 'new-eb-5-page' ) === null && \DealDirect\page_lang( 'home' ) === null );
 
 exit( $fail );
