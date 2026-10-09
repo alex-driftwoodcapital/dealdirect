@@ -1,0 +1,8 @@
+wp-content/uploads/automatic-css/automatic-gutenberg.css
+wp-content/uploads/automatic-css/automatic-core-for-block-editor.css
+wp-content/uploads/automatic-css/automatic-gutenberg-color-palette.css
+wp-content/uploads/automatic-css/automatic-variables.css
+wp-content/uploads/automatic-css/automatic-core-for-iframe-editor.css
+wp-content/uploads/automatic-css/automatic-tokens.css
+wp-content/uploads/automatic-css/automatic-custom-css.css
+wp-content/uploads/automatic-css/automatic.css
