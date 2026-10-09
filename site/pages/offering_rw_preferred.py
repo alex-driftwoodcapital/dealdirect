@@ -78,4 +78,7 @@ META = {'kind': 'offering', 'title': 'Riverside Wharf Miami – Preferred Equity
             'offering_status': 'open', 'offering_tag': 'Preferred Equity', 'card_title': 'Riverside Wharf Miami',
             'card_summary': 'A transformative hospitality & entertainment development in the heart of Downtown Miami',
             'card_image': '{{media:Riverside-Wharf_View-from-River}}', 'card_cta_label': 'View Offering', 'card_rendering': 1, 'home_order': 1,
-        }}  # frozen permalink /offering/riverside-wharf-preferred-equity/ (handoff/docs/permalinks.md)
+        },
+        # live head: its title keeps the hyphen of the live post title; og:image the River view
+        'seo': {'title': 'Riverside Wharf Miami - Preferred Equity - Driftwood Capital | DealDirect',
+                'og_image': '{{media:Riverside-Wharf_View-from-River}}', 'og_image_alt': 'Riverside Wharf View from River'}}  # frozen permalink /offering/riverside-wharf-preferred-equity/ (handoff/docs/permalinks.md)

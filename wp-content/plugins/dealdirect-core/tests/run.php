@@ -2,6 +2,7 @@
 // Unit tests for DealDirect\Submission (no WordPress needed). Run: php tests/run.php
 require __DIR__ . '/../includes/class-submission.php';
 require __DIR__ . '/../includes/i18n.php';
+require __DIR__ . '/../includes/seo.php';
 use DealDirect\Submission as S;
 
 $fail = 0;
@@ -105,5 +106,9 @@ check( 'hreflang group: en, es, pt-BR + x-default', array_keys( $h ) === [ 'en',
 check( 'x-default is the EN page', $h['x-default'] === 'https://example.com/eb-5-investments/' && $h['es'] === 'https://example.com/inversiones-eb-5/' );
 check( 'PT page lang is pt-BR', \DealDirect\page_lang( 'investimentos-eb-5' ) === 'pt-BR' );
 check( 'other pages keep the site language', \DealDirect\page_lang( 'new-eb-5-page' ) === null && \DealDirect\page_lang( 'home' ) === null );
+
+check( 'SEO title: live pattern by default', \DealDirect\seo_title( 'EB-5 Investments', [] ) === 'EB-5 Investments - Driftwood Capital | DealDirect' );
+check( 'SEO title: page override wins', \DealDirect\seo_title( 'X – Y', [ 'title' => 'X - Y - Driftwood Capital | DealDirect' ] ) === 'X - Y - Driftwood Capital | DealDirect' );
+check( 'robots string -> wp_robots directives', \DealDirect\robots_directives( 'follow, noindex, max-snippet:-1' ) === [ 'follow' => true, 'noindex' => true, 'max-snippet' => '-1' ] );
 
 exit( $fail );

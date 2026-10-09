@@ -5,7 +5,7 @@ template (template_page_pt) carries the Portuguese footer; the Portuguese EB-5 d
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
 from design import Aligned
-from eb5_page import alt_texts, build, media, track_data
+from eb5_page import SEO, alt_texts, build, media, track_data
 from etch import El
 import eb5 as en
 
@@ -17,4 +17,4 @@ PAGE = build(q, TRACK, alt_texts(DESIGN), legal_extra=LEGAL, dialog='eb5-dialog-
 STYLESHEETS = en.STYLESHEETS
 NON_DESIGN = {'→', '+', '±', '1', '2', '1.', '2.', '3.', '4.', '5.'} | {v for t in TRACK for v in t[:6]}
 MEDIA = media(DESIGN)
-META = {'title': 'Investimentos EB-5', 'slug': 'investimentos-eb-5', 'status': 'publish'}  # live title; frozen permalink /investimentos-eb-5/
+META = {'title': 'Investimentos EB-5', 'slug': 'investimentos-eb-5', 'status': 'publish', 'seo': SEO}  # live title; frozen permalink /investimentos-eb-5/

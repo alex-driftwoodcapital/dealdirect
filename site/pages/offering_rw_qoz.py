@@ -139,4 +139,6 @@ META = {'kind': 'offering', 'title': 'Riverside Wharf Miami – QOZ Common Equit
             'offering_status': 'coming_soon', 'offering_tag': 'QOZ', 'card_title': 'Riverside Wharf Miami',
             'card_summary': '[Summary from offering CPT]', 'card_image': '{{media:Riverside-Wharf_Pooldeck}}', 'card_cta_label': '',
             'card_rendering': 1, 'home_order': 2,
-        }}
+        },
+        # no live page of its own: title from the live pattern; og:image as live /offering/riverside-wharf/
+        'seo': {'og_image': '{{media:Riverside-Wharf_View-from-River}}', 'og_image_alt': 'Riverside Wharf View from River'}}

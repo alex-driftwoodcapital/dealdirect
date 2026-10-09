@@ -5,7 +5,7 @@ ends the page and opens from data-modal-open="eb5-register"."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
 from design import Copy
-from eb5_page import alt_texts, build, media, track_data
+from eb5_page import SEO, alt_texts, build, media, track_data
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'EB-5 Investments.dc.html')
 q = Copy(DESIGN)
@@ -18,4 +18,4 @@ NON_DESIGN = {'→', '+', '±', '1', '2', '1.', '2.', '3.', '4.', '5.'} | {v for
 STYLESHEETS = ['shared', 'eb5_layout']  # the EB-5 pages share eb5_layout.css
 MEDIA = media(DESIGN)  # slug -> (source, Etch Asset Manager collection)
 
-META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments', 'status': 'publish'}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)
+META = {'title': 'EB-5 Investments', 'slug': 'eb-5-investments', 'status': 'publish', 'seo': SEO}  # frozen permalink /eb-5-investments/ (handoff/docs/permalinks.md)

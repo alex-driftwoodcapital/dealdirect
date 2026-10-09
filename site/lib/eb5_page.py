@@ -53,6 +53,7 @@ def media(design_path):
         'eb5-green-card': ('handoff/design/assets/eb5/eb5-green-card.webp', 'EB-5'),
         'eb5-flag-wood-wide': ('handoff/design/assets/eb5/eb5-flag-wood-wide.webp', 'EB-5'),
         'Riverside-Wharf_View-from-River': (UPLOADS + 'Riverside-Wharf_View-from-River.jpg', 'Riverside Wharf'),
+        'EB-5-Background': (UPLOADS + 'EB-5-Background.jpeg', 'EB-5'),  # the live pages' og:image (SEO only)
     }
     m.update({f.rsplit('.', 1)[0]: (UPLOADS + f, 'Prior Projects') for f in track_files(design_path)})
     return m
@@ -63,6 +64,10 @@ def alt_texts(design_path):
     src = open(design_path, encoding='utf-8').read()
     alt = lambda img: re.search(r'<img src="[^"]*%s[^"]*"[^>]*alt="([^"]*)"' % re.escape(img), src).group(1)
     return {'passports': alt('eb5-passports'), 'green_card': alt('eb5-green-card'), 'rendering': alt('Riverside-Wharf_View-from-River')}
+
+
+# Live og:image of /eb-5-investments/, /inversiones-eb-5/ and /investimentos-eb-5/ (dealdirect-core includes/seo.php).
+SEO = {'og_image': '{{media:EB-5-Background}}', 'og_image_alt': 'Driftwood EB-5 Program'}
 
 
 def build(q, track_rows, alt, legal_extra=(), dialog='eb5-dialog'):

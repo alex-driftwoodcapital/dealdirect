@@ -147,4 +147,4 @@ MEDIA = {
     'Dream_Website_banner': (UP + 'Dream_Website_banner.mp4', 'Video'),
     'Riverside-Wharf_View-from-River': (UP + 'Riverside-Wharf_View-from-River.jpg', 'Riverside Wharf'),
 }
-META = {'title': 'Home', 'slug': 'home', 'status': 'publish'}  # the front page (page_on_front = 48)
+META = {'title': 'Home', 'slug': 'home', 'status': 'publish', 'seo': {}}  # front page (page_on_front = 48); live head: pattern title, no og:image
