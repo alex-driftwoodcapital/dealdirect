@@ -23,12 +23,6 @@
   color: var(--primary-ultra-dark);
   text-wrap: balance;
 }
-.qoz-head__byline {
-  margin: 0;
-  font-size: var(--text-s);
-  font-weight: 600;
-  color: var(--base-dark);
-}
 
 
 /* article prose */
@@ -41,50 +35,113 @@
   & a { color: var(--secondary); }
   & .fn-ref a { color: inherit; text-decoration: none; }
 }
-.qoz-prose--dark {
-  color: color-mix(in oklch, var(--white) 84%, transparent);
-  & a { color: var(--accent); }
-}
 
-/* the article's closing summary, open under the parts */
-.qoz-summary {
+
+
+/* the guide: five numbered parts, always open */
+.qoz-guide {
   display: grid;
-  gap: 12px;
-  padding: var(--space-l);
-  @media (max-width: 767px) { padding: 20px; border-radius: 18px; }
-  border-radius: 24px;
-  background: var(--primary-ultra-light);
-  scroll-margin-block-start: 140px;
+  gap: var(--space-xl);
+  @media (max-width: 767px) { gap: var(--space-l); }
 }
-.qoz-summary__title {
+.qoz-block {
+  display: grid;
+  gap: var(--space-m);
+  padding-block-start: var(--space-l);
+  border-block-start: 1px solid var(--base-semi-light);
+  scroll-margin-block-start: 140px;  /* a linked part lands below the fixed header (68px) and the sticky sub-nav */
+  & .fn-ref { scroll-margin-block-start: 160px; }
+  @media (max-width: 767px) { gap: 18px; padding-block-start: var(--space-m); }
+}
+.qoz-block__head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.qoz-block__num {
+  font-size: var(--text-s);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--secondary);
+}
+.qoz-block__title {
+  margin: 0;
+  font-size: var(--h3);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--primary-ultra-dark);
+  text-wrap: balance;
+}
+.qoz-block__body {
+  display: grid;
+  gap: var(--space-m);
+  min-inline-size: 0;
+  @media (max-width: 767px) { gap: 18px; }
+  & > .qoz-prose, & > .qoz-gains__text { max-inline-size: 78ch; }
+}
+.qoz-what__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: var(--space-l);
+  align-items: start;
+}
+.qoz-what__media {
+  aspect-ratio: 4 / 3;
+  min-block-size: 0;
+  @media (max-width: 767px) { aspect-ratio: 16 / 10; border-radius: 14px; }
+  & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; }
+}
+.qoz-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 12px;
+}
+.qoz-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: var(--space-m);
+  @media (max-width: 767px) { padding: 18px; border-radius: 14px; }
+  border-radius: 20px;
+  background: var(--base);
+  & .fn-ref a { color: inherit; text-decoration: none; }
+}
+.qoz-card--dark {
+  background: var(--primary-ultra-dark);
+  color: color-mix(in oklch, var(--white) 84%, transparent);
+  & .qoz-card__label, & strong { color: var(--white); }
+}
+.qoz-card__label {
   margin: 0;
   font-size: var(--text-l);
   font-weight: 600;
-  line-height: 1.35;
-  color: var(--primary);
+  line-height: 1.3;
+  color: var(--primary-ultra-dark);
+}
+.qoz-card__text {
+  margin: 0;
+  font-size: var(--text-m);
+  line-height: 1.7;
+}
+.qoz-card__text--lead {
+  & strong { display: block; margin-block-end: 6px; font-size: var(--text-l); font-weight: 600; color: var(--primary-ultra-dark); }
+}
+.qoz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+}
+.qoz-actions__link {
+  font-size: var(--text-m);
+  font-weight: 600;
+  color: var(--secondary);
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
 }
 
-/* executive summary: the navy lead card */
-.qoz-intro {
-  padding: var(--space-l);
-  @media (max-width: 767px) { padding: 20px; border-radius: 18px; }
-  border-radius: 24px;
-  background: var(--primary-ultra-dark);
-}
-.qoz-intro__subtitle {
-  margin: 0 0 16px;
-  font-size: var(--text-l);
-  font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: var(--white);
-}
-
-/* core mechanics + the five steps */
-.qoz-steps__lede {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  column-gap: var(--space-xl-to-l);
-}
+/* how it works: the sequence line + the five steps */
 .qoz-steps__lead {
   margin: 0;
   font-size: var(--text-l);
@@ -154,55 +211,8 @@
     color: var(--primary-ultra-dark);
   }
 }
-.qoz-gains__notes {
-  display: grid;
-  gap: 12px;
-}
-.qoz-note {
-  margin: 0;
-  padding: 22px 24px;
-  border-radius: 18px;
-  background: var(--base);
-  border: 1px solid rgba(219, 229, 240, 0.9);
-  font-size: var(--text-m);
-  line-height: 1.7;
-  /* phones: no card inside the open part (a second frame squeezed the text); a divider between the notes */
-  @media (max-width: 767px) { padding: 14px 0 0; border: 0; border-block-start: 1px solid var(--base-semi-light); border-radius: 0; background: none; }
-  & strong { display: block; margin-block-end: 6px; font-weight: 600; color: var(--primary-ultra-dark); }
-  & .fn-ref a { color: inherit; text-decoration: none; }
-}
 
-/* QOZ 1.0 vs 2.0 */
-.qoz-compare__rules {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: 12px;
-}
-.qoz-rule {
-  margin: 0;
-  padding: var(--space-m);
-  @media (max-width: 767px) { padding: 16px; border-radius: 14px; }
-  border-radius: 20px;
-  background: var(--base);
-  font-size: var(--text-m);
-  line-height: 1.7;
-  & strong { display: inline; font-weight: 600; color: var(--primary-ultra-dark); }
-  & .fn-ref a { color: inherit; text-decoration: none; }
-}
-.qoz-rule--new {
-  background: var(--primary-ultra-dark);
-  color: color-mix(in oklch, var(--white) 84%, transparent);
-  & strong { color: var(--white); }
-}
 
-/* hospitality advantage */
-.qoz-hospitality__row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: var(--space-l);
-  align-items: start;
-}
-.qoz-hospitality__media { min-block-size: 360px; & .rendering-chip { position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1; } }
 
 /* quick comparison: the article's QOZ 1.0 / 2.0 table, always open; rows stack into labelled cards below 768px */
 .qoz-quick {
@@ -281,11 +291,6 @@
   }
 }
 
-/* the parts: accordions (shared .faq / .faq__q / .faq__icon) */
-.qoz-parts {
-  display: grid;
-  gap: 10px;
-}
 .qoz-acc {
   scroll-margin-block-start: 140px;  /* a linked part lands below the fixed header (68px) and the sticky sub-nav */
   &[open] { box-shadow: 0 10px 28px -18px rgba(11, 43, 72, 0.18); }
