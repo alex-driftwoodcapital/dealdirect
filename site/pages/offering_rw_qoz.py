@@ -125,17 +125,6 @@ rationale = o.rationale('Investment rationale', [
 ], 'Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein is')
 
 # ---------- teaser sections (this page only; site/styles/offering_rw_qoz.css) ----------
-# Key figures (#metrics): the design's own program figures, in place of its "[TBD]" target metrics.
-FACTS = [('167-Keys', 'Dream by Hyatt (upper-upscale lifestyle brand)'), ('~23,000 SF', 'Nightclub'), ('~14,000 SF', 'Day Club'),
-         ('~33,000 SF', 'Wharf Food & Beverage Venue'), ('~18,000 SF', 'State-of-the-art meeting & event space')]
-facts = section('Key figures', 'qoz-facts', None, [
-    El('ul', 'Figures', 'qoz-facts__grid', children=[
-        El('li', 'Figure', 'qoz-facts__item', children=[
-            El('strong', 'Value', 'qoz-facts__value', children=[q(v)]),
-            El('span', 'Label', 'qoz-facts__label', children=[q(l)]),
-        ]) for v, l in FACTS
-    ]),
-], attrs={'id': 'metrics', 'aria-label': 'Key figures'})
 
 # Renderings, placed with the content instead of one big grid (Alex, 2026-10-09: "use the renderings strategically across
 # the page not a massive grid, then below the video we can have a nice carousel to save space"): the hero (view from the
@@ -152,8 +141,8 @@ CAROUSEL = [  # (suffix, alt, design gallery category)
     (P + '10', 'Entertainment', 'Entertainment'), (P + '40', 'Entertainment', 'Entertainment'),
     ('_Ballroom', 'Ballroom', 'Conference'),
 ]
-renderings = o.carousel([(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL], 'QOZ Common Equity', 'Renderings',
-                        'Request Investor Details')
+# a strip under the webinar video, same section (Alex, 2026-10-09: "I want these as a strip below the video")
+renderings = o.strip([(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL], 'Riverside Wharf renderings')
 aerial = o.rendering_band(W + '_View-from-exterior', 'Riverside Wharf view from exterior')
 market_scene = El('figure', 'Image', 'media-card market-update__media', children=[
     Img('Photo', W + P + '33', 'Riverside Wharf food and beverage venue'), o.chip()])
@@ -292,7 +281,9 @@ qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
 STYLESHEETS = ['shared', 'offering']  # + this page's site/styles/offering_rw_qoz.css
 PAGE = [
     o.hero('QOZ Common Equity', 'Riverside-Wharf-hero', 'Riverside-Wharf_View-from-River', 'Riverside Wharf Miami rendering video', badge='Coming soon'),
-    facts,
+    # the design's target metrics with their [TBD] placeholders (Alex, 2026-10-09: "remove these for now, keep the
+    # placeholders we had" — the program figures band is off the page)
+    o.metrics('QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary', METRICS, METRIC_NOTES),
     o.subnav(SUBNAV),
     o.overview('Riverside-Wharf_Pooldeck', 'Riverside Wharf Pool deck', 'A hospitality & entertainment development', [
         ['This two tower project', '1', ', a rooftop day club', '2', '.'], ['Designed to foster'], ['Located in a market'],
@@ -300,8 +291,7 @@ PAGE = [
         ['1 Profile Magazine', '2 These project descriptions', '3 Such benefits', 'All information is as of the date indicated',
          'Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The description of the project']),
     # No poster in the design (empty image slot): the frame shows the play button on the dark band until clicked.
-    o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video'),
-    renderings,
+    o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video', extra=renderings),
     qoz,
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
@@ -316,12 +306,8 @@ PAGE = [
 # metric bands, their footnotes and disclaimer link), the two placeholder highlights, and the design's request-button
 # labels, all replaced by RESERVE ("Download Brochure" too: the site never hosts a brochure, CLAUDE.md rule 7).
 # Bring a section back by putting it on the page and taking its strings off this list.
-DROPPED_COPY = {q(t) for t in ('[TBD]', 'Target*', 'Net Quarterly Distributions', 'Net Equity Multiple', 'Minimum Investment',
-                               'Assumed Hold Period', 'Targeted preferred return anticipated', 'The minimum investment amount',
-                               'The anticipated hold period', '* Target internal rate of return', 'Click here to see important disclaimers',
-                               '[QOZ highlight', 'Target Metrics*', 'Request Offering Details', 'Request Information',
+DROPPED_COPY = {q(t) for t in ('[QOZ highlight', 'Target Metrics*', 'Request Offering Details', 'Request Information',
                                'Request Investor Details', 'Download Brochure', 'Start Investing',
-                               'QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary',
                                'Total equity')}  # 'Total equity': the ~$96M layer is common equity (Alex, 2026-10-09)
 # Alex, 2026-10-09: "Remove program, and rationale for now. This page should enhance the oz information." Both sections
 # stay defined above; their strings that appear nowhere else on the page are dropped.
