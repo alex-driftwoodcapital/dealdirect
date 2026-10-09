@@ -19,6 +19,7 @@ const PAGES = [
   ['eb5-new', '/new-eb-5-page/', 'en-US'],
   ['preferred-equity', '/offering/riverside-wharf-preferred-equity/', 'en-US'],
   ['qoz', '/offering/riverside-wharf-qoz/', 'en-US'],
+  ['dst', '/offering/driftwood-hotel-income-i-dst/', 'en-US'],
   ['not-found', '/qa-no-such-page/', 'en-US', 404],  // name, path, lang, status (200 unless given)
 ];
 const URLS = [  // path, expected status, expected Location (path) for redirects
