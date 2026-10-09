@@ -93,6 +93,26 @@ try:
             print(f'  {sel:40} {r["status"]}')
     print(f'  {counts}; written: {st["written"]}')
 
+    loops = json.load(open(f'{B}/loops.json')) if os.path.exists(f'{B}/loops.json') else {}
+    if loops:
+        step('loops')
+        lp = helper('loops', loops, mode)
+        for lid, r in (lp['loops'] or {}).items():
+            print(f'  {lid} {r["key"]:28} {r["status"]}')
+        print(f'  written: {lp["written"]}')
+
+    def card_fields():
+        # META['fields']: SCF fields of an offering (Home cards); '{{media:slug}}' becomes the attachment id
+        out = {}
+        for k, v in meta.get('fields', {}).items():
+            m = re.fullmatch(r'\{\{media:([^}]*)\}\}', str(v))
+            if m:
+                if not (got.get(m.group(1)) or {}).get('id'):
+                    sys.exit(f'STOP: field {k}: media {m.group(1)} not imported')
+                v = got[m.group(1)]['id']
+            out[k] = v
+        return out
+
     KIND = meta.get('kind', 'page')
     PTYPE = {'page': 'page', 'offering': 'offering', 'component': 'wp_block', 'template': 'wp_template'}[KIND]
     want = meta.get('status', 'draft' if KIND in ('page', 'offering') else 'publish')
@@ -114,6 +134,12 @@ try:
             print(f'  would create {what} as {want}')
         for slug, rid in refs.items():
             print(f'  component {slug}: ' + (f'#{rid}' if rid else 'not on staging yet: created by the component step of this deploy'))
+        if meta.get('fields'):
+            if pg['id'] and all((got.get(m) or {}).get('id') for m in re.findall(r'\{\{media:([^}]*)\}\}', json.dumps(meta['fields']))):
+                fr = helper('fields', {'id': pg['id'], 'fields': card_fields()}, 'dry')
+                print('  card fields: ' + ', '.join(f'{k} {v}' for k, v in fr.items()))
+            else:
+                print(f'  card fields: would set {", ".join(meta["fields"])} after the import/create')
         if svg.MARKER.search(template):  # fetch + sanitize now, so a bad SVG fails the PR check, not the deploy
             n = svg.expand(template).count('"tag":"path"')
             print(f'  inline SVG fetched and converted ({n} paths)')
@@ -151,7 +177,11 @@ try:
         sys.exit(f'STOP: edit-run.sh exited {r.returncode}')
     pid = int(re.findall(r'post id: (\d+)', r.stdout)[-1])
     helper('mark', {'id': pid, 'sha': live_sha(pid)}, 'write')
-    st_ = helper('status', {'id': pid, 'status': want}, 'write')
-    print(f'done: {PTYPE} #{pid} {meta["slug"]} status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else ''))
+    if meta.get('fields'):
+        fr = helper('fields', {'id': pid, 'fields': card_fields()}, 'write')
+        print('  card fields: ' + ', '.join(f'{k} {v}' for k, v in fr.items()))
+    st_ = helper('status', {'id': pid, 'status': want, 'title': meta['title']}, 'write')
+    print(f'done: {PTYPE} #{pid} {meta["slug"]} status {st_["to"]}' + (f' (was {st_["from"]})' if st_['changed'] else '')
+      + (' · title updated' if st_.get('title') == 'retitled' else ''))
 finally:
     remote(f'rm -rf {TMP}', check=False)
