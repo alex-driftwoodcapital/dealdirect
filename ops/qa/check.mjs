@@ -1,0 +1,100 @@
+// ROLE-TEMPLATE — staging QA in a real browser, run by .github/workflows/qa.yml (read-only: GETs only).
+// Every page at 375 / 768 / 1440: status, horizontal overflow, console errors, failed requests, the self-hosted
+// font and ACSS palette actually in use, <html lang>, title, robots, canonical, hreflang; full-page screenshots.
+// Plus the URL decisions (301s, 410s, 404). Writes qa-out/report.md, results.json and screenshots; exits 1 on a failure.
+import { chromium, request } from 'playwright';
+import fs from 'fs';
+
+const BASE = (process.env.QA_BASE_URL || '').replace(/\/$/, '');
+const auth = { username: process.env.QA_HTTP_USER || '', password: process.env.QA_HTTP_PASSWORD || '' };
+if (!BASE) { console.error('QA_BASE_URL is not set'); process.exit(2); }
+const OUT = 'qa-out';
+fs.mkdirSync(`${OUT}/shots`, { recursive: true });
+
+const PAGES = [
+  ['home', '/', 'en-US'],
+  ['eb5', '/eb-5-investments/', 'en'],
+  ['eb5-es', '/inversiones-eb-5/', 'es'],
+  ['eb5-pt', '/investimentos-eb-5/', 'pt-BR'],
+  ['eb5-new', '/new-eb-5-page/', 'en-US'],
+  ['preferred-equity', '/offering/riverside-wharf-preferred-equity/', 'en-US'],
+  ['qoz', '/offering/riverside-wharf-qoz/', 'en-US'],
+];
+const URLS = [  // path, expected status, expected Location (path) for redirects
+  ['/offering/riverside-wharf/', 301, '/offering/riverside-wharf-qoz/'],
+  ['/offering/riverside-wharf-eb-5/', 301, '/eb-5-investments/'],
+  ['/admin-login/', 410], ['/forgot-password/', 410], ['/reset-password/', 410], ['/registration-success/', 410],
+  ['/qa-no-such-page/', 404],
+];
+const WIDTHS = [375, 768, 1440];
+const fails = [];
+const rows = [];
+
+const api = await request.newContext({ httpCredentials: auth, maxRedirects: 0 });
+const urlRows = [];
+for (const [path, want, to] of URLS) {
+  const r = await api.get(BASE + path, { maxRedirects: 0 });
+  const loc = (r.headers()['location'] || '').replace(BASE, '');
+  const ok = r.status() === want && (!to || loc === to);
+  if (!ok) fails.push(`${path}: got ${r.status()}${loc ? ' -> ' + loc : ''}, want ${want}${to ? ' -> ' + to : ''}`);
+  urlRows.push(`| \`${path}\` | ${want}${to ? ' → `' + to + '`' : ''} | ${r.status()}${loc ? ' → `' + loc + '`' : ''} | ${ok ? 'ok' : '**FAIL**'} |`);
+}
+
+const browser = await chromium.launch();
+for (const [name, path, lang] of PAGES) {
+  for (const w of WIDTHS) {
+    const ctx = await browser.newContext({ httpCredentials: auth, viewport: { width: w, height: 900 } });
+    const page = await ctx.newPage();
+    const errors = [], failed = [];
+    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
+    page.on('pageerror', (e) => errors.push(e.message.slice(0, 160)));
+    page.on('response', (r) => { if (r.status() >= 400 && r.url().startsWith(BASE)) failed.push(`${r.status()} ${r.url().replace(BASE, '')}`); });
+    const resp = await page.goto(BASE + path, { waitUntil: 'networkidle', timeout: 60000 });
+    await page.evaluate(() => document.fonts.ready);
+    const info = await page.evaluate(() => {
+      const meta = (n) => document.querySelector(`meta[name="${n}"]`)?.content || '';
+      const fonts = [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, ''));
+      return {
+        overflow: document.documentElement.scrollWidth - window.innerWidth,
+        lang: document.documentElement.lang,
+        title: document.title,
+        robots: meta('robots'),
+        canonical: document.querySelector('link[rel=canonical]')?.href || '',
+        hreflang: document.querySelectorAll('link[rel=alternate][hreflang]').length,
+        jakarta: fonts.includes('Plus Jakarta Sans'),
+        bodyFont: getComputedStyle(document.body).fontFamily.split(',')[0].replace(/"/g, '').trim(),
+        primary: getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+        h2: getComputedStyle(document.documentElement).getPropertyValue('--h2').trim().slice(0, 60),
+      };
+    });
+    await page.screenshot({ path: `${OUT}/shots/${name}-${w}.jpg`, fullPage: true, type: 'jpeg', quality: 70 });
+    const status = resp ? resp.status() : 0;
+    const problems = [];
+    if (status !== 200) problems.push(`status ${status}`);
+    if (info.overflow > 0) problems.push(`horizontal overflow ${info.overflow}px`);
+    if (errors.length) problems.push(`console: ${errors[0]}`);
+    if (failed.length) problems.push(`failed: ${failed.slice(0, 3).join(', ')}`);
+    if (!info.jakarta || info.bodyFont !== 'Plus Jakarta Sans') problems.push(`font: ${info.bodyFont}${info.jakarta ? '' : ' (Jakarta not loaded)'}`);
+    if (w === 1440 && info.lang !== lang) problems.push(`lang ${info.lang}, want ${lang}`);
+    problems.forEach((p) => fails.push(`${path} @${w}: ${p}`));
+    rows.push({ name, path, w, status, ...info, errors, failed, problems });
+    await ctx.close();
+  }
+}
+await browser.close();
+
+const first = rows.find((r) => r.w === 1440) || {};
+const md = [
+  `# Staging QA — ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`, '',
+  fails.length ? `**${fails.length} problem(s)**` : '**All checks passed**', '',
+  ...fails.map((f) => `- ${f}`), '',
+  `ACSS on staging: \`--primary: ${first.primary}\` · \`--h2: ${first.h2}\``, '',
+  '## Pages', '', '| Page | Width | Status | Overflow | Font | lang | Robots | hreflang | Problems |', '|---|---|---|---|---|---|---|---|---|',
+  ...rows.map((r) => `| [${r.name}](shots/${r.name}-${r.w}.jpg) | ${r.w} | ${r.status} | ${r.overflow > 0 ? r.overflow + 'px' : '–'} | ${r.jakarta ? 'Jakarta' : r.bodyFont} | ${r.lang} | ${r.robots.slice(0, 30)} | ${r.hreflang} | ${r.problems.join('; ') || 'ok'} |`),
+  '', '## Titles', '', ...rows.filter((r) => r.w === 1440).map((r) => `- \`${r.path}\`: ${r.title}`),
+  '', '## Old URLs', '', '| Path | Want | Got | |', '|---|---|---|---|', ...urlRows, '',
+].join('\n');
+fs.writeFileSync(`${OUT}/report.md`, md);
+fs.writeFileSync(`${OUT}/results.json`, JSON.stringify({ fails, rows, urls: urlRows }, null, 1));
+console.log(md);
+process.exit(fails.length ? 1 : 0);
