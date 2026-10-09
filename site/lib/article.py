@@ -1,7 +1,7 @@
 """Verbatim blocks from a public article saved under site/sources/ (ops/sources.txt), for pages that quote it (CLAUDE.md
 rule 1: lifted, never retyped). The article's own markup (paragraphs, bold, links, footnote marks, lists, tables) is
 turned into Etch elements as it is, so the copy gate sees the source's strings; the page only picks the blocks and adds
-classes. Inline styles and the article's back-links (↩) are dropped."""
+classes. Inline styles are dropped; footnote marks and the endnotes' back-links (↩) link to each other on the page."""
 import re
 from html.parser import HTMLParser
 from design import Copy
@@ -55,12 +55,12 @@ def _walk(node):
 class Article:
     """Article(path, start, end): the region between the two markers. .copy is its Copy lookup (for COPY_EXTRA);
     .section(heading) the blocks of the rich-text body under that <h3>; .el(block) one block as Etch elements."""
-    def __init__(self, path, start, end, fn_prefix):
+    def __init__(self, path, start, end, fn_prefix, ref_prefix):
         src = open(path, encoding='utf-8').read()
         region = src[src.index(start):src.index(end)]
         t = _Tree()
         t.feed(region)
-        self.root, self.copy, self.fn = t.root, Copy(path, start, end), fn_prefix
+        self.root, self.copy, self.fn, self.ref = t.root, Copy(path, start, end), fn_prefix, ref_prefix
 
     def heading(self, text):
         return next(n for n in _walk(self.root) if not isinstance(n, str) and n[0] in ('h1', 'h3') and _text(n).strip() == text)
@@ -83,15 +83,21 @@ class Article:
 
     def el(self, node, cls=None, name=None, attrs=None):
         """One source node as Etch elements: text keeps its edge spaces (inline links), footnote marks become this page's
-        fn-ref linking to the endnote (#<fn_prefix>N), links keep their href."""
+        fn-ref (id <ref_prefix>N) linking to the endnote (#<fn_prefix>N) and the endnote's ↩ links back; links keep their
+        href and the source's aria-label."""
         if isinstance(node, str):
             return node if node.strip() else (' ' if node else None)
         tag, a, kids = node
         if tag == 'sup':
             n = _text(node).strip()
-            return El('sup', 'Footnote ref', 'fn-ref', children=[El('a', 'Endnote link', None, {'href': f'#{self.fn}{n}'}, [n])])
+            link = next((k for k in kids if not isinstance(k, str) and k[0] == 'a'), None)
+            label = {'aria-label': link[1]['aria-label']} if link and link[1].get('aria-label') else {}
+            return El('sup', 'Footnote ref', 'fn-ref', {'id': f'{self.ref}{n}'},
+                      [El('a', 'Endnote link', None, {'href': f'#{self.fn}{n}', **label}, [n])])
         if tag == 'a' and a.get('href', '').startswith('#footnote-ref'):
-            return None  # the article's back-link (↩)
+            n = a['href'].rsplit('-', 1)[1]
+            label = {'aria-label': a['aria-label']} if a.get('aria-label') else {}
+            return El('a', 'Back to reference', None, {'href': f'#{self.ref}{n}', **label}, [_text(node).strip()])
         children = [self.el(k) for k in kids]
         children = [c for c in children if c is not None]
         while children and isinstance(children[0], str) and not children[0].strip():
@@ -103,6 +109,8 @@ class Article:
         at = dict(attrs or {})
         if tag == 'a':
             at['href'] = a['href']
+            if a.get('aria-label'):
+                at['aria-label'] = a['aria-label']
         if tag in ('th',) and a.get('scope'):
             at['scope'] = a['scope']
         return El(tag, name or tag.capitalize(), cls, at, children)
