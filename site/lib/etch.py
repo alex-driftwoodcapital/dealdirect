@@ -136,12 +136,13 @@ class Svg(Node):
         return self.cls.split() if self.cls else []
 
 
-def section(name, cls, heading_id, children, attrs=None, tag='section'):
+def section(name, cls, heading_id, children, attrs=None, tag='section', script=None):
     """Section > Container skeleton (guardrails §2), labelled by its heading. A band without a heading is a div."""
     a = {'aria-labelledby': heading_id} if heading_id else {}
     a.update(attrs or {})
     block = cls.split()[0]  # 'cta-band cta-band--cover' -> container 'cta-band__inner'
-    return El(tag, name, cls, a, [El('div', 'Container', block + '__inner', etch='container', children=children)], etch='section')
+    return El(tag, name, cls, a, [El('div', 'Container', block + '__inner', etch='container', children=children)], etch='section',
+              script=script)
 
 
 def page(nodes) -> str:
