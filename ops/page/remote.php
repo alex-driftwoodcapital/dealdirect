@@ -180,10 +180,11 @@ if ( $action === 'media' ) {
 	// $in: {id, fields: {name: value}}. SCF fields of an offering (field keys field_dd_<name>, dealdirect-core), written
 	// with update_field so SCF stores its reference meta too. Reports each change; writes only in write mode.
 	if ( ! function_exists( 'update_field' ) ) { WP_CLI::error( 'Secure Custom Fields is not active' ); }
-	foreach ( array_keys( $in['fields'] ) as $name ) {
-		// an unknown key would be saved as a meta named "field_dd_<name>" (SCF falls back to it): refuse instead
-		if ( ! acf_get_field( 'field_dd_' . $name ) ) { WP_CLI::error( "field $name is not registered (dealdirect-core not deployed?)" ); }
-	}
+	$unknown = array_values( array_filter( array_keys( $in['fields'] ), fn( $n ) => ! acf_get_field( 'field_dd_' . $n ) ) );
+	// An unknown key would be saved as a meta named "field_dd_<name>" (SCF falls back to it): a write refuses it. A dry
+	// run runs before this deploy's plugin step, so a field that plugin adds is reported, not fatal.
+	if ( $unknown && $write ) { WP_CLI::error( 'fields not registered (dealdirect-core not deployed?): ' . implode( ', ', $unknown ) ); }
+	foreach ( $unknown as $name ) { $out[ $name ] = 'would set (registered by the plugin step of this deploy)'; unset( $in['fields'][ $name ] ); }
 	foreach ( $in['fields'] as $name => $value ) {
 		// Compare with what is stored, not get_field(): it returns the field's default (e.g. status "open") when nothing is
 		// saved, and an unsaved field is invisible to the Home loops' meta_query.
