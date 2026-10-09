@@ -162,13 +162,14 @@
   @media (min-width: 900px) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 }
 .dst-kpi {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   display: grid;
   align-content: start;
   gap: 8px;
   padding: 20px;
-  border: 1px solid rgba(36, 104, 168, 0.09);
   border-radius: 12px;
-  background: linear-gradient(135deg, #FEFEFF 0%, #F1F5FA 100%);
   @media (min-width: 768px) { padding: var(--space-m); }
 }
 .dst-kpi__value {
@@ -236,12 +237,13 @@
   }
 }
 .dst-panel {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   display: grid;
   gap: var(--space-m);
   padding: 24px 20px;
-  border: 1px solid rgba(36, 104, 168, 0.08);
   border-radius: 14px;
-  background: linear-gradient(135deg, #FDFEFF 0%, #EDF3FA 100%);
   @media (min-width: 768px) { padding: var(--space-l); }
 }
 .dst-panel__title {
@@ -476,12 +478,13 @@
   @media (min-width: 640px) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 }
 .dst-stat {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   display: grid;
   gap: 6px;
   padding: 20px;
-  border: 1px solid rgba(36, 104, 168, 0.12);
   border-radius: 12px;
-  background: var(--white);
 }
 .dst-stat__value {
   font-size: var(--h3);
@@ -495,12 +498,13 @@
   color: var(--base-ultra-dark);
 }
 .dst-strategies {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   display: grid;
   gap: var(--space-m);
   padding: 24px 20px;
-  border: 1px solid rgba(36, 104, 168, 0.16);
   border-radius: 14px;
-  background: linear-gradient(180deg, #FBFDFF 0%, #F2F7FC 100%);
   @media (min-width: 768px) { padding: var(--space-l); }
 }
 .dst-strategies__title {

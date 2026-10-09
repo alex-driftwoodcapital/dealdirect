@@ -476,10 +476,11 @@
   list-style: none;
 }
 .highlights-list__item {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   padding: 18px 24px;
   border-radius: 16px;
-  background: linear-gradient(160deg, #FFFFFF 0%, #F7FAFD 100%);
-  border: 1px solid rgba(219, 229, 240, 0.9);
   font-size: var(--text-m);
   line-height: 1.6;
   text-wrap: pretty;
@@ -583,10 +584,11 @@
   margin: 24px 0 28px;
 }
 .offering-oz__benefit {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   padding: 22px 24px;
   border-radius: 16px;
-  background: var(--white);
-  border: 1px solid rgba(219, 229, 240, 0.9);
   & p { margin: 8px 0 0; font-size: var(--text-m); line-height: 1.7; }
 }
 .offering-oz__benefit-title {
@@ -740,10 +742,11 @@
   gap: 16px;
 }
 .rationale-card {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   padding: 28px;
   border-radius: 20px;
-  background: var(--white);
-  border: 1px solid rgba(219, 229, 240, 0.9);
 }
 .rationale-card__title {
   margin: 0;
@@ -803,10 +806,11 @@
   }
 }
 .market-update__item {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   padding: 20px;
-  border: 1px solid var(--base-semi-light);
   border-radius: 14px;
-  background: var(--base);
   @media (min-width: 768px) { padding: var(--space-m); }
   font-size: var(--text-s);
   line-height: 1.6;

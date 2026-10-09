@@ -126,10 +126,10 @@
    (each image's own rule repeats these values so no record order can move them). */  /* the design's mono face is dropped: Plus Jakarta Sans only (CLAUDE.md) */
 
 .card-light {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   border-radius: 22px;
-  background: linear-gradient(160deg, #FFFFFF 0%, #FDFEFE 54%, #F5F9FD 100%);
-  border: 1px solid rgba(219, 229, 240, 0.7);
-  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.025), 0 10px 28px -16px rgba(11, 43, 72, 0.09), 0 34px 60px -34px rgba(11, 43, 72, 0.13);
 }
 
 .media-card {
@@ -152,16 +152,15 @@
 }
 
 .stat-card {
+  background: var(--white);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
   gap: 6px;
   padding: 16px 18px;
   border-radius: 14px;
-  border: 1.5px solid transparent;
-  background: linear-gradient(165deg, #fff 0%, #EDF2F7 100%) padding-box,
-              linear-gradient(140deg, #fff 0%, rgba(127, 184, 224, 0.4) 30%, rgba(11, 43, 72, 0.08) 78%) border-box;
-  box-shadow: 0 10px 24px -20px rgba(11, 43, 72, 0.3);
 }
 .stat-card__value {
   margin: 0;
@@ -204,9 +203,10 @@
 .footnotes--dark { color: color-mix(in oklch, var(--white) 76%, transparent); }
 
 .faq {
-  border-radius: 16px;
   background: var(--white);
-  border: 1px solid rgba(219, 229, 240, 0.9);
+  border: 1px solid rgba(11, 43, 72, 0.07);
+  box-shadow: 0 1px 2px rgba(11, 43, 72, 0.04), 0 8px 24px -12px rgba(11, 43, 72, 0.10), 0 28px 56px -32px rgba(11, 43, 72, 0.16);
+  border-radius: 16px;
 }
 .faq__q {
   display: flex;

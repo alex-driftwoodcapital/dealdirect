@@ -61,6 +61,7 @@ class Article:
         t = _Tree()
         t.feed(region)
         self.root, self.copy, self.fn, self.ref = t.root, Copy(path, start, end), fn_prefix, ref_prefix
+        self.renumber = {}  # source note number -> the page's own (a page quoting only some passages numbers its notes 1..n)
 
     def heading(self, text):
         return next(n for n in _walk(self.root) if not isinstance(n, str) and n[0] in ('h1', 'h3') and _text(n).strip() == text)
@@ -89,14 +90,14 @@ class Article:
             return node if node.strip() else (' ' if node else None)
         tag, a, kids = node
         if tag == 'sup':
-            n = _text(node).strip()
+            n = str(self.renumber.get(int(_text(node).strip()), _text(node).strip()))
             link = next((k for k in kids if not isinstance(k, str) and k[0] == 'a'), None)
-            label = {'aria-label': link[1]['aria-label']} if link and link[1].get('aria-label') else {}
+            label = {'aria-label': re.sub(r'\d+$', n, link[1]['aria-label'])} if link and link[1].get('aria-label') else {}
             return El('sup', 'Footnote ref', 'fn-ref', {'id': f'{self.ref}{n}'},
                       [El('a', 'Endnote link', None, {'href': f'#{self.fn}{n}', **label}, [n])])
         if tag == 'a' and a.get('href', '').startswith('#footnote-ref'):
-            n = a['href'].rsplit('-', 1)[1]
-            label = {'aria-label': a['aria-label']} if a.get('aria-label') else {}
+            n = str(self.renumber.get(int(a['href'].rsplit('-', 1)[1]), a['href'].rsplit('-', 1)[1]))
+            label = {'aria-label': re.sub(r'\d+$', n, a['aria-label'])} if a.get('aria-label') else {}
             return El('a', 'Back to reference', None, {'href': f'#{self.ref}{n}', **label}, [_text(node).strip()])
         children = [self.el(k) for k in kids]
         children = [c for c in children if c is not None]

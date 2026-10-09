@@ -148,20 +148,27 @@ market_scene = El('figure', 'Image', 'media-card market-update__media', children
     Img('Photo', W + P + '33', 'Riverside Wharf food and beverage venue'), o.chip()])
 
 
-# All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section", "Whatever can be on
-# a drop down or accordion do it. We need to optimize space. Don't do a toc column"): the article's title and its
-# executive summary stay open as the lead; every other part is a native <details> accordion (the EB-5 FAQ's classes),
-# its heading an anchored h3 in the summary; the article's disclaimer stays visible under them. Parts: the design's OZ
-# benefits and "Opportunity Zones Program Explained" (driftwoodcapital.com) block by block.
+# All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section"). Not the whole
+# article (Alex, 2026-10-09: "We don't need to copy the article as is, the article is in our website. We need to extract
+# the most important part and enhance our OZ section, what it's, what's the new framework/regulations, how they
+# compared, who qualifies etc."): its key passages, verbatim, under five short headings (Alex's own framing; "how it
+# works" after the new framework, so the notes run in order), then a link to the full article on driftwoodcapital.com.
+# Its endnotes 2-8 come along, numbered 1-7 (1 and 9-11 cite passages left out), in an accordion; its disclaimer stays
+# visible (CLAUDE.md rule 6).
 TITLE = 'Opportunity Zones Program Explained'
-EXEC, ABOUT = 'Executive summary: How Opportunity Zone investing works after QOZ 2.0', 'About Opportunity Zones'
+ABOUT = 'About Opportunity Zones'
 MECH, GAINS, NOTE = 'The Core Mechanics: How the Tax Benefits Work', 'Eligible Gains', 'What Investors May Want to Note'
-CHANGED, HOSP = 'What Changed: QOZ 1.0 vs. QOZ 2.0', 'The Opportunity Zone Advantage for Hospitality Assets'
-SUMMARY, SOURCES = 'Summary', 'Sources and endnotes'
+CHANGED, SOURCES = 'What Changed: QOZ 1.0 vs. QOZ 2.0', 'Sources and endnotes'
+ARTICLE_URL = 'https://driftwoodcapital.com/opportunity-zones-program-explained/'
+# the guide's headings and labels (Alex's framing above; not article or design copy)
+H_WHAT, H_NEW, H_COMPARE, H_WHO, H_HOW = ('What it is', 'What’s new: the QOZ 2.0 framework', 'How QOZ 1.0 and QOZ 2.0 compare',
+                                          'Who qualifies', 'How it works')
+L_DEFER, L_STEP = 'Rolling five-year deferral', 'Basis step-up and 10-year exclusion'
+FULL = 'Read the full article on driftwoodcapital.com'
 ICON = '+'
 
-ACC_SCRIPT = """// qoz accordions: a link to something inside a closed part (footnote marks, endnotes and their back-links, #structure)
-// opens that part before the browser scrolls to it. Scoped to the QOZ section; without it the parts still open by hand.
+ACC_SCRIPT = """// qoz sources: a footnote mark (or a link to an endnote) opens the closed sources accordion before the browser
+// scrolls to it. Scoped to the QOZ section; without it the accordion still opens by hand.
 const qoz = document.getElementById('qoz');
 if (qoz) {
   const reveal = (id) => {
@@ -180,34 +187,31 @@ if (qoz) {
 """
 
 
-def blocks(heading, cls='qoz-prose'):
-    return El('div', 'Text', cls, children=[oz_src.el(b) for b in oz_src.section(heading)])
+def prose(nodes, cls='qoz-prose'):
+    return El('div', 'Text', cls, children=[oz_src.el(b) for b in nodes])
 
 
-def part(anchor, title, body, attrs=None):
-    """One accordion part: the heading (h3, anchored) in the summary, the body below."""
-    return El('details', 'Part', 'faq qoz-acc', {'id': anchor, **(attrs or {})}, [
-        El('summary', 'Summary', 'faq__q qoz-acc__q', children=[
-            El('h3', 'Heading', 'qoz-acc__title', children=title),
-            El('span', 'Icon', 'faq__icon', {'aria-hidden': 'true'}, [ICON]),
+def block(anchor, num, title, body, cls=''):
+    """One part of the guide: a numbered heading, then its body."""
+    return El('div', 'Part', ('qoz-block ' + cls).strip(), {'id': anchor}, [
+        El('div', 'Heading', 'qoz-block__head', children=[
+            El('span', 'Number', 'qoz-block__num', {'aria-hidden': 'true'}, [num]),
+            El('h3', 'Title', 'qoz-block__title', children=[title]),
         ]),
-        El('div', 'Body', 'qoz-acc__body', children=body),
+        El('div', 'Body', 'qoz-block__body', children=body),
     ])
+
+
+def card(label, node, cls='qoz-card'):
+    return El('div', 'Card', cls, children=[El('h4', 'Label', 'qoz-card__label', children=[label]), oz_src.el(node, 'qoz-card__text', 'Text')])
 
 
 head = El('div', 'Head', 'qoz-head', children=[
     El('p', 'Eyebrow', 'eyebrow', children=[oz_src.copy(TITLE)]),
     El('h2', 'Heading', 'qoz-head__title', {'id': 'qoz-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
-    El('p', 'Byline', 'qoz-head__byline', children=[oz_src.copy('Driftwood Capital')]),
 ])
-lead = El('div', 'Executive summary', 'qoz-intro', {'id': 'qoz-executive-summary'}, [
-    El('h3', 'Heading', 'qoz-intro__subtitle', children=[oz_src.copy(EXEC)]),
-    blocks(EXEC, 'qoz-prose qoz-prose--dark'),
-])
-
-mech = oz_src.section(MECH)  # two paragraphs, the "basic sequence" line, the five steps
-gains_src = oz_src.section(GAINS)
-changed_src = oz_src.section(CHANGED)  # two paragraphs, then the table's scroll wrapper
+about, mech = oz_src.section(ABOUT), oz_src.section(MECH)
+gains_src, note_src, changed_src = oz_src.section(GAINS), oz_src.section(NOTE), oz_src.section(CHANGED)
 table = next(c for c in changed_src[2][2] if not isinstance(c, str) and c[0] == 'table')
 
 
@@ -215,9 +219,8 @@ def els(node):
     return [k for k in node[2] if not isinstance(k, str)]
 
 
-# Quick comparison (Alex, 2026-10-09: "a quick easy comparison between oz 1.0 and 2.0, a quick summary besides the
-# content"): the article's own QOZ 1.0 / QOZ 2.0 table, always visible under the executive summary. Each cell carries its
-# column header as data-label, so on small screens a row stacks into a labelled card.
+# The article's own QOZ 1.0 / QOZ 2.0 table. Each cell carries its column header as data-label, so on small screens a
+# row stacks into a labelled card.
 caption, thead, tbody = (next(c for c in els(table) if c[0] == t) for t in ('caption', 'thead', 'tbody'))
 cols = [oz_src.copy(_t.strip()) for _t in (''.join(x for x in th[2] if isinstance(x, str)) for th in els(els(thead)[0]))]
 quick = El('div', 'Quick comparison', 'qoz-quick', children=[
@@ -232,53 +235,52 @@ quick = El('div', 'Quick comparison', 'qoz-quick', children=[
             for tr in els(tbody)]),
     ]),
 ])
-hosp = oz_src.section(HOSP)
-# Its last paragraph ends "To learn more, visit our offering page here." (a link to this offering): left out here.
-LAST = (hosp[3][0], hosp[3][1], [c for c in hosp[3][2] if isinstance(c, str) or c[0] != 'strong'])
 notes = oz_src.endnotes()
+USED_NOTES = range(2, 9)  # the article's marks in the passages above, numbered 1-7 on this page
+oz_src.renumber = {n: i for i, n in enumerate(USED_NOTES, 1)}
 
-parts = El('div', 'Parts', 'qoz-parts', children=[
-    part('qoz-about', [oz_src.copy(ABOUT)], [blocks(ABOUT)]),
-    part('structure', OZ_TITLE, oz_benefits),  # the design's #structure anchor (old sub-nav links) opens this part
-    part('qoz-mechanics', [oz_src.copy(MECH)], [
-        El('div', 'Text', 'qoz-prose qoz-steps__lede', children=[oz_src.el(b) for b in mech[:2]]),
+guide = El('div', 'Guide', 'qoz-guide', children=[
+    block('qoz-what', '01', H_WHAT, [
+        El('div', 'Row', 'qoz-what__row', children=[
+            prose([about[0]]),
+            El('figure', 'Image', 'media-card qoz-what__media', children=[
+                Img('Photo', 'Riverside-Wharf_Dream-Hotel-Prefunction', 'Riverside Wharf Dream Hotel Pre-function'), o.chip()]),
+        ]),
+    ]),
+    block('qoz-new', '02', H_NEW, [
+        prose([about[1]]),
+        El('div', 'Cards', 'qoz-cards', children=[card(L_DEFER, mech[0]), card(L_STEP, mech[1])]),
+    ]),
+    block('structure', '03', H_HOW, [  # the design's #structure anchor (old sub-nav links) lands here
         oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
         oz_src.el(mech[3], 'qoz-steps__list', 'Steps'),
     ]),
-    part('qoz-eligible-gains', [oz_src.copy(GAINS)], [
+    block('qoz-compare', '04', H_COMPARE, [quick]),
+    block('qoz-who', '05', H_WHO, [
         oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
         oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
+        El('div', 'Cards', 'qoz-cards', children=[
+            # each note opens with its own bold label in the article ("The 180-day clock.", "State conformity.")
+            El('div', 'Card', 'qoz-card', children=[oz_src.el(n, 'qoz-card__text qoz-card__text--lead', 'Text')]) for n in note_src]),
     ]),
-    part('qoz-what-to-note', [oz_src.copy(NOTE)], [
-        El('div', 'Notes', 'qoz-gains__notes', children=[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)]),
+])
+sources = El('details', 'Sources', 'faq qoz-acc', {'id': 'qoz-sources'}, [
+    El('summary', 'Summary', 'faq__q qoz-acc__q', children=[
+        El('h3', 'Heading', 'qoz-acc__title', children=[oz_src.copy(SOURCES)]),
+        El('span', 'Icon', 'faq__icon', {'aria-hidden': 'true'}, [ICON]),
     ]),
-    part('qoz-what-changed', [oz_src.copy(CHANGED)], [
-        # the table itself is the quick comparison above the parts
-        El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
-                                                           oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
-    ]),
-    part('qoz-hospitality', [oz_src.copy(HOSP)], [
-        El('div', 'Row', 'qoz-hospitality__row', children=[
-            El('div', 'Text', 'qoz-prose', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
-            El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
-        ]),
-    ]),
-    part('qoz-sources', [oz_src.copy(SOURCES)], [
-        El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
+    El('div', 'Body', 'qoz-acc__body', children=[
+        El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{oz_src.renumber[n]}'}) for n in USED_NOTES]),
     ]),
 ])
 qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
     head,
-    lead,
-    quick,
-    parts,
-    # the article's closing summary reads as the takeaway after the parts, always open (Alex, 2026-10-09: "all those
-    # accordions need to make sense, we have one for 'summary'"); the accordions hold only the content parts and sources
-    El('div', 'Summary', 'qoz-summary', {'id': 'qoz-summary'}, [
-        El('h3', 'Heading', 'qoz-summary__title', children=[oz_src.copy(SUMMARY)]),
-        blocks(SUMMARY),
+    guide,
+    El('div', 'Actions', 'qoz-actions', children=[
+        o.request('Request Investor Details'),
+        El('a', 'Full article', 'qoz-actions__link', {'href': ARTICLE_URL}, [FULL, ' ', El('span', 'Arrow', None, {'aria-hidden': 'true'}, ['→'])]),
     ]),
-    o.request('Request Investor Details'),
+    sources,
     # the article's disclaimer, always visible (CLAUDE.md rule 6)
     El('div', 'Disclaimer', 'footnotes qoz-disclaimer', children=[oz_src.el(b) for b in oz_src.section(SOURCES) if b[0] == 'p']),
 ], attrs={'id': 'qoz'}, script=ACC_SCRIPT)
@@ -317,11 +319,16 @@ DROPPED_COPY = {q(t) for t in ('[QOZ highlight', 'Target Metrics*', 'Request Off
 # Alex, 2026-10-09: "Remove program, and rationale for now. This page should enhance the oz information." Both sections
 # stay defined above; their strings that appear nowhere else on the page are dropped.
 DROPPED_COPY |= ({norm(t) for t in all_texts([program, rationale])} & set(q.all)) - {norm(t) for t in all_texts(PAGE)}
+# The design's OZ benefits block (its two benefits, intro and IRS footnote): the article's passages in the guide cover the
+# same ground with the QOZ 2.0 rules (Alex, 2026-10-09: "extract the most important part and enhance our OZ section").
+DROPPED_COPY |= ({norm(t) for t in all_texts(oz_benefits + [El('p', 'T', children=OZ_TITLE)])} & set(q.all)) - {norm(t) for t in all_texts(PAGE)}
 
 # Not design copy: the arrow, the reserve label (Alex), the accordion icon, the sub-nav labels (design script data) and the program tab labels (design script data).
 NON_DESIGN = {'→', RESERVE, ICON} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
 # The ~$96M layer's label (Alex, 2026-10-09) and the market update's footnote marks and back-links.
 NON_DESIGN |= {COMMON_EQUITY} | market_update.NON_DESIGN
+# The QOZ guide's headings, numbers, card labels and article link label (Alex's framing, 2026-10-09).
+NON_DESIGN |= {H_WHAT, H_NEW, H_COMPARE, H_WHO, H_HOW, L_DEFER, L_STEP, FULL, '01', '02', '03', '04', '05'}
 # slug -> (source, Etch Asset Manager collection). Live-site uploads keep their filenames; images are compressed on
 # import with the Etch Asset Manager preset.
 MEDIA = {
