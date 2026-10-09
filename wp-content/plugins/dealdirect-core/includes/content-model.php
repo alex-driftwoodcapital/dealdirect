@@ -73,6 +73,8 @@ add_action( 'acf/init', function () {
 			$f( [ 'name' => 'card_summary', 'label' => 'Card summary', 'type' => 'textarea', 'rows' => 2, 'maxlength' => 140, 'instructions' => 'Compliance-approved line, 140 characters max.' ] ),
 			$f( [ 'name' => 'card_image', 'label' => 'Card image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Optional; falls back to the featured image.' ] ),
 			$f( [ 'name' => 'card_cta_label', 'label' => 'Card button label', 'type' => 'text', 'default_value' => 'View Offering' ] ),
+			$f( [ 'name' => 'card_url', 'label' => 'Card link (no page yet)', 'type' => 'url',
+				'instructions' => 'Only for an offering without a page here: its URL redirects (302) to this link. Clear it once the offering has its page.' ] ),
 			$f( [ 'name' => 'card_rendering', 'label' => 'Card image is a rendering', 'type' => 'true_false', 'ui' => 1, 'default_value' => 0,
 				'instructions' => 'Shows the "Rendering" chip on the Home card.' ] ),
 			$f( [ 'name' => 'show_oz_section', 'label' => 'Show OZ incentives section', 'type' => 'true_false', 'ui' => 1, 'default_value' => 0,

@@ -66,9 +66,9 @@ ROUTES = [  # (number, position label, position, heading, body, footnote ref, in
     ('01', 'You have', 'Realized capital gains', 'Qualified Opportunity Zone Funds', 'Directs capital gains', '1',
      'Riverside Wharf Miami QOF', '/offering/riverside-wharf-qoz/', 'https://driftwoodcapital.com/opportunity-zones/'),
     ('02', 'You are', 'A 1031 exchange buyer', 'Delaware Statutory Trusts', 'Offers fractional interests', '2',
-     'Driftwood Hotel Income I, DST', '#courtyard-dst', 'https://driftwoodcapital.com/1031-exchanges-and-dsts/'),
+     'Driftwood Hotel Income I, DST', '#driftwood-hotel-income-i-dst', 'https://driftwoodcapital.com/1031-exchanges-and-dsts/'),
     ('03', 'You are seeking', 'To offset passive income', 'Bonus Depreciation Funds', 'Applies cost segregation', None,
-     'Driftwood Tax Advantage Strategy I', '#advantaged-strategy-2026', 'https://driftwoodcapital.com/bonus-depreciation/'),
+     'Driftwood Tax Advantage Strategy I', '#driftwood-tax-advantage-strategy-i', 'https://driftwoodcapital.com/bonus-depreciation/'),
 ]
 
 

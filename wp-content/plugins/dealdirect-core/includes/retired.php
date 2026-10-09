@@ -46,3 +46,22 @@ if ( function_exists( 'add_action' ) ) {
 		}
 	}, 1 );
 }
+
+/** Where a card-only offering's URL goes: its card_url when that is an http(s) link, else null (the page renders). */
+function card_redirect( $card_url ): ?string {
+	$url = is_string( $card_url ) ? trim( $card_url ) : '';
+	return preg_match( '#^https?://[^\s/]+#i', $url ) ? $url : null;
+}
+
+if ( function_exists( 'add_action' ) ) {
+	// Card-only offerings (site/lib/card_offering.py; field card_url in content-model.php): 302, because the URL gets a page of its own later.
+	add_action( 'template_redirect', function () {
+		if ( ! is_singular( 'offering' ) || ! function_exists( 'get_field' ) ) {
+			return;
+		}
+		if ( $to = card_redirect( get_field( 'card_url', get_queried_object_id() ) ) ) {
+			wp_redirect( $to, 302, 'DealDirect' );
+			exit;
+		}
+	} );
+}
