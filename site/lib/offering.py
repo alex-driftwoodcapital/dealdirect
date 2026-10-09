@@ -106,16 +106,20 @@ document.querySelectorAll('.rendering-carousel').forEach((c) => {
   const prev = ctl.querySelector('[data-dir="prev"]'), next = ctl.querySelector('[data-dir="next"]');
   const count = ctl.querySelector('.rendering-carousel__count');
   const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-  let i = 0;
+  let i = 0, j = 0;  // first and last slide in view
   const go = (n) => {
     n = Math.max(0, Math.min(slides.length - 1, n));
     track.scrollTo({ left: slides[n].offsetLeft - slides[0].offsetLeft, behavior });
   };
   const update = () => {
-    count.textContent = (i + 1) + ' / ' + slides.length;
+    count.textContent = (j > i ? (i + 1) + '–' + (j + 1) : (i + 1)) + ' / ' + slides.length;
     prev.disabled = i === 0;
-    next.disabled = i === slides.length - 1;
+    // the end: the last slide is in view (with several in view, the first one never reaches the last index)
+    const last = slides[slides.length - 1].getBoundingClientRect(), box = track.getBoundingClientRect();
+    next.disabled = i === slides.length - 1 || last.right <= box.right + 2;
   };
+  let raf = 0;
+  track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
   prev.addEventListener('click', () => go(i - 1));
   next.addEventListener('click', () => go(i + 1));
   track.addEventListener('keydown', (e) => {
@@ -123,8 +127,11 @@ document.querySelectorAll('.rendering-carousel').forEach((c) => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
   });
   if ('IntersectionObserver' in window) {
+    // several slides can be in view (the strip shows four): the counter and the buttons follow the first one
+    const shown = new Set();
     const seen = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { i = slides.indexOf(e.target); update(); } });
+      entries.forEach((e) => { const k = slides.indexOf(e.target); if (e.isIntersecting) shown.add(k); else shown.delete(k); });
+      if (shown.size) { i = Math.min(...shown); j = Math.max(...shown); update(); }
     }, { root: track, threshold: 0.6 });
     slides.forEach((s) => seen.observe(s));
   }
