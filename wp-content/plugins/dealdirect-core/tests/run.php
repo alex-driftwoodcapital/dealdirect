@@ -114,5 +114,8 @@ check( 'robots string -> wp_robots directives', \DealDirect\robots_directives( '
 
 check( 'retired login pages answer 410', \DealDirect\is_retired_path( '/forgot-password/' ) && \DealDirect\is_retired_path( '/admin-login?redirect=x' ) );
 check( 'other paths are not retired', ! \DealDirect\is_retired_path( '/eb-5-investments/' ) && ! \DealDirect\is_retired_path( '/forgot-password/extra/' ) );
+check( 'old Riverside Wharf URL -> QOZ', \DealDirect\redirect_target( '/offering/riverside-wharf/' ) === '/offering/riverside-wharf-qoz/' );
+check( 'old EB-5 offering URL -> EB-5 page', \DealDirect\redirect_target( '/offering/riverside-wharf-eb-5/?utm_source=x' ) === '/eb-5-investments/' );
+check( 'kept URLs are not redirected', \DealDirect\redirect_target( '/offering/riverside-wharf-qoz/' ) === null && \DealDirect\redirect_target( '/eb-5-investments/' ) === null );
 
 exit( $fail );
