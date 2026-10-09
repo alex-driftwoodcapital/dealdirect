@@ -83,6 +83,7 @@ $eb5 = [
 ];
 $v = S::validate( $eb5, $host );
 check( 'eb5 validates (unicode names, bool acknowledgement)', $v['ok'] && $v['fields']['eb5_amount_acknowledgement'] === 'true' && $v['fields']['firstname'] === 'João' );
+check( 'eb5 drops page_language (not on the HubSpot form; the Forms API refuses unknown fields)', ! isset( $v['fields']['page_language'] ) );
 check( 'eb5 inc maps to income string', $v['fields']['accredited_investor'] === 'annual income exceeding $200,000' );
 check( 'eb5 opts in to EB-5 Onboarding + Marketing + One to One', array_column( S::payload( $v )['legalConsentOptions']['consent']['communications'], 'subscriptionTypeId' ) === [ 105452959, 7195048, 3199624 ] );
 check( 'no hutk -> no hutk in context', ! isset( S::payload( $v )['context']['hutk'] ) );

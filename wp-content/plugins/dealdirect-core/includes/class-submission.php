@@ -14,11 +14,13 @@ final class Submission {
 		'offering-request' => '3f7d6df4-c356-4d6c-bc04-f9502dd8864b',
 	];
 
-	// Field name => required. Names are HubSpot internal names; the site's inputs use the same names.
+	// Field name => required. Names are HubSpot internal names; the site's inputs use the same names. Only fields the HubSpot
+	// form defines: the Forms API refuses a submission with any other field (page_language was refused on EB-5, 2026-10-09;
+	// the page URL in the submission's context already says which language page it came from). ops/forms/check.sh compares.
 	const FIELDS = [
 		'registration'     => [ 'accredited_investor' => true, 'firstname' => true, 'lastname' => true, 'email' => true, 'phone' => true ],
 		'eb5'              => [ 'accredited_investor' => true, 'firstname' => true, 'lastname' => true, 'email' => true, 'phone' => true,
-		                        'country' => true, 'preferred_contact_method' => false, 'eb5_amount_acknowledgement' => true, 'page_language' => false ],
+		                        'country' => true, 'preferred_contact_method' => false, 'eb5_amount_acknowledgement' => true ],
 		'offering-request' => [ 'email' => true ],
 	];
 
