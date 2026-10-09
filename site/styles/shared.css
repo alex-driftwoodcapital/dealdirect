@@ -21,6 +21,9 @@
   margin: 0 0.08em;
   /* never below 12px (CLAUDE.md rule 6), however small the text it marks */
   font-size: max(0.85em, var(--text-xs));
+  /* the theme makes every <a> outside p/span/li/headings a block (a:not(p > a, span > a, …) { display: block }), and
+     <sup> isn't on its list: the mark's link broke the line before and after it everywhere */
+  & a { display: inline; }
   /* in headings and figures the mark hangs from the top of the text (an em offset would push a 12px mark into the
      line above when the heading or figure wraps) */
   :is(h1, h2, h3, h4) & { font-size: max(0.45em, var(--text-xs)); font-weight: 600; line-height: 1; vertical-align: text-top; margin: 0 0 0 0.15em; }
