@@ -59,7 +59,7 @@ def offering_items():
             if mm:
                 meta[k] = mm.group(1)
                 media.setdefault(mm.group(1), m.MEDIA[mm.group(1)][0])
-        items.append({'slug': m.META['slug'], 'permalink': {'relative': f"/offering/{m.META['slug']}/"}, 'meta': meta})
+        items.append({'slug': m.META['slug'], 'title': m.META['title'], 'permalink': {'relative': f"/offering/{m.META['slug']}/"}, 'meta': meta})
     return items
 
 
@@ -111,6 +111,7 @@ for slug in list(media):
     src = m_['src'] if isinstance(m_, dict) else m_
     src_of[slug] = os.path.relpath(os.path.join(ROOT, src), B) if not src.startswith('http') else ''
 body = expand_loops(body, getattr(page_mod, 'LOOPS', {}))
+body = body.replace('{this.title}', page_mod.META.get('title', ''))  # template-level dynamic data: the post shown
 markup = etch.resolve(svg.expand(body, fetch_or_standin), sel2id, {k: k for k in media}, None, src_of)
 STATS = {'{options.acf.years_experience}': '30+', '{options.acf.properties}': '78', '{options.acf.aum}': '~$3.5B',
          '{options.acf.employees.numberFormat()}': '6,000', '{options.acf.as_of}': 'September 1, 2026'}

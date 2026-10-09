@@ -52,8 +52,9 @@ card = El('article', 'Offering card', 'deal-card', {
         # Coming soon: the registration dialog (forms phase) submits with this offering's URL as pageUri
         # (handoff/docs/hubspot-setup-steps.md "Home page QOZ Get notified").
         El('button', 'Get notified', 'deal-card__notify', {'type': 'button', 'data-modal-open': 'registration',
-                                                         'data-page-uri': '{item.permalink.relative}'}, [q('Get notified'), ARROW]),
-        El('p', 'Notified', 'deal-card__notified', {'role': 'status', 'hidden': ''}, [q("Thank you. We'll email you")]),
+                                                         'data-page-uri': '{item.permalink.relative}',
+                                                         'data-page-name': '{item.title}'}, [q('Get notified'), ARROW]),
+        El('p', 'Notified', 'deal-card__notified', {'role': 'status', 'tabindex': '-1', 'hidden': ''}, [q("Thank you. We'll email you")]),
     ]),
 ])
 live = section('Live offerings', 'home-live', None, [

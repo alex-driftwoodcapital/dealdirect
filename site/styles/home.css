@@ -201,12 +201,14 @@
   color: var(--white);
   cursor: pointer;
   &:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+  &[hidden] { display: none; }  /* the request dialog hides it once the visitor is signed up */
 }
 .deal-card__notified {
   margin: 2px 0 0;
   font-size: 13px;
   line-height: 1.6;
   color: var(--white);
+  &:focus { outline: none; }  /* takes focus from the dialog when it closes (tabindex -1), not a tab stop */
   &[hidden] { display: none; }
 }
 
