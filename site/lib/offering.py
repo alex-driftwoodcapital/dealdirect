@@ -236,7 +236,7 @@ class Offering:
         ], attrs={'id': 'overview'})
 
     @staticmethod
-    def webinar(video_src, video_title, poster=None, poster_alt=''):
+    def webinar(video_src, video_title, poster=None, poster_alt='', extra=None):
         frame = [Img('Poster', poster, poster_alt)] if poster else []
         return section('Webinar', 'offering-video', None, [
             Img('Background', 'cover-bg', ''),
@@ -246,22 +246,13 @@ class Offering:
                     El('span', 'Icon', 'offering-video__icon', {'aria-hidden': 'true'}),
                 ]),
             ]),
+            extra,  # e.g. a strip of renderings under the video (Offering.strip)
         ], attrs={'id': 'webinar', 'aria-label': 'Riverside Wharf Miami webinar'})
 
-    def carousel(self, slides, eyebrow=None, title=None, request_label=None, label=None, chip=True, sid='renderings'):
-        """Image carousel (#renderings): slides = [(media slug, alt, caption or None)], one per view on phones, the next
-        one peeking from tablets up. A native scroll-snap track (swipe, trackpad, keyboard); CAROUSEL_SCRIPT adds the
-        buttons and the counter. eyebrow/title: the visible heading (else label names it for screen readers);
-        chip: the Rendering tag on each slide (renderings only, not photographs)."""
-        q = self.q
+    def _carousel_parts(self, slides, sid, name, chip, heading=()):
         n = len(slides)
-        name = title or label
-        heading = [El('div', 'Titles', 'rendering-carousel__titles', children=[
-            El('p', 'Eyebrow', 'eyebrow', children=[q(eyebrow)]) if eyebrow else None,
-            El('h2', 'Heading', 'rendering-carousel__title', {'id': f'{sid}-h'}, [q(title)]),
-        ])] if title else []
-        return section(name, 'rendering-carousel', f'{sid}-h' if title else None, [
-            El('div', 'Head', 'rendering-carousel__head', children=heading + [
+        return [
+            El('div', 'Head', 'rendering-carousel__head', children=list(heading) + [
                 El('div', 'Controls', 'rendering-carousel__controls', {'hidden': ''}, [
                     El('button', 'Previous', 'rendering-carousel__arrow', {'type': 'button', 'data-dir': 'prev', 'aria-label': 'Previous image',
                                                                           'aria-controls': f'{sid}-track'}),
@@ -278,8 +269,29 @@ class Offering:
                     ]),
                 ]) for k, (media, alt, caption) in enumerate(slides, 1)
             ]),
-            self.request(request_label) if request_label else None,
-        ], attrs={'id': sid, 'aria-roledescription': 'carousel', **({} if title else {'aria-label': name})}, script=CAROUSEL_SCRIPT)
+        ]
+
+    def carousel(self, slides, eyebrow=None, title=None, request_label=None, label=None, chip=True, sid='renderings'):
+        """Image carousel section: slides = [(media slug, alt, caption or None)], one per view on phones, the next one
+        peeking from tablets up. A native scroll-snap track (swipe, trackpad, keyboard); CAROUSEL_SCRIPT adds the
+        buttons and the counter. eyebrow/title: the visible heading (else label names it for screen readers);
+        chip: the Rendering tag on each slide (renderings only, not photographs)."""
+        q = self.q
+        name = title or label
+        heading = [El('div', 'Titles', 'rendering-carousel__titles', children=[
+            El('p', 'Eyebrow', 'eyebrow', children=[q(eyebrow)]) if eyebrow else None,
+            El('h2', 'Heading', 'rendering-carousel__title', {'id': f'{sid}-h'}, [q(title)]),
+        ])] if title else []
+        return section(name, 'rendering-carousel', f'{sid}-h' if title else None,
+                       self._carousel_parts(slides, sid, name, chip, heading) + [self.request(request_label) if request_label else None],
+                       attrs={'id': sid, 'aria-roledescription': 'carousel', **({} if title else {'aria-label': name})},
+                       script=CAROUSEL_SCRIPT)
+
+    def strip(self, slides, label, chip=True, sid='renderings'):
+        """The same carousel as a strip of smaller slides inside another section (under the webinar video)."""
+        return El('div', label, 'rendering-carousel rendering-carousel--strip',
+                  {'id': sid, 'aria-roledescription': 'carousel', 'aria-label': label},
+                  self._carousel_parts(slides, sid, label, chip), script=CAROUSEL_SCRIPT)
 
     def rendering_band(self, media, alt):
         """One wide rendering between sections, with its Rendering tag."""

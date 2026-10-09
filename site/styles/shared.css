@@ -195,6 +195,7 @@
   line-height: 1.7;
   color: var(--base-dark);
   & p { margin: 0; }
+  & p > .fn-ref:first-child { margin-inline: 0 0.35em; }  /* "1 Information…", not "1Information…" */
   & a { color: var(--secondary); overflow-wrap: anywhere; }  /* design: a { color: gold-500 } */
 }
 .footnotes--dark { color: color-mix(in oklch, var(--white) 76%, transparent); }
@@ -208,27 +209,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  min-block-size: 60px;
-  padding: 16px 22px;
+  gap: 20px;
+  min-block-size: 64px;
+  padding: 18px 24px;
   font-size: var(--text-m);
   font-weight: 500;
+  line-height: 1.4;
   color: var(--primary-ultra-dark);
+  @media (max-width: 767px) { gap: 14px; padding: 16px 18px; }
   cursor: pointer;
   list-style: none;
   &::-webkit-details-marker { display: none; }
 }
 .faq__icon {
+  /* the "+" in a round button, centred; it turns into a cross when the answer is open */
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  background: var(--base-light);
   color: var(--secondary);
-  transition: transform 200ms cubic-bezier(.2,.7,.2,1);
-  [open] > .faq__q & { transform: rotate(45deg); }
+  font-size: var(--text-l);
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 200ms cubic-bezier(.2,.7,.2,1), background-color 200ms;
+  [open] > .faq__q & { transform: rotate(45deg); background: var(--base-semi-light); }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 .faq__a {
-  padding: 0 22px 22px;
-  font-size: var(--text-s);
-  line-height: 1.75;
+  padding: 0 24px 24px;
+  font-size: var(--text-m);
+  line-height: 1.7;
   color: var(--text-dark);
-  & p { margin: 0; }
+  @media (max-width: 767px) { padding: 0 18px 20px; }
+  & p { margin: 0; max-inline-size: 78ch; }
+  & p + p { margin-block-start: var(--space-s); }
   & ul { margin: 10px 0 0; padding-inline-start: 18px; }
 }
 
