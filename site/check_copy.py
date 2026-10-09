@@ -27,7 +27,13 @@ field_vals = [v for v in getattr(mod, 'META', {}).get('fields', {}).values()
               if isinstance(v, str) and not v.startswith('{{') and not in_source(v)]
 extra = [t for t in mine if t and t not in design and t not in mod.NON_DESIGN and not t.startswith('{options.') and t not in expr]
 extra += [f'expression literal {l!r}' for l in literals] + [f'card field value {v!r}' for v in field_vals]
-missing = [t for t in (mod.q.all if mod.q else []) if t not in set(mine) and t not in getattr(mod, 'DYNAMIC_COPY', set())]
+# DROPPED_COPY: design strings a page leaves out on purpose (each with who decided, in the page module), e.g. a teaser
+# page without the design's placeholder metrics. A listed string that is on the page after all is reported, so the list
+# never hides copy that came back.
+dropped = set(getattr(mod, 'DROPPED_COPY', set()))
+missing = [t for t in (mod.q.all if mod.q else []) if t not in set(mine) and t not in getattr(mod, 'DYNAMIC_COPY', set())
+           and t not in dropped]
+missing += [f'(listed as dropped, but on the page) {t}' for t in sorted(dropped & set(mine))]
 banned = [t for t in mine if 'shovel' in t.lower()]  # CLAUDE.md rule 2
 for label, items in (('not design copy', extra), ('design copy missing from page', missing), ('banned wording', banned)):
     for t in items:

@@ -71,12 +71,14 @@ def sup(n):
 class Offering:
     """Builders bound to one page's copy lookup."""
 
-    def __init__(self, q):
-        self.q = q
+    def __init__(self, q, cta=None):
+        """cta: one label for every request button on the page, in place of the design's (e.g. a teaser page's
+        "Reserve Your Spot"); the page lists it as non-design copy with who asked for it."""
+        self.q, self.cta_label = q, cta
 
     # ---------- small parts ----------
     def request(self, label, cls='button button--primary', name='Request'):
-        return El('a', name, cls, {'href': '#request', 'data-modal-open': 'offering-request'}, [self.q(label)])
+        return El('a', name, cls, {'href': '#request', 'data-modal-open': 'offering-request'}, [self.cta_label or self.q(label)])
 
     def chip(self, cls=''):
         return El('span', 'Rendering chip', ('chip chip--glass rendering-chip ' + cls).strip(), children=[self.q('Rendering')])
