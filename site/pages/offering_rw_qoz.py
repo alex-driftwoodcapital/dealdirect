@@ -145,7 +145,8 @@ CAROUSEL = [  # (suffix, alt, design gallery category)
 renderings = o.strip([(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL], 'Riverside Wharf renderings')
 aerial = o.rendering_band(W + '_View-from-exterior', 'Riverside Wharf view from exterior')
 market_scene = El('figure', 'Image', 'media-card market-update__media', children=[
-    Img('Photo', W + P + '33', 'Riverside Wharf food and beverage venue'), o.chip()])
+    # eager: as a lazy image staging's Chrome never requested it (QA, 2026-10-09: "HTTP not requested")
+    Img('Photo', W + P + '33', 'Riverside Wharf food and beverage venue', loading='eager'), o.chip()])
 
 
 # All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section"). Not the whole
