@@ -215,6 +215,29 @@ mech = oz_src.section(MECH)  # two paragraphs, the "basic sequence" line, the fi
 gains_src = oz_src.section(GAINS)
 changed_src = oz_src.section(CHANGED)  # two paragraphs, then the table's scroll wrapper
 table = next(c for c in changed_src[2][2] if not isinstance(c, str) and c[0] == 'table')
+
+
+def els(node):
+    return [k for k in node[2] if not isinstance(k, str)]
+
+
+# Quick comparison (Alex, 2026-10-09: "a quick easy comparison between oz 1.0 and 2.0, a quick summary besides the
+# content"): the article's own QOZ 1.0 / QOZ 2.0 table, always visible under the executive summary. Each cell carries its
+# column header as data-label, so on small screens a row stacks into a labelled card.
+caption, thead, tbody = (next(c for c in els(table) if c[0] == t) for t in ('caption', 'thead', 'tbody'))
+cols = [oz_src.copy(_t.strip()) for _t in (''.join(x for x in th[2] if isinstance(x, str)) for th in els(els(thead)[0]))]
+quick = El('div', 'Quick comparison', 'qoz-quick', children=[
+    El('table', 'Comparison', 'qoz-quick__table', children=[
+        oz_src.el(caption, 'qoz-quick__caption', 'Caption'),
+        oz_src.el(thead, 'qoz-quick__head', 'Head'),
+        El('tbody', 'Rows', children=[
+            El('tr', 'Row', 'qoz-quick__row', children=[
+                oz_src.el(cell, 'qoz-quick__cell' + (' qoz-quick__cell--new' if i == 2 else ''), 'Cell',
+                          {'scope': 'row'} if cell[0] == 'th' else {'data-label': cols[i]})
+                for i, cell in enumerate(els(tr))])
+            for tr in els(tbody)]),
+    ]),
+])
 hosp = oz_src.section(HOSP)
 # Its last paragraph ends "To learn more, visit our offering page here." (a link to this offering): left out here.
 LAST = (hosp[3][0], hosp[3][1], [c for c in hosp[3][2] if isinstance(c, str) or c[0] != 'strong'])
@@ -236,10 +259,9 @@ parts = El('div', 'Parts', 'qoz-parts', children=[
         El('div', 'Notes', 'qoz-gains__notes', children=[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)]),
     ]),
     part('qoz-what-changed', [oz_src.copy(CHANGED)], [
+        # the table itself is the quick comparison above the parts
         El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
                                                            oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
-        El('div', 'Table scroll', 'qoz-compare__scroll', {'tabindex': '0', 'role': 'region', 'aria-label': oz_src.copy('QOZ 1.0 and QOZ 2.0 comparison')},
-           [oz_src.el(table, 'qoz-table', 'Comparison')]),
     ]),
     part('qoz-hospitality', [oz_src.copy(HOSP)], [
         El('div', 'Row', 'qoz-hospitality__row', children=[
@@ -255,6 +277,7 @@ parts = El('div', 'Parts', 'qoz-parts', children=[
 qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
     head,
     lead,
+    quick,
     parts,
     o.request('Request Investor Details'),
     # the article's disclaimer, always visible (CLAUDE.md rule 6)
