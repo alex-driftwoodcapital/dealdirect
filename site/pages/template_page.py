@@ -12,11 +12,11 @@ class PostContent(Node):
         return '<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->'
 
 
-def frame(main_attrs=None):
+def frame(main_attrs=None, footer='site-footer'):
     return [
         Component('Site header', 'site-header'),
         El('main', 'Main', attrs=main_attrs, children=[PostContent()]),
-        Component('Site footer', 'site-footer'),
+        Component('Site footer', footer),
         Component('Request dialog', 'request-dialog'),
     ]
 

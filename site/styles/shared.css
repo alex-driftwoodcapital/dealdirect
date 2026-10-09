@@ -140,6 +140,8 @@
   font-size: 13px;
   line-height: 1.4;
   color: var(--base-dark);
+  overflow-wrap: anywhere;  /* ES/PT "propios/administrados": no break point, wider than the 2-up card at 375px */
+  hyphens: auto;  /* proper hyphens where <html lang> is set (the ES/PT pages) */
 }
 .stat-card__value--accent { color: var(--secondary); }
 .stat-card__qualifier { margin-inline-start: 0.25em; }

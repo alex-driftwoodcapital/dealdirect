@@ -97,6 +97,17 @@ def countries(design_path):
     return [html.unescape(o) for o in re.findall(r'<option>([^<]*)</option>', sel)]
 
 
+def design_labels(design_path):
+    """Strings the dialog takes from outside its markup text: the Next/Submit labels (design script nextLabel), the
+    close button's aria-label and the four input placeholders, in order."""
+    src = open(design_path, encoding='utf-8').read()
+    dlg = src[src.index('role="dialog"'):]
+    submit, nxt = re.search(r"nextLabel: step === 2 \? '([^']*)' : '([^']*)'", src).groups()
+    close = re.search(r'aria-label="([^"]*)" onClick="\{\{ closeForm \}\}"', dlg).group(1)
+    ph = re.findall(r'placeholder="([^"{]*)"', dlg)[:4]
+    return {'next': nxt, 'submit': submit, 'close': close, 'placeholders': ph}
+
+
 def placeholders(design_path, values):
     """Placeholders are attributes, which the copy gate doesn't read: each must be in the design verbatim."""
     src = open(design_path, encoding='utf-8').read()
@@ -105,10 +116,11 @@ def placeholders(design_path, values):
         raise KeyError(f'placeholders not in the design: {missing}')
 
 
-def build(q, t, en_countries, local_countries=None):
+def build(q, t, en_countries, local_countries=None, consent_tail=None):
     """q: Copy over one EB-5 design's dialog. t: that design's strings as q() prefixes, plus 'next'/'submit' (design script
     data) and 'close' (aria label); see site/pages/eb5_dialog.py. en_countries: HubSpot values; local_countries: the same
-    list as the language's design shows it (defaults to EN)."""
+    list as the language's design shows it (defaults to EN). consent_tail: the language's own text after the last link
+    (ES/PT: "(available in English)"), with no EN counterpart."""
     shown = local_countries or en_countries
     assert len(shown) == len(en_countries), 'country lists differ in length'
 
@@ -130,6 +142,8 @@ def build(q, t, en_countries, local_countries=None):
         else:
             consent.append((' ' if consent else '') + q(part) + ' ')
     consent[-1] = consent[-1].rstrip() if isinstance(consent[-1], str) else consent[-1]
+    if consent_tail:
+        consent.append(' ' + consent_tail)
 
     step0 = El('fieldset', 'Accreditation', 'dd-dialog__stepbox', {'data-step': '0'}, [
         heading('h_accred', 'eb-step0-h'),

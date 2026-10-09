@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/includes/class-submission.php';
 require_once __DIR__ . '/includes/content-model.php';
 require_once __DIR__ . '/includes/rest.php';
+require_once __DIR__ . '/includes/i18n.php';
 
 // Register the CPT before flushing so /offering/{slug}/ resolves right after activation.
 register_activation_hook( __FILE__, function () {
