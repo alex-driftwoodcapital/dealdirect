@@ -1,5 +1,5 @@
 """Expand <!-- dd:svg {...} --> markers into native Etch svg/g/path elements (fixtures/parts/footer.html form).
-The SVG is fetched once and cached in build/assets/; it is sanitized: only drawing elements and presentation
+The SVG (a URL, or a file in this repo) is fetched once and cached in build/assets/; it is sanitized: only drawing elements and presentation
 attributes are kept, never scripts, styles, event handlers, external references or foreignObject."""
 import json, os, re, urllib.request
 import xml.etree.ElementTree as ET
@@ -16,6 +16,8 @@ CACHE = os.path.join(os.path.dirname(__file__), '..', '..', 'build', 'assets')
 
 
 def fetch(url: str) -> str:
+    if not url.startswith('http'):  # a file in this repo (handoff assets), relative to the repo root
+        return open(os.path.join(os.path.dirname(__file__), '..', '..', url), encoding='utf-8').read()
     os.makedirs(CACHE, exist_ok=True)
     path = os.path.join(CACHE, re.sub(r'[^A-Za-z0-9._-]', '_', url.split('/')[-1]))
     if not os.path.exists(path):
@@ -52,7 +54,7 @@ def _class_rules(root) -> dict:
 
 def _convert(node, name, rules=None):
     tag = _local(node.tag)
-    if tag == 'style':
+    if tag in ('style', 'metadata'):  # metadata (editor/licence info) is never drawn
         return None
     if tag not in ALLOWED:
         raise ValueError(f'unsupported SVG element <{tag}>')

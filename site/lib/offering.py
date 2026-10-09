@@ -248,36 +248,38 @@ class Offering:
             ]),
         ], attrs={'id': 'webinar', 'aria-label': 'Riverside Wharf Miami webinar'})
 
-    def carousel(self, eyebrow, title, slides, request_label):
-        """Renderings carousel (#renderings): slides = [(media slug, alt, caption)], one per view on phones, the next one
-        peeking from tablets up. A native scroll-snap track (swipe, trackpad, keyboard); CAROUSEL_SCRIPT adds the
-        buttons and the counter."""
+    def carousel(self, slides, eyebrow=None, title=None, request_label=None, label=None, chip=True, sid='renderings'):
+        """Image carousel (#renderings): slides = [(media slug, alt, caption or None)], one per view on phones, the next
+        one peeking from tablets up. A native scroll-snap track (swipe, trackpad, keyboard); CAROUSEL_SCRIPT adds the
+        buttons and the counter. eyebrow/title: the visible heading (else label names it for screen readers);
+        chip: the Rendering tag on each slide (renderings only, not photographs)."""
         q = self.q
         n = len(slides)
-        return section('Renderings', 'rendering-carousel', 'renderings-h', [
-            El('div', 'Head', 'rendering-carousel__head', children=[
-                El('div', 'Titles', 'rendering-carousel__titles', children=[
-                    El('p', 'Eyebrow', 'eyebrow', children=[q(eyebrow)]),
-                    El('h2', 'Heading', 'rendering-carousel__title', {'id': 'renderings-h'}, [q(title)]),
-                ]),
+        name = title or label
+        heading = [El('div', 'Titles', 'rendering-carousel__titles', children=[
+            El('p', 'Eyebrow', 'eyebrow', children=[q(eyebrow)]) if eyebrow else None,
+            El('h2', 'Heading', 'rendering-carousel__title', {'id': f'{sid}-h'}, [q(title)]),
+        ])] if title else []
+        return section(name, 'rendering-carousel', f'{sid}-h' if title else None, [
+            El('div', 'Head', 'rendering-carousel__head', children=heading + [
                 El('div', 'Controls', 'rendering-carousel__controls', {'hidden': ''}, [
-                    El('button', 'Previous', 'rendering-carousel__arrow', {'type': 'button', 'data-dir': 'prev', 'aria-label': 'Previous rendering',
-                                                                          'aria-controls': 'renderings-track'}),
+                    El('button', 'Previous', 'rendering-carousel__arrow', {'type': 'button', 'data-dir': 'prev', 'aria-label': 'Previous image',
+                                                                          'aria-controls': f'{sid}-track'}),
                     El('p', 'Counter', 'rendering-carousel__count', {'aria-live': 'polite'}),
                     El('button', 'Next', 'rendering-carousel__arrow rendering-carousel__arrow--next', {'type': 'button', 'data-dir': 'next',
-                                                                                                  'aria-label': 'Next rendering', 'aria-controls': 'renderings-track'}),
+                                                                                                  'aria-label': 'Next image', 'aria-controls': f'{sid}-track'}),
                 ]),
             ]),
-            El('ul', 'Track', 'rendering-carousel__track', {'id': 'renderings-track', 'tabindex': '0', 'aria-label': title}, children=[
+            El('ul', 'Track', 'rendering-carousel__track', {'id': f'{sid}-track', 'tabindex': '0', 'aria-label': name}, children=[
                 El('li', 'Slide', 'rendering-carousel__slide', {'aria-roledescription': 'slide', 'aria-label': f'{k} of {n}'}, [
-                    El('figure', 'Rendering', 'rendering-carousel__figure', children=[
-                        Img('Photo', media, alt), self.chip(),
-                        El('figcaption', 'Caption', 'chip chip--glass rendering-carousel__caption', children=[caption]),
+                    El('figure', 'Image', 'rendering-carousel__figure', children=[
+                        Img('Photo', media, alt), self.chip() if chip else None,
+                        El('figcaption', 'Caption', 'chip chip--glass rendering-carousel__caption', children=[caption]) if caption else None,
                     ]),
                 ]) for k, (media, alt, caption) in enumerate(slides, 1)
             ]),
-            self.request(request_label),
-        ], attrs={'id': 'renderings', 'aria-roledescription': 'carousel'}, script=CAROUSEL_SCRIPT)
+            self.request(request_label) if request_label else None,
+        ], attrs={'id': sid, 'aria-roledescription': 'carousel', **({} if title else {'aria-label': name})}, script=CAROUSEL_SCRIPT)
 
     def rendering_band(self, media, alt):
         """One wide rendering between sections, with its Rendering tag."""
