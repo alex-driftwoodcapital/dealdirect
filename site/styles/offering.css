@@ -814,6 +814,9 @@
   & strong { display: block; margin-block-end: var(--space-xs); font-size: var(--text-m); font-weight: 600; line-height: 1.35; color: var(--primary-ultra-dark); }
   & .fn-ref a { color: var(--secondary); }
 }
+.market-update__text {
+  margin: 0;
+}
 .market-update__closing {
   max-inline-size: 760px;
   margin: var(--space-l) 0 0;

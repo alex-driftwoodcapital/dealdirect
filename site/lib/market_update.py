@@ -37,8 +37,12 @@ def build(disclaimer, media=None):
     rows = []
     for n, li in enumerate([c for c in items[2] if not isinstance(c, str)], 1):
         el = src.el(li, 'market-update__item', 'Investment')
-        el.children.append(El('sup', 'Footnote ref', 'fn-ref', {'id': f'mu-ref-{n}'},
-                              [El('a', 'Note link', None, {'href': f'#mu-note-{n}', 'aria-label': f'See footnote {n}'}, [str(n)])]))
+        # the lead (strong) above, then the sentence and its footnote mark in one paragraph, so the mark always
+        # follows the sentence (on staging, loose text and a <sup> directly in the <li> laid out as separate blocks)
+        lead, rest = el.children[0], el.children[1:]
+        mark = El('sup', 'Footnote ref', 'fn-ref', {'id': f'mu-ref-{n}'},
+                  [El('a', 'Note link', None, {'href': f'#mu-note-{n}', 'aria-label': f'See footnote {n}'}, [str(n)])])
+        el.children = [lead, El('p', 'Text', 'market-update__text', children=rest + [mark])]
         rows.append(el)
     note_els = []
     for n, li in enumerate(notes, 1):
