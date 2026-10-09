@@ -71,6 +71,7 @@
 
 .dd-dialog__title {
   margin: 0;
+  padding-inline-end: 44px;  /* clear of the close button when a view starts with its title (exit dialog) */
   font-size: var(--h3);
   font-weight: 300;
   letter-spacing: -0.03em;

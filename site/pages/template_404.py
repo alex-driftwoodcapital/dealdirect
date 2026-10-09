@@ -5,7 +5,8 @@ placeholders listed in NON_DESIGN until Alex approves them (CLAUDE.md rule 1).""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
 sys.path.insert(0, os.path.dirname(__file__))
-from etch import El, Component, section
+from etch import El, section
+from template_page import frame
 
 T = {
     'eyebrow': '404',
@@ -26,12 +27,7 @@ not_found = section('Not found', 'not-found', 'not-found-h', [
     ]),
 ])
 
-PAGE = [
-    Component('Site header', 'site-header'),
-    El('main', 'Main', children=[not_found]),
-    Component('Site footer', 'site-footer'),
-    Component('Request dialog', 'request-dialog'),
-]
+PAGE = frame(main=[not_found])
 META = {'kind': 'template', 'title': '404', 'slug': '404', 'order': 25}
 MEDIA = {}
 q = None

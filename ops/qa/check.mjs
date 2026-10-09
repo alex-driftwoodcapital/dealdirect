@@ -65,6 +65,7 @@ for (const [name, path, lang, want = 200] of PAGES) {
         robots: meta('robots'),
         canonical: document.querySelector('link[rel=canonical]')?.href || '',
         hreflang: document.querySelectorAll('link[rel=alternate][hreflang]').length,
+        exitDialog: !!document.querySelector('dialog[data-dialog="exit"]'),
         jakarta: fonts.includes('Plus Jakarta Sans'),
         bodyFont: getComputedStyle(document.body).fontFamily.split(',')[0].replace(/"/g, '').trim(),
         primary: getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
@@ -80,6 +81,8 @@ for (const [name, path, lang, want = 200] of PAGES) {
     if (failed.length) problems.push(`failed: ${failed.slice(0, 3).join(', ')}`);
     if (!info.jakarta || info.bodyFont !== 'Plus Jakarta Sans') problems.push(`font: ${info.bodyFont}${info.jakarta ? '' : ' (Jakarta not loaded)'}`);
     if (w === 1440 && info.lang !== lang) problems.push(`lang ${info.lang}, want ${lang}`);
+    // the "leaving our website" interstitial is on every English page (site/pages/exit_dialog.py), as on live
+    if (w === 1440 && lang.startsWith('en') && !info.exitDialog) problems.push('no exit-link interstitial');
     problems.forEach((p) => fails.push(`${path} @${w}: ${p}`));
     rows.push({ name, path, w, status, ...info, errors, failed, problems });
     await ctx.close();
