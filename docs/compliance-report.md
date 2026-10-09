@@ -4,7 +4,7 @@ Generated from `handoff/design/evidence-register/claims.js` by `ops/compliance/r
 Every figure on the rebuilt pages was lifted verbatim from the live site, which is not a source document, so a
 claim is only closed once compliance traces it to an offering document or accepts it in writing.
 
-**56 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 29 `check`.
+**63 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 36 `check`.
 Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 
 | Status | Meaning |
@@ -82,6 +82,18 @@ Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 | `check` | Market update | Citadel headquarters site | $363 million · 2022 · global headquarters | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. The 2022 report attributed the buyer to Citadel through people familiar with the deal; the HQ plans were announced later (2024). Confirm the attribution and the "global headquarters" wording. |
 | `check` | Market update | Mandarin Oriental residences presales | $1.7 billion before groundbreaking · two penthouses ~$50 million each | Alex's market update text (2026-10-09), both Riverside Wharf pages; citation compiled for compliance. Bloomberg (Oct 2026) reports the $1.7B; the penthouses were reported at about $49.9M each. Confirm the figures and that groundbreaking had not yet occurred at the date cited. |
 | `check` | Market update | Forward-looking closing statement | We believe this continued investment strengthens Miami’s appeal … supports the long-term opportunity for Riverside Wharf | Opinion framed as "We believe"; followed by the page's market disclaimer. Compliance to confirm. |
+
+## DST
+
+| Status | Section | Claim | Shown on the page | Note / what closes it |
+|---|---|---|---|---|
+| `check` | Weston | Public version of the brochure | Institutional line and Cap Rate row (8.16%, footnote 4) left out | Alex, 2026-10-09: the web page follows the public version, which drops the line "For institutional due diligence use only…" and the Cap Rate (2025 NOI) row. Confirm the public version is approved for a public web page. |
+| `check` | Weston | Room count | 176 keys / 176 Rooms | Handoff open question 5: the brochure says 176; the one-sheet copy supplied said 174. Built with 176 (brochure). Confirm. |
+| `check` | Weston | Sponsor figures vs platform stats | ~$3.5B AUM · 85 assets owned/managed · ~16,400 keys · 85 hotels managed · ~6,000 employees | Shown verbatim from the brochure (footnote 1: internal data as of Feb. 12, 2026, including third-party managed properties). The site's platform-stats page shows 78 hotels and 15,162 keys (CLAUDE.md rule 8: platform figures come from that page). Compliance decides which set the DST page shows. |
+| `check` | Weston | Offering terms and targets | ~$23.98M max offering · ~42.54% leverage · 6.8% Year-1 / 7.0% 5-yr avg. target distribution · 5% sponsor equity | Verbatim from the brochure, with its footnotes 1-3 and the hero disclaimer (figures as of May 21, 2026). Confirm against the PPM. |
+| `check` | Weston | Contact cards | Wholesaler: Andy Marshall, 404.247.3455, dstweston@driftwoodcapital.com · National Accounts: Joanna Venetch, 773.580.4308, jo@hana-solutions.com | Alex, 2026-10-09: contacts only, no site request form on this page. Names, phones and emails published on the web page as in the brochure. Confirm both contacts agree to appear on a public page. |
+| `check` | Weston | No accredited-investor gate; noindex | Open page (as the other offerings); robots noindex, follow | Alex, 2026-10-09: no gate. Handoff open questions 1 and 3: confirm a 506(c) offering page needs no acknowledgement gate, and when it may be indexed. |
+| `check` | Weston | Copy not in the brochure | "Contact the offering team", "View offering summary", "2000 N Commerce Pkwy, Weston, FL 33326", "Open in Google Maps" | From the landing-page handoff (the brochure is print: no buttons; the address only on its map). Confirm the wording and the address. |
 
 ## EB-5
 

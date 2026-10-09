@@ -152,7 +152,7 @@ CAROUSEL = [  # (suffix, alt, design gallery category)
     (P + '10', 'Entertainment', 'Entertainment'), (P + '40', 'Entertainment', 'Entertainment'),
     ('_Ballroom', 'Ballroom', 'Conference'),
 ]
-renderings = o.carousel('QOZ Common Equity', 'Renderings', [(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL],
+renderings = o.carousel([(W + s, 'Riverside Wharf ' + alt, cat) for s, alt, cat in CAROUSEL], 'QOZ Common Equity', 'Renderings',
                         'Request Investor Details')
 aerial = o.rendering_band(W + '_View-from-exterior', 'Riverside Wharf view from exterior')
 market_scene = El('figure', 'Image', 'media-card market-update__media', children=[
