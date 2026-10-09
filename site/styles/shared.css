@@ -3,6 +3,14 @@
    here, so every page deploys the same css for it (a page-local copy would overwrite the others on staging).
    Values from handoff/README.md (design tokens) and the EB-5 / offering design files. */
 
+/* Layout rails (site/lib/etch.py section()): the design's rails are the content width with the gutter inside
+   (max-width 1334px; padding 0 32px), the same as the header and footer rails, so text lines up with the logo. */
+.dd-section { padding-inline: 0; }
+.dd-rail {
+  box-sizing: border-box;
+  padding-inline: var(--gutter);
+}
+
 .eyebrow {
   margin: 0;
   font-size: var(--text-xs);
@@ -292,7 +300,6 @@
 
 .cta-band {
   background: var(--base);
-  padding-inline: var(--gutter);
   padding-block: 0 var(--section-space-s);
 }
 .cta-band__card {

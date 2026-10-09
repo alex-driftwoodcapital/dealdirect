@@ -6,7 +6,7 @@
 .eb-hero {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;  /* Etch's section style is a column flexbox: this puts the copy at the bottom */
   min-block-size: min(86vh, 840px);
   padding-block: 0;  /* the copy block carries the hero spacing */
   overflow: hidden;
@@ -104,7 +104,6 @@
 }
 
 .eb-reqs {
-  padding-inline: var(--gutter);
   background: var(--base);
 }
 .eb-reqs__inner { padding-block: var(--section-space-m); }  /* a div band: ACSS's default section padding doesn't reach it */

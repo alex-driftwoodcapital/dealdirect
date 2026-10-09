@@ -9,7 +9,7 @@
 .offering-hero {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;  /* Etch's section style is a column flexbox: this puts the copy at the bottom */
   min-block-size: min(78vh, 760px);
   padding-block: 0;  /* the copy block carries the hero spacing */
   overflow: hidden;
