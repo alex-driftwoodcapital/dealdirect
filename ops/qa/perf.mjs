@@ -11,7 +11,7 @@ const BASE = (process.env.QA_BASE_URL || '').replace(/\/$/, '');
 const auth = { username: process.env.QA_HTTP_USER || '', password: process.env.QA_HTTP_PASSWORD || '' };
 const OUT = 'qa-out';
 const PAGES = [['home', '/'], ['eb5', '/eb-5-investments/'], ['eb5-es', '/inversiones-eb-5/'], ['preferred-equity', '/offering/riverside-wharf-preferred-equity/'],
-  ['qoz', '/offering/riverside-wharf-qoz/']];
+  ['qoz', '/offering/riverside-wharf-qoz/'], ['dst', '/offering/driftwood-hotel-income-i-dst/']];
 const kb = (n) => `${Math.round(n / 1024)} KB`;
 
 fs.mkdirSync(OUT, { recursive: true });
