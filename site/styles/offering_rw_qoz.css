@@ -111,8 +111,9 @@
     & .rendering-chip { inset-block-end: 8px; inset-inline-start: 8px; padding: 4px 8px; }
   }
   @media (min-width: 768px) {
-    &:first-child { grid-column: span 2; grid-row: span 2; }
-    &:nth-child(4), &:nth-child(n+7) { grid-column: span 2; }  /* 9 tiles fill 4 rows of 4 */
+    /* 19 tiles fill 7 rows of 4: two large (1st, 10th), three wide (4th, 15th, 19th) */
+    &:first-child, &:nth-child(10) { grid-column: span 2; grid-row: span 2; }
+    &:nth-child(4), &:nth-child(15), &:nth-child(19) { grid-column: span 2; }
   }
   @media (prefers-reduced-motion: reduce) { & img { transition: none; } &:hover img { transform: none; } }
 }

@@ -137,10 +137,16 @@ facts = section('Key figures', 'qoz-facts', None, [
 ], attrs={'id': 'metrics', 'aria-label': 'Key figures'})
 
 # Renderings mosaic (#renderings): the design's renderings; the first is the large tile.
+# Renderings mosaic (#renderings): 19 of the design's Riverside Wharf renderings (Alex, 2026-10-09: "add more renderings
+# to the gallery"), categories mixed; the large tiles are the 1st and 10th. The two left out show in the QOZ parts.
+P = '-2023-05-25_ICRAVE_THE-WHARF-FB_100-DD-PRESENTATION-'
 MOSAIC = [('_View-from-River', 'View from River'), ('_Pooldeck', 'Pool deck'), ('-Night-club-Main-Floor', 'Nightclub main floor'),
           ('-RIVERSIDE-WHARF_DAYCLUB_View02b-2023-01-20', 'Day club'), ('_Exterior-view-from-street', 'Exterior view from street'),
-          ('-Coastal-dining', 'Coastal dining'), ('-Night-club-Sunset-Lounge', 'Nightclub sunset lounge'), ('_Ballroom', 'Ballroom'),
-          ('-AFT-Bar', 'Bar')]
+          ('-Coastal-dining', 'Coastal dining'), (P + '22', 'Hotel'), ('-AFT-show-kitchen', 'Show kitchen'),
+          ('-Night-club-Sunset-Lounge', 'Nightclub sunset lounge'), ('_View-from-exterior', 'View from exterior'),
+          ('-Coastal-Bar', 'Coastal bar'), (P + '15', 'Entertainment'), ('_Dream-Hotel-Wine-Bar', 'Dream Hotel wine bar'),
+          ('-Night-club-Lobby', 'Nightclub lobby'), ('_Ballroom', 'Ballroom'), (P + '10', 'Entertainment'), ('-AFT-Bar', 'Bar'),
+          (P + '40', 'Entertainment'), (P + '33', 'Entertainment')]
 renderings = section('Renderings', 'qoz-gallery', 'qoz-gallery-h', [
     El('div', 'Head', 'qoz-gallery__head', children=[
         El('p', 'Eyebrow', 'eyebrow', children=[q('QOZ Common Equity')]),
