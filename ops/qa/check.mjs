@@ -112,11 +112,22 @@ for (const [name, path, lang, want = 200] of PAGES) {
       window.scrollTo(0, 0);
     });
     await page.waitForLoadState('networkidle').catch(() => {});
+    // images that should show but don't (never loaded, or laid out at zero size). Large lazy images can still be on
+    // their way after the scroll-through: each one left is scrolled into view and given up to 8 s to load first.
+    await page.evaluate(async () => {
+      const left = [...document.querySelectorAll('main img')].filter((i) => { const r = i.getBoundingClientRect();
+        return !i.complete && !i.closest('details:not([open]), [hidden], dialog:not([open])') && r.left < window.innerWidth && r.right > 0; });  // not carousel slides off to the side
+      for (const i of left) {
+        i.scrollIntoView({ block: 'center' });
+        await Promise.race([new Promise((r) => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }),
+                            new Promise((r) => setTimeout(r, 8000))]);
+      }
+      window.scrollTo(0, 0);
+    });
     await page.screenshot({ path: `${OUT}/shots/${name}-${w}.jpg`, fullPage: true, type: 'jpeg', quality: 70 });
-    // images that should show but don't (never loaded, or laid out at zero size), after the scroll-through
     const blankImgs = await page.evaluate(() => [...document.querySelectorAll('main img')].filter((i) => {
       const cs = getComputedStyle(i), r = i.getBoundingClientRect();
-      if (cs.display === 'none' || cs.visibility === 'hidden' || i.closest('[hidden], dialog:not([open])')) return false;
+      if (cs.display === 'none' || cs.visibility === 'hidden' || i.closest('[hidden], dialog:not([open]), details:not([open])')) return false;  // closed parts load on opening
       if (r.left >= window.innerWidth || r.right <= 0) return false;  // further along a carousel: lazy, loads on swipe
       return !i.complete || i.naturalWidth === 0 || r.width < 2 || r.height < 2;
     }).map((i) => `${i.alt || i.currentSrc.split('/').pop() || i.getAttribute('src') || '?'} (${Math.round(i.getBoundingClientRect().width)}x${Math.round(i.getBoundingClientRect().height)}, natural ${i.naturalWidth})`));
