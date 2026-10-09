@@ -36,6 +36,17 @@ for lib in getattr(mod, 'STYLESHEETS', ['shared']):
 if classes and not rules:
     sys.exit(f'{a.page}: classes on the page but no {os.path.relpath(css)}')
 hooks = [c for c in classes if '.' + c not in rules]
+# A hook still gets a style record, so a class styled in a sheet this page doesn't load would overwrite that sheet's
+# record with empty css on staging (every page deploys every record for its classes): refuse to build.
+elsewhere = {}
+for f in sorted(os.listdir(os.path.join(HERE, 'styles'))):
+    if f.endswith('.css'):
+        for sel in styles.parse(os.path.join(HERE, 'styles', f)):
+            if sel[1:] in hooks:
+                elsewhere.setdefault(f, []).append(sel)
+if elsewhere:
+    sys.exit(f'{a.page}: classes styled in sheets this page does not load (add them to STYLESHEETS): '
+             + '; '.join(f'site/styles/{f}: {" ".join(v[:5])}{" ..." if len(v) > 5 else ""}' for f, v in elsewhere.items()))
 if hooks:
     print(f'{a.page}: {len(hooks)} class hook(s) without css (containers, ACSS utilities, or a typo?): {" ".join(hooks)}')
 open(os.path.join(out, 'content.tpl.html'), 'w').write(etch.page(mod.PAGE))
