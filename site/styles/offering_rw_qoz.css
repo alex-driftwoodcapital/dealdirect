@@ -131,6 +131,13 @@
   color: var(--white);
   text-wrap: balance;
 }
+.qoz-intro__byline {
+  margin: 0;
+  font-size: var(--text-s);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch, var(--white) 72%, transparent);
+}
 .qoz-intro__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));

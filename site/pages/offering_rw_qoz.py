@@ -2,7 +2,8 @@
 rendered by the single-offering template. A teaser for now (Alex, 2026-10-09: "tease the project and allow people to
 reserve their spot using the form ... the info we already have + lots of nice renderings + qoz information"):
   - the design's sections (handoff/design/Riverside Wharf QOZ.dc.html, copy via q()), minus its placeholder target
-    metrics and placeholder highlights (DROPPED_COPY); key figures from the design's program instead;
+    metrics and placeholder highlights, and (for now) its program and investment rationale sections (DROPPED_COPY);
+    key figures from the design's program instead;
   - a renderings mosaic (the design's own Riverside Wharf renderings);
   - "Opportunity Zones Program Explained" from driftwoodcapital.com (site/sources/, ops/sources.txt), lifted block by
     block through site/lib/article.py with its endnotes and disclaimer;
@@ -11,9 +12,9 @@ reserve their spot using the form ... the info we already have + lots of nice re
 Sections: site/lib/offering.py; this page's own: site/styles/offering_rw_qoz.css."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
-from etch import El, Img, section
+from etch import El, Img, section, all_texts
 from article import Article
-from design import Copy
+from design import Copy, norm
 from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP, sup
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'Riverside Wharf QOZ.dc.html')
@@ -49,8 +50,7 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
 # Sub-nav: the design's labels (its subnav data), in this page's section order, plus Renderings and QOZ 2.0 for the
 # teaser's own sections (#metrics now holds the key figures).
 SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('OZ Benefits', 'structure'),
-          ('QOZ 2.0', 'qoz'), ('Program', 'assets'), ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'),
-          ('Rationale', 'rationale'), ('Legal', 'legal')]
+          ('QOZ 2.0', 'qoz'), ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Legal', 'legal')]
 
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
 oz = o.oz('Riverside-Wharf_Dream-Hotel-Prefunction', 'Riverside Wharf Dream Hotel Pre-function',
@@ -153,6 +153,7 @@ intro = section('QOZ 2.0', 'qoz-intro', 'qoz-intro-h', [
     El('div', 'Head', 'qoz-intro__head', children=[
         El('p', 'Eyebrow', 'eyebrow eyebrow--dark', children=[oz_src.copy(TITLE)]),
         El('h2', 'Heading', 'qoz-intro__title', {'id': 'qoz-intro-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
+        El('p', 'Byline', 'qoz-intro__byline', children=[oz_src.copy('Driftwood Capital')]),
     ]),
     El('div', 'Columns', 'qoz-intro__grid', children=[
         El('div', 'Column', 'qoz-intro__col', children=[h3(t, 'qoz-intro__subtitle'), blocks(t, 'qoz-prose qoz-prose--dark')])
@@ -240,11 +241,9 @@ PAGE = [
     o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video'),
     oz,
     intro, steps, gains, compare, hospitality, summary,
-    program,
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
     o.market(MARKET, MARKET_NOTES),
-    rationale,
     o.legal(),
     o.cta(),
 ]
@@ -259,6 +258,9 @@ DROPPED_COPY = {q(t) for t in ('[TBD]', 'Target*', 'Net Quarterly Distributions'
                                '[QOZ highlight', 'Target Metrics*', 'Request Offering Details', 'Request Information',
                                'Request Investor Details', 'Download Brochure', 'Start Investing',
                                'QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary')}
+# Alex, 2026-10-09: "Remove program, and rationale for now. This page should enhance the oz information." Both sections
+# stay defined above; their strings that appear nowhere else on the page are dropped.
+DROPPED_COPY |= ({norm(t) for t in all_texts([program, rationale])} & set(q.all)) - {norm(t) for t in all_texts(PAGE)}
 
 # Not design copy: the arrow, the reserve label (Alex), the sub-nav labels (design script data) and the program tab labels (design script data).
 NON_DESIGN = {'→', RESERVE} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
