@@ -96,7 +96,45 @@
   @media (prefers-reduced-motion: reduce) { & img { transition: none; } &:hover img { transform: none; } }
 }
 
-/* ---------- article prose (shared by the QOZ 2.0 sections) ---------- */
+/* ---------- the QOZ section (#qoz): every Opportunity Zone block in one section ---------- */
+.qoz-section {
+  padding-block: var(--section-space-l);
+  background: var(--white);
+}
+.qoz-section__inner { gap: var(--section-space-m); }
+.qoz-head {
+  display: grid;
+  gap: 14px;
+  max-inline-size: 62ch;
+}
+.qoz-head__title {
+  margin: 0;
+  font-size: var(--h2);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.032em;
+  color: var(--primary-ultra-dark);
+  text-wrap: balance;
+}
+.qoz-head__byline {
+  margin: 0;
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--base-dark);
+}
+.qoz-block { min-inline-size: 0; }
+.qoz-block__title {
+  margin: 0 0 var(--space-m);
+  max-inline-size: 28ch;
+  font-size: var(--h3);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--primary-ultra-dark);
+  text-wrap: balance;
+}
+
+/* article prose */
 .qoz-prose {
   display: grid;
   gap: 16px;
@@ -111,42 +149,14 @@
   & a { color: var(--accent); }
 }
 
-/* ---------- QOZ 2.0 intro (#qoz): the navy band ---------- */
+/* executive summary + about: the navy card */
 .qoz-intro {
-  padding-block: var(--section-space-l);
-  background: var(--primary-ultra-dark);
-  color: var(--white);
-}
-.qoz-intro__head {
-  display: grid;
-  gap: 16px;
-  max-inline-size: 60ch;
-}
-.qoz-intro__title {
-  margin: 0;
-  font-size: var(--h2);
-  font-weight: 300;
-  line-height: 1.15;
-  letter-spacing: -0.032em;
-  color: var(--white);
-  text-wrap: balance;
-}
-.qoz-intro__byline {
-  margin: 0;
-  font-size: var(--text-s);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: color-mix(in oklch, var(--white) 72%, transparent);
-}
-.qoz-intro__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: var(--space-xl-to-l);
-  margin-block-start: var(--space-xl-to-l);
-}
-.qoz-intro__col {
-  padding-block-start: var(--space-m);
-  border-block-start: 1px solid color-mix(in oklch, var(--white) 18%, transparent);
+  padding: var(--space-xl-to-l);
+  border-radius: 24px;
+  background: var(--primary-ultra-dark);
 }
 .qoz-intro__subtitle {
   margin: 0 0 16px;
@@ -156,29 +166,15 @@
   letter-spacing: -0.015em;
   color: var(--white);
 }
+.qoz-intro__col { min-inline-size: 0; }
 
-/* ---------- core mechanics + the five steps ---------- */
-.qoz-steps {
-  padding-block: var(--section-space-l) var(--section-space-m);
-  background: var(--white);
-}
-.qoz-steps__title {
-  margin: 0;
-  max-inline-size: 24ch;
-  font-size: var(--h2);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.032em;
-  color: var(--primary-ultra-dark);
-  text-wrap: balance;
-}
+/* core mechanics + the five steps */
 .qoz-steps__lede {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   column-gap: var(--space-xl-to-l);
-  margin-block-start: var(--space-l);
 }
 .qoz-steps__lead {
-  margin: var(--space-xl-to-l) 0 var(--space-m);
+  margin: var(--space-l) 0 var(--space-m);
   font-size: var(--text-l);
   font-weight: 500;
   color: var(--primary-ultra-dark);
@@ -220,20 +216,19 @@
   & strong { display: block; margin-block-end: 6px; font-size: var(--text-m); font-weight: 600; color: var(--primary-ultra-dark); }
 }
 
-/* ---------- eligible gains + what to note ---------- */
+/* eligible gains + what to note: a light panel */
 .qoz-gains {
-  padding-block: var(--section-space-m);
-  background: var(--base);
-}
-.qoz-gains__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: var(--space-l);
   align-items: start;
+  padding: var(--space-xl-to-l);
+  border-radius: 24px;
+  background: var(--base);
 }
 .qoz-gains__card {
   padding: var(--space-l);
-  border-radius: 22px;
+  border-radius: 20px;
   background: var(--white);
   border: 1px solid rgba(219, 229, 240, 0.9);
 }
@@ -270,7 +265,7 @@
 .qoz-gains__notes {
   display: grid;
   gap: 12px;
-  & .qoz-gains__title { margin-block-end: 4px; }
+  & .qoz-gains__title { margin-block: var(--space-l) 4px; }
 }
 .qoz-note {
   margin: 0;
@@ -284,24 +279,12 @@
   & .fn-ref a { color: inherit; text-decoration: none; }
 }
 
-/* ---------- QOZ 1.0 vs 2.0 ---------- */
-.qoz-compare {
-  padding-block: var(--section-space-l) var(--section-space-m);
-  background: var(--white);
-}
-.qoz-compare__title {
-  margin: 0;
-  font-size: var(--h2);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.032em;
-  color: var(--primary-ultra-dark);
-}
+/* QOZ 1.0 vs 2.0 */
 .qoz-compare__rules {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: 12px;
-  margin-block: var(--space-l);
+  margin-block-end: var(--space-l);
 }
 .qoz-rule {
   margin: 0;
@@ -350,45 +333,19 @@
   & thead th:last-child { color: var(--secondary); }
 }
 
-/* ---------- hospitality advantage ---------- */
-.qoz-hospitality {
-  padding-block: var(--section-space-m) var(--section-space-l);
-  background: var(--white);
-}
+/* hospitality advantage */
 .qoz-hospitality__media { min-block-size: 420px; & .rendering-chip { position: absolute; inset-block-start: 16px; inset-inline-start: 16px; z-index: 1; } }
-.qoz-hospitality__title {
-  margin: 0 0 24px;
-  font-size: var(--h2);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.032em;
-  color: var(--primary-ultra-dark);
-  text-wrap: balance;
-  & + .qoz-prose { margin-block-end: 28px; }
-}
+.qoz-hospitality__text { margin-block-end: 28px; }
 
-/* ---------- summary + sources ---------- */
+/* summary + sources */
 .qoz-summary {
-  padding-block: var(--section-space-m);
-  background: var(--base);
-}
-.qoz-summary__card {
-  display: grid;
-  gap: 16px;
   padding: var(--space-xl-to-l);
   border-radius: 24px;
-  background: var(--white);
   border: 1px solid rgba(219, 229, 240, 0.9);
-}
-.qoz-summary__title {
-  margin: 0;
-  font-size: var(--h3);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: var(--primary-ultra-dark);
+  background: linear-gradient(160deg, #FFFFFF 0%, #F5F9FD 100%);
 }
 .qoz-endnotes {
-  margin-block-start: var(--space-l);
+  margin: 0;
   & em { font-style: normal; }
 }
 .qoz-endnotes__title {

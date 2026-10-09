@@ -49,16 +49,31 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
                    (None, 'All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather')]
 # Sub-nav: the design's labels (its subnav data), in this page's section order, plus Renderings and QOZ 2.0 for the
 # teaser's own sections (#metrics now holds the key figures).
-SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('OZ Benefits', 'structure'),
-          ('QOZ 2.0', 'qoz'), ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Legal', 'legal')]
+SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('QOZ 2.0', 'qoz'),
+          ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'), ('Legal', 'legal')]
 
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
-oz = o.oz('Riverside-Wharf_Dream-Hotel-Prefunction', 'Riverside Wharf Dream Hotel Pre-function',
-          'Potential Opportunity Zone tax incentives', '1', 'Established under the 2017 Tax Cuts and Jobs Act',
-          [('Capital Gain Exclusion:', 'For qualifying investments held for 10 years'), ('Tax Deferral and Recognition:', 'The Opportunity Zone framework allows')],
-          [El('p', 'Footnote', children=[sup('1'), q('Information is for illustrative purposes only') + ' ',
-                                         El('a', 'IRS link', attrs={'href': IRS}, children=[q(IRS)]), q('.')]),
-           o.fn(None, 'This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes tax advice')])
+OZ_BENEFITS = [('Capital Gain Exclusion:', 'For qualifying investments held for 10 years'),
+               ('Tax Deferral and Recognition:', 'The Opportunity Zone framework allows')]
+# The design's OZ benefits section (o.oz), as a block of the one QOZ section below: same classes and copy, h3 title,
+# its own footnote (the IRS link) right under it so its "1" doesn't mix with the article's endnotes.
+oz_benefits = El('div', 'OZ benefits', 'qoz-block', {'id': 'structure'}, [
+    El('div', 'Row', 'offering-oz__row', children=[
+        El('div', 'Copy', 'offering-oz__copy', children=[
+            El('h3', 'Heading', 'offering-oz__title', children=[q('Potential Opportunity Zone tax incentives'), sup('1')]),
+            El('p', 'Intro', 'offering-oz__intro', children=[q('Established under the 2017 Tax Cuts and Jobs Act')]),
+            El('div', 'Benefits', 'offering-oz__benefits', children=[
+                El('div', 'Benefit', 'offering-oz__benefit', children=[
+                    El('strong', 'Title', 'offering-oz__benefit-title', children=[q(t)]), El('p', 'Text', children=[q(b)])])
+                for t, b in OZ_BENEFITS]),
+        ]),
+        El('figure', 'Image', 'media-card offering-oz__media', children=[
+            Img('Photo', 'Riverside-Wharf_Dream-Hotel-Prefunction', 'Riverside Wharf Dream Hotel Pre-function'), o.chip()]),
+    ]),
+    o.footnotes('Footnotes', [El('p', 'Footnote', children=[sup('1'), q('Information is for illustrative purposes only') + ' ',
+                                                           El('a', 'IRS link', attrs={'href': IRS}, children=[q(IRS)]), q('.')]),
+                              o.fn(None, 'This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes tax advice')]),
+])
 
 
 # A text node before an inline link keeps its trailing space (the design lookup trims edges; the copy gate ignores them).
@@ -139,7 +154,8 @@ renderings = section('Renderings', 'qoz-gallery', 'qoz-gallery-h', [
 ], attrs={'id': 'renderings'})
 
 
-# Opportunity Zones Program Explained (driftwoodcapital.com), block by block.
+# All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section"): the article's
+# title, the design's OZ benefits, then "Opportunity Zones Program Explained" (driftwoodcapital.com) block by block.
 def blocks(heading, cls='qoz-prose'):
     return El('div', 'Text', cls, children=[oz_src.el(b) for b in oz_src.section(heading)])
 
@@ -149,22 +165,20 @@ def h3(text, cls):
 
 
 TITLE = 'Opportunity Zones Program Explained'
-intro = section('QOZ 2.0', 'qoz-intro', 'qoz-intro-h', [
-    El('div', 'Head', 'qoz-intro__head', children=[
-        El('p', 'Eyebrow', 'eyebrow eyebrow--dark', children=[oz_src.copy(TITLE)]),
-        El('h2', 'Heading', 'qoz-intro__title', {'id': 'qoz-intro-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
-        El('p', 'Byline', 'qoz-intro__byline', children=[oz_src.copy('Driftwood Capital')]),
-    ]),
-    El('div', 'Columns', 'qoz-intro__grid', children=[
-        El('div', 'Column', 'qoz-intro__col', children=[h3(t, 'qoz-intro__subtitle'), blocks(t, 'qoz-prose qoz-prose--dark')])
-        for t in ('Executive summary: How Opportunity Zone investing works after QOZ 2.0', 'About Opportunity Zones')
-    ]),
-], attrs={'id': 'qoz'})
+head = El('div', 'Head', 'qoz-head', children=[
+    El('p', 'Eyebrow', 'eyebrow', children=[oz_src.copy(TITLE)]),
+    El('h2', 'Heading', 'qoz-head__title', {'id': 'qoz-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
+    El('p', 'Byline', 'qoz-head__byline', children=[oz_src.copy('Driftwood Capital')]),
+])
+intro = El('div', 'Overview', 'qoz-block qoz-intro', children=[
+    El('div', 'Column', 'qoz-intro__col', children=[h3(t, 'qoz-intro__subtitle'), blocks(t, 'qoz-prose qoz-prose--dark')])
+    for t in ('Executive summary: How Opportunity Zone investing works after QOZ 2.0', 'About Opportunity Zones')
+])
 
 MECH = 'The Core Mechanics: How the Tax Benefits Work'
 mech = oz_src.section(MECH)  # two paragraphs, the "basic sequence" line, the five steps
-steps = section('How it works', 'qoz-steps', 'qoz-steps-h', [
-    El('h2', 'Heading', 'qoz-steps__title', {'id': 'qoz-steps-h'}, [oz_src.copy(MECH)]),
+steps = El('div', 'How it works', 'qoz-block', children=[
+    h3(MECH, 'qoz-block__title'),
     El('div', 'Text', 'qoz-prose qoz-steps__lede', children=[oz_src.el(b) for b in mech[:2]]),
     oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
     oz_src.el(mech[3], 'qoz-steps__list', 'Steps'),
@@ -172,25 +186,23 @@ steps = section('How it works', 'qoz-steps', 'qoz-steps-h', [
 
 GAINS, NOTE = 'Eligible Gains', 'What Investors May Want to Note'
 gains_src = oz_src.section(GAINS)
-gains = section('Eligible gains', 'qoz-gains', 'qoz-gains-h', [
-    El('div', 'Columns', 'qoz-gains__grid', children=[
-        El('div', 'Eligible gains', 'qoz-gains__card', children=[
-            El('h2', 'Heading', 'qoz-gains__title', {'id': 'qoz-gains-h'}, [oz_src.copy(GAINS)]),
-            oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
-            oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
-        ]),
-        El('div', 'Notes', 'qoz-gains__notes', children=[
-            h3(NOTE, 'qoz-gains__title'),
-            *[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)],
-        ]),
+gains = El('div', 'Eligible gains', 'qoz-block qoz-gains', children=[
+    El('div', 'Eligible gains', 'qoz-gains__card', children=[
+        h3(GAINS, 'qoz-gains__title'),
+        oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
+        oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
+    ]),
+    El('div', 'Notes', 'qoz-gains__notes', children=[
+        h3(NOTE, 'qoz-gains__title'),
+        *[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)],
     ]),
 ])
 
 CHANGED = 'What Changed: QOZ 1.0 vs. QOZ 2.0'
 changed_src = oz_src.section(CHANGED)  # two paragraphs, then the table's scroll wrapper
 table = next(c for c in changed_src[2][2] if not isinstance(c, str) and c[0] == 'table')
-compare = section('QOZ 1.0 vs. QOZ 2.0', 'qoz-compare', 'qoz-compare-h', [
-    El('h2', 'Heading', 'qoz-compare__title', {'id': 'qoz-compare-h'}, [oz_src.copy(CHANGED)]),
+compare = El('div', 'QOZ 1.0 vs. QOZ 2.0', 'qoz-block', children=[
+    h3(CHANGED, 'qoz-block__title'),
     El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
                                                        oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
     El('div', 'Table scroll', 'qoz-compare__scroll', {'tabindex': '0', 'role': 'region', 'aria-label': oz_src.copy('QOZ 1.0 and QOZ 2.0 comparison')},
@@ -201,30 +213,24 @@ HOSP = 'The Opportunity Zone Advantage for Hospitality Assets'
 hosp = oz_src.section(HOSP)
 # Its last paragraph ends "To learn more, visit our offering page here." (a link to this offering): left out here.
 LAST = (hosp[3][0], hosp[3][1], [c for c in hosp[3][2] if isinstance(c, str) or c[0] != 'strong'])
-hospitality = section('Hospitality', 'qoz-hospitality', 'qoz-hospitality-h', [
-    El('div', 'Row', 'media-split', children=[
-        El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
-        El('div', 'Copy', 'media-split__copy', children=[
-            El('h2', 'Heading', 'qoz-hospitality__title', {'id': 'qoz-hospitality-h'}, [oz_src.copy(HOSP)]),
-            El('div', 'Text', 'qoz-prose', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
-            o.request('Request Investor Details'),
-        ]),
+hospitality = El('div', 'Hospitality', 'qoz-block media-split', children=[
+    El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
+    El('div', 'Copy', 'media-split__copy', children=[
+        h3(HOSP, 'qoz-block__title'),
+        El('div', 'Text', 'qoz-prose qoz-hospitality__text', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
+        o.request('Request Investor Details'),
     ]),
 ])
 
 notes = oz_src.endnotes()
-summary = section('Summary', 'qoz-summary', 'qoz-summary-h', [
-    El('div', 'Card', 'qoz-summary__card', children=[
-        El('h2', 'Heading', 'qoz-summary__title', {'id': 'qoz-summary-h'}, [oz_src.copy('Summary')]),
-        blocks('Summary'),
-    ]),
-    El('div', 'Endnotes', 'footnotes qoz-endnotes', children=[
-        h3('Sources and endnotes', 'qoz-endnotes__title'),
-        El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
-        *[oz_src.el(b) for b in oz_src.section('Sources and endnotes') if b[0] == 'p'],  # the article's disclaimer
-    ]),
+summary = El('div', 'Summary', 'qoz-block qoz-summary', children=[h3('Summary', 'qoz-block__title'), blocks('Summary')])
+endnotes = El('div', 'Endnotes', 'footnotes qoz-endnotes', children=[
+    h3('Sources and endnotes', 'qoz-endnotes__title'),
+    El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
+    *[oz_src.el(b) for b in oz_src.section('Sources and endnotes') if b[0] == 'p'],  # the article's disclaimer
 ])
-
+qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h',
+              [head, intro, oz_benefits, steps, gains, compare, hospitality, summary, endnotes], attrs={'id': 'qoz'})
 
 STYLESHEETS = ['shared', 'offering']  # + this page's site/styles/offering_rw_qoz.css
 PAGE = [
@@ -239,8 +245,7 @@ PAGE = [
     renderings,
     # No poster in the design (empty image slot): the frame shows the play button on the dark band until clicked.
     o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video'),
-    oz,
-    intro, steps, gains, compare, hospitality, summary,
+    qoz,
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
     o.market(MARKET, MARKET_NOTES),
