@@ -263,7 +263,6 @@ parts = El('div', 'Parts', 'qoz-parts', children=[
             El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
         ]),
     ]),
-    part('qoz-summary', [oz_src.copy(SUMMARY)], [blocks(SUMMARY)]),
     part('qoz-sources', [oz_src.copy(SOURCES)], [
         El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
     ]),
@@ -273,6 +272,12 @@ qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
     lead,
     quick,
     parts,
+    # the article's closing summary reads as the takeaway after the parts, always open (Alex, 2026-10-09: "all those
+    # accordions need to make sense, we have one for 'summary'"); the accordions hold only the content parts and sources
+    El('div', 'Summary', 'qoz-summary', {'id': 'qoz-summary'}, [
+        El('h3', 'Heading', 'qoz-summary__title', children=[oz_src.copy(SUMMARY)]),
+        blocks(SUMMARY),
+    ]),
     o.request('Request Investor Details'),
     # the article's disclaimer, always visible (CLAUDE.md rule 6)
     El('div', 'Disclaimer', 'footnotes qoz-disclaimer', children=[oz_src.el(b) for b in oz_src.section(SOURCES) if b[0] == 'p']),

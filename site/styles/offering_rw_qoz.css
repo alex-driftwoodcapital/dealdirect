@@ -46,6 +46,24 @@
   & a { color: var(--accent); }
 }
 
+/* the article's closing summary, open under the parts */
+.qoz-summary {
+  display: grid;
+  gap: 12px;
+  padding: var(--space-l);
+  @media (max-width: 767px) { padding: 20px; border-radius: 18px; }
+  border-radius: 24px;
+  background: var(--primary-ultra-light);
+  scroll-margin-block-start: 140px;
+}
+.qoz-summary__title {
+  margin: 0;
+  font-size: var(--text-l);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--primary);
+}
+
 /* executive summary: the navy lead card */
 .qoz-intro {
   padding: var(--space-l);
