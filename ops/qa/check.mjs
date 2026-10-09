@@ -27,9 +27,9 @@ const URLS = [  // path, expected status, expected Location (path) for redirects
   ['/offering/riverside-wharf-eb-5/', 301, '/eb-5-investments/'],
   ['/admin-login/', 410], ['/forgot-password/', 410], ['/reset-password/', 410], ['/registration-success/', 410],
   ['/qa-no-such-page/', 404],
-  // card-only offerings (site/lib/card_offering.py): 302 to their card link until they have a page
-  ['/offering/driftwood-hotel-income-i-dst/', 302, 'https://driftwoodcapital.com/1031-exchanges-and-dsts/'],
-  ['/offering/driftwood-tax-advantage-strategy-i/', 302, 'https://driftwoodcapital.com/bonus-depreciation/'],
+  // card-only offerings (site/lib/card_offering.py): 302 to their card link until they have a page (the DST has its
+  // page since #38; DTAS goes to its own site for now, Alex 2026-10-09)
+  ['/offering/driftwood-tax-advantage-strategy-i/', 302, 'https://dtas1.driftwoodcapital.com/'],
 ];
 const WIDTHS = [375, 768, 1440];
 const fails = [];

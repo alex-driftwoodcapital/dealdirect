@@ -16,8 +16,7 @@ const OUT = 'qa-out';
 const EXPECTED = {
   '/offering/riverside-wharf/': [301, '/offering/riverside-wharf-qoz/'],
   '/offering/riverside-wharf-eb-5/': [301, '/eb-5-investments/'],
-  '/offering/driftwood-hotel-income-i-dst/': [302, 'https://driftwoodcapital.com/1031-exchanges-and-dsts/'],
-  '/offering/driftwood-tax-advantage-strategy-i/': [302, 'https://driftwoodcapital.com/bonus-depreciation/'],
+  '/offering/driftwood-tax-advantage-strategy-i/': [302, 'https://dtas1.driftwoodcapital.com/'],
   '/registration-success/': [410], '/forgot-password/': [410], '/reset-password/': [410], '/admin-login/': [410],
 };
 // URLs the rebuild adds (not on live yet)
