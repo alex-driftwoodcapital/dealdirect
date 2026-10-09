@@ -12,13 +12,14 @@ class PostContent(Node):
         return '<!-- wp:post-content {"align":"full","layout":{"type":"default"}} /-->'
 
 
-def frame(main_attrs=None, footer='site-footer'):
+def frame(main_attrs=None, footer='site-footer', exit_dialog=True, main=None):
+    # exit_dialog: the "leaving our website" interstitial (site/pages/exit_dialog.py), English pages only (as on live)
     return [
         Component('Site header', 'site-header'),
-        El('main', 'Main', attrs=main_attrs, children=[PostContent()]),
+        El('main', 'Main', attrs=main_attrs, children=main or [PostContent()]),
         Component('Site footer', footer),
         Component('Request dialog', 'request-dialog'),
-    ]
+    ] + ([Component('Exit dialog', 'exit-dialog')] if exit_dialog else [])
 
 
 PAGE = frame()

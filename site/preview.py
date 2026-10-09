@@ -172,6 +172,19 @@ def type_scale():
             a, b = float(st[f'{t}-min']), float(st[f'{t}-max'])
             slope = (b - a) / (hi - lo)
             out.append(f'--{t}:clamp({a / 16}rem, calc({slope * 100:.4f}vw + {(a - slope * lo) / 16:.4f}rem), {b / 16}rem)')
+    # Spacing: staging's ACSS scale (not in dealdirect-settings.json; read from staging's automatic.css, inventory
+    # 2026-10-08), min/max px per token; bridge tokens --space-{big}-to-{small} go from small's min to big's max.
+    space = {'space-xs': (13.3, 13.5), 'space-s': (18, 20), 'space-m': (24, 30), 'space-l': (32, 45),
+             'space-xl': (42.6, 67.5), 'space-xxl': (56.8, 101.2), 'section-space-xs': (27, 40),
+             'section-space-s': (36, 60), 'section-space-m': (48, 90), 'section-space-l': (64, 135),
+             'section-space-xl': (85.3, 202.5), 'section-space-xxl': (113.7, 303.8)}
+    for big in ['xxl', 'xl', 'l', 'm', 's']:
+        for small in ['xl', 'l', 'm', 's', 'xs']:
+            if small != big and ['xs', 's', 'm', 'l', 'xl', 'xxl'].index(small) < ['xs', 's', 'm', 'l', 'xl', 'xxl'].index(big):
+                space[f'space-{big}-to-{small}'] = (space[f'space-{small}'][0], space[f'space-{big}'][1])
+    for t, (a, b) in space.items():
+        slope = (b - a) / (hi - lo)
+        out.append(f'--{t}:clamp({a / 16}rem, calc({slope * 100:.4f}vw + {(a - slope * lo) / 16:.4f}rem), {b / 16}rem)')
     font = os.path.relpath(os.path.join(ROOT, 'wp-content', 'plugins', 'dealdirect-core', 'assets', 'fonts',
                                          'plus-jakarta-sans-latin-wght-normal.woff2'), B)
     return ('@font-face{font-family:"Plus Jakarta Sans";src:url(' + font + ') format("woff2");font-weight:200 800;'

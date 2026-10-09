@@ -137,11 +137,14 @@ class Svg(Node):
 
 
 def section(name, cls, heading_id, children, attrs=None, tag='section', script=None):
-    """Section > Container skeleton (guardrails §2), labelled by its heading. A band without a heading is a div."""
+    """Section > Container skeleton (guardrails §2), labelled by its heading. A band without a heading is a div.
+    Every section is full-bleed (dd-section: no inline padding) and every container is the design's rail (dd-rail:
+    the content width with the gutter inside, like the header and footer rails), so all content shares one left edge."""
     a = {'aria-labelledby': heading_id} if heading_id else {}
     a.update(attrs or {})
     block = cls.split()[0]  # 'cta-band cta-band--cover' -> container 'cta-band__inner'
-    return El(tag, name, cls, a, [El('div', 'Container', block + '__inner', etch='container', children=children)], etch='section',
+    return El(tag, name, cls + ' dd-section', a,
+              [El('div', 'Container', block + '__inner dd-rail', etch='container', children=children)], etch='section',
               script=script)
 
 

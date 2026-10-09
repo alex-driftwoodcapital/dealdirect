@@ -41,6 +41,13 @@ literal = sorted({sel for sel, css in rules.items()
                   for v in re.findall(r'font-size:\s*([^;}]+)', css) if not re.match(r'(var\(--|inherit|1em|100%)', v.strip())})
 if literal:
     sys.exit(f'{a.page}: literal font sizes (use an ACSS token, e.g. var(--text-m)): {" ".join(literal)}')
+# Spacing likewise comes from ACSS's spacing tokens (var(--space-m), var(--section-space-l), bridge tokens such as
+# var(--space-xl-to-l)), never a hand-written clamp(). The one exception is the Home hero's top padding, which clears
+# the fixed header rather than following the spacing scale.
+CLAMP_OK = {'.home-hero__inner'}
+fluid = sorted(sel for sel, css in rules.items() if 'clamp(' in css and sel not in CLAMP_OK)
+if fluid:
+    sys.exit(f'{a.page}: hand-written clamp() (use an ACSS spacing token, e.g. var(--section-space-m)): {" ".join(fluid)}')
 hooks = [c for c in classes if '.' + c not in rules]
 # A hook still gets a style record, so a class styled in a sheet this page doesn't load would overwrite that sheet's
 # record with empty css on staging (every page deploys every record for its classes): refuse to build.

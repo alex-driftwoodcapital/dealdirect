@@ -1,0 +1,10 @@
+{
+  "_why": "Components and templates the previous build left on staging that nothing of ours uses (Alex, 2026-10-09: \"go ahead and trash the leftover components\"). Trashed, not deleted: WP admin > Trash restores them. Only posts this repo never wrote (no _dd_deployed_sha) and nothing references are touched.",
+  "posts": [
+    ["wp_block", "etchnavcomponent"],
+    ["wp_block", "etchburgercomponent"],
+    ["wp_block", "header"],
+    ["wp_block", "footer"],
+    ["wp_template", "home"]
+  ]
+}
