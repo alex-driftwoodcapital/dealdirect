@@ -55,12 +55,12 @@ SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'web
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
 OZ_BENEFITS = [('Capital Gain Exclusion:', 'For qualifying investments held for 10 years'),
                ('Tax Deferral and Recognition:', 'The Opportunity Zone framework allows')]
-# The design's OZ benefits section (o.oz), as a block of the one QOZ section below: same classes and copy, h3 title,
-# its own footnote (the IRS link) right under it so its "1" doesn't mix with the article's endnotes.
-oz_benefits = El('div', 'OZ benefits', 'qoz-block', {'id': 'structure'}, [
+# The design's OZ benefits section (o.oz), as one part of the QOZ section below: same classes and copy, its title in
+# the part's summary, its own footnote (the IRS link) inside it so its "1" doesn't mix with the article's endnotes.
+OZ_TITLE = [q('Potential Opportunity Zone tax incentives'), sup('1')]
+oz_benefits = [
     El('div', 'Row', 'offering-oz__row', children=[
         El('div', 'Copy', 'offering-oz__copy', children=[
-            El('h3', 'Heading', 'offering-oz__title qoz-num', {'id': 'qoz-incentives'}, [q('Potential Opportunity Zone tax incentives'), sup('1')]),
             El('p', 'Intro', 'offering-oz__intro', children=[q('Established under the 2017 Tax Cuts and Jobs Act')]),
             El('div', 'Benefits', 'offering-oz__benefits', children=[
                 El('div', 'Benefit', 'offering-oz__benefit', children=[
@@ -73,7 +73,7 @@ oz_benefits = El('div', 'OZ benefits', 'qoz-block', {'id': 'structure'}, [
     o.footnotes('Footnotes', [El('p', 'Footnote', children=[sup('1'), q('Information is for illustrative purposes only') + ' ',
                                                            El('a', 'IRS link', attrs={'href': IRS}, children=[q(IRS)]), q('.')]),
                               o.fn(None, 'This webpage is a preliminary summary for discussion purposes only and does not contain all material information. Nothing herein constitutes tax advice')]),
-])
+]
 
 
 # A text node before an inline link keeps its trailing space (the design lookup trims edges; the copy gate ignores them).
@@ -154,122 +154,112 @@ renderings = section('Renderings', 'qoz-gallery', 'qoz-gallery-h', [
 ], attrs={'id': 'renderings'})
 
 
-# All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section ... properly organized,
-# easy to navigate and access"): the article's title, then a contents list beside the parts (sticky on wide screens, a
-# list on top on small ones), each part an h3 with its own anchor and number, footnote marks and endnotes linked both
-# ways. Parts: the design's OZ benefits and "Opportunity Zones Program Explained" (driftwoodcapital.com) block by block.
+# All QOZ content in one section (#qoz; Alex, 2026-10-09: "All qoz should be in the same section", "Whatever can be on
+# a drop down or accordion do it. We need to optimize space. Don't do a toc column"): the article's title and its
+# executive summary stay open as the lead; every other part is a native <details> accordion (the EB-5 FAQ's classes),
+# its heading an anchored h3 in the summary; the article's disclaimer stays visible under them. Parts: the design's OZ
+# benefits and "Opportunity Zones Program Explained" (driftwoodcapital.com) block by block.
 TITLE = 'Opportunity Zones Program Explained'
 EXEC, ABOUT = 'Executive summary: How Opportunity Zone investing works after QOZ 2.0', 'About Opportunity Zones'
 MECH, GAINS, NOTE = 'The Core Mechanics: How the Tax Benefits Work', 'Eligible Gains', 'What Investors May Want to Note'
 CHANGED, HOSP = 'What Changed: QOZ 1.0 vs. QOZ 2.0', 'The Opportunity Zone Advantage for Hospitality Assets'
 SUMMARY, SOURCES = 'Summary', 'Sources and endnotes'
-# (anchor, heading): the contents list, in page order; the heading text is the part's own heading.
-PARTS = [('qoz-executive-summary', oz_src.copy(EXEC)), ('qoz-about', oz_src.copy(ABOUT)),
-         ('qoz-incentives', q('Potential Opportunity Zone tax incentives')), ('qoz-mechanics', oz_src.copy(MECH)),
-         ('qoz-eligible-gains', oz_src.copy(GAINS)), ('qoz-what-to-note', oz_src.copy(NOTE)),
-         ('qoz-what-changed', oz_src.copy(CHANGED)), ('qoz-hospitality', oz_src.copy(HOSP)),
-         ('qoz-summary', oz_src.copy(SUMMARY)), ('qoz-sources', oz_src.copy(SOURCES))]
-ANCHOR = {text: anchor for anchor, text in PARTS}
+ICON = '+'
+
+ACC_SCRIPT = """// qoz accordions: a link to something inside a closed part (footnote marks, endnotes and their back-links, #structure)
+// opens that part before the browser scrolls to it. Scoped to the QOZ section; without it the parts still open by hand.
+const qoz = document.getElementById('qoz');
+if (qoz) {
+  const reveal = (id) => {
+    const t = id && document.getElementById(id);
+    if (!t || !qoz.contains(t)) return;
+    for (let d = t.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
+  };
+  const fromHash = (h) => { try { return decodeURIComponent(h.slice(1)); } catch (_) { return ''; } };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (a) reveal(fromHash(a.getAttribute('href')));
+  });
+  window.addEventListener('hashchange', () => reveal(fromHash(location.hash)));
+  reveal(fromHash(location.hash));
+}
+"""
 
 
 def blocks(heading, cls='qoz-prose'):
     return El('div', 'Text', cls, children=[oz_src.el(b) for b in oz_src.section(heading)])
 
 
-def h3(text, cls):
-    """A part's heading: numbered (CSS counter) and anchored for the contents list."""
-    t = oz_src.copy(text)
-    return El('h3', 'Heading', cls + ' qoz-num', {'id': ANCHOR[t]}, [t])
+def part(anchor, title, body, attrs=None):
+    """One accordion part: the heading (h3, anchored) in the summary, the body below."""
+    return El('details', 'Part', 'faq qoz-acc', {'id': anchor, **(attrs or {})}, [
+        El('summary', 'Summary', 'faq__q qoz-acc__q', children=[
+            El('h3', 'Heading', 'qoz-acc__title', children=title),
+            El('span', 'Icon', 'faq__icon', {'aria-hidden': 'true'}, [ICON]),
+        ]),
+        El('div', 'Body', 'qoz-acc__body', children=body),
+    ])
 
 
-TOC_SCRIPT = """// qoz-toc: marks the part being read (aria-current) in the contents list. Scoped; the links work without it.
-document.querySelectorAll('.qoz-toc').forEach((toc) => {
-  const links = [...toc.querySelectorAll('a[href^="#"]')];
-  const parts = links.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
-  if (!('IntersectionObserver' in window) || !parts.length) return;
-  const mark = (id) => links.forEach((a) => {
-    if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-  });
-  const seen = new IntersectionObserver((entries) => {
-    const shown = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (shown.length) mark(shown[0].target.id);
-  }, { rootMargin: '-140px 0px -55% 0px' });
-  parts.forEach((p) => seen.observe(p));
-});
-"""
 head = El('div', 'Head', 'qoz-head', children=[
     El('p', 'Eyebrow', 'eyebrow', children=[oz_src.copy(TITLE)]),
     El('h2', 'Heading', 'qoz-head__title', {'id': 'qoz-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
     El('p', 'Byline', 'qoz-head__byline', children=[oz_src.copy('Driftwood Capital')]),
 ])
-toc = El('nav', 'Contents', 'qoz-toc', {'aria-label': oz_src.copy(TITLE)}, [
-    El('ol', 'Parts', 'qoz-toc__list', children=[
-        El('li', 'Part', 'qoz-toc__item', children=[El('a', 'Link', 'qoz-toc__link', {'href': '#' + anchor}, [text])])
-        for anchor, text in PARTS]),
-], script=TOC_SCRIPT)
-
-intro = El('div', 'Overview', 'qoz-block qoz-intro', children=[
-    El('div', 'Column', 'qoz-intro__col', children=[h3(t, 'qoz-intro__subtitle'), blocks(t, 'qoz-prose qoz-prose--dark')])
-    for t in (EXEC, ABOUT)
+lead = El('div', 'Executive summary', 'qoz-intro', {'id': 'qoz-executive-summary'}, [
+    El('h3', 'Heading', 'qoz-intro__subtitle', children=[oz_src.copy(EXEC)]),
+    blocks(EXEC, 'qoz-prose qoz-prose--dark'),
 ])
 
 mech = oz_src.section(MECH)  # two paragraphs, the "basic sequence" line, the five steps
-steps = El('div', 'How it works', 'qoz-block', children=[
-    h3(MECH, 'qoz-block__title'),
-    El('div', 'Text', 'qoz-prose qoz-steps__lede', children=[oz_src.el(b) for b in mech[:2]]),
-    oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
-    oz_src.el(mech[3], 'qoz-steps__list', 'Steps'),
-])
-
 gains_src = oz_src.section(GAINS)
-gains = El('div', 'Eligible gains', 'qoz-block qoz-gains', children=[
-    El('div', 'Eligible gains', 'qoz-gains__card', children=[
-        h3(GAINS, 'qoz-gains__title'),
-        oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
-        oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
-    ]),
-    El('div', 'Notes', 'qoz-gains__notes', children=[
-        h3(NOTE, 'qoz-gains__title'),
-        *[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)],
-    ]),
-])
-
 changed_src = oz_src.section(CHANGED)  # two paragraphs, then the table's scroll wrapper
 table = next(c for c in changed_src[2][2] if not isinstance(c, str) and c[0] == 'table')
-compare = El('div', 'QOZ 1.0 vs. QOZ 2.0', 'qoz-block', children=[
-    h3(CHANGED, 'qoz-block__title'),
-    El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
-                                                       oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
-    El('div', 'Table scroll', 'qoz-compare__scroll', {'tabindex': '0', 'role': 'region', 'aria-label': oz_src.copy('QOZ 1.0 and QOZ 2.0 comparison')},
-       [oz_src.el(table, 'qoz-table', 'Comparison')]),
-])
-
 hosp = oz_src.section(HOSP)
 # Its last paragraph ends "To learn more, visit our offering page here." (a link to this offering): left out here.
 LAST = (hosp[3][0], hosp[3][1], [c for c in hosp[3][2] if isinstance(c, str) or c[0] != 'strong'])
-hospitality = El('div', 'Hospitality', 'qoz-block qoz-hospitality', children=[
-    h3(HOSP, 'qoz-block__title'),
-    El('div', 'Row', 'qoz-hospitality__row', children=[
-        El('div', 'Text', 'qoz-prose', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
-        El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
-    ]),
-    o.request('Request Investor Details'),
-])
-
 notes = oz_src.endnotes()
-summary = El('div', 'Summary', 'qoz-block qoz-summary', children=[h3(SUMMARY, 'qoz-block__title'), blocks(SUMMARY)])
-endnotes = El('div', 'Endnotes', 'footnotes qoz-endnotes', children=[
-    h3(SOURCES, 'qoz-endnotes__title'),
-    El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
-    *[oz_src.el(b) for b in oz_src.section(SOURCES) if b[0] == 'p'],  # the article's disclaimer
+
+parts = El('div', 'Parts', 'qoz-parts', children=[
+    part('qoz-about', [oz_src.copy(ABOUT)], [blocks(ABOUT)]),
+    part('structure', OZ_TITLE, oz_benefits),  # the design's #structure anchor (old sub-nav links) opens this part
+    part('qoz-mechanics', [oz_src.copy(MECH)], [
+        El('div', 'Text', 'qoz-prose qoz-steps__lede', children=[oz_src.el(b) for b in mech[:2]]),
+        oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
+        oz_src.el(mech[3], 'qoz-steps__list', 'Steps'),
+    ]),
+    part('qoz-eligible-gains', [oz_src.copy(GAINS)], [
+        oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
+        oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
+    ]),
+    part('qoz-what-to-note', [oz_src.copy(NOTE)], [
+        El('div', 'Notes', 'qoz-gains__notes', children=[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)]),
+    ]),
+    part('qoz-what-changed', [oz_src.copy(CHANGED)], [
+        El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
+                                                           oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
+        El('div', 'Table scroll', 'qoz-compare__scroll', {'tabindex': '0', 'role': 'region', 'aria-label': oz_src.copy('QOZ 1.0 and QOZ 2.0 comparison')},
+           [oz_src.el(table, 'qoz-table', 'Comparison')]),
+    ]),
+    part('qoz-hospitality', [oz_src.copy(HOSP)], [
+        El('div', 'Row', 'qoz-hospitality__row', children=[
+            El('div', 'Text', 'qoz-prose', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
+            El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
+        ]),
+    ]),
+    part('qoz-summary', [oz_src.copy(SUMMARY)], [blocks(SUMMARY)]),
+    part('qoz-sources', [oz_src.copy(SOURCES)], [
+        El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
+    ]),
 ])
 qoz = section('Opportunity Zones', 'qoz-section', 'qoz-h', [
     head,
-    El('div', 'Layout', 'qoz-layout', children=[
-        toc,
-        El('div', 'Parts', 'qoz-content', children=[intro, oz_benefits, steps, gains, compare, hospitality, summary, endnotes]),
-    ]),
-], attrs={'id': 'qoz'})
+    lead,
+    parts,
+    o.request('Request Investor Details'),
+    # the article's disclaimer, always visible (CLAUDE.md rule 6)
+    El('div', 'Disclaimer', 'footnotes qoz-disclaimer', children=[oz_src.el(b) for b in oz_src.section(SOURCES) if b[0] == 'p']),
+], attrs={'id': 'qoz'}, script=ACC_SCRIPT)
 
 STYLESHEETS = ['shared', 'offering']  # + this page's site/styles/offering_rw_qoz.css
 PAGE = [
@@ -306,8 +296,8 @@ DROPPED_COPY = {q(t) for t in ('[TBD]', 'Target*', 'Net Quarterly Distributions'
 # stay defined above; their strings that appear nowhere else on the page are dropped.
 DROPPED_COPY |= ({norm(t) for t in all_texts([program, rationale])} & set(q.all)) - {norm(t) for t in all_texts(PAGE)}
 
-# Not design copy: the arrow, the reserve label (Alex), the sub-nav labels (design script data) and the program tab labels (design script data).
-NON_DESIGN = {'→', RESERVE} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
+# Not design copy: the arrow, the reserve label (Alex), the accordion icon, the sub-nav labels (design script data) and the program tab labels (design script data).
+NON_DESIGN = {'→', RESERVE, ICON} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
 # slug -> (source, Etch Asset Manager collection). Live-site uploads keep their filenames; images are compressed on
 # import with the Etch Asset Manager preset.
 MEDIA = {
