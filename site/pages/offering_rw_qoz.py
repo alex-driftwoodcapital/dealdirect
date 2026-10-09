@@ -1,18 +1,28 @@
 """Riverside Wharf QOZ (/offering/riverside-wharf-qoz/; slug to confirm, handoff/docs/permalinks.md): an `offering` post
-rendered by the single-offering template. Etch build of handoff/design/Riverside Wharf QOZ.dc.html; section order and
-anchors follow the design (#metrics #overview #webinar #partners #offering #market #structure #assets #rationale
-#legal), every string comes from the design file via q(). The design's placeholders ("[TBD]", "[QOZ ... from offering
-documents]") are shipped as they are: open `gap`s in handoff/design/evidence-register/claims.js, never filled in here.
-Sections: site/lib/offering.py."""
+rendered by the single-offering template. A teaser for now (Alex, 2026-10-09: "tease the project and allow people to
+reserve their spot using the form ... the info we already have + lots of nice renderings + qoz information"):
+  - the design's sections (handoff/design/Riverside Wharf QOZ.dc.html, copy via q()), minus its placeholder target
+    metrics and placeholder highlights (DROPPED_COPY); key figures from the design's program instead;
+  - a renderings mosaic (the design's own Riverside Wharf renderings);
+  - "Opportunity Zones Program Explained" from driftwoodcapital.com (site/sources/, ops/sources.txt), lifted block by
+    block through site/lib/article.py with its endnotes and disclaimer;
+  - every request button reads "Reserve Your Spot" and opens the offering request dialog (Registration / Offering
+    Request forms in HubSpot, pageName = this offering).
+Sections: site/lib/offering.py; this page's own: site/styles/offering_rw_qoz.css."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'lib'))
-from etch import El
+from etch import El, Img, section
+from article import Article
 from design import Copy
 from offering import Offering, MARKET, MARKET_NOTES, METRIC_NOTES, UP, sup
 
 DESIGN = os.path.join(os.path.dirname(__file__), '..', '..', 'handoff', 'design', 'Riverside Wharf QOZ.dc.html')
 q = Copy(DESIGN)
-o = Offering(q)
+RESERVE = 'Reserve Your Spot'  # Alex, 2026-10-09 ("reserve their spot using the form"); compliance to confirm the wording
+o = Offering(q, cta=RESERVE)
+ARTICLE = os.path.join(os.path.dirname(__file__), '..', 'sources', 'driftwoodcapital-opportunity-zones-program-explained.html')
+oz_src = Article(ARTICLE, "<div id='inner_content", '<footer id="main-footer"', 'oz-note-')
+COPY_EXTRA = [oz_src.copy]
 
 METRICS = [  # (value, qualifier, label, footnote ref, accent): values are the design's [TBD] placeholders
     ('[TBD]', 'Target*', 'Net Quarterly Distributions', '1', True),
@@ -26,8 +36,7 @@ STACK = [  # the total-equity layer is this offering's highlight (claims.js: con
     ('~$60M', 'EB-5 mezzanine loan', '61%', 'cap-stack__layer--mezz'),
     ('~$145M', 'Total senior debt', '43%', 'cap-stack__layer--senior'),
 ]
-HIGHLIGHTS = [
-    ['[QOZ highlight — from offering documents]'], ['[QOZ highlight — from offering documents]'],
+HIGHLIGHTS = [  # the design's two "[QOZ highlight — from offering documents]" placeholders are left out (teaser)
     ['The project is located within a Qualified Opportunity Zone'],
     ['The project is structured with the objective of generating diversified'],
     ['The planned development includes', '4', '.'], ['Special use designations', '5', '.'],
@@ -37,9 +46,11 @@ STRUCTURE_NOTES = [('1', 'As of November 25, 2025'), ('2', 'The preferred equity
                    (None, '3 QOZ investments'), (None, '4 These project descriptions'), (None, '5 These features are expected'),
                    (None, '6 For a complete schedule'), (None, 'All information is as of the date indicated'),
                    (None, 'All projections, financial or otherwise, are for illustrative purposes only and should not be construed as what actual results will be. Rather')]
-# Sub-nav labels and order from the design's subnav data (its order, not the section order).
-SUBNAV = [('Metrics', 'metrics'), ('Overview', 'overview'), ('Video', 'webinar'), ('Partners', 'partners'), ('Offering', 'offering'),
-          ('OZ Benefits', 'structure'), ('Program', 'assets'), ('Market', 'market'), ('Rationale', 'rationale'), ('Legal', 'legal')]
+# Sub-nav: the design's labels (its subnav data), in this page's section order, plus Renderings and QOZ 2.0 for the
+# teaser's own sections (#metrics now holds the key figures).
+SUBNAV = [('Overview', 'overview'), ('Renderings', 'renderings'), ('Video', 'webinar'), ('OZ Benefits', 'structure'),
+          ('QOZ 2.0', 'qoz'), ('Program', 'assets'), ('Partners', 'partners'), ('Offering', 'offering'), ('Market', 'market'),
+          ('Rationale', 'rationale'), ('Legal', 'legal')]
 
 IRS = 'https://www.irs.gov/credits-deductions/businesses/opportunity-zones'
 oz = o.oz('Riverside-Wharf_Dream-Hotel-Prefunction', 'Riverside Wharf Dream Hotel Pre-function',
@@ -97,31 +108,160 @@ rationale = o.rationale('Investment rationale', [
                                           El('a', 'Riverwalk link', attrs={'href': RIVERWALK}, children=[q('Riverwalk')]), q(', the Sponsors believe')]),
 ], 'Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The descriptions of the project listed herein is')
 
-STYLESHEETS = ['shared', 'offering']
+# ---------- teaser sections (this page only; site/styles/offering_rw_qoz.css) ----------
+# Key figures (#metrics): the design's own program figures, in place of its "[TBD]" target metrics.
+FACTS = [('167-Keys', 'Dream by Hyatt (upper-upscale lifestyle brand)'), ('~23,000 SF', 'Nightclub'), ('~14,000 SF', 'Day Club'),
+         ('~33,000 SF', 'Wharf Food & Beverage Venue'), ('~18,000 SF', 'State-of-the-art meeting & event space')]
+facts = section('Key figures', 'qoz-facts', None, [
+    El('ul', 'Figures', 'qoz-facts__grid', children=[
+        El('li', 'Figure', 'qoz-facts__item', children=[
+            El('strong', 'Value', 'qoz-facts__value', children=[q(v)]),
+            El('span', 'Label', 'qoz-facts__label', children=[q(l)]),
+        ]) for v, l in FACTS
+    ]),
+], attrs={'id': 'metrics', 'aria-label': 'Key figures'})
+
+# Renderings mosaic (#renderings): the design's renderings; the first is the large tile.
+MOSAIC = [('_View-from-River', 'View from River'), ('_Pooldeck', 'Pool deck'), ('-Night-club-Main-Floor', 'Nightclub main floor'),
+          ('-RIVERSIDE-WHARF_DAYCLUB_View02b-2023-01-20', 'Day club'), ('_Exterior-view-from-street', 'Exterior view from street'),
+          ('-Coastal-dining', 'Coastal dining'), ('-Night-club-Sunset-Lounge', 'Nightclub sunset lounge'), ('_Ballroom', 'Ballroom'),
+          ('-AFT-Bar', 'Bar')]
+renderings = section('Renderings', 'qoz-gallery', 'qoz-gallery-h', [
+    El('div', 'Head', 'qoz-gallery__head', children=[
+        El('p', 'Eyebrow', 'eyebrow', children=[q('QOZ Common Equity')]),
+        El('h2', 'Heading', 'qoz-gallery__title', {'id': 'qoz-gallery-h'}, [q('Renderings')]),
+    ]),
+    El('div', 'Mosaic', 'qoz-gallery__grid', children=[
+        El('figure', 'Rendering', 'qoz-gallery__tile', children=[Img('Photo', W + s, 'Riverside Wharf ' + alt), o.chip()])
+        for s, alt in MOSAIC
+    ]),
+    o.request('Request Investor Details'),
+], attrs={'id': 'renderings'})
+
+
+# Opportunity Zones Program Explained (driftwoodcapital.com), block by block.
+def blocks(heading, cls='qoz-prose'):
+    return El('div', 'Text', cls, children=[oz_src.el(b) for b in oz_src.section(heading)])
+
+
+def h3(text, cls):
+    return El('h3', 'Heading', cls, children=[oz_src.copy(text)])
+
+
+TITLE = 'Opportunity Zones Program Explained'
+intro = section('QOZ 2.0', 'qoz-intro', 'qoz-intro-h', [
+    El('div', 'Head', 'qoz-intro__head', children=[
+        El('p', 'Eyebrow', 'eyebrow eyebrow--dark', children=[oz_src.copy(TITLE)]),
+        El('h2', 'Heading', 'qoz-intro__title', {'id': 'qoz-intro-h'}, [oz_src.copy('A practical overview of Opportunity Zone investing')]),
+    ]),
+    El('div', 'Columns', 'qoz-intro__grid', children=[
+        El('div', 'Column', 'qoz-intro__col', children=[h3(t, 'qoz-intro__subtitle'), blocks(t, 'qoz-prose qoz-prose--dark')])
+        for t in ('Executive summary: How Opportunity Zone investing works after QOZ 2.0', 'About Opportunity Zones')
+    ]),
+], attrs={'id': 'qoz'})
+
+MECH = 'The Core Mechanics: How the Tax Benefits Work'
+mech = oz_src.section(MECH)  # two paragraphs, the "basic sequence" line, the five steps
+steps = section('How it works', 'qoz-steps', 'qoz-steps-h', [
+    El('h2', 'Heading', 'qoz-steps__title', {'id': 'qoz-steps-h'}, [oz_src.copy(MECH)]),
+    El('div', 'Text', 'qoz-prose qoz-steps__lede', children=[oz_src.el(b) for b in mech[:2]]),
+    oz_src.el(mech[2], 'qoz-steps__lead', 'Sequence'),
+    oz_src.el(mech[3], 'qoz-steps__list', 'Steps'),
+])
+
+GAINS, NOTE = 'Eligible Gains', 'What Investors May Want to Note'
+gains_src = oz_src.section(GAINS)
+gains = section('Eligible gains', 'qoz-gains', 'qoz-gains-h', [
+    El('div', 'Columns', 'qoz-gains__grid', children=[
+        El('div', 'Eligible gains', 'qoz-gains__card', children=[
+            El('h2', 'Heading', 'qoz-gains__title', {'id': 'qoz-gains-h'}, [oz_src.copy(GAINS)]),
+            oz_src.el(gains_src[0], 'qoz-gains__text', 'Text'),
+            oz_src.el(gains_src[1], 'qoz-gains__list', 'List'),
+        ]),
+        El('div', 'Notes', 'qoz-gains__notes', children=[
+            h3(NOTE, 'qoz-gains__title'),
+            *[oz_src.el(b, 'qoz-note', 'Note') for b in oz_src.section(NOTE)],
+        ]),
+    ]),
+])
+
+CHANGED = 'What Changed: QOZ 1.0 vs. QOZ 2.0'
+changed_src = oz_src.section(CHANGED)  # two paragraphs, then the table's scroll wrapper
+table = next(c for c in changed_src[2][2] if not isinstance(c, str) and c[0] == 'table')
+compare = section('QOZ 1.0 vs. QOZ 2.0', 'qoz-compare', 'qoz-compare-h', [
+    El('h2', 'Heading', 'qoz-compare__title', {'id': 'qoz-compare-h'}, [oz_src.copy(CHANGED)]),
+    El('div', 'Rules', 'qoz-compare__rules', children=[oz_src.el(changed_src[0], 'qoz-rule', 'Original rules'),
+                                                       oz_src.el(changed_src[1], 'qoz-rule qoz-rule--new', 'New rules')]),
+    El('div', 'Table scroll', 'qoz-compare__scroll', {'tabindex': '0', 'role': 'region', 'aria-label': oz_src.copy('QOZ 1.0 and QOZ 2.0 comparison')},
+       [oz_src.el(table, 'qoz-table', 'Comparison')]),
+])
+
+HOSP = 'The Opportunity Zone Advantage for Hospitality Assets'
+hosp = oz_src.section(HOSP)
+# Its last paragraph ends "To learn more, visit our offering page here." (a link to this offering): left out here.
+LAST = (hosp[3][0], hosp[3][1], [c for c in hosp[3][2] if isinstance(c, str) or c[0] != 'strong'])
+hospitality = section('Hospitality', 'qoz-hospitality', 'qoz-hospitality-h', [
+    El('div', 'Row', 'media-split', children=[
+        El('figure', 'Image', 'media-card qoz-hospitality__media', children=[Img('Photo', W + '_Complex', 'Riverside Wharf Complex'), o.chip()]),
+        El('div', 'Copy', 'media-split__copy', children=[
+            El('h2', 'Heading', 'qoz-hospitality__title', {'id': 'qoz-hospitality-h'}, [oz_src.copy(HOSP)]),
+            El('div', 'Text', 'qoz-prose', children=[oz_src.el(b) for b in hosp[:3]] + [oz_src.el(LAST)]),
+            o.request('Request Investor Details'),
+        ]),
+    ]),
+])
+
+notes = oz_src.endnotes()
+summary = section('Summary', 'qoz-summary', 'qoz-summary-h', [
+    El('div', 'Card', 'qoz-summary__card', children=[
+        El('h2', 'Heading', 'qoz-summary__title', {'id': 'qoz-summary-h'}, [oz_src.copy('Summary')]),
+        blocks('Summary'),
+    ]),
+    El('div', 'Endnotes', 'footnotes qoz-endnotes', children=[
+        h3('Sources and endnotes', 'qoz-endnotes__title'),
+        El('ol', 'Endnotes', 'qoz-endnotes__list', children=[oz_src.el(notes[n], None, 'Endnote', {'id': f'oz-note-{n}'}) for n in sorted(notes)]),
+        *[oz_src.el(b) for b in oz_src.section('Sources and endnotes') if b[0] == 'p'],  # the article's disclaimer
+    ]),
+])
+
+
+STYLESHEETS = ['shared', 'offering']  # + this page's site/styles/offering_rw_qoz.css
 PAGE = [
     o.hero('QOZ Common Equity', 'Dream_Website_banner', 'Riverside-Wharf_View-from-River', 'Riverside Wharf Miami rendering video', badge='Coming soon'),
-    o.metrics('QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary', METRICS, METRIC_NOTES),
+    facts,
     o.subnav(SUBNAV),
     o.overview('Riverside-Wharf_Pooldeck', 'Riverside Wharf Pool deck', 'A hospitality & entertainment development', [
         ['This two tower project', '1', ', a rooftop day club', '2', '.'], ['Designed to foster'], ['Located in a market'],
         ['The project is structured with the objective of generating cash flows', '3', '.']],
         ['1 Profile Magazine', '2 These project descriptions', '3 Such benefits', 'All information is as of the date indicated',
          'Nothing herein constitutes an offering of securities. All information provided is for informational purposes only and should not be deemed as advice in relation to legal, taxation, financial or investment matters. The description of the project']),
+    renderings,
     # No poster in the design (empty image slot): the frame shows the play button on the dark band until clicked.
     o.webinar('https://player.vimeo.com/video/1073671948?byline=0&title=0&autoplay=1', 'Riverside Wharf Miami video'),
+    oz,
+    intro, steps, gains, compare, hospitality, summary,
+    program,
     o.partners(),
     o.structure(STACK, HIGHLIGHTS, STRUCTURE_NOTES),
     o.market(MARKET, MARKET_NOTES),
-    oz,
-    o.metrics_repeat(METRICS, METRIC_NOTES),
-    program,
     rationale,
     o.legal(),
     o.cta(),
 ]
 
-# Not design copy: the arrow, the sub-nav labels (design script data) and the program tab labels (design script data).
-NON_DESIGN = {'→'} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
+# Design copy this teaser leaves out (Alex, 2026-10-09: teaser + reservation form): the "[TBD]" target metrics (both
+# metric bands, their footnotes and disclaimer link), the two placeholder highlights, and the design's request-button
+# labels, all replaced by RESERVE ("Download Brochure" too: the site never hosts a brochure, CLAUDE.md rule 7).
+# Bring a section back by putting it on the page and taking its strings off this list.
+DROPPED_COPY = {q(t) for t in ('[TBD]', 'Target*', 'Net Quarterly Distributions', 'Net Equity Multiple', 'Minimum Investment',
+                               'Assumed Hold Period', 'Targeted preferred return anticipated', 'The minimum investment amount',
+                               'The anticipated hold period', '* Target internal rate of return', 'Click here to see important disclaimers',
+                               '[QOZ highlight', 'Target Metrics*', 'Request Offering Details', 'Request Information',
+                               'Request Investor Details', 'Download Brochure', 'Start Investing',
+                               'QOZ Common Equity Target Metrics', '* 1', '[QOZ target summary')}
+
+# Not design copy: the arrow, the reserve label (Alex), the sub-nav labels (design script data) and the program tab labels (design script data).
+NON_DESIGN = {'→', RESERVE} | {label for label, _ in SUBNAV} | {label for label, _ in GALLERIES}
 # slug -> (source, Etch Asset Manager collection). Live-site uploads keep their filenames; images are compressed on
 # import with the Etch Asset Manager preset.
 MEDIA = {

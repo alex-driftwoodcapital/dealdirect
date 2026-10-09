@@ -8,7 +8,7 @@ Nothing here runs without Alex's typed OK (CLAUDE.md: AUTHORIZED_SITE is staging
 | # | Blocker | Owner | How it's verified |
 |---|---|---|---|
 | 1 | Evidence register: every open `gap` / `check` traced or accepted (see `docs/compliance-report.md`) | Compliance | Report shows 0 open items |
-| 2 | Riverside Wharf QOZ metrics: the `[TBD]` placeholders and the Pref footnotes carried on the QOZ page replaced or approved | Compliance / Alex | Register item "RW QOZ · Metrics" closed |
+| 2 | Riverside Wharf QOZ teaser (2026-10-09): the QOZ 2.0 explainer lifted from the Driftwood article, its "This blog" disclaimer and the "Reserve Your Spot" wording approved for an offering page; the `[TBD]` metrics are off the teaser and needed again only for the full offering page | Compliance / Alex | Register items "RW QOZ · QOZ 2.0", "· OZ benefits", "· Reserve" closed |
 | 3 | All live offerings on the new Home (incl. Tax Advantaged Strategies 2026 and the Income hotel fund DST) with their card fields and pages | Build | Home loop shows every live/coming-soon offering; crawl diff has no missing offering URL |
 | 4 | Design fidelity pass against the handoff on every page (hero titles, link colors, section details) | Build, Alex reviews | Side-by-side screenshots at 375 / 768 / 1440 |
 | 5 | 404 page copy approved (written 2026-10-09 at Alex's request) | Alex | Alex's OK on `site/pages/template_404.py` |

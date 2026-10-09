@@ -4,7 +4,7 @@ Generated from `handoff/design/evidence-register/claims.js` by `ops/compliance/r
 Every figure on the rebuilt pages was lifted verbatim from the live site, which is not a source document, so a
 claim is only closed once compliance traces it to an offering document or accepts it in writing.
 
-**46 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 19 `check`.
+**50 open items block go-live** (CLAUDE.md rule 10): 27 `gap` and 23 `check`.
 Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 
 | Status | Meaning |
@@ -65,7 +65,11 @@ Also: 2 `internal` (live typos carried verbatim), 1 `traced`.
 
 | Status | Section | Claim | Shown on the page | Note / what closes it |
 |---|---|---|---|---|
-| `gap` | Metrics | QOZ common equity target metrics (both blocks) | [TBD] | Page cloned from Pref. All four metrics, the target summary line and highlights 1–2 are placeholders. Footnotes 1–3, *, the "A14% annual coupon" note and highlights 3–8 (incl. 1.0% fees) are still the Pref text — compliance must confirm or replace for QOZ. |
+| `gap` | Metrics | QOZ common equity target metrics (both blocks) | [TBD] | Not shown on the QOZ teaser (2026-10-09: both metric blocks and highlights 1–2 left out); needed again for the full offering page. Page cloned from Pref. All four metrics, the target summary line and highlights 1–2 are placeholders. Footnotes 1–3, *, the "A14% annual coupon" note and highlights 3–8 (incl. 1.0% fees) are still the Pref text — compliance must confirm or replace for QOZ. |
+| `check` | QOZ 2.0 | Opportunity Zone program explainer (QOZ 1.0 vs 2.0, deferral, 10%/30% step-up, 10-year exclusion, 180 days, eligible gains, state conformity, comparison table) | Lifted verbatim from driftwoodcapital.com/opportunity-zones-program-explained/ (2026-09-18) with its 11 endnotes | Published Driftwood article reused on an offering page (Alex, 2026-10-09). Confirm the tax statements are approved for use next to an offering, and current (QOZ 2.0 rules, IRS Notice 2026-40). |
+| `check` | QOZ 2.0 | Article disclaimer on an offering page | "This blog is for informational and educational purposes only…" | Carried verbatim, so it says "This blog" on the offering page. Compliance decides whether the wording stands or an offering-page version replaces it. |
+| `check` | OZ benefits | Design OZ benefits next to the QOZ 2.0 explainer | "Capital Gain Exclusion" / "Tax Deferral and Recognition" (design) + QOZ 2.0 rules (article) | The design section cites the 2017 framework; the article explains QOZ 2.0 (investments from Jan 1, 2027). Confirm both read consistently for this offering's timing. |
+| `check` | Reserve | Reservation call to action | "Reserve Your Spot" (every request button on the QOZ page) | Alex, 2026-10-09: the teaser lets people "reserve their spot using the form". Opens the offering request dialog (accredited check, Registration / Offering Request forms). Confirm the wording for a coming-soon securities offering. |
 | `check` | Offering | Cap stack highlight | Total equity ~$96M | Highlighted as the QOZ offering layer; confirm the QOZ common equity amount and whether it should be shown separately from pref. |
 
 ## EB-5
