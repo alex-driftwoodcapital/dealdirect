@@ -115,7 +115,7 @@ SCRIPT = r"""// request-dialog: registration / offering request (handoff/docs/hu
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json', 'X-DD-Nonce': tok.nonce },
         body: JSON.stringify({ ...body, utm: utm(), hutk: cookie('hubspotutk') || '', pageUri: ctx.pageUri, pageName: ctx.pageName,
-                               website: form.elements.website ? form.elements.website.value : '' }),
+                               website: form.elements.dd_trap ? form.elements.dd_trap.value : '' }),
       });
       return await res.json();
     } catch (_) {
@@ -217,7 +217,7 @@ register = El('form', 'Registration', 'dd-dialog__view', {'data-view': 'register
             ]),
         ]),
         # honeypot: people never see or fill it (dealdirect-core drops submissions that do)
-        El('input', 'Website (leave empty)', 'dd-dialog__hp', {'type': 'text', 'name': 'website', 'tabindex': '-1', 'autocomplete': 'off', 'aria-hidden': 'true'}),
+        El('input', 'Website (leave empty)', 'dd-dialog__hp', {'type': 'text', 'name': 'dd_trap', 'tabindex': '-1', 'autocomplete': 'off', 'aria-hidden': 'true'}),
     ]),
     El('div', 'Apologies', 'dd-dialog__stepbox', {'data-step': 'sorry', 'hidden': ''}, [
         El('h2', 'Heading', 'dd-dialog__title', {'id': 'dd-sorry-h', 'tabindex': '-1'}, [q('Our Apologies')]),

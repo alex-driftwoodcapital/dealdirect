@@ -46,8 +46,11 @@ function handle_submit( \WP_REST_Request $req ): \WP_REST_Response {
 	if ( ! is_array( $body ) ) {
 		return respond( [ 'status' => 'error', 'message' => 'Something went wrong. Please reload the page and try again.' ], 400 );
 	}
-	// Honeypot: a hidden "website" input that people never fill.
+	// Honeypot: a hidden input that people never fill (named dd_trap on the page, so browser autofill and password managers
+	// leave it alone: as "website" it could be autofilled and a real visitor's details silently dropped). Logged, so a
+	// dropped submission shows up in the error log.
 	if ( ! empty( $body['website'] ) ) {
+		error_log( sprintf( 'dealdirect: honeypot filled, %s submission dropped', sanitize_key( (string) ( $body['form'] ?? '' ) ) ) );
 		return respond( [ 'status' => 'sent' ] );
 	}
 	$v = Submission::validate( $body, (string) wp_parse_url( home_url(), PHP_URL_HOST ) );

@@ -67,6 +67,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -q --orphan qa-perf
           git rm -rfq .
+          git clean -fdxq   # untracked installs (node_modules, package.json) stay out of the results branch
           cp -r /tmp/qa-out/. .
           git add -A
           git commit -q -m "chore: staging perf for $sha ($(date -u +%Y-%m-%dT%H:%MZ))"
